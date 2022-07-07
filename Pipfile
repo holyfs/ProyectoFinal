@@ -7,8 +7,9 @@ verify_ssl = true
 
 [packages]
 flask = "*"
-sqlalchemy = "*"
 flask-sqlalchemy = "*"
+sqlalchemy = "*"
+mysqlclient = "*"
 flask-migrate = "*"
 flask-swagger = "*"
 psycopg2-binary = "*"
