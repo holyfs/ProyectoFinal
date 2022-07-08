@@ -11,6 +11,7 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import Signup from "./component/signup";
 import { Footer } from "./component/footer";
+import { Bio } from "./pages/bio";
 
 //create your first component
 const Layout = () => {
@@ -31,6 +32,7 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
+                    <Bio />
                     <Footer />
                 </ScrollToTop>
             </BrowserRouter>
