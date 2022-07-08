@@ -7,20 +7,81 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
+		<div class="container-lg">
+			<div class="row row-cols-1 row-cols-md-4 g-4">
+				<div class="col">
+					<div class="card">
+						<img
+							src="http://photos.demandstudios.com/getty/article/174/175/dv1788026.jpg"
+							class="card-img-top"
+							alt="..."
+						/>
+						<div class="card-body">
+							<h5 class="card-title">Los Gofiones</h5>
+							<p class="card-text">
+							Una agrupación, conjunto, ensamble, banda o grupo musical se refiere a dos o más personas que, a través de la voz o de instrumentos musicales, ...
+							</p>
+							<a href="#" className="btn btn-primary">
+							Ver Perfil
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card">
+						<img
+							src="http://photos.demandstudios.com/getty/article/174/175/dv1788026.jpg"
+							class="card-img-top"
+							alt="..."
+						/>
+						<div class="card-body">
+							<h5 class="card-title">Los Chunguitos</h5>
+							<p class="card-text">
+							Una agrupación, conjunto, ensamble, banda o grupo musical se refiere a dos o más personas que, a través de la voz o de instrumentos musicales, ...
+							</p>
+							<a href="#" className="btn btn-primary">
+							Ver Perfil
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card">
+						<img
+							src="http://photos.demandstudios.com/getty/article/174/175/dv1788026.jpg"
+							class="card-img-top"
+							alt="..."
+						/>
+						<div class="card-body">
+							<h5 class="card-title">Frank el largo</h5>
+							<p class="card-text">
+							Una agrupación, conjunto, ensamble, banda o grupo musical se refiere a dos o más personas que, a través de la voz o de instrumentos musicales, ...
+							</p>
+							<a href="#" className="btn btn-primary">
+							Ver Perfil
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card">
+						<img
+							src="http://photos.demandstudios.com/getty/article/174/175/dv1788026.jpg"
+							class="card-img-top"
+							alt="..."
+						/>
+						<div class="card-body">
+							<h5 class="card-title">Ukelele Mix</h5>
+							<p class="card-text">
+							Una agrupación, conjunto, ensamble, banda o grupo musical se refiere a dos o más personas que, a través de la voz o de instrumentos musicales, ...
+							</p>
+							<a href="#" className="btn btn-primary">
+								Ver Perfil
+							</a>
+						</div>
+					</div>
+				</div>
 			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
-					Read documentation
-				</a>
-			</p>
 		</div>
 	);
 };
