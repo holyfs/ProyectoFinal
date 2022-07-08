@@ -31,11 +31,29 @@ class Instruments(db.Model):
     __tablename__ = 'Instruments'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
+
+    def repr(self):
+        return f'<Instruments {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }
     
 class Genre(db.Model):
     __tablename__ = 'Genre'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
+
+    def repr(self):
+        return f'<Genre {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }
 
 class Instruments_user(db.Model):
     __tablename__ = 'Instruments_user'
@@ -44,6 +62,14 @@ class Instruments_user(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
     instrument = db.relationship(Instruments)
     user = db.relationship(User)
+    def repr(self):
+        return f'<Instruments_user {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "Instruments_user": self.name
+        }
 
 class Generos_user(db.Model):
     __tablename__ = 'Genre_user'
@@ -52,4 +78,12 @@ class Generos_user(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
     genre = db.relationship(Genre)
     user = db.relationship(User)
+    def repr(self):
+        return f'<Generos_user {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "Generos_user": self.name
+        }
 

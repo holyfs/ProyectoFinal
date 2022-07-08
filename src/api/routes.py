@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Instruments, Genre, Generos_user, Instruments_user
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -128,7 +128,7 @@ def delete_instrument_by_id(id):
 @api.route('/genre', methods=['POST'])
 def add_musical_genre():
     body = request.get_json()
-    genre = Genres(
+    genre = Genre(
     name = body["name"],
     )
     response_body = {
@@ -142,7 +142,7 @@ def add_musical_genre():
 @api.route('/genre', methods=['GET'])
 def get_genre():
     genres = Genre.query.all()
-    if len(genre) <= 0:
+    if len(genres) <= 0:
         raise APIException("no genre, please enter a musical genre, 401")
     all_genres = list(map(lambda genre: genre.serialize(), genres))    
     return jsonify(all_genres),200
@@ -150,14 +150,14 @@ def get_genre():
 #GENRE METHODS BY ID    
 @api.route('/genre/<int:id>', methods=['GET'])
 def get_genre_by_id(id):
-    genre = Genres.query.get(id)
+    genre = Genre.query.get(id)
     if genre is None:
         raise APIException("genre not found", 404)
     return jsonify(genre.serialize()),200
 
 @api.route('/genre/<int:id>', methods=['DELETE'])
 def delete_genre_by_id(id):
-    genre = Genres.query.get(id)
+    genre = Genre.query.get(id)
     if genre is None:
         raise APIException("genre not found", 404)
     db.session.delete(genre)
