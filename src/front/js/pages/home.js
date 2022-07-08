@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { Bio } from "./bio";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -21,7 +22,7 @@ export const Home = () => {
 							<p class="card-text">
 							Una agrupación, conjunto, ensamble, banda o grupo musical se refiere a dos o más personas que, a través de la voz o de instrumentos musicales, ...
 							</p>
-							<a href="#" className="btn btn-primary">
+							<a href="/bio" className="btn btn-primary">
 							Ver Perfil
 							</a>
 						</div>
@@ -39,7 +40,7 @@ export const Home = () => {
 							<p class="card-text">
 							Una agrupación, conjunto, ensamble, banda o grupo musical se refiere a dos o más personas que, a través de la voz o de instrumentos musicales, ...
 							</p>
-							<a href="#" className="btn btn-primary">
+							<a href="/bio" className="btn btn-primary">
 							Ver Perfil
 							</a>
 						</div>
@@ -57,7 +58,7 @@ export const Home = () => {
 							<p class="card-text">
 							Una agrupación, conjunto, ensamble, banda o grupo musical se refiere a dos o más personas que, a través de la voz o de instrumentos musicales, ...
 							</p>
-							<a href="#" className="btn btn-primary">
+							<a href="/bio" className="btn btn-primary">
 							Ver Perfil
 							</a>
 						</div>
@@ -75,7 +76,7 @@ export const Home = () => {
 							<p class="card-text">
 							Una agrupación, conjunto, ensamble, banda o grupo musical se refiere a dos o más personas que, a través de la voz o de instrumentos musicales, ...
 							</p>
-							<a href="#" className="btn btn-primary">
+							<a href="/bio" className="btn btn-primary">
 								Ver Perfil
 							</a>
 						</div>

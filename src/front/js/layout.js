@@ -31,8 +31,8 @@ const Layout = () => {
                         <Route element={<Signup />} path="/signup" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
+                        <Route element={<Bio />} path="/bio" />
                     </Routes>
-                    <Bio />
                     <Footer />
                 </ScrollToTop>
             </BrowserRouter>
