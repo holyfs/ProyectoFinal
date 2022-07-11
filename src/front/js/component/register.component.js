@@ -15,7 +15,6 @@ const required = value => {
     );
   }
 };
-
 const email = value => {
   if (!isEmail(value)) {
     return (
@@ -25,7 +24,6 @@ const email = value => {
     );
   }
 };
-
 const vusername = value => {
   if (value.length < 3 || value.length > 20) {
     return (
