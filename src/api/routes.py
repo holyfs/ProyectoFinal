@@ -29,7 +29,8 @@ def add_user():
     age = body["age"],
     description = body["description"],
     artist_name_or_band_name = body ["artist_name_or_band_name"],
-    band = False
+    band = False,
+    experiencie= False
     )
     response_body = {
         "msg" : "user created",
