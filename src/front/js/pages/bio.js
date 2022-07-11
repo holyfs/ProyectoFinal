@@ -17,7 +17,9 @@ export const Bio = () => {
                     <h1 className="bioperfil">Nombre de Banda</h1>
                 </div>
                 <div className="d-flex justify-content-end">
-                    <button className="Contactar" data-bs-toggle="modal" data-bs-target="#exampleModal">Contactar</button>
+                    <Link to="#">
+						<button className="btn btn-primary"><Contact /></button>
+				    </Link>
                 </div>
             </div>
         </div>

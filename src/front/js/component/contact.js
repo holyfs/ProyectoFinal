@@ -4,7 +4,6 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, La
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 
-
 class Contact extends React.Component{
   state={
     abierto: false,
@@ -24,41 +23,44 @@ class Contact extends React.Component{
     }
     return(
       <>
-      
+      <div className="principal">
+        <div className="secundario">
+      <Button color="danger" onClick={this.abrirModal}>Contactar</Button>
+
+      </div></div>
 
       <Modal isOpen={this.state.abierto} style={modalStyles}>
-      <form>
-                <h3>Contactar</h3>
-
-                <div className="form-group">
-                    <label>First name</label>
-                    <input type="text" className="form-control" placeholder="First name" />
-                </div>
-
-                <div className="form-group">
-                    <label>Last name</label>
-                    <input type="text" className="form-control" placeholder="Last name" />
-                </div>
-
-                <div className="form-group">
-                    <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
-                </div>
-
-                <div className="form-group">
-                    <label>Teléfono</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
-
-                <div className="form-group">
-                    <input type="password" className="form-control" placeholder="Escriba su mensaje" />
-                </div>
-
-                
+      <form class="seminor-login-form">
+              <div class="form-group">
+                <label class="form-control-placeholder" for="name">Email address</label>
+                <input type="email" class="form-control" required autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <label class="form-control-placeholder" for="nombre">Nombre</label>
+                <input type="nombre" class="form-control" required autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <label class="form-control-placeholder" for="Teléfono">Telefono</label>
+                <input type="mensaje" class="form-control" required autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <label class="form-control-placeholder" for="nombre">Mensaje</label>
+                <input type="mensaje" class="form-control" required autocomplete="off" />
+              </div>
+              <div class="btn-check-log">
+                    <button type="submit" class="btn-check-login">Enviar</button>
+              </div>
+        
+        
+              
                 <ModalFooter>
+            
             <Button color="secondary" onClick={this.abrirModal}>Cerrar</Button>
         </ModalFooter>
-            </form>
+        
+        
+        
+              </form>
 			  
       </Modal>
       </>
