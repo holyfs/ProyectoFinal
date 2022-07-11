@@ -1,10 +1,13 @@
 import React from 'react';
 import '../../styles/App.css';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import Signup from '../component/signup';
-
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
+import AuthService from "../../../services/auth.service";
 class Login extends React.Component{
   state={
     abierto: false,
@@ -58,7 +61,7 @@ class Login extends React.Component{
         
                                       </div>
                                       <div class="create-new-fau text-center pt-3">
-                                          <a href="#" class="text-primary-fau"><span data-toggle="modal" data-target="#sem-reg" data-dismiss="modal">Create A New Account <Signup /></span></a>
+                                          <a href="#" class="text-primary-fau"><span data-toggle="modal" data-target="#sem-reg" data-dismiss="modal">Create A New Account</span></a>
                                       </div>
 
                                       <ModalFooter>
