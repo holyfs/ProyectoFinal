@@ -1,6 +1,8 @@
 
 import click
-from api.models import db, User
+from api.models import db, User, Instruments, Genre
+from flask import Flask, request, jsonify, url_for, send_from_directory
+
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -28,5 +30,35 @@ def setup_commands(app):
             print("User: ", user.email, " created.")
 
         print("All test users created")
+    
+    instruments = ['saxophone', 'flute', 'clarinet', 'trumpet', 'oboe', 'trombone', 'guitar', 'piano', 'organ', 'double bass', 'bass guitar', 'mandolin', 'sitar', 'harp', 'violin', 'viola', 'cello', 'cymbals', 'drums', 'cajon', 'djembe', 'bongos', 'congas' ,'tambourines' ,'cowbells' ,'timbales', 'gongs', 'claves', 'triangles', 'shakers' ,'kalimbas', 'guiros', 'rainsticks synth', 'electric guitar', 'electric bass guitar', 'electric harp', 'piano rhodes', 'electric violin']
 
-        ### Insert the code to populate others tables if needed
+    @app.cli.command("insert-instruments") # name of our command
+    @click.argument("count") # argument of out command
+    def insert_test_data(count):
+        print("Creating instruments")
+        for x in range(len(instruments)):
+            
+            Instruments.id = x+1 
+            Instruments.name = instruments[x]
+            db.session.add(Instruments)
+            db.session.commit()
+            print(" Instrument: ", Instruments.name , " created.")
+
+        print("All test instruments created")
+    
+    genre = ['blues' , 'classic' , 'country' , 'dance' , 'electronic' , 'experimental' , 'folk' , 'jazz' , 'latin' , 'new age' , 'pop' , 'hip hop and rap' , 'rock' , 'r&b and soul' , 'reggae' , 'music of the world' ]
+
+    @app.cli.command("insert-genre") # name of our command
+    @click.argument("count") # argument of out command
+    def insert_test_data(count):
+        print("Creating genre")
+        for x in range(len(genre)):
+            
+            Genre.id = x+1 
+            Genre.name = genre[x]
+            db.session.add(Genre)
+            db.session.commit()
+            print(" Genre: ", Genre.name , " created.")
+
+        print("All test instruments created")
