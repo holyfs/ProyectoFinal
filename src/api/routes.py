@@ -37,7 +37,7 @@ def handle_hello():
 #USER METHODS
 @api.route('/signup', methods=['POST'])
 def add_user():
-    body = request.get_json()
+    body = request.get_json(),
     user = User(
     name = body["name"],
     last_name = body["last_name"],
