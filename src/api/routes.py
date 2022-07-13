@@ -42,7 +42,8 @@ def add_user():
     name = body["name"],
     last_name = body["last_name"],
     email = body["email"],
-    password=body["password"],    
+    password=body["password"],
+    re_password=body["re_password"],    
     age = body["age"],
     description = body["description"],
     artist_name_or_band_name = body["artist_name_or_band_name"],
@@ -50,10 +51,8 @@ def add_user():
     experience= False,
     avatar="url"
     )
-    response_body = {
-        "msg" : "user created",
-        "user": user.serialize()
-    }
+    if re_password != password:
+        raise APIException("Not same password, please check again!")
     db.session.add(user)
     db.session.commit()
 #    response_body = {
@@ -61,7 +60,6 @@ def add_user():
 #        "user": user.serialize()
 #    }
     return jsonify(user.serialize()),201
-
 #GET ALL USERS - LIST
 @api.route('/user', methods=['GET'])
 def get_users():
