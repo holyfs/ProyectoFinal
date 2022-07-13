@@ -118,11 +118,7 @@ export default class Register extends Component {
             alt="profile-img"
             className="profile-img-card"
             width="250"
-<<<<<<< HEAD
 			      height="250"
-=======
-			height="250"
->>>>>>> 13ec819 (Creación de services y pagina de login y register)
           />
         </center>
         
