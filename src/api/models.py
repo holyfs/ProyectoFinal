@@ -4,10 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class User(db.Model):
-    __tablename__ = 'User'
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+    re_password= db.Column(db.String(80), unique=False, nullable=False)
     name = db.Column(db.String(80), unique=False, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
     age = db.Column (db.Integer)
@@ -18,7 +19,7 @@ class User(db.Model):
 
 
     def repr(self):
-        return f'<User {self.email}>'
+        return '<User %r>' % self.name
 
     def serialize(self):
         return {
@@ -35,12 +36,12 @@ class User(db.Model):
         }
 
 class Instruments(db.Model):
-    __tablename__ = 'Instruments'
+    __tablename__ = 'instruments'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
 
     def repr(self):
-        return f'<Instruments {self.name}>'
+        return '<Instruments %r>' % self.name
 
     def serialize(self):
         return {
@@ -49,12 +50,12 @@ class Instruments(db.Model):
         }
     
 class Genre(db.Model):
-    __tablename__ = 'Genre'
+    __tablename__ = 'genre'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
 
     def repr(self):
-        return f'<Genre {self.name}>'
+        return '<Genre %r>' % self.name
 
     def serialize(self):
         return {
@@ -63,34 +64,33 @@ class Genre(db.Model):
         }
 
 class Instruments_user(db.Model):
-    __tablename__ = 'Instruments_user'
+    __tablename__ = 'instruments_user'
     id = db.Column(db.Integer, primary_key=True)
-    instruments_id = db.Column(db.Integer, db.ForeignKey('Instruments.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
-    instrument = db.relationship(Instruments)
-    user = db.relationship(User)
+    instruments_id = db.Column(db.Integer, db.ForeignKey('instruments.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    instrument = db.relationship('Instruments')
+    user = db.relationship('User')
     def repr(self):
-        return f'<Instruments_user {self.name}>'
+        return '<Instruments_user %r>' % self.name
 
     def serialize(self):
         return {
-            "id": self.id,
-            "Instruments_user": self.name
+            "user": self.user.serialize(),
+            "instrument":self.instrument.serialize(),
         }
 
 class Generos_user(db.Model):
-    __tablename__ = 'Genre_user'
+    __tablename__ = 'generos_user'
     id = db.Column(db.Integer, primary_key=True)
-    genre_id = db.Column(db.Integer, db.ForeignKey('Genre.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
-    genre = db.relationship(Genre)
-    user = db.relationship(User)
+    genre_id = db.Column(db.Integer, db.ForeignKey('genre.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    genre = db.relationship('Genre')
+    user = db.relationship('User')
     def repr(self):
-        return f'<Generos_user {self.name}>'
+        return '<Generos_user %r>' % self.name
 
     def serialize(self):
         return {
-            "id": self.id,
-            "Generos_user": self.name
+            "user": self.user.serialize(),
+            "genre":self.genre.serialize()
         }
-

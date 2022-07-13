@@ -16,22 +16,24 @@ def setup_commands(app):
     by typing: $ flask insert-test-users 5
     Note: 5 is the number of users to add
     """
-    @app.cli.command("insert-test-users") # name of our command
-    @click.argument("count") # argument of out command
-    def insert_test_data(count):
-        print("Creating test users")
-        for x in range(1, int(count) + 1):
-            user = User()
-            user.email = "test_user" + str(x) + "@test.com"
-            user.password = "123456"
-            user.is_active = True
-            db.session.add(user)
-            db.session.commit()
-            print("User: ", user.email, " created.")
+#    @app.cli.command("insert-test-users") # name of our command
+#    @click.argument("count") # argument of out command
+#    def insert_test_data(count):
+#        print("Creating test users")
+#        for x in range(1, int(count) + 1):
+#            user = User()
+#            user.email = "test_user" + str(x) + "@test.com"
+#            user.password = "123456"
+#            db.session.add(user)
+#            db.session.commit()
+#            print("User: ", user.email, " created.")
 
-        print("All test users created")
+
+#    print("All test users created")
     
     instruments = ['saxophone', 'flute', 'clarinet', 'trumpet', 'oboe', 'trombone', 'guitar', 'piano', 'organ', 'double bass', 'bass guitar', 'mandolin', 'sitar', 'harp', 'violin', 'viola', 'cello', 'cymbals', 'drums', 'cajon', 'djembe', 'bongos', 'congas' ,'tambourines' ,'cowbells' ,'timbales', 'gongs', 'claves', 'triangles', 'shakers' ,'kalimbas', 'guiros', 'rainsticks synth', 'electric guitar', 'electric bass guitar', 'electric harp', 'piano rhodes', 'electric violin']
+
+
 
     @app.cli.command("insert-instruments") # name of our command
     @click.argument("count") # argument of out command
