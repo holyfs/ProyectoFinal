@@ -7,7 +7,11 @@ import { Context } from "../store/appContext";
 
 export const PersonalBio = () => {
 
-    
+    let user_name = 'Slipknot'
+    let user_nick_name = '@Slipknot'
+
+    let guardar_cambios = () => {
+    }
     return (
     <>
         <div className="container-fluid"> 
@@ -29,8 +33,8 @@ export const PersonalBio = () => {
                 </div>
                 <div className="col-3">
                     <h3 className="PersonalDates">Datos Personales</h3>
-                    <div className="userName" id="userName" contenteditable="true">UserName</div>
-                    <div className="nickName" id="nickName" contenteditable="true">nickName</div>
+                    <div className="userName" id="userName" contenteditable="true">{user_name}</div>
+                    <div className="nickName" id="nickName" contenteditable="true">{user_nick_name}</div>
                 </div>
             </div>
             <button>Cambiar Foto de Perfil</button>
@@ -54,7 +58,7 @@ export const PersonalBio = () => {
            
         </div>
 
-        <button>Guardar Cambios</button>    
+        <button onClick={guardar_cambios()}>Guardar Cambios</button>    
         
     </>   
     
