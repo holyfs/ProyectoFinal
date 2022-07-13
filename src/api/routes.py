@@ -20,8 +20,8 @@ def handle_hello():
 #USER METHODS
 @api.route('/signup', methods=['POST'])
 def add_user():
-    body = request.get_json()
-    user = User(
+    body = request.get_json(),
+    user = User(),
     name = body["name"],
     last_name = body["last_name"],
     email = body["email"],
@@ -31,7 +31,6 @@ def add_user():
     artist_name_or_band_name = body ["artist_name_or_band_name"],
     band = False,
     experiencie= False
-    )
     response_body = {
         "msg" : "user created",
         "user": user.serialize()

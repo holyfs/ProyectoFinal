@@ -23,7 +23,7 @@ export const Home = () => {
 		
 	<div className="App">
   <h1 className="text-center mb-3">Músicos/Banda</h1>
-  <Searchfilter setSearch={setSearch} updatePageNumber={updatePageNumber} />
+  <Searchfilter setSearch={setSearch} updatePageNumber={updatePageNumber} />º
   <div className="container">
   <div className="row">
    

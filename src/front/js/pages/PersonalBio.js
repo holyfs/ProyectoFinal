@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Contact from "../component/contact";
 import '../../styles/bio.css';
 import { Context } from "../store/appContext";
+import ChangePassword from "../component/ChangePassword";
 
 export const PersonalBio = () => {
 
@@ -35,6 +36,7 @@ export const PersonalBio = () => {
                     <h3 className="PersonalDates">Datos Personales</h3>
                     <div className="userName" id="userName" contenteditable="true">{user_name}</div>
                     <div className="nickName" id="nickName" contenteditable="true">{user_nick_name}</div>
+                    <button><ChangePassword/></button>
                 </div>
             </div>
             <button>Cambiar Foto de Perfil</button>

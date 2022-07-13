@@ -15,6 +15,7 @@ import Signup from "./component/signup";
 import { Footer } from "./component/footer";
 import { Bio } from "./pages/bio";
 import { PersonalBio } from "./pages/PersonalBio";
+import ForgetPassword from "./component/ForgetPassword";
 
 //create your first component
 const Layout = () => {
@@ -38,6 +39,7 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<Bio />} path="/bio" />
                         <Route element={<PersonalBio />} path="/PersonalBio" />
+                        <Route element={<ForgetPassword/>} path="/forgetpassword" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
