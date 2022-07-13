@@ -118,7 +118,7 @@ export default class Register extends Component {
             alt="profile-img"
             className="profile-img-card"
             width="250"
-			height="250"
+			      height="250"
           />
         </center>
         
