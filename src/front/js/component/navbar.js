@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import App from "../pages/App"
 import Signup from "../component/signup"
+import Login from "../component/login"
 
 
 export const Navbar = () => {
@@ -29,21 +30,27 @@ export const Navbar = () => {
 					
           <button data-toggle="modal" data-target="#exampleModal" className="btn btn-primary" 
           type="button"><Signup /></button>
-          <div class="btn-group">
-              <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" 
-              aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-cog"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right">
-                  <a class="dropdown-item" href="#">Accion</a>
-                  <a class="dropdown-item" href="#">Otra accion</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Cerrar sesión</a>
-              </div>
-          </div>
-      </form>
-			</div>
-	</nav>	
+
+<div class="btn-group">
+  <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">🔈</button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Samsung</a></li>
+    <li><a class="dropdown-item" href="#">LG</a></li>
+  </ul>
+
+  <div class="btn-group">
+    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">Mobile Phones</button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Android</a></li>
+      <li><a class="dropdown-item" href="#">Iphone</a></li>
+    </ul>
+
+   </div>
+</div>
+          
+    			</form>
+</div>
+</nav>	
 		
 	);
 };

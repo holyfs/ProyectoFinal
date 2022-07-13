@@ -43,6 +43,7 @@ const vpassword = value => {
   }
 };
 export default class Register extends Component {
+  
   constructor(props) {
     super(props);
     this.handleRegister = this.handleRegister.bind(this);
@@ -108,6 +109,7 @@ export default class Register extends Component {
   }
   render() {
     return (
+     
       <div className="col-md-12">
         <div className="card card-container">
         <center>
@@ -123,6 +125,15 @@ export default class Register extends Component {
 >>>>>>> 13ec819 (Creación de services y pagina de login y register)
           />
         </center>
+        
+        <Form
+            onSubmit={this.handleRegister}
+            ref={c => {
+              this.form = c;
+            }}
+          >
+       
+        </Form>
           <Form
             onSubmit={this.handleRegister}
             ref={c => {

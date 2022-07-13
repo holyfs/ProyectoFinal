@@ -1,0 +1,15 @@
+
+.card {
+  border: 2px solid lightseagreen;
+  border-radius: 50px 10px;
+}
+.content {
+  padding: 10px;
+}
+.img {
+  border-radius: 50px 10px;
+}
+.badge {
+  top: 10px; right: 20px;
+  font-size: 17px;
+}

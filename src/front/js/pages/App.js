@@ -51,10 +51,7 @@ class Login extends React.Component{
                 </label>
                 </div>
         
-                <div class="btn-check-log">
-                    <button type="submit" class="btn-check-login">LOGIN</button>
-                </div>
-        
+                
         
               <div class="forgot-pass-fau text-center pt-3">
                                         <a href="#" class="text-secondary">Forgot Your Password?</a>
