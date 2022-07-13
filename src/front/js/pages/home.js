@@ -40,7 +40,6 @@ export const Home = () => {
   </div>
 </div>
 
-<<<<<<< HEAD
 	return (
 		<div class="container-lg">
 			<div class="row row-cols-1 row-cols-md-4 g-4">
@@ -118,7 +117,5 @@ export const Home = () => {
 				</div>
 			</div>
 		</div>
-=======
->>>>>>> f79df08 (main, search component, filter)
 	);
 };
