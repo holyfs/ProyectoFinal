@@ -24,13 +24,12 @@ def handle_hello():
 #USER METHODS
 @api.route('/signup', methods=['POST'])
 def add_user():
-    body = request.get_json(),
+    body = request.get_json()
     user = User(
     name = body["name"],
     last_name = body["last_name"],
     email = body["email"],
-    password=body["password"],
-    re_password=body["re_password"],    
+    password=body["password"],    
     age = body["age"],
     description = body["description"],
     artist_name_or_band_name = body ["artist_name_or_band_name"],
@@ -188,7 +187,7 @@ def add_musical_genre():
 def get_genre():
     genres = Genre.query.all()
     if len(genres) <= 0:
-        raise APIException("no genre, please enter a musical genre, 401")
+        raise APIException("no genre, please enter a musical genre", 404)
     all_genres = list(map(lambda genre: genre.serialize(), genres))    
     return jsonify(all_genres),200
 
@@ -228,11 +227,11 @@ def add_genre_to_user():
 def get_user_genre(user_id):
     generos_user = Generos_user.query.filter_by(user_id=user_id).all()
     if len(generos_user) <= 0:
-        raise APIException("not genres found", 400)
+        raise APIException("not genres found", 404)
     all_genres = list(map(lambda genre: genre.serialize(), generos_user))
     return jsonify(all_genres),200
 #USER MUSICAL GENRE DELETE
-@api.route('/user/genre/delete', methods=['POST'])
+@api.route('/user/genre/delete', methods=['DELETE'])
 def delete_user_genre():
     body = request.get_json()
     if body is None:
@@ -249,10 +248,13 @@ def delete_user_genre():
 @api.route('/user/instrument', methods=['POST'])
 def add_instrument_to_user():
     body = request.get_json()
+    user_id=body["user_id"]
     instruments_user = Instruments_user (
         user_id=body["user_id"],
         instruments_id=body["instruments_id"]
         )
+    if body["user_id"] is None:
+        raise APIException("user not found", 404)
     db.session.add(instruments_user)
     db.session.commit()
     res = {"msg":"music instrument added"}
@@ -266,10 +268,10 @@ def get_user_instrument(user_id):
     all_instruments = list(map(lambda instrument: instrument.serialize(), instruments_user))
     return jsonify(all_instruments),200
 #USER MUSIC INSTRUMENT DELETE
-@api.route('/user/instrument/delete', methods=['POST'])
+@api.route('/user/instrument/delete', methods=['DELETE'])
 def delete_user_instrument():
     body = request.get_json()
-    print(body)
+#revisar este if
     if body is None:
         raise APIException("user not found", 404)
     else: instruments_user = Instruments_user.query.filter((Instruments_user.user_id==body["user_id"]) & (Instruments_user.instruments_id==body["instruments_id"])).first()
