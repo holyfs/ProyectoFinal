@@ -29,7 +29,7 @@ class Login extends React.Component{
       <>
       <div className="principal">
         <div className="secundario">
-      <Button color="danger" onClick={this.abrirModal}>Login</Button>
+      <div color="blue" onClick={this.abrirModal}>Login</div>
 
       </div></div>
 

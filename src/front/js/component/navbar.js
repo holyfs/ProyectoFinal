@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import App from "../pages/App"
 import Signup from "../component/signup"
 import Login from "../component/login"
+import "../../styles/navBar.css"
 
 
 export const Navbar = () => {
 
 	return (
-		<nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
+		<nav className="navbar navbar-light Nav">
 		<div className="container">
 				<Link to="/">
 				<span className="navbar-brand mb-0 h1">
@@ -34,31 +35,12 @@ export const Navbar = () => {
 				</Link>
 				<form class="form-inline">
 				
-					<Link to="#">
-						<button className=""><App /></button>
-					</Link>
+					
+						<button className="btn btn-dark" type="button"><App /></button>
+					
 				
 					
-          <button data-toggle="modal" data-target="#exampleModal" className="btn btn-primary" 
-          type="button"><Signup /></button>
-
-<div class="btn-group">
-  <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">🔈</button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Samsung</a></li>
-    <li><a class="dropdown-item" href="#">LG</a></li>
-  </ul>
-
-  <div class="btn-group">
-    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">Mobile Phones</button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Android</a></li>
-      <li><a class="dropdown-item" href="#">Iphone</a></li>
-    </ul>
-
-   </div>
-</div>
-          
+          <button className="btn btn-dark" type="button"><Signup /></button>
     			</form>
 </div>
 </nav>	

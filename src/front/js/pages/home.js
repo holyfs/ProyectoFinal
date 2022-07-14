@@ -7,14 +7,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
 import Card from "../component/Card";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Pagination from "../component/Pagination";
+import Filter from "../component/Filter/filter";
 
 export const Home = () => {
 	let [pageNumber, updatePageNumber] = useState(1);
+	let [gender, updateGender] = useState("");
 	let [search, setSearch] = useState("");
 	let [fetchedData, updateFetchedData] = useState([]);
 	let { info, results } = fetchedData;
 	const { store, actions } = useContext(Context);
-	let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}`;
+	let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&gender=${gender}`;
 	
 	
 	useEffect(() => {
@@ -32,7 +35,11 @@ export const Home = () => {
   <div className="container">
   <div className="row">
    
-		Filter component will be placed here
+  <Filter
+  pageNumber={pageNumber}
+  updateGender={updateGender}
+  updatePageNumber={updatePageNumber}
+	/>
 	
     <div className="col-lg-8 col-12">
       <div className="row">
@@ -43,6 +50,11 @@ export const Home = () => {
     </div>
   </div>
   </div>
+  <Pagination
+        info={info}
+        pageNumber={pageNumber}
+        updatePageNumber={updatePageNumber}
+      />
 </div>
 	);
 };
