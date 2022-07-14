@@ -11,7 +11,7 @@ import "../../styles/navBar.css"
 export const Navbar = () => {
 
 	return (
-		<nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
+		<nav className="navbar navbar-light Nav">
 		<div className="container">
 				<Link to="/">
 				<span className="navbar-brand mb-0 h1">
@@ -35,9 +35,9 @@ export const Navbar = () => {
 				</Link>
 				<form class="form-inline">
 				
-					<Link to="#">
-						<button className=""><App /></button>
-					</Link>
+					
+						<button className="btn btn-dark" type="button"><App /></button>
+					
 				
 					
           <button className="btn btn-dark" type="button"><Signup /></button>
