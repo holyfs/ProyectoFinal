@@ -11,6 +11,7 @@ const Card = ({ results }) => {
   if (results){
       display = results.map((x) =>{
         let { id, name, image, location } = x;
+
         return  (
         <div key={id} className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark">
           <div className={`${styles.card} d-flex flex-column justify-content-center`}>
@@ -30,7 +31,7 @@ const Card = ({ results }) => {
     display = "No artist founds :(";
   }
 
-  return <div>{display}</div>;
+  return <>{display}</>;
 };
 
 export default Card;

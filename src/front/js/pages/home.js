@@ -4,12 +4,12 @@ import "../../styles/home.css";
 import { Bio } from "./bio";
 
 export const Home = () => {
-	let [pageNumber, setPageNumber] = useState(1);
+	let [pageNumber, updatePageNumber] = useState(1);
 	let [search, setSearch] = useState("");
 	let [fetchedData, updateFetchedData] = useState([]);
 	let { info, results } = fetchedData;
 	const { store, actions } = useContext(Context);
-	let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}`
+	let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}`;
 	
 	
 	useEffect(() => {

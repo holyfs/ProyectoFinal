@@ -10,21 +10,32 @@ import Login from "../component/login"
 export const Navbar = () => {
 
 	return (
-		<nav className="navbar navbar-light bg-light">
+		<nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
 		<div className="container">
 				<Link to="/">
 				<span className="navbar-brand mb-0 h1">
 					<img
-						src="https://w7.pngwing.com/pngs/230/738/png-transparent-musical-note-logo-musical-theatre-musical-note-text-logo-musical-notation.png"
-						width="60"
-						height="40"
+						src="https://cdn.icon-icons.com/icons2/1052/PNG/256/256_folder_music_icon-icons.com_76633.png"
+						width="90"
+						height="60"
 					/>
 				</span>
+				<Link to="/" className="navbar-brand fs-3 ubuntu">
+				<span className="text-primary">Music</span>On Demand
+        </Link>
+        <style jsx>{`
+          button[aria-expanded="false"] > .close {
+            display: none;
+          }
+          button[aria-expanded="true"] > .open {
+            display: none;
+          }
+        `}</style>
 				</Link>
 				<form class="form-inline">
 				
 					<Link to="#">
-						<button className="btn btn-primary"><App /></button>
+						<button className=""><App /></button>
 					</Link>
 				
 					
