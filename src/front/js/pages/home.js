@@ -4,6 +4,7 @@ import "../../styles/home.css";
 import { Bio } from "./bio";
 import  Search  from "../component/searchComponent.js";
 import Card from "../component/Card.js"
+import Searchfilter from "../component/searchComponent"
 
 export const Home = () => {
 	let [pageNumber, updatePageNumber] = useState(1);
