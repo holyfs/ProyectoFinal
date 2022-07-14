@@ -1,54 +1,31 @@
 import React, {useState, useEffect} from 'react'
-import "../../styles/SearchComponent.css";
+import styles from "../../styles/Search.module.scss";
 
-const SearchComponent = () => {
-    //setear los hooks useState
-    const [ photo, setPhotos ] = useState([])
-    const [ search, setSearch ] = useState("")
+const Search = ({ setSearch, updatePageNumber }) => {
+    let searchBtn = (e) => {
+      e.preventDefault();
+    };
+    return (
+      <form
+        className={`${styles.search} d-flex flex-sm-row flex-column align-items-center justify-content-center gap-4 mb-5`}
+      >
+        <input
+          onChange={(e) => {
+            updatePageNumber(1);
+            setSearch(e.target.value);
+          }}
+          placeholder="Search for Name"
+          className={styles.input}
+          type="text"
+        />
+        <button
+          onClick={searchBtn}
+          className={`${styles.btn} btn btn-primary fs-5`}
+        >
+          Search
+        </button>
+      </form>
+    );
+  };
   
-    //función para traer los datos de la API
-    const URL = 'https://jsonplaceholder.typicode.com/photos'
-
-    const showData = async () => {
-        const response = await fetch(URL)
-        const data = await response.json()
-        //console.log(data)
-        setPhotos(data)
-      } 
-         //función de búsqueda
-  const searcher = (e) => {
-    setSearch(e.target.value)   
-}
-//metodo de filtrado 2   
-const results = !search ? photo : photo.filter((dato)=> dato.title.toLowerCase().includes(search.toLocaleLowerCase()))
-  
-useEffect( ()=> {
- showData()
-}, [])
-
-//renderizamos la vista
-return (
-    <>
-    <div class="input-group mb-3">
-        <input value={search} onChange={searcher} type="text" placeholder='Name' className='form-control'/>
-    </div>
-    <div>
-        <table className='table table-striped table-hover mt-5 shadow-lg'>
-            <thead>
-                <tr className='bg-curso text-white'>
-                    <th>Perfil</th>
-                </tr>
-            </thead>
-            <tbody>
-                { results.map( (photo) => (
-                    <tr key={photo.id}>
-                        <td>{photo.title}</td>
-                    </tr>                    
-                ))}
-            </tbody>
-        </table>
-    </div>
-</>
-  )
-}
-export default SearchComponent
+  export default Search;
