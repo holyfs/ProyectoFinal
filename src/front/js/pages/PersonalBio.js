@@ -5,11 +5,14 @@ import Contact from "../component/contact";
 import '../../styles/bio.css';
 import { Context } from "../store/appContext";
 import ChangePassword from "../component/ChangePassword";
+import { Images } from "./galeriaImagenes";
+
 
 export const PersonalBio = () => {
 
     let user_name = 'Slipknot'
-    let user_nick_name = '@Slipknot'
+    let user_nick_name = 'Slipknot'
+    let band_name = "Slipknot"
 
     let guardar_cambios = () => {
     }
@@ -18,12 +21,14 @@ export const PersonalBio = () => {
         <div className="container-fluid"> 
             <div className="row">
                 <div className="col-3">
-                    <h1 className="bioperfil">Nombre de Banda</h1>
+                    <h1 className="bioperfil">{band_name}</h1>
                 </div>
                 <div className="d-flex justify-content-end">
-                    <Link to="#">
-						<button className="btn btn-primary">Galeria de Imagenes</button>
-				    </Link>
+                <form>
+                    <a href="/images">
+                        <input type="button" value="Galería de Imágenes" />
+                    </a>
+                </form>
                 </div>
             </div>
         </div>
@@ -45,9 +50,54 @@ export const PersonalBio = () => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-3">
-                    <input className="genre" />
-                    <input className="instruments" />
+                <h4>Generos</h4>
+                <ul className="list-group">
+                    <li className="list-group-item">
+                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
+                        Rock
+                    </li>
+                    <li className="list-group-item">
+                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
+                        Pop
+                    </li>
+                    <li className="list-group-item">
+                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
+                        Jazz
+                    </li>
+                    <li className="list-group-item">
+                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
+                        Metal
+                    </li>
+                    <li className="list-group-item">
+                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
+                        Hip-Hop
+                    </li>
+                </ul>
+                <h4>Instrumentos</h4>
+                <ul className="list-group">
+                    <li className="list-group-item">
+                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
+                        Guitarra
+                    </li>
+                    <li className="list-group-item">
+                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
+                        Bajo
+                    </li>
+                    <li className="list-group-item">
+                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
+                        Bateria
+                    </li>
+                    <li className="list-group-item">
+                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
+                        Saxo
+                    </li>
+                    <li className="list-group-item">
+                        <input className="form-check-input me-1" type="checkbox" value="" aria-label="..."/>
+                        Cantante
+                    </li>
+                    </ul>    
                 </div>
+                
                 <div className="col-1">
                     
                 </div>

@@ -53,7 +53,7 @@ class Login extends React.Component{
         
         
               <div class="forgot-pass-fau text-center pt-3">
-                                        <a href="#" class="text-secondary">Forgot Your Password?</a>
+                                        <a href="/forgetpassword" class="text-secondary">Forgot Your Password?</a>
         
                                       </div>
                                       <div class="create-new-fau text-center pt-3">
