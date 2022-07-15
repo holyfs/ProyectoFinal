@@ -9,6 +9,7 @@ In this file, you can add as many commands as you want using the @app.cli.comman
 Flask commands are usefull to run cronjobs or tasks outside of the API but sill in integration 
 with youy database, for example: Import the price of bitcoin every night as 12am
 """
+
 def setup_commands(app):
     
     """ 
@@ -16,20 +17,31 @@ def setup_commands(app):
     by typing: $ flask insert-test-users 5
     Note: 5 is the number of users to add
     """
-#    @app.cli.command("insert-test-users") # name of our command
-#    @click.argument("count") # argument of out command
-#    def insert_test_data(count):
-#        print("Creating test users")
-#        for x in range(1, int(count) + 1):
-#            user = User()
-#            user.email = "test_user" + str(x) + "@test.com"
-#            user.password = "123456"
-#            db.session.add(user)
-#            db.session.commit()
-#            print("User: ", user.email, " created.")
+    @app.cli.command("insert-test-users") # name of our command
+    @click.argument("count") # argument of out command
+    def insert_test_data(count):
+        # db.create_all()
+
+        print("Creating test users")
+        diff = 6
+        for x in range(diff, int(diff + count) + 1):
+            user = User()
+            user.email = "test_user" + str(x) + "@test.com"
+            user.password = "123456"
+            user.name = "pepe"
+            user.last_name = "perez"
+            user.avatar = "url"
+            user.band = True
+            user.description = "hola"
+            user.experience = True
+            user.age = 20
+            user.artist_name_or_band_name = "pepito"
+            db.session.add(user)
+            db.session.commit()
+            print("User: ", user.email, " created.")
 
 
-#    print("All test users created")
+    print("All test users created")
     
     instruments = ['saxophone', 'flute', 'clarinet', 'trumpet', 'oboe', 'trombone', 'guitar', 'piano', 'organ', 'double bass', 'bass guitar', 'mandolin', 'sitar', 'harp', 'violin', 'viola', 'cello', 'cymbals', 'drums', 'cajon', 'djembe', 'bongos', 'congas' ,'tambourines' ,'cowbells' ,'timbales', 'gongs', 'claves', 'triangles', 'shakers' ,'kalimbas', 'guiros', 'rainsticks synth', 'electric guitar', 'electric bass guitar', 'electric harp', 'piano rhodes', 'electric violin']
 

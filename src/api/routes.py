@@ -32,9 +32,10 @@ def add_user():
     password=body["password"],    
     age = body["age"],
     description = body["description"],
-    artist_name_or_band_name = body ["artist_name_or_band_name"],
+    artist_name_or_band_name = body["artist_name_or_band_name"],
     band = False,
-    experiencie= False
+    experience= False,
+    avatar="url"
     )
     response_body = {
         "msg" : "user created",
@@ -47,6 +48,7 @@ def add_user():
 #        "user": user.serialize()
 #    }
     return jsonify(user.serialize()),201
+
 #GET ALL USERS - LIST
 @api.route('/user', methods=['GET'])
 def get_users():
