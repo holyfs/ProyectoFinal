@@ -30,7 +30,11 @@ export const Home = () => {
   <div className="container">
   <div className="row">
    
-		Filter component will be placed here
+  <Filter
+  pageNumber={pageNumber}
+  updateGender={updateGender}
+  updatePageNumber={updatePageNumber}
+	/>
 	
     <div className="col-lg-8 col-12">
       <div className="row">
@@ -41,9 +45,11 @@ export const Home = () => {
     </div>
   </div>
   </div>
+  <Pagination
+        info={info}
+        pageNumber={pageNumber}
+        updatePageNumber={updatePageNumber}
+      />
 </div>
-
-	
-				
 	);
 };

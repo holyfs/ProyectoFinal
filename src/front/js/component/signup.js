@@ -25,7 +25,7 @@ class Signup extends React.Component{
       <>
       <div className="principal">
         <div className="secundario">
-      <Button class="btn btn-warning" onClick={this.abrirModal}>SignUp</Button>
+      <div class="" onClick={this.abrirModal}>SignUp</div>
 
       </div></div>
 

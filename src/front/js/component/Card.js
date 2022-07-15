@@ -21,6 +21,7 @@ const Card = ({ results }) => {
               <div className="">
                 <div className="fs-6 fw-bold">Last location</div>
                 <div className="fs-5">{location.name}</div>
+                <div><Link to="/bio"><button type="button" class="btn btn-info">Info</button></Link></div>
               </div>
             </div>
           </div>
