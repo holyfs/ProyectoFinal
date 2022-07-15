@@ -8,6 +8,19 @@ import bcrypt
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+from flask import Flask
+from flask_mail import Mail, Message
+
+app = Flask(__name__)
+mail= Mail(app)
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'facemusicapp@gmail.com'
+app.config['MAIL_PASSWORD'] = 'FaceMusic123'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 api = Blueprint('api', __name__)
 
@@ -283,3 +296,14 @@ def delete_user_instrument():
     db.session.commit()
     res = {"msg":"music instrument deleted"}
     return jsonify(res),200
+
+#ENVIO DE EMAIL
+@app.route("/mail")
+def index():
+   msg = Message('Hello', sender = 'facemusicapp@gmail.com', recipients = ['facemusicapp@gmail.com'])
+   msg.body = "Hello Flask message sent from Flask-Mail"
+   mail.send(msg)
+   return "Sent"
+
+if __name__ == '__main__':
+   app.run(debug = True)

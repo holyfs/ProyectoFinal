@@ -23,8 +23,7 @@ def setup_commands(app):
         # db.create_all()
 
         print("Creating test users")
-        diff = 6
-        for x in range(diff, int(diff + count) + 1):
+        for x in range(1, int(count) + 1):
             user = User()
             user.email = "test_user" + str(x) + "@test.com"
             user.password = "123456"
