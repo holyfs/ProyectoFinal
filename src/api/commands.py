@@ -1,18 +1,14 @@
-
 import click
 from api.models import db, User, Instruments, Genre
 from flask import Flask, request, jsonify, url_for, send_from_directory
-
-
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
-Flask commands are usefull to run cronjobs or tasks outside of the API but sill in integration 
+Flask commands are usefull to run cronjobs or tasks outside of the API but sill in integration
 with youy database, for example: Import the price of bitcoin every night as 12am
 """
 
 def setup_commands(app):
-    
-    """ 
+    """
     This is an example command "insert-test-users" that you can run from the command line
     by typing: $ flask insert-test-users 5
     Note: 5 is the number of users to add
@@ -21,7 +17,6 @@ def setup_commands(app):
     @click.argument("count") # argument of out command
     def insert_test_data(count):
         # db.create_all()
-
         print("Creating test users")
         for x in range(1, int(count) + 1):
             user = User()
@@ -54,7 +49,6 @@ def setup_commands(app):
             db.session.add(instrumentos)
             db.session.commit()
             print(" Instrument: ", Instruments.name , " created.")
-
         print("All test instruments created")
     
 
