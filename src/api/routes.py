@@ -51,14 +51,12 @@ def add_user():
     name = body["name"],
     last_name = body["last_name"],
     email = body["email"],
-    password=body["password"],
-    re_password=body["re_password"],    
+    password=body["password"],  
     age = body["age"],
     description = body["description"],
     artist_name_or_band_name = body["artist_name_or_band_name"],
     band = False,
     experience= False,
-    avatar="url"
     )
     db.session.add(user)
     db.session.commit()
