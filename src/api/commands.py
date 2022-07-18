@@ -74,3 +74,19 @@ def setup_commands(app):
             print(" Genre: ", Genre.name , " created.")
 
         print("All test instruments created")
+
+    @app.cli.command("insert-instruments-manual") # name of our command
+    def insert_test_data():
+        print("Creating instruments")
+        instruments = ['saxophone', 'flute', 'clarinet', 'trumpet', 'oboe', 'trombone', 'guitar', 'piano', 'organ', 'double bass', 'bass guitar', 'mandolin', 'sitar', 'harp', 'violin', 'viola', 'cello', 'cymbals', 'drums', 'cajon', 'djembe', 'bongos', 'congas' ,'tambourines' ,'cowbells' ,'timbales', 'gongs', 'claves', 'triangles', 'shakers' ,'kalimbas', 'guiros', 'rainsticks synth', 'electric guitar', 'electric bass guitar', 'electric harp', 'piano rhodes', 'electric violin']
+        instrumentos = Instruments ()
+        instrumentos.id = 1
+        instrumentos.name = 'saxophone'
+        print(" Instrument: ", instrumentos.name , " created.")
+        instrumentos.id = 2
+        instrumentos.name = 'flute'
+        print(" Instrument: ", instrumentos.name , " created.")
+        db.session.add(instrumentos)
+        db.session.commit()
+
+        print("All test instruments created")
