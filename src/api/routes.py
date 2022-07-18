@@ -24,6 +24,7 @@ mail = Mail(app)
 
 api = Blueprint('api', __name__)
 
+FORMAT_CODE = 'utf-8'
 
 def upload_image():
     image_to_load =  request.files["file"]
@@ -46,24 +47,28 @@ def handle_hello():
 #USER METHODS
 @api.route('/signup', methods=['POST'])
 def add_user():
-    password = request.form.get("password")
-    password = b'password'
-    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
     body = request.get_json()
+    password = body["password"]
+    hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
+
+    # pregutar a la bd si existe usuario con el email tal.
+
     user = User(
-    name = body["name"],
-    last_name = body["last_name"],
-    email = body["email"],
-    password=body["password"],  
-    age = body["age"],
-    description = body["description"],
-    artist_name_or_band_name = body["artist_name_or_band_name"],
-    band = False,
-    experience= False,
+        name = body["name"],
+        last_name = body["last_name"],
+        email = body["email"],
+        password=hashed.decode(FORMAT_CODE),  
+        age = body["age"],
+        description = body["description"],
+        artist_name_or_band_name = body["artist_name_or_band_name"],
+        band = False,
+        experience= False,
     )
+
     db.session.add(user)
     db.session.commit()
     return jsonify(user.serialize()),201
+
 #GET ALL USERS - LIST
 @api.route('/user', methods=['GET'])
 def get_users():
@@ -112,20 +117,16 @@ def delete_user_by_id(id):
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    if email != email:
-        raise APIException("wrong email, please insert a valid email", 401)
-    if password != password:
-        raise APIException("wrong password, try again", 401)
+    print(password)
     # Query your database for email and password
     user = User.query.filter_by(email=email).first()
     if user is None:
         # the user was not found on the database
         raise APIException("Bad username or password", 404)       
     # create a new token with the user id inside
-    if bcrypt.checkpw(password, user.password):
-        print( "It matches")
-    else:
-        print("It Does not Match :(")
+    if not bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)):
+        raise APIException("Bad username or password", 404)     
+
     access_token = create_access_token(identity=user.id)
     return jsonify({ "token": access_token, "user_id": user.id })
 
