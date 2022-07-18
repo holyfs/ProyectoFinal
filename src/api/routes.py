@@ -46,7 +46,10 @@ def handle_hello():
 #USER METHODS
 @api.route('/signup', methods=['POST'])
 def add_user():
-    body = request.get_json(),
+    password = request.form.get("password")
+    password = b'password'
+    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+    body = request.get_json()
     user = User(
     name = body["name"],
     last_name = body["last_name"],
@@ -66,7 +69,7 @@ def add_user():
 def get_users():
     users = User.query.all()
     if len(users) <= 0:
-        raise APIException("no user, please enter user, 401")
+        raise APIException("no user, please enter user", 401)
     all_users = list(map(lambda user: user.serialize(), users))    
     return jsonify(all_users),200
 
@@ -114,11 +117,15 @@ def create_token():
     if password != password:
         raise APIException("wrong password, try again", 401)
     # Query your database for email and password
-    user = User.query.filter_by(email=email, password=password).first()
+    user = User.query.filter_by(email=email).first()
     if user is None:
         # the user was not found on the database
-        raise APIException("Bad username or password", 401)       
+        raise APIException("Bad username or password", 404)       
     # create a new token with the user id inside
+    if bcrypt.checkpw(password, user.password):
+        print( "It matches")
+    else:
+        print("It Does not Match :(")
     access_token = create_access_token(identity=user.id)
     return jsonify({ "token": access_token, "user_id": user.id })
 

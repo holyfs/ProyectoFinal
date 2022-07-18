@@ -29,7 +29,6 @@ def setup_commands(app):
             user.password = "123456"
             user.name = "pepe"
             user.last_name = "perez"
-            user.avatar = "url"
             user.band = True
             user.description = "hola"
             user.experience = True
