@@ -17,6 +17,7 @@ class User(db.Model):
     description = db.Column(db.String(250), unique=False, nullable=False)
     experience = db.Column(db.Boolean(), nullable=False)
     artist_name_or_band_name = db.Column(db.String(120), unique=False, nullable=False)
+    avatar = db.Column(db.String(250), unique=False, nullable=False)
 
 
     def repr(self):
@@ -32,7 +33,8 @@ class User(db.Model):
             "band":self.band,
             "description":self.description,
             "experience":self.experience,
-            "artist_name_or_band_name":self.artist_name_or_band_name
+            "artist_name_or_band_name":self.artist_name_or_band_name,
+            "avatar":self.avatar
             # do not serialize the password, its a security breach
         }
 

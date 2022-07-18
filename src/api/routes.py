@@ -25,6 +25,15 @@ mail = Mail(app)
 api = Blueprint('api', __name__)
 
 
+def upload_image():
+    image_to_load =  request.files["file"]
+
+    if image_to_load:
+        resutl = cloudinary.uploader.upload(image_to_load)
+        url= result["url"]
+
+    return url
+
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
 
@@ -51,14 +60,8 @@ def add_user():
     experience= False,
     avatar="url"
     )
-    if re_password != password:
-        raise APIException("Not same password, please check again!")
     db.session.add(user)
     db.session.commit()
-#    response_body = {
-#        "msg" : "user created",
-#        "user": user.serialize()
-#    }
     return jsonify(user.serialize()),201
 #GET ALL USERS - LIST
 @api.route('/user', methods=['GET'])
@@ -92,15 +95,6 @@ def update_user_by_id(id):
     user.artist_name_or_band_name=body["artist_name_or_band_name"]
     db.session.commit()        
     return jsonify(user.serialize()),200
-
-#RESET PASSWORD
-#@api.route('/user/<int:id>', methods=['GET'])
-#def get_user_by_id(id):
-#    user = User.query.get(id)
-#    if user is None:
-#        raise APIException("user not found", 404)
-#    return jsonify(user.serialize()),200
-
 
 @api.route('/user/<int:id>', methods=['DELETE'])
 def delete_user_by_id(id):
@@ -188,12 +182,12 @@ def add_musical_genre():
     genre = Genre(
     name = body["name"],
     )
+    db.session.add(genre)
+    db.session.commit()
     response_body = {
         "msg" : "genre created",
         "user": genre.serialize()
     }
-    db.session.add(genre)
-    db.session.commit()
     return jsonify(response_body),201
 #GET ALL GENRES - LIST
 @api.route('/genre', methods=['GET'])
@@ -265,9 +259,7 @@ def add_instrument_to_user():
     instruments_user = Instruments_user (
         user_id=body["user_id"],
         instruments_id=body["instruments_id"]
-        )
-    if body["user_id"] is None:
-        raise APIException("user not found", 404)
+        )    
     db.session.add(instruments_user)
     db.session.commit()
     res = {"msg":"music instrument added"}
