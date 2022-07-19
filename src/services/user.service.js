@@ -6,7 +6,7 @@ class UserService {
     return axios.get(API_URL + '/user');
   }
   getUserBoard() {
-    return axios.get(API_URL + '/private', { headers: authHeader() });
+    return axios.get(API_URL + '/private hshajshjahshasjshjhj', { headers: authHeader() });
   }
 }
 export default new UserService();
