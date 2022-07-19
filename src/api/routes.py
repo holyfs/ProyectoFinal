@@ -101,6 +101,12 @@ def update_user_by_id(id):
     user.description=body["description"]
     user.experience=body["experience"]
     user.artist_name_or_band_name=body["artist_name_or_band_name"]
+    # try:
+    #     db.session.commit()
+    # except KeyError:
+    #     db.session.rollback()
+    #     return jsonify("missing key", 404) 
+    # return jsonify(user.serialize()),200
     db.session.commit()        
     return jsonify(user.serialize()),200
 
