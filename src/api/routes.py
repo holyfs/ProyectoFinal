@@ -10,6 +10,7 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask import Flask
 from flask_mail import Mail, Message
+from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__)
 mail= Mail(app)
@@ -50,9 +51,7 @@ def add_user():
     body = request.get_json()
     password = body["password"]
     hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
-
-    # pregutar a la bd si existe usuario con el email tal.
-
+    
     user = User(
         name = body["name"],
         last_name = body["last_name"],
@@ -63,10 +62,13 @@ def add_user():
         artist_name_or_band_name = body["artist_name_or_band_name"],
         band = False,
         experience= False,
-    )
-
-    db.session.add(user)
-    db.session.commit()
+    )        
+    try:
+        db.session.add(user)
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify("Email already registered", 404)
     return jsonify(user.serialize()),201
 
 #GET ALL USERS - LIST
@@ -117,16 +119,14 @@ def delete_user_by_id(id):
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    print(password)
     # Query your database for email and password
     user = User.query.filter_by(email=email).first()
+    print(email)
     if user is None:
         # the user was not found on the database
         raise APIException("Bad username or password", 404)       
-    # create a new token with the user id inside
     if not bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)):
         raise APIException("Bad username or password", 404)     
-
     access_token = create_access_token(identity=user.id)
     return jsonify({ "token": access_token, "user_id": user.id })
 
