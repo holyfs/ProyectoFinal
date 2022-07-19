@@ -76,7 +76,7 @@ def add_user():
 def get_users():
     users = User.query.all()
     if len(users) <= 0:
-        raise APIException("no user, please enter user", 401)
+        raise APIException("no user, please enter a valid user", 404)
     all_users = list(map(lambda user: user.serialize(), users))    
     return jsonify(all_users),200
 
@@ -121,11 +121,11 @@ def create_token():
     password = request.json.get("password", None)
     # Query your database for email and password
     user = User.query.filter_by(email=email).first()
-    print(email)
+    print(user)
     if user is None:
         # the user was not found on the database
         raise APIException("Bad username or password", 404)       
-    if not bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)):
+    if bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)) == False:
         raise APIException("Bad username or password", 404)     
     access_token = create_access_token(identity=user.id)
     return jsonify({ "token": access_token, "user_id": user.id })
