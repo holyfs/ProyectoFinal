@@ -19,7 +19,7 @@ export default class Login extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.state = {
-      username: "",
+      email: "",
       password: "",
       loading: false,
       message: ""
@@ -27,7 +27,7 @@ export default class Login extends Component {
   }
   onChangeUsername(e) {
     this.setState({
-      username: e.target.value
+      email: e.target.value
     });
   }
   onChangePassword(e) {
@@ -45,7 +45,7 @@ export default class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.username, this.state.password).then(
         () => {
-          this.props.history.push("/profile");
+          this.props.history.push("/bio");
           window.location.reload();
         },
         error => {
@@ -90,6 +90,7 @@ export default class Login extends Component {
               <label htmlFor="username">Username</label>
               <Input
                 type="text"
+                placeholder="Inser your e-mail"
                 className="form-control"
                 name="username"
                 value={this.state.username}
@@ -101,6 +102,7 @@ export default class Login extends Component {
               <label htmlFor="password">Password</label>
               <Input
                 type="password"
+                placeholder="Inser your Password"
                 className="form-control"
                 name="password"
                 value={this.state.password}

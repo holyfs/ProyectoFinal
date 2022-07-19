@@ -1,10 +1,10 @@
 import axios from "axios";
-const API_URL = "https://3001-4geeksacade-reactflaskh-l102j4glwox.ws-eu53.gitpod.io/api/auth/";
+const API_URL = "https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io";
 class AuthService {
-  login(username, password) {
+  login(email, password) {
     return axios
-      .post(API_URL + "signin", {
-        username,
+      .post(API_URL + "/login", {
+        email,
         password
       })
       .then(response => {
@@ -17,11 +17,15 @@ class AuthService {
   logout() {
     localStorage.removeItem("user");
   }
-  register(username, email, password) {
-    return axios.post(API_URL + "signup", {
-      username,
+  register(name, last_name, email, password, age, description, artist_name_or_band_name) {
+    return axios.post(API_URL + "/signup", {
+      name,
+      last_name,
       email,
-      password
+      password,
+      age,
+      description,
+      artist_name_or_band_name
     });
   }
   getCurrentUser() {
