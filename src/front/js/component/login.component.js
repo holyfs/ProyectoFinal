@@ -1,149 +1,79 @@
-import React, { Component } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import AuthService from "../../../services/auth.service";
-const required = value => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
+import React, { useContext, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Context } from "../store/appContext";
+import { useAlert } from 'react-alert'
+
+import "../../styles/home.css";
+export const Login = () => {
+	const { store, actions } = useContext(Context);
+	const [email, setEmail] = useState(null);
+	const [password, setPassword] = useState(null);
+	const required = value => {
+		if (!value) {
+		  return (
+			<div className="alert alert-danger" role="alert">
+			  This field is required!
+			</div>
+		  );
+		}
+	  };
+	const navigate = useNavigate();
+
+	async function login(event) {
+		event.preventDefault();
+		const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				email: email,
+				password: password
+			})
+		});
+
+		if (!response.ok) throw Error("There was a problem in the login request");
+
+		if (response.status === 401) {
+			throw "Invalid credentials";
+		} else if (response.status === 400) {
+			throw "Invalid email or password format";
+		}
+		const data = await response.json();
+		// save your token in the localStorage
+		//also you should set your user into the store using the setStore function
+		localStorage.setItem("jwt-token", data.token);
+		actions.setUser_token(data.token);
+		navigate("/personalbio");
+    console.log(data)
+	}
+
+	return (
+		<div className="container">
+			<h1>Log in</h1>
+			<form onSubmit={login}>
+				<div className="form-group">
+					<input
+						type="email"
+						className="form-control"
+						placeholder="email"
+						onChange={event => setEmail(event.target.value)}
+						validations={[required]}
+					/>
+				</div>
+				<div className="form-group">
+					<input
+						type="password"
+						className="form-control"
+						placeholder="password"
+						onChange={event => setPassword(event.target.value)}
+						validations={[required]}
+					/>
+				</div>
+				<button type="submit" className="btn btn-primary">
+					Login
+				</button>
+			</form>
+		</div>
+	);
 };
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.state = {
-      email: "",
-      password: "",
-      loading: false,
-      message: ""
-    };
-  }
-  onChangeUsername(e) {
-    this.setState({
-      email: e.target.value
-    });
-  }
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
-  handleLogin(e) {
-    e.preventDefault();
-    this.setState({
-      message: "",
-      loading: true
-    });
-    this.form.validateAll();
-    if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
-        () => {
-          this.props.history.push("/bio");
-          window.location.reload();
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          this.setState({
-            loading: false,
-            message: resMessage
-          });
-        }
-      );
-    } else {
-      this.setState({
-        loading: false
-      });
-    }
-  }
-  render() {
-    return (
-      <div className="col-md-12">
-        <div className="card card-container">
-        <center>
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-            width="250"
-			height="250"
-          />
-        </center>
-          <Form
-            onSubmit={this.handleLogin}
-            ref={c => {
-              this.form = c;
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <Input
-                type="text"
-                placeholder="Inser your e-mail"
-                className="form-control"
-                name="username"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
-                validations={[required]}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Input
-                type="password"
-                placeholder="Inser your Password"
-                className="form-control"
-                name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}
-              />
-            </div>
-            <div class="forgot-pass-fau text-center pt-3">
-                                        <a href="#" class="text-secondary">Forgot Your Password?</a>
-        
-                                      </div>
-                                      <div class="create-new-fau text-center pt-3">
-                                          <a href="#" class="text-primary-fau"><span data-toggle="modal" data-target="#sem-reg" data-dismiss="modal">Create A New Account</span></a>
-                                      </div>
-            <div className="form-group">
-              <button
-                className="btn btn-primary btn-block"
-                disabled={this.state.loading}
-              >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </button>
-            </div>
-            {this.state.message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {this.state.message}
-                </div>
-              </div>
-            )}
-            <CheckButton
-              style={{ display: "none" }}
-              ref={c => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
-        </div>
-      </div>
-    );
-  }
-}
