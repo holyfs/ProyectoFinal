@@ -10,7 +10,7 @@ class User(db.Model):
     last_name = db.Column(db.String(80), unique=False, nullable=False)
     age = db.Column(db.Integer)
     band = db.Column(db.Boolean(), nullable=False)
-    description = db.Column(db.String(250), unique=False, nullable=False)
+    description = db.Column(db.String(10000), unique=False, nullable=False)
     avatar = db.Column(db.String(700), unique=False, nullable=False)
     experience = db.Column(db.Boolean(), nullable=False)
     artist_name_or_band_name = db.Column(db.String(120), unique=False, nullable=False)

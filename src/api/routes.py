@@ -43,6 +43,7 @@ def upload_image():
     if image_to_load:
         result = cloudinary.uploader.upload(image_to_load)
         url= result["url"]
+        image = Image
     return url
 
 
