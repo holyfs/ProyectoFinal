@@ -5,7 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import App from "./pages/App";
-import Login from "./component/login.component"
+import {Login} from "./component/login.component"
 import Register from "./component/register.component"
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
