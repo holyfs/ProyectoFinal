@@ -11,7 +11,7 @@ class User(db.Model):
     age = db.Column(db.Integer)
     band = db.Column(db.Boolean(), nullable=False)
     description = db.Column(db.String(10000), unique=False, nullable=False)
-    avatar = db.Column(db.String(700), unique=False, nullable=False)
+    avatar = db.Column(db.String(700), unique=True, nullable=False)
     experience = db.Column(db.Boolean(), nullable=False)
     artist_name_or_band_name = db.Column(db.String(120), unique=False, nullable=False)
     def repr(self):
@@ -84,6 +84,7 @@ class Images(db.Model):
     __tablename__ = 'images'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(700), nullable=False)
+    public_id = db.Column(db.String(700), unique=True, nullable=False)
     def repr(self):
         return '<Images %r>' % self.name
     def serialize(self):
