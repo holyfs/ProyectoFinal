@@ -39,17 +39,32 @@ api = Blueprint('api', __name__)
 FORMAT_CODE = 'utf-8'
 
 def upload_image():
-    image_to_load =  request.files["file"]
-    if image_to_load:
-        result = cloudinary.uploader.upload(image_to_load)
-        url= result["url"]
-    return url
+    image_to_load= request.files["file"]
+    result = cloudinary.uploader.upload(image_to_load)
+    return result
+
+def get_image():
+    result = upload_image()
+#     # image_to_load= request.files["file"]
+#     # result = cloudinary.uploader.upload(image_to_load) 
+    return result
+
+# def get_public_id():
+#     result = upload_image()
+#     public_id=result["public_id"]    
+#     return public_id
 
 @api.route('/image', methods=['POST'])
 def add_image():
+    image_name = upload_image()
+    print(image_name)
+#    image_public_id = get_public_id()
     images=Images(
-        name=upload_image()
+        name=image_name["url"],
+        public_id=image_name["public_id"]
     )
+    if images is None:
+        raise APIException("Please insert an image", 404)
     db.session.add(images)
     db.session.commit()
     return jsonify(images.serialize(),201)
@@ -58,7 +73,7 @@ def add_image():
 def get_images():
     images = Images.query.all()
     if len(images) <= 0:
-        raise APIException("no image, please enter a valid image", 404)
+        raise APIException("no image, please enter an image", 404)
     all_images = list(map(lambda images: images.serialize(), images))    
     return jsonify(all_images),200
 
@@ -75,28 +90,40 @@ def handle_hello():
 #USER METHODS
 @api.route('/signup', methods=['POST'])
 def add_user():
-    body = request.get_json()
-    password = body["password"]
-    hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
+    image_to_load = request.files['file']
+    result = cloudinary.uploader.upload(image_to_load)
+    url = result["url"]
+    password = request.form["password"]
+    name = request.form["name"]
+    last_name = request.form["last_name"]
+    email = request.form["email"]
+    age = request.form["age"]
+    description = request.form["description"]
+    artist_name_or_band_name = request.form["artist_name_or_band_name"]
+    band = False
+    experience= False
     
+    hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
+    # validar existencia
+    exist_user = User.query.filter_by(email=email).first()
+    if exist_user:
+        # the user was not found on the database
+        raise APIException("User exist!!!", 404)  
+
     user = User(
-        name = body["name"],
-        last_name = body["last_name"],
-        email = body["email"],
-        password=hashed.decode(FORMAT_CODE),  
-        age = body["age"],
-        description = body["description"],
-        artist_name_or_band_name = body["artist_name_or_band_name"],
-        band = False,
-        experience= False,
-        avatar=body["avatar"]
-    )        
-    try:
-        db.session.add(user)
-        db.session.commit()
-    except IntegrityError:
-        db.session.rollback()
-        return jsonify("Email already registered", 404)
+        name=name,
+        last_name=last_name,
+        email=email,
+        password=hashed.decode(FORMAT_CODE),
+        age=age,
+        description=description,
+        artist_name_or_band_name =artist_name_or_band_name,
+        band=band,
+        experience=experience,
+        avatar=url,
+    )   
+    db.session.add(user)
+    db.session.commit()     
     return jsonify(user.serialize()),201
 
 #GET ALL USERS - LIST
@@ -159,7 +186,7 @@ def create_token():
     if user is None:
         # the user was not found on the database
         raise APIException("Bad username or password", 404)       
-    if bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)) == False:
+    if not bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)):
         raise APIException("Bad username or password", 404)     
     access_token = create_access_token(identity=user.id)
     return jsonify({ "token": access_token, "user_id": user.id })
