@@ -11,9 +11,20 @@ from flask_jwt_extended import jwt_required
 from flask import Flask
 from flask_mail import Mail, Message
 from sqlalchemy.exc import IntegrityError
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+
 
 app = Flask(__name__)
 mail= Mail(app)
+
+cloudinary.config( 
+  cloud_name = "facemusic", 
+  api_key = "216346968812243", 
+  api_secret = "mmzFZGFS-jRirON88rr7ZQ58Il4" 
+)
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -29,12 +40,11 @@ FORMAT_CODE = 'utf-8'
 
 def upload_image():
     image_to_load =  request.files["file"]
-
     if image_to_load:
-        resutl = cloudinary.uploader.upload(image_to_load)
+        result = cloudinary.uploader.upload(image_to_load)
         url= result["url"]
-
     return url
+
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -62,6 +72,7 @@ def add_user():
         artist_name_or_band_name = body["artist_name_or_band_name"],
         band = False,
         experience= False,
+        avatar=body["avatar"]
     )        
     try:
         db.session.add(user)
