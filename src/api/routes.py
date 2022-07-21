@@ -402,5 +402,7 @@ def index():
    mail.send(msg)
    return "Sent"
 
+
+
 if __name__ == '__main__':
    app.run(debug = True)
