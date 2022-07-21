@@ -43,22 +43,10 @@ def upload_image():
     result = cloudinary.uploader.upload(image_to_load)
     return result
 
-def get_image():
-    result = upload_image()
-#     # image_to_load= request.files["file"]
-#     # result = cloudinary.uploader.upload(image_to_load) 
-    return result
-
-# def get_public_id():
-#     result = upload_image()
-#     public_id=result["public_id"]    
-#     return public_id
 
 @api.route('/image', methods=['POST'])
 def add_image():
     image_name = upload_image()
-    print(image_name)
-#    image_public_id = get_public_id()
     images=Images(
         name=image_name["url"],
         public_id=image_name["public_id"]
@@ -76,6 +64,60 @@ def get_images():
         raise APIException("no image, please enter an image", 404)
     all_images = list(map(lambda images: images.serialize(), images))    
     return jsonify(all_images),200
+#Image methods by ID
+@api.route('/image/<int:id>', methods=['GET'])
+def get_image_by_id(id):
+    images = Images.query.get(id)
+    if images is None:
+        raise APIException("image not found", 404)
+    return jsonify(images.serialize()),200
+
+@api.route('/image/<int:id>', methods=['DELETE'])
+def delete_image_by_id(id):
+    images = Images.query.get(id)
+    if images is None:
+        raise APIException("image not found", 404)
+    cloudinary.uploader.destroy(images.public_id)
+    db.session.delete(images)
+    db.session.commit()
+    res = {"msg":"image deleted"}
+    return jsonify(res),200
+
+#User images Methods
+@api.route('/user/images', methods=['POST'])
+def add_images_to_user():
+    body = request.get_json()
+    user_id=body["user_id"]
+    images_user = Images_user (
+        user_id=body["user_id"],
+        image_id=body["image_id"]
+        )    
+    db.session.add(images_user)
+    db.session.commit()
+    res = {"msg":"image added"}
+    return jsonify(res),200
+#USER MUSIC INSTRUMENT GET
+@api.route('/user/<int:user_id>/images', methods=['GET'])
+def get_user_image(user_id):
+    images_user = Images_user.query.filter_by(user_id=user_id).all()
+    if len(images_user) <= 0:
+        raise APIException("images not found", 400)
+    all_images = list(map(lambda image: image.serialize(), images_user))
+    return jsonify(all_images),200
+#USER MUSIC INSTRUMENT DELETE
+@api.route('/user/image/delete', methods=['DELETE'])
+def delete_user_image():
+    body = request.get_json()
+#revisar este if
+    if body is None:
+        raise APIException("user not found", 404)
+    else: images_user = Images_user.query.filter((Images_user.user_id==body["user_id"]) & (Images_user.image_id==body["image_id"])).first()
+    if images_user is None:
+        raise APIException("images not found", 404)
+    db.session.delete(images_user)
+    db.session.commit()
+    res = {"msg":"image deleted"}
+    return jsonify(res),200
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -86,7 +128,7 @@ def handle_hello():
     }
     return jsonify(response_body), 200
     
-#comentario prueba
+    
 #USER METHODS
 @api.route('/signup', methods=['POST'])
 def add_user():
@@ -104,11 +146,9 @@ def add_user():
     experience= False
     
     hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
-    # validar existencia
     exist_user = User.query.filter_by(email=email).first()
     if exist_user:
-        # the user was not found on the database
-        raise APIException("User exist!!!", 404)  
+        raise APIException("email already registered", 404)  
 
     user = User(
         name=name,
