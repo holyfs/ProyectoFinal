@@ -413,21 +413,18 @@ def reset_password():
     print(new_password)
     return new_password
 
-@api.route('/user/<int:user_id>/reset-password', methods=['PUT'])
-def reset_user_password(user_id):
+@api.route('/user/reset-password', methods=['PUT'])
+def reset_user_password():
     body=request.get_json()
     email = body["email"]
     exist_user = User.query.filter_by(email=email).first()
     if not exist_user:
         return jsonify("email is not registered"), 404
-    user = User.query.get(user_id)
-    if user is None:
-        raise APIException("user not found", 404)
     else:
         hashed = bcrypt.hashpw(reset_password().encode(FORMAT_CODE), bcrypt.gensalt())
-    user.password = hashed.decode(FORMAT_CODE)
+    exist_user.password = hashed.decode(FORMAT_CODE)
     db.session.commit()        
-    return jsonify(user.serialize()),200
+    return jsonify(exist_user.serialize()),200
 
 
 #ENVIO DE EMAIL
