@@ -1,14 +1,39 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import Contact from "../component/contact";
 import '../../styles/bio.css';
 import { Context } from "../store/appContext";
 import ChangePassword from "../component/ChangePassword";
 import { Images } from "./galeriaImagenes";
+import { useNavigate } from 'react-router-dom';
 
 
 export const PersonalBio = () => {
+    let navigate = useNavigate();
+	const { store, actions } = useContext(Context);
+	const [data, setData] = useState(" ");
+    const protectedData = async () => {
+		// retrieve token form localStorage
+        
+		const token = localStorage.getItem("jwt-token");
+		const response = await fetch(process.env.BACKEND_URL + "/api/private", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token
+			}
+		});
+		if (!response.ok) throw Error("There was a problem in the login request");
+       
+		const responseJson = await response.json();
+		setData(responseJson);
+	};
+
+	useEffect(() => {
+		if (store.user_token === null) navigate("/register");
+		else protectedData();
+	}, []);
 
     let user_name = 'Slipknot'
     let user_nick_name = 'Slipknot'

@@ -17,6 +17,7 @@ import { Bio } from "./pages/bio";
 import { PersonalBio } from "./pages/PersonalBio";
 import ForgetPassword from "./component/ForgetPassword";
 import { Images } from "./pages/galeriaImagenes";
+import {SignUpTest} from "./component/registerComponent.test";
 
 //create your first component
 const Layout = () => {
@@ -36,6 +37,7 @@ const Layout = () => {
                         <Route element={<Login />} path="/login" />
                         <Route element={<Register />} path="/register" />
                         <Route element={<Signup />} path="/signup" />
+                        <Route element={<SignUpTest />} path="/signup2" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<Bio />} path="/bio" />
