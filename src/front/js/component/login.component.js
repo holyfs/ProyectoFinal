@@ -2,8 +2,10 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import { useAlert } from 'react-alert'
+import ForgetPass from "./ForgetPassword"
 
 import "../../styles/home.css";
+import ForgetPassword from "./ForgetPassword";
 export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState(null);
@@ -51,6 +53,17 @@ export const Login = () => {
 	return (
 		<div className="container">
 			<h1>Log in</h1>
+			<div className="card card-container">
+        <center>
+          <img
+            src="https://pbs.twimg.com/profile_images/897355385/cabeza-avatar.gif"
+            alt="profile-img"
+            className="profile-img-card"
+            width="250"
+			      height="250"
+          />
+        </center>
+		</div>
 			<form onSubmit={login}>
 				<div className="form-group">
 					<input
@@ -70,6 +83,9 @@ export const Login = () => {
 						validations={[required]}
 					/>
 				</div>
+				<p className="forgot-password text-right">
+                    Olvidé mi clave<i className="glyphicon glyphicon-cloud"> :( </i> <ForgetPass />
+                </p>
 				<button type="submit" className="btn btn-primary">
 					Login
 				</button>

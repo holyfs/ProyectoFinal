@@ -17,9 +17,9 @@ export const Bio = () => {
                     <h1 className="bioperfil">Nombre de Banda</h1>
                 </div>
                 <div className="d-flex justify-content-end">
-                    <Link to="#">
-						<button className="btn btn-primary"><Contact /></button>
-				    </Link>
+                    
+					<Contact />
+				
                 </div>
             </div>
         </div>

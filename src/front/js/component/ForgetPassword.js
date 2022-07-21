@@ -25,7 +25,7 @@ class ForgetPassword extends React.Component{
       <>
       <div className="principal">
         <div className="secundario">
-      <Button color="danger" onClick={this.abrirModal}>Olvidar contraseña</Button>
+      <Button color="danger" onClick={this.abrirModal}>Olvidé contraseña</Button>
 
       </div></div>
 

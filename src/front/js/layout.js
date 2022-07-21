@@ -15,6 +15,7 @@ import Signup from "./component/signup";
 import { Footer } from "./component/footer";
 import { Bio } from "./pages/bio";
 import { PersonalBio } from "./pages/PersonalBio";
+import {Redirect} from "./pages/redirectSignup"
 import ForgetPassword from "./component/ForgetPassword";
 import { Images } from "./pages/galeriaImagenes";
 import {SignUpTest} from "./component/registerComponent.test";
@@ -42,6 +43,7 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<Bio />} path="/bio" />
                         <Route element={<PersonalBio />} path="/PersonalBio" />
+                        <Route element={<Redirect />} path="/rederictsignup" />
                         <Route element={<ForgetPassword/>} path="/forgetpassword" />
                         <Route element={<Images/>} path="/images" />
                     </Routes>

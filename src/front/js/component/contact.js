@@ -25,7 +25,7 @@ class Contact extends React.Component{
       <>
       <div className="principal">
         <div className="secundario">
-      <Button color="danger" onClick={this.abrirModal}>Contactar</Button>
+      <Button color="btn btn-dark" onClick={this.abrirModal}>Contactar</Button>
 
       </div></div>
 
@@ -48,7 +48,7 @@ class Contact extends React.Component{
                 <input type="mensaje" class="form-control" required autocomplete="off" />
               </div>
               <div class="btn-check-log">
-                    <button type="submit" class="btn-check-login">Enviar</button>
+                    <button type="submit" className="btn btn-dark">Enviar</button>
               </div>
         
         

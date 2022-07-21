@@ -56,6 +56,18 @@ export const SignUpTest = () => {
 		<div className="container">
 			<h1>SIGN UP</h1>
 			<form onSubmit={signUp}>
+			
+        <div className="card card-container">
+        <center>
+          <img
+            src="https://st2.depositphotos.com/3854637/47799/v/600/depositphotos_477992494-stock-illustration-profile-of-a-young-woman.jpg"
+            alt="profile-img"
+            className="profile-img-card"
+            width="250"
+			height="250"
+          />
+        </center>
+		</div>
             <div className="form-group">
                 <label>
                     Name:
@@ -162,7 +174,7 @@ export const SignUpTest = () => {
 					/>
 				</div>
 				<button type="submit" className="btn btn-primary">
-					Save
+					Register!
 				</button>
 			</form>
 		</div>

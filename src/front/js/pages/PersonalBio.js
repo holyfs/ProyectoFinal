@@ -31,7 +31,7 @@ export const PersonalBio = () => {
 	};
 
 	useEffect(() => {
-		if (store.user_token === null) navigate("/register");
+		if (store.user_token === null) navigate("/rederictsignup");
 		else protectedData();
 	}, []);
 
