@@ -14,6 +14,7 @@ from sqlalchemy.exc import IntegrityError
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import random
 
 
 
@@ -91,17 +92,22 @@ def add_images_to_user():
     images_user = Images_user (
         user_id=body["user_id"],
         image_id=body["image_id"]
-        )    
-    db.session.add(images_user)
-    db.session.commit()
+        ) 
+    try:
+        db.session.add(images_user)
+        db.session.commit()        
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify("user or image not found"),500
     res = {"msg":"image added"}
     return jsonify(res),200
+
 #USER MUSIC INSTRUMENT GET
 @api.route('/user/<int:user_id>/images', methods=['GET'])
 def get_user_image(user_id):
     images_user = Images_user.query.filter_by(user_id=user_id).all()
     if len(images_user) <= 0:
-        raise APIException("images not found", 400)
+        raise APIException("user not found", 500)
     all_images = list(map(lambda image: image.serialize(), images_user))
     return jsonify(all_images),200
 #USER MUSIC INSTRUMENT DELETE
@@ -332,27 +338,30 @@ def add_genre_to_user():
         user_id=body["user_id"],
         genre_id=body["genre_id"]
         )
-    db.session.add(generos_user)
-    db.session.commit()
+    try:
+        db.session.add(generos_user)
+        db.session.commit()        
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify("user or genre not found"),500
     res = {"msg":"musical genre added"}
     return jsonify(res),200
+
 #USER MUSICAL GENRE GET
 @api.route('/user/<int:user_id>/genre', methods=['GET'])
 def get_user_genre(user_id):
     generos_user = Generos_user.query.filter_by(user_id=user_id).all()
     if len(generos_user) <= 0:
-        raise APIException("not genres found", 404)
+        raise APIException("not user or genres found", 404)
     all_genres = list(map(lambda genre: genre.serialize(), generos_user))
     return jsonify(all_genres),200
 #USER MUSICAL GENRE DELETE
 @api.route('/user/genre/delete', methods=['DELETE'])
 def delete_user_genre():
     body = request.get_json()
-    if body is None:
-        raise APIException("user not found", 404)
-    else: generos_user = Generos_user.query.filter((Generos_user.user_id==body["user_id"]) & (Generos_user.genre_id==body["genre_id"])).first()
+    generos_user = Generos_user.query.filter((Generos_user.user_id==body["user_id"]) & (Generos_user.genre_id==body["genre_id"])).first()
     if generos_user is None:
-        raise APIException("music genres not found", 404)
+        raise APIException("music genres or user not found", 404)
     db.session.delete(generos_user)
     db.session.commit()
     res = {"msg":"music genre deleted"}
@@ -366,17 +375,22 @@ def add_instrument_to_user():
     instruments_user = Instruments_user (
         user_id=body["user_id"],
         instruments_id=body["instruments_id"]
-        )    
-    db.session.add(instruments_user)
-    db.session.commit()
-    res = {"msg":"music instrument added"}
+        )
+    try:
+        db.session.add(instruments_user)
+        db.session.commit()        
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify("user or instrument not found"),500
+    res = {"msg":"musical genre added"}
     return jsonify(res),200
+
 #USER MUSIC INSTRUMENT GET
 @api.route('/user/<int:user_id>/instrument', methods=['GET'])
 def get_user_instrument(user_id):
     instruments_user = Instruments_user.query.filter_by(user_id=user_id).all()
     if len(instruments_user) <= 0:
-        raise APIException("music instruments not found", 400)
+        raise APIException("music instruments or user not found", 400)
     all_instruments = list(map(lambda instrument: instrument.serialize(), instruments_user))
     return jsonify(all_instruments),200
 #USER MUSIC INSTRUMENT DELETE
@@ -384,15 +398,37 @@ def get_user_instrument(user_id):
 def delete_user_instrument():
     body = request.get_json()
 #revisar este if
-    if body is None:
-        raise APIException("user not found", 404)
-    else: instruments_user = Instruments_user.query.filter((Instruments_user.user_id==body["user_id"]) & (Instruments_user.instruments_id==body["instruments_id"])).first()
+    instruments_user = Instruments_user.query.filter((Instruments_user.user_id==body["user_id"]) & (Instruments_user.instruments_id==body["instruments_id"])).first()
     if instruments_user is None:
-        raise APIException("music instruments not found", 404)
+        raise APIException("music instruments or user not found", 500)
     db.session.delete(instruments_user)
     db.session.commit()
     res = {"msg":"music instrument deleted"}
     return jsonify(res),200
+
+def reset_password():
+    password_choice = ["A","B","C","D","E","F","G","H","J","Q","K","1","2","3","4","5","6","7","8","9","l","m","n","o","p","q","r","s","t","u",".","<","#","@","-","_","/","&","%","$"]
+    password_list= random.sample(password_choice, k=8)
+    new_password = "".join(str(x) for x in password_list)
+    print(new_password)
+    return new_password
+
+@api.route('/user/<int:user_id>/reset-password', methods=['PUT'])
+def reset_user_password(user_id):
+    body=request.get_json()
+    email = body["email"]
+    exist_user = User.query.filter_by(email=email).first()
+    if not exist_user:
+        return jsonify("email is not registered"), 404
+    user = User.query.get(user_id)
+    if user is None:
+        raise APIException("user not found", 404)
+    else:
+        hashed = bcrypt.hashpw(reset_password().encode(FORMAT_CODE), bcrypt.gensalt())
+    user.password = hashed.decode(FORMAT_CODE)
+    db.session.commit()        
+    return jsonify(user.serialize()),200
+
 
 #ENVIO DE EMAIL
 @app.route("/mail")
