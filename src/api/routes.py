@@ -179,10 +179,9 @@ def add_user():
     )
     db.session.add(user)
     db.session.commit()   
-    response=jsonify(user)
+    response=jsonify(user.serialize())
     response.headers.add("Access-Control-Allow-Origin", "*")
     response.status=201
-    print(response)
     return response  
     #return jsonify(user.serialize()),201
 
@@ -223,6 +222,26 @@ def update_user_by_id(id):
     db.session.commit()        
     return jsonify(user.serialize()),200
 
+@api.route('/user/<int:id>/new-password', methods=['PUT'])
+def user_new_password(id):
+    user = User.query.get(id)
+    password=request.form["password"]
+    if not bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)):
+        return jsonify("bad password, try again"),404
+    else: new_password = request.form["new_password"]
+    hashed = bcrypt.hashpw(new_password.encode(FORMAT_CODE), bcrypt.gensalt())
+    user.password = hashed.decode(FORMAT_CODE)
+    if not user:
+        return jsonify("user not found"),404
+    db.session.commit()
+    response_body = {
+        "msg" : "password changed",
+        "user": user.serialize()
+    } 
+    return jsonify(response_body),200   
+ 
+    
+
 @api.route('/user/<int:id>', methods=['DELETE'])
 def delete_user_by_id(id):
     user = User.query.get(id)
@@ -240,7 +259,6 @@ def create_token():
     password = request.json.get("password", None)
     # Query your database for email and password
     user = User.query.filter_by(email=email).first()
-    print(user)
     if user is None:
         # the user was not found on the database
         raise APIException("Bad username or password", 404)       
