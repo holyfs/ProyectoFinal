@@ -208,22 +208,28 @@ def get_user_by_id(id):
 @api.route('/user/<int:id>', methods=['PUT'])
 def update_user_by_id(id):
     user = User.query.get(id)
-    body= request.get_json()
-    if user is None:
-        raise APIException("user not found", 404)
-    user.name = body["name"]
-    user.last_name = body["last_name"]
-    user.email= body["email"]   
-    user.age=body["age"]
-    user.description=body["description"]
-    user.experience=body["experience"]
-    user.artist_name_or_band_name=body["artist_name_or_band_name"]
-    # try:
-    #     db.session.commit()
-    # except KeyError:
-    #     db.session.rollback()
-    #     return jsonify("missing key", 404) 
-    # return jsonify(user.serialize()),200
+    image_to_load = request.files['file']
+    result = cloudinary.uploader.upload(image_to_load)
+    url = result["url"]
+    name = request.form["name"]
+    last_name = request.form["last_name"]
+    email = request.form["email"]
+    age = request.form["age"]
+    description = request.form["description"]
+    artist_name_or_band_name = request.form["artist_name_or_band_name"]
+    band = False
+    experience= False
+    user = User(
+        name=name,
+        last_name=last_name,
+        email=email,
+        age=age,
+        description=description,
+        artist_name_or_band_name =artist_name_or_band_name,
+        band=band,
+        experience=experience,
+        avatar=url,
+    )   
     db.session.commit()        
     return jsonify(user.serialize()),200
 
