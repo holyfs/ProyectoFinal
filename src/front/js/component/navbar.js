@@ -4,12 +4,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import App from "../pages/App"
 import Signup from "../component/signup"
-import Login from "../component/login"
 import "../../styles/navBar.css"
+import {Login} from "../component/login.component"
 
 
 export const Navbar = () => {
-
+	let tok = localStorage.getItem("jwt-token")
 	return (
 		<nav className="navbar navbar-light Nav">
 		<div className="container">
@@ -32,15 +32,23 @@ export const Navbar = () => {
             display: none;
           }
         `}</style>
+			
 				</Link>
 				<form class="form-inline">
+		  	{tok==null?
+			<Link to="/login">
+			<button className="btn btn-dark" type="button">Login no modal</button>
+		  	</Link>
+			:<Link to="/personalbio">
+			<button className="btn btn-dark" type="button">Mi zona</button>
+		  	</Link>}
 				
 					
-						<button className="btn btn-dark" type="button"><App /></button>
+			<button className="btn btn-dark" type="button"><App /></button>
 					
 				
 					
-          <button className="btn btn-dark" type="button"><Signup /></button>
+          	<button className="btn btn-dark" type="button"><Signup /></button>
     			</form>
 </div>
 </nav>	

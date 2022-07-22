@@ -21,7 +21,7 @@ export const PersonalBio = () => {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: "Bearer " + token
+				"Authorization": "Bearer " + token
 			}
 		});
 		if (!response.ok) throw Error("There was a problem in the login request");
@@ -31,7 +31,8 @@ export const PersonalBio = () => {
 	};
 
 	useEffect(() => {
-		if (store.user_token === null) navigate("/rederictsignup");
+        let prueba = localStorage.getItem("jwt-token")
+		if (prueba === null) navigate("/rederictsignup");
 		else protectedData();
 	}, []);
 

@@ -16,6 +16,17 @@ import cloudinary.uploader
 import cloudinary.api
 import random
 
+from datetime import timedelta
+delta = timedelta(
+    days=50,
+    seconds=27,
+    microseconds=10,
+    milliseconds=29000,
+    minutes=5,
+    hours=8,
+    weeks=2
+)
+
 
 
 app = Flask(__name__)
@@ -167,10 +178,15 @@ def add_user():
         band=band,
         experience=experience,
         avatar=url,
-    )   
+    )
     db.session.add(user)
-    db.session.commit()     
-    return jsonify(user.serialize()),201
+    db.session.commit()   
+    response=jsonify(user)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.status=201
+    print(response)
+    return response  
+    #return jsonify(user.serialize()),201
 
 #GET ALL USERS - LIST
 @api.route('/user', methods=['GET'])
@@ -233,14 +249,23 @@ def create_token():
         # the user was not found on the database
         raise APIException("Bad username or password", 404)       
     if not bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)):
-        raise APIException("Bad username or password", 404)     
-    access_token = create_access_token(identity=user.id)
+        raise APIException("Bad username or password", 404)
+
+    data = {
+        "id": user.id,
+        'email': user.email,
+        'name': user.name,
+        'lastName': user.last_name
+    }     
+    access_token = create_access_token(identity=user.id, expires_delta=timedelta(minutes=120))
     return jsonify({ "token": access_token, "user_id": user.id })
 
 #PRIVATE AREA
 @api.route("/private", methods=["GET"])
 @jwt_required()
 def protected():
+    print("ok")
+    return jsonify("ok")
     # Access the identity of the current user with get_jwt_identity
     current_user_id = get_jwt_identity()
     user = User.query.get(current_user_id)    
