@@ -203,13 +203,11 @@ def get_user_by_id(id):
     return jsonify(user.serialize()),200    
 
 @api.route('/user/<int:id>', methods=['PUT'])
+@jwt_required()
 def update_user_by_id(id):
     user = User.query.get(id)
-    password=request.form["password"]
     image_to_load = request.files['file']
     result = cloudinary.uploader.upload(image_to_load)
-    hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
-    user.password = hashed.decode(FORMAT_CODE)
     user.name = request.form["name"]
     user.last_name = request.form["last_name"]
     user.email = request.form["email"]
@@ -223,6 +221,7 @@ def update_user_by_id(id):
     return jsonify(user.serialize()),200
 
 @api.route('/user/<int:id>/new-password', methods=['PUT'])
+@jwt_required()
 def user_new_password(id):
     user = User.query.get(id)
     password=request.form["password"]
@@ -243,6 +242,7 @@ def user_new_password(id):
     
 
 @api.route('/user/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_user_by_id(id):
     user = User.query.get(id)
     if user is None:
