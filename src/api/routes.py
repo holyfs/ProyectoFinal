@@ -206,33 +206,20 @@ def get_user_by_id(id):
 @api.route('/user/<int:id>', methods=['PUT'])
 def update_user_by_id(id):
     user = User.query.get(id)
+    password=request.form["password"]
     image_to_load = request.files['file']
     result = cloudinary.uploader.upload(image_to_load)
-    password = request.form["password"]
     hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
-    url = result["url"]
-    name = request.form["name"]
-    last_name = request.form["last_name"]
-    email = request.form["email"]
-    age = request.form["age"]
-    description = request.form["description"]
-    artist_name_or_band_name = request.form["artist_name_or_band_name"]
-    band=request.form["band"]
-    experience=request.form["experience"]
+    user.password = hashed.decode(FORMAT_CODE)
+    user.name = request.form["name"]
+    user.last_name = request.form["last_name"]
+    user.email = request.form["email"]
+    user.age = request.form["age"]
+    user.description = request.form["description"]
+    user.artist_name_or_band_name = request.form["artist_name_or_band_name"]
+    user.avatar=result["url"]
     if not user:
-        return jsonify("user not found"), 404 
-    user = User(
-        name=name,
-        last_name=last_name,
-        email=email,
-        password=hashed.decode(FORMAT_CODE),
-        age=age,
-        description=description,
-        artist_name_or_band_name =artist_name_or_band_name,
-        band=band,
-        experience=experience,
-        avatar=url,
-    )   
+        return jsonify("user not found"), 404   
     db.session.commit()        
     return jsonify(user.serialize()),200
 
