@@ -12,17 +12,26 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
+from flask_mail import Mail, Message
 
 #from models import Person
-
 ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
+
 app.url_map.strict_slashes = False
 
 app.config["JWT_SECRET_KEY"] = "super-secret" 
 jwt = JWTManager(app)
 
+# Mail config
+app.config['MAIL_SERVER']='smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = '14ffbbed45bf6a'
+app.config['MAIL_PASSWORD'] = '9b9a9a828b0113'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+mail = Mail(app)
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -67,6 +76,15 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0 # avoid cache memory
     return response
+
+
+#ENVIO DE EMAIL
+@app.route("/send_mail", methods=['POST'])
+def send_mail():
+    msg = Message('Hello', sender='facemusicapp@gmail.com', recipients = ['facemusicapp@gmail.com'])
+    msg.body = "Hello Flask message sent from Flask-Mail"
+    mail.send(msg)
+    return "Sent"
 
 
 # this only runs if `$ python src/main.py` is executed
