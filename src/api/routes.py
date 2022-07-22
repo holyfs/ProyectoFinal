@@ -159,14 +159,12 @@ def add_user():
     age = request.form["age"]
     description = request.form["description"]
     artist_name_or_band_name = request.form["artist_name_or_band_name"]
-    band = False
-    experience= False
-    
+    band=False
+    experience=False  
     hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
     exist_user = User.query.filter_by(email=email).first()
     if exist_user:
         raise APIException("email already registered", 404)  
-
     user = User(
         name=name,
         last_name=last_name,
@@ -210,6 +208,8 @@ def update_user_by_id(id):
     user = User.query.get(id)
     image_to_load = request.files['file']
     result = cloudinary.uploader.upload(image_to_load)
+    password = request.form["password"]
+    hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
     url = result["url"]
     name = request.form["name"]
     last_name = request.form["last_name"]
@@ -217,12 +217,15 @@ def update_user_by_id(id):
     age = request.form["age"]
     description = request.form["description"]
     artist_name_or_band_name = request.form["artist_name_or_band_name"]
-    band = False
-    experience= False
+    band=request.form["band"]
+    experience=request.form["experience"]
+    if not user:
+        return jsonify("user not found"), 404 
     user = User(
         name=name,
         last_name=last_name,
         email=email,
+        password=hashed.decode(FORMAT_CODE),
         age=age,
         description=description,
         artist_name_or_band_name =artist_name_or_band_name,
