@@ -428,12 +428,12 @@ def reset_user_password():
 
 
 #ENVIO DE EMAIL
-@app.route("/mail")
+@api.route("/mail", methods=['POST'])
 def index():
-   msg = Message('Hello', sender = 'facemusicapp@gmail.com', recipients = ['facemusicapp@gmail.com'])
-   msg.body = "Hello Flask message sent from Flask-Mail"
-   mail.send(msg)
-   return "Sent"
+    msg = Message('Hello', sender = 'facemusicapp@gmail.com', recipients = ['facemusicapp@gmail.com'])
+    msg.body = "Hello Flask message sent from Flask-Mail"
+    mail.send(msg)
+    return "Sent"
 
 
 
