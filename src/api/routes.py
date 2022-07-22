@@ -9,7 +9,6 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask import Flask
-from flask_mail import Mail, Message
 from sqlalchemy.exc import IntegrityError
 import cloudinary
 import cloudinary.uploader
@@ -27,27 +26,13 @@ delta = timedelta(
     weeks=2
 )
 
-
-
-app = Flask(__name__)
-mail= Mail(app)
-
 cloudinary.config( 
   cloud_name = "facemusic", 
   api_key = "216346968812243", 
   api_secret = "mmzFZGFS-jRirON88rr7ZQ58Il4" 
 )
 
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'facemusicapp@gmail.com'
-app.config['MAIL_PASSWORD'] = 'FaceMusic123'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
-
 api = Blueprint('api', __name__)
-
 FORMAT_CODE = 'utf-8'
 
 def upload_image():
@@ -464,16 +449,6 @@ def reset_user_password():
     exist_user.password = hashed.decode(FORMAT_CODE)
     db.session.commit()        
     return jsonify(exist_user.serialize()),200
-
-
-#ENVIO DE EMAIL
-@api.route("/mail", methods=['POST'])
-def index():
-    msg = Message('Hello', sender = 'facemusicapp@gmail.com', recipients = ['facemusicapp@gmail.com'])
-    msg.body = "Hello Flask message sent from Flask-Mail"
-    mail.send(msg)
-    return "Sent"
-
 
 
 if __name__ == '__main__':
