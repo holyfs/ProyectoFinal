@@ -23,7 +23,7 @@ export const SignUpTest = () => {
 		event.preventDefault();
 
 		if (password !== confirmPass) {
-			alert("Las constraseñas no coinciden");
+			alert("Las contraseñas no coinciden");
 			return;
 		}
 		const response = await fetch(process.env.BACKEND_URL + "/api/signup", {
