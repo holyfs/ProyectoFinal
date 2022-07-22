@@ -1,6 +1,7 @@
 import click
-from api.models import db, User, Instruments, Genre
+from api.models import db, User, Instruments, Genre , Instruments_user , Generos_user
 from flask import Flask, request, jsonify, url_for, send_from_directory
+import random
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
 Flask commands are usefull to run cronjobs or tasks outside of the API but sill in integration
@@ -78,6 +79,33 @@ def setup_commands(app):
         db.session.commit()
 
         print("All test instruments created")
+
+    @app.cli.command("insert-user-instruments") # name of our command
+    def insert_test_data():
+        instrument_id = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38]
+        user_id = [1,2,3,4,5,6]
+        for x in user_id:
+            # user_instrumentos = Instruments_user()
+            random_instrument= random.sample(instrument_id, random.randint(1,8))
+            random_user = x
+            print(random_instrument)
+            print(random_user)
+            # db.session.add(user_instrumentos)
+            # db.session.commit()
+
+    @app.cli.command("insert-user-genres") # name of our command
+    def insert_test_data():
+        genre_id = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+        user_id = [1,2,3,4,5,6]
+        for x in user_id:
+            # user_generos = Generos_user()
+            random_genre= random.sample(genre_id, random.randint(1,8))
+            random_user = x
+            print(random_genre)
+            print(random_user)
+            # db.session.add(user_generos)
+            # db.session.commit()
+    
 
 
     @app.cli.command("insert-user-manual") # name of our command
