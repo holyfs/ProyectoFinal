@@ -143,7 +143,7 @@ def add_user():
     email = request.form["email"]
     age = request.form["age"]
     description = request.form["description"]
-    artist_name_or_band_name = request.form["artist_name_or_band_name"]
+    artist_name_or_band_name = request.form["artist_name_or_band_name"]    
     band=False
     experience=False  
     hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
@@ -162,6 +162,7 @@ def add_user():
         experience=experience,
         avatar=url,
     )
+    print(user)
     db.session.add(user)
     db.session.commit()   
     response=jsonify(user.serialize())

@@ -14,7 +14,7 @@ const ShowUser = () => {
     // });
 
     axios
-      .all([axios.get(`https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user`)])
+      .all([axios.get(`https://3001-holyfs-proyectofinal-5m505b4tkc5.ws-eu54.gitpod.io/api/user`)])
       .then(
         axios.spread((users) => {
           const user = users.data;
@@ -25,11 +25,11 @@ const ShowUser = () => {
   }, []);
 
   return (
-    <div>
-        {user.map(users => (
-          <div key={users.id} className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark">
+    <>
+      {user.map(users => (
+        <div key={users.id} className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark">
           <div className={`${styles.card} d-flex flex-column justify-content-center`}>
-          <img className={`${styles.img} img-fluid`}  src={users.avatar} alt="" />
+            <img className={`${styles.img} img-fluid`} src={users.avatar} alt="" />
             <div className={`${styles.content}`}>
               <div className="fs-4 fw-bold mb-4">{users.name}</div>
               <div className="">
@@ -40,8 +40,8 @@ const ShowUser = () => {
             </div>
           </div>
         </div>
-        ))}
-    </div>
+      ))}
+    </>
   );
 };
 

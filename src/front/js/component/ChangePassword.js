@@ -19,7 +19,7 @@ class ChangePassword extends React.Component{
     const [newpassword, setNewPassword] = useState("");
 	  const [confirmPass, setConfirmPass] = useState("");
 
-    const ChangePassword = () => {
+    const ChangePassword = async() => {
       if (newpassword !== confirmPass) {
         alert("Las contraseñas no coinciden");
         return;
