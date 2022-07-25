@@ -1,78 +1,148 @@
-import React from 'react';
-import '../../styles/App.css';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import '../../styles/loginModal.scss';
+import { useNavigate } from 'react-router-dom';
 
-class Login extends React.Component{
-  state={
-    abierto: false,
+
+const LoginModal = props => { 
+
+  // Initial values empty
+  const { show , close } = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+   // Hide / Show Errors
+   const [showErrors, setShowErrors] = useState(false);
+   // Error messages
+  const [errorMsgs, setErrorMsgs] = useState([]);
+
+  // Mail Sent
+  const [mailSent, setMailSent] = useState(false);
+   
+  // Return null if false
+  if (!show) {
+    return null;
   }
 
-  abrirModal=()=>{
-    this.setState({abierto: !this.state.abierto});
-  }
+  
+  const navigate = useNavigate();
+  async function login(e) {
+    e.preventDefault();
+     // Set Empty on Submit
+     setErrorMsgs([]);
+     setMailSent(false);
+ 
+     // Flag to check if email is valid or not
+     let isValidEmail = false;
+ 
+     // Empty Email and Password Field
+     if ( !email && !password) {
+       setErrorMsgs(errorMsgs => [...errorMsgs, 'Email and Password is a required field.']);
+       setShowErrors(true);
+       return false;
+     }
+ 
+     // If empty Email
+     if (!email) {
+       setErrorMsgs(errorMsgs => [...errorMsgs, 'Email is a required field.']);
+     } else {
+       // Validate Email
+       if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
+         setErrorMsgs(errorMsgs => [...errorMsgs, 'Invalid email address.']);
+       } else {
+         isValidEmail = true;
+       }
+     }
+ 
+     // if empty password
+     if (!password) {
+       setErrorMsgs(errorMsgs => [...errorMsgs, 'Password is a required field.']);
+       return false;
+     }
+ 
+     if (isValidEmail) {
+       setShowErrors(false);
+  // Use AXIOS code here
+      
+      const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+      
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
+  
+      if (!response.ok) throw Error("There was a problem in the login request");
+  
+      if (response.status === 401) {
+        throw "Invalid credentials";
+      } else if (response.status === 400) {
+        throw "Invalid email or password format";
+      }
+      const data = await response.json();
+      // save your token in the localStorage
+      //also you should set your user into the store using the setStore function
+      localStorage.setItem("jwt-token", data.token);
+      actions.setUser_token(data.token);
+      navigate("/personalbio");
+      console.log(data)
+      // Show Sent mail message after success
+      setMailSent(true);
 
-  render(){
+      // Clear Fields after success
+      setEmail('');
+      setPassword('')
 
-    const modalStyles={
-      position: "absolute",
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)'
+      // Close Modal after success.
+      setTimeout(close,1000);
     }
-    return(
-      <>
-      <div className="principal">
-        <div className="secundario">
-      <Button color="danger" onClick={this.abrirModal}>Login</Button>
 
-      </div></div>
-
-      <Modal isOpen={this.state.abierto} style={modalStyles}>
-      <form class="seminor-login-form">
-              <div class="form-group">
-                <input type="email" class="form-control" required autocomplete="off" />
-                <label class="form-control-placeholder" for="name">Email address</label>
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" required autocomplete="off" />
-                <label class="form-control-placeholder" for="password">Password</label>
-              </div>
-              <div class="form-group">
-                <label class="container-checkbox">
-                Remember Me On This Computer
-                <input type="checkbox" checked="checked" required />
-                <span class="checkmark-box"></span>
-                </label>
-                </div>
-        
-                <div class="btn-check-log">
-                    <button type="submit" class="btn-check-login">LOGIN</button>
-                </div>
-        
-        
-              <div class="forgot-pass-fau text-center pt-3">
-                                        <a href="/forgetpassword" class="text-secondary">Forgot Your Password?</a>
-        
-                                      </div>
-                                      <div class="create-new-fau text-center pt-3">
-                                          <a href="#" class="text-primary-fau"><span data-toggle="modal" data-target="#sem-reg" data-dismiss="modal">Create A New Account</span></a>
-                                      </div>
-
-                                      <ModalFooter>
-            <Button color="primary">Iniciar Sesión</Button>
-            <Button color="secondary" onClick={this.abrirModal}>Cerrar</Button>
-        </ModalFooter>
-        
-        
-        
-              </form>
-			  
-      </Modal>
-      </>
-    )
   }
-}
+                                                   
+     
 
-export default Login;
+  return (
+    <>
+      <div className="login-modal-ui">
+        <form onSubmit={login}>
+          <h3 className="mdhead">Login</h3>  
+          <span onClick={close} title="Close" className="close">&times;</span>
+          {
+          showErrors ? errorMsgs.map((msg, index) => {
+              return <div key={index} className="alertdanger">{msg}</div>;
+          }) 
+          : 
+          ''
+          }
+          {
+            mailSent ? <div className="alertsent">Mail sent successfully.</div> : ''
+          }
+          <div className="mdbody">
+              <div className="mdrow">
+                <input 
+                  type="email"
+                  placeholder = "Enter your email."
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="mdrow">
+                <input 
+                  type="password"
+                  placeholder = "Enter your password."
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
+              </div>
+          </div> 
+          <div className="mdactions">
+            <button type="submit" className="btnui">Login</button>
+          </div> 
+        </form>
+      </div>
+    </>
+  );
+}
+export default LoginModal;

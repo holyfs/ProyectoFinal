@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
@@ -6,9 +6,14 @@ import App from "../pages/App"
 import Signup from "../component/signup"
 import "../../styles/navBar.css"
 import {Login} from "../component/login.component"
+import LoginModal from "../component/login"
 
 
 export const Navbar = () => {
+	const [showLoginModal, setShowLoginModal]     = useState(false);
+  const handleShowLoginModal = () => {
+    setShowLoginModal(!showLoginModal); 
+  }
 	let tok = localStorage.getItem("jwt-token")
 	return (
 		<nav className="navbar navbar-light Nav">
@@ -34,6 +39,9 @@ export const Navbar = () => {
         `}</style>
 			
 				</Link>
+				<Link to="/mainindex">
+			<button className="btn btn-dark" type="button">Main Api</button>
+		  	</Link>
 				<form class="form-inline">
 		  	{tok==null?
 			<Link to="/login">
@@ -43,7 +51,12 @@ export const Navbar = () => {
 			<button className="btn btn-dark" type="button">Mi zona</button>
 		  	</Link>}
 				
-					
+			  <LoginModal show={showLoginModal} close={handleShowLoginModal} />
+      
+        
+          	<button className="btn btn-dark" type="button" onClick={handleShowLoginModal}>Login</button>
+        
+      		
 			<button className="btn btn-dark" type="button"><App /></button>
 					
 				

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 //import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
+import UploadImage from "../component/uploadImage";
 
 export const SignUpTest = () => {
 	//const { store, actions } = useContext(Context);
@@ -68,6 +69,7 @@ export const SignUpTest = () => {
           />
         </center>
 		</div>
+		<br></br>
             <div className="form-group">
                 <label>
                     Name:
@@ -80,6 +82,7 @@ export const SignUpTest = () => {
 					/>
                 </label>
 				</div>
+				<br></br>
                 <div className="form-group">
 					<input
 						type="text"
@@ -89,6 +92,7 @@ export const SignUpTest = () => {
 						required
 					/>
 				</div>
+			<br></br>
                 <div className="form-group">
 					<input
 						type="number"
@@ -98,6 +102,7 @@ export const SignUpTest = () => {
 						required
 					/>
 				</div>
+			<br></br>
                 <div className="form-group">
 					<input
 						type="text"
@@ -107,6 +112,7 @@ export const SignUpTest = () => {
                         required
 					/>
 				</div>
+			<br></br>
                 <div className="form-group">
                 <label>
                     ¿Eres una banda?
@@ -117,6 +123,7 @@ export const SignUpTest = () => {
 					/>
                 </label>
                 </div>
+			<br></br>
                 <div className="form-group">
                 <label>
                     ¿Tienes Experiencia?
@@ -126,6 +133,8 @@ export const SignUpTest = () => {
 						//onChange={event => setExperience(event.target.value)}
 					/>
                 </label>
+				</div>
+			<br></br>
                 <div className="form-group">
                 <label>
                     <h4>Elige tu foto de perfil</h4>
@@ -136,8 +145,11 @@ export const SignUpTest = () => {
                         required
 					/>
                 </label>
+			<br></br>
+			<br></br>
+				<UploadImage />
 				</div>
-                </div>
+				<br></br>
                 <div className="form-group">
 					<input
 						type="textarea"
@@ -147,6 +159,7 @@ export const SignUpTest = () => {
                         required
 					/>
 				</div>
+				<br></br>
 				<div className="form-group">
 					<input
 						type="email"
@@ -156,6 +169,7 @@ export const SignUpTest = () => {
 						required
 					/>
 				</div>
+				<br></br>
 				<div className="form-group">
 					<input
 						type="password"
@@ -165,6 +179,7 @@ export const SignUpTest = () => {
 						required
 					/>
 				</div>
+				<br></br>
 				<div className="form-group">
 					<input
 						type="password"
@@ -173,6 +188,7 @@ export const SignUpTest = () => {
 						onChange={event => setConfirmPass(event.target.value)}
 					/>
 				</div>
+				<br></br>
 				<button type="submit" className="btn btn-primary">
 					Register!
 				</button>
