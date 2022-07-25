@@ -21,6 +21,29 @@ class Contact extends React.Component{
       left: '50%',
       transform: 'translate(-50%, -50%)'
     }
+
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+	  const [phone, setPhone] = useState("");
+    const [msg, setMsg] = useState("");
+
+    const SendMsg = () => {
+      fetch(process.env.BACKEND_URL + "/sendMsg", {
+        method: "PUT",
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+        body: JSON.stringify({
+          email: email,
+          name: name,
+          phone: phone,
+          msg: msg
+        })
+      });
+      // necesitaria un RETURN aquí para cerrar modal y enviar un alert con "mensaje enviado"
+    }
+
+
     return(
       <>
       <div className="principal">
@@ -33,22 +56,22 @@ class Contact extends React.Component{
       <form class="seminor-login-form">
               <div class="form-group">
                 <label class="form-control-placeholder" for="name">Email address</label>
-                <input type="email" class="form-control" required autocomplete="off" />
+                <input type="email" class="form-control" onChange={event => setEmail(event.target.value)} required />
               </div>
               <div class="form-group">
                 <label class="form-control-placeholder" for="nombre">Nombre</label>
-                <input type="nombre" class="form-control" required autocomplete="off" />
+                <input type="nombre" class="form-control" onChange={event => setName(event.target.value)} required />
               </div>
               <div class="form-group">
                 <label class="form-control-placeholder" for="Teléfono">Telefono</label>
-                <input type="mensaje" class="form-control" required autocomplete="off" />
+                <input type="mensaje" class="form-control" onChange={event => setPhone(event.target.value)} required />
               </div>
               <div class="form-group">
                 <label class="form-control-placeholder" for="nombre">Mensaje</label>
-                <input type="mensaje" class="form-control" required autocomplete="off" />
+                <input type="mensaje" class="form-control" onChange={event => setMsg(event.target.value)} required />
               </div>
               <div class="btn-check-log">
-                    <button type="submit" className="btn btn-dark">Enviar</button>
+                    <button type="submit" className="btn btn-dark" onClick={SendMsg()}>Enviar</button>
               </div>
         
         
