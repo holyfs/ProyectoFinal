@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const PersonalBio = () => {
     let navigate = useNavigate();
+    const [usuarios, setUsuarios]= useState([]);
 	const { store, actions } = useContext(Context);
 	const [data, setData] = useState(" ");
     const protectedData = async () => {

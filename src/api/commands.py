@@ -39,7 +39,7 @@ def setup_commands(app):
     @click.argument("count") # argument of out command
     def insert_test_data(count):
         instruments = ['saxophone', 'flute', 'clarinet', 'trumpet', 'oboe', 'trombone', 'guitar', 'piano', 'organ', 'double bass', 'bass guitar', 'mandolin', 'sitar', 'harp', 'violin', 'viola', 'cello', 'cymbals', 'drums', 'cajon', 'djembe', 'bongos', 'congas' ,'tambourines' ,'cowbells' ,'timbales', 'gongs', 'claves', 'triangles', 'shakers' ,'kalimbas', 'guiros', 'rainsticks synth', 'electric guitar', 'electric bass guitar', 'electric harp', 'piano rhodes', 'electric violin']
-
+        #37 instrumentos
         print("Creating instruments")
         for x in range(1,int(count) + 1):
             instrumentos = Instruments()
@@ -56,7 +56,7 @@ def setup_commands(app):
     def insert_test_data(count):
         print("Creating genre")
         genre = ['blues' , 'classic' , 'country' , 'dance' , 'electronic' , 'experimental' , 'folk' , 'jazz' , 'latin' , 'new age' , 'pop' , 'hip hop and rap' , 'rock' , 'r&b and soul' , 'reggae' , 'music of the world' ]
-
+        # 15 generos
         for x in range(1, int(count) + 1):
             generos = Genre() 
             generos.name = genre[x]
