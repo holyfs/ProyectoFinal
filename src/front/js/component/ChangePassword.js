@@ -24,7 +24,7 @@ class ChangePassword extends React.Component{
         alert("Las contraseñas no coinciden");
         return;
       }
-      await fetch(process.env.BACKEND_URL + "/user/<int:id>/new-password", {
+      fetch(process.env.BACKEND_URL + "/user/<int:id>/new-password", {
         method: "PUT",
         headers: {
           "Content-type": "multipart/form-data",

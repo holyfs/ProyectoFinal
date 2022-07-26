@@ -67,7 +67,7 @@ export const PersonalBio = () => {
                     <h3 className="PersonalDates">Datos Personales</h3>
                     <div className="userName" id="userName" contenteditable="true">{user_name}</div>
                     <div className="nickName" id="nickName" contenteditable="true">{user_nick_name}</div>
-                    <button><ChangePassword/></button>
+                    <button>***changepassword component</button>
                 </div>
             </div>
             <button>Cambiar Foto de Perfil</button>

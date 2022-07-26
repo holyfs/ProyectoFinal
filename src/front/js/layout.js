@@ -7,7 +7,6 @@ import { MainIndex } from "./pages/mainIndex";
 import { Demo } from "./pages/demo";
 import App from "./pages/App";
 import {Login} from "./component/login.component"
-import Register from "./component/register.component"
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
@@ -39,7 +38,6 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<App />} path="/app" />
                         <Route element={<Login />} path="/login" />
-                        <Route element={<Register />} path="/register" />
                         <Route element={<Signup />} path="/signup" />
                         <Route element={<SignUpTest />} path="/signup2" />
                         <Route element={<Single />} path="/single/:theid" />

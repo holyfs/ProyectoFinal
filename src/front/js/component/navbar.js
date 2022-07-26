@@ -7,6 +7,10 @@ import Signup from "../component/signup"
 import "../../styles/navBar.css"
 import {Login} from "../component/login.component"
 import LoginModal from "../component/login"
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+import MuiAlert from "@material-ui/lab/Alert";
+import Swal from "sweetalert2"
 
 
 export const Navbar = () => {
@@ -14,7 +18,24 @@ export const Navbar = () => {
   const handleShowLoginModal = () => {
     setShowLoginModal(!showLoginModal); 
   }
+  
+  
+
+  const logout = () => {
+	Swal.fire({
+		title: 'Se cerrará la sesión',
+		buttonsStyling: false,
+		customClass: {
+			confirmButtonText: "Salir",
+			confirmButtonColor: "#4c4",
+			
+		}
+	})
+			localStorage.removeItem('jwt-token');
+			window.location.reload()
+  };
 	let tok = localStorage.getItem("jwt-token")
+	let tokLogout = localStorage.getItem("jwt-token")
 	return (
 		<nav className="navbar navbar-light Nav">
 		<div className="container">
@@ -50,6 +71,14 @@ export const Navbar = () => {
 			:<Link to="/personalbio">
 			<button className="btn btn-dark" type="button">Mi zona</button>
 		  	</Link>}
+			{tokLogout==null?
+			<Link to="/signup2">
+			<button className="btn btn-dark" type="button">SingUp No modal</button>
+			</Link>
+			:
+			<button className="btn btn-dark" type="button" onClick={logout}>Log Out</button>
+			}
+			
 				
 			  <LoginModal show={showLoginModal} close={handleShowLoginModal} />
       

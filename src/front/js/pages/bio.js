@@ -18,7 +18,8 @@ export const Bio = () => {
                 </div>
                 <div className="d-flex justify-content-end">
                     
-					<Contact />
+              ***componente contact.js***
+              
 				
                 </div>
             </div>
