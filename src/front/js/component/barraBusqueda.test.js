@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from "../../styles/Card.module.css";
 import { Link } from "react-router-dom";
+import AddMusicalInstruments from "./AddMusicalInstruments.js";
 
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
@@ -55,6 +56,7 @@ function Search() {
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </div>
+        <div><AddMusicalInstruments /></div>
         <div>
           {usuarios.map((usuarios) => (
             <div
