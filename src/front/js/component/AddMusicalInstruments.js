@@ -21,6 +21,17 @@ const AddMusicalInstruments = () => {
         peticionGet();
         },[])
 
-  
-}
+  return (
+    <div>
+      <MultiSelect
+        options={instruments}                                   
+        value={selected}
+        onChange={setSelected}
+        labelledBy="Select"
+      />
+    </div>
+  );
+};
+
+
 export default AddMusicalInstruments;
