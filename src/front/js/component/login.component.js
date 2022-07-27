@@ -20,7 +20,7 @@ export const Login = () => {
 
 	async function login(event) {
 		event.preventDefault();
-		const response = await fetch("https://3001-holyfs-proyectofinal-zmvgflr5rep.ws-eu54.gitpod.io" + "/api/login", {
+		const response = await fetch(process.env.BACKEND_URL + "/api/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
