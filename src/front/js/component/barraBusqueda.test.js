@@ -7,7 +7,6 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from "../../styles/Card.module.css";
 import { Link } from "react-router-dom";
 
-
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
   const [tablaUsuarios, setTablaUsuarios]= useState([]);
@@ -89,7 +88,7 @@ function Search() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </>
     );
     }
