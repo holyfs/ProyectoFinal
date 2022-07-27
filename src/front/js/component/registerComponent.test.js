@@ -16,8 +16,8 @@ export const SignUpTest = () => {
     const [age, setAge] = useState("");
     const [description, setDescription] = useState("");
     const [artist_name_or_band_name, setArtist_name_or_band_name] = useState("");
-    const [experience, setExperience] = useState(false);
-    const [band, setBand] = useState(false);
+    const [experience, setExperience] = useState("");
+    const [band, setBand] = useState("");
     const [avatar, setAvatar] = useState("");
     const navigate = useNavigate();
     async function signUp(event) {
