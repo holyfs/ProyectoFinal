@@ -8,28 +8,24 @@ class AuthService {
         password
       })
       .then(response => {
-        if (response.data.access_token) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+        if (response.data.token) {
+          localStorage.setItem("jwt-token", JSON.stringify(response.data));
         }
         return response.data;
       });
   }
   logout() {
-    localStorage.removeItem("user");
+    localStorage.removeItem("jwt-token");
   }
-  register(name, last_name, email, password, age, description, artist_name_or_band_name) {
+  register(name, email, password) {
     return axios.post(API_URL + "/signup", {
       name,
-      last_name,
       email,
-      password,
-      age,
-      description,
-      artist_name_or_band_name
+      password
     });
   }
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));;
+    return JSON.parse(localStorage.getItem('jwt-token'));;
   }
 }
 export default new AuthService();

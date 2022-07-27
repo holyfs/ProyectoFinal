@@ -4,6 +4,8 @@ import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import UploadImage from "../component/uploadImage";
 import { resetWarningCache } from "prop-types";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2"
 export const SignUpTest = () => {
     //const { store, actions } = useContext(Context);
     const [name, setName] = useState("");
@@ -59,8 +61,14 @@ export const SignUpTest = () => {
         });;
         request.send(formData);
         const responseJson = await response.json();
+        Swal.fire({
+            icon: 'sucess',
+            title: 'Registro Completo',
+            text: 'Something went wrong!',
+            footer: '<a href="/login">Quieres Iniciar sesión?</a>'
+          })
         return responseJson;
-        navigate("/login");
+       
     }
     return (
         <div className="container">

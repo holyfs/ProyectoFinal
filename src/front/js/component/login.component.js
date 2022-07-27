@@ -1,8 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, Component } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import { useAlert } from 'react-alert'
 import ForgetPass from "./ForgetPassword"
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2"
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
 
 import "../../styles/home.css";
 import ForgetPassword from "./ForgetPassword";
@@ -10,20 +15,12 @@ export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
-	const required = value => {
-		if (!value) {
-		  return (
-			<div className="alert alert-danger" role="alert">
-			  This field is required!
-			</div>
-		  );
-		}
-	  };
+
 	const navigate = useNavigate();
 
 	async function login(event) {
 		event.preventDefault();
-		const response = await fetch("https://3001-holyfs-proyectofinal-5m505b4tkc5.ws-eu54.gitpod.io" + "/api/login", {
+		const response = await fetch(process.env.BACKEND_URL + "/api/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -35,9 +32,13 @@ export const Login = () => {
 		});
 
 		if (!response.ok) throw Error("There was a problem in the login request");
+		alert("Las contraseñas no coinciden");
 
 		if (response.status === 401) {
 			throw "Invalid credentials";
+		}if (response.status === 404) {
+			alert("Credenciales no son correctas");
+				throw "Invalid credentials";
 		} else if (response.status === 400) {
 			throw "Invalid email or password format";
 		}
@@ -46,7 +47,12 @@ export const Login = () => {
 		//also you should set your user into the store using the setStore function
 		localStorage.setItem("jwt-token", data.token);
 		actions.setUser_token(data.token);
-		navigate("/personalbio");
+		Swal.fire({
+            icon: 'sucess',
+            title: 'Login Completo',
+            text: 'Gracias por usar esta página web ',
+            footer: '<a href="/personalbio">Quieres ir a tu página personal?</a>'
+          })
     console.log(data)
 	}
 
@@ -71,7 +77,7 @@ export const Login = () => {
 						className="form-control"
 						placeholder="email"
 						onChange={event => setEmail(event.target.value)}
-						validations={[required]}
+						required
 					/>
 				</div>
 				<div className="form-group">
@@ -80,7 +86,7 @@ export const Login = () => {
 						className="form-control"
 						placeholder="password"
 						onChange={event => setPassword(event.target.value)}
-						validations={[required]}
+						required
 					/>
 				</div>
 				<p className="forgot-password text-right">

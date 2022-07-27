@@ -6,34 +6,37 @@ import App from "../pages/App"
 import Signup from "../component/signup"
 import "../../styles/navBar.css"
 import {Login} from "../component/login.component"
-import LoginModal from "../component/login"
-import { transitions, positions, Provider as AlertProvider } from 'react-alert'
-import AlertTemplate from 'react-alert-template-basic'
-import MuiAlert from "@material-ui/lab/Alert";
+import Login2 from "../component/login"
 import Swal from "sweetalert2"
 
 
 export const Navbar = () => {
-	const [showLoginModal, setShowLoginModal]     = useState(false);
-  const handleShowLoginModal = () => {
-    setShowLoginModal(!showLoginModal); 
-  }
-  
+	
+  const logout = () => {
+	Swal
+    .fire({
+        title: "LogOut",
+        input: "Desea Cerrar sesión?",
+        showCancelButton: true,
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+    })
+    .then(resultado => {
+        if (resultado.value=== true) {
+            
+        }else {
+            // Dijeron que no
+            return "Te mantienes logueado";
+        }
+		
+    });
+	localStorage.removeItem('jwt-token');
+			window.location.reload();
+			
+	  };
+			
   
 
-  const logout = () => {
-	Swal.fire({
-		title: 'Se cerrará la sesión',
-		buttonsStyling: false,
-		customClass: {
-			confirmButtonText: "Salir",
-			confirmButtonColor: "#4c4",
-			
-		}
-	})
-			localStorage.removeItem('jwt-token');
-			window.location.reload()
-  };
 	let tok = localStorage.getItem("jwt-token")
 	let tokLogout = localStorage.getItem("jwt-token")
 	return (
@@ -80,10 +83,11 @@ export const Navbar = () => {
 			}
 			
 				
-			  <LoginModal show={showLoginModal} close={handleShowLoginModal} />
-      
+			
         
-          	<button className="btn btn-dark" type="button" onClick={handleShowLoginModal}>Login</button>
+			<Link to="/loginmensaje">
+			<button className="btn btn-dark" type="button">LoginMensajes</button>
+		  	</Link>
         
       		
 			<button className="btn btn-dark" type="button"><App /></button>
