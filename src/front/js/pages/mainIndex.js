@@ -31,24 +31,24 @@ export const MainIndex = () => {
   return (
 
     <div className="App">
-  <h1 className="text-center mb-3">Músicos/Banda</h1>
-  
-  <div className="container">
-  <div className="row">
-  <div className="col">
-  <h4>***Filter boceto***</h4>
-  </div>
-  
-  
-  <div className="col-lg-8 col-12">
-  <div className="row">
-  <Search />
-  </div>
-  </div>
-  </div> 
-  </div>
-  
- <h4>***Footer Pagination***</h4>
-</div>
-	);
+      <h1 className="text-center mb-3">Músicos/Banda</h1>
+
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <h4>***Filter boceto***</h4>
+          </div>
+
+
+          <div className="col-lg-8 col-12">
+            <div className="row">
+              <Search />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4>***Footer Pagination***</h4>
+    </div>
+  );
 };
