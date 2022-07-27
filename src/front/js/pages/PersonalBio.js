@@ -24,7 +24,7 @@ export const PersonalBio = () => {
 		// retrieve token form localStorage
         
 		const token = localStorage.getItem("jwt-token");
-		const response = await fetch(process.env.BACKEND_URL + "/api/private", {
+		const response = await fetch("https://3001-holyfs-proyectofinal-zmvgflr5rep.ws-eu54.gitpod.io" + "/api/private", {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
