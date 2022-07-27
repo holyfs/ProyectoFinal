@@ -41,6 +41,13 @@ class Instruments(db.Model):
             "id": self.id,
             "name": self.name
         }
+
+    def serialize_dropdown(self):
+        return {
+            "value": self.id,
+            "label": self.name
+        }
+
 class Genre(db.Model):
     __tablename__ = 'genre'
     id = db.Column(db.Integer, primary_key=True)
@@ -51,6 +58,11 @@ class Genre(db.Model):
         return {
             "id": self.id,
             "name": self.name
+        }
+    def serialize_dropdown(self):
+        return {
+            "value": self.id,
+            "label": self.name
         }
 class Instruments_user(db.Model):
     __tablename__ = 'instruments_user'

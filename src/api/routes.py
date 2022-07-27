@@ -144,8 +144,16 @@ def add_user():
     age = request.form["age"]
     description = request.form["description"]
     artist_name_or_band_name = request.form["artist_name_or_band_name"]    
-    band=False
-    experience=False  
+    band=request.form["band"]
+    if band == 'True':
+        band = True
+    else:
+        band = False
+    experience=request.form["experience"]
+    if experience == 'True':
+        experience = True
+    else:
+        experience = False 
     hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
     exist_user = User.query.filter_by(email=email).first()
     if exist_user:
@@ -162,7 +170,6 @@ def add_user():
         experience=experience,
         avatar=url,
     )
-    print(user)
     db.session.add(user)
     db.session.commit()   
     response=jsonify(user.serialize())
@@ -199,6 +206,16 @@ def update_user_by_id(id):
     user.email = request.form["email"]
     user.age = request.form["age"]
     user.description = request.form["description"]
+    user.band=request.form["band"]
+    if request.form["band"] == 'True':
+        user.band = True
+    else:
+        user.band = False
+    user.experience=request.form["experience"]
+    if request.form["experience"] == 'True':
+        user.experience = True
+    else:
+        user.experience = False 
     user.artist_name_or_band_name = request.form["artist_name_or_band_name"]
     user.avatar=result["url"]
     if not user:
@@ -292,7 +309,8 @@ def get_instruments():
     instruments = Instruments.query.all()
     if len(instruments) <= 0:
         raise APIException("no instruments, please enter a musical instrument, 401")
-    all_instruments = list(map(lambda instrument: instrument.serialize(), instruments))    
+        
+    all_instruments = list(map(lambda instrument: instrument.serialize_dropdown(), instruments))    
     return jsonify(all_instruments),200
 
 #INSTRUMENTS METHODS BY ID    
@@ -333,7 +351,7 @@ def get_genre():
     genres = Genre.query.all()
     if len(genres) <= 0:
         raise APIException("no genre, please enter a musical genre", 404)
-    all_genres = list(map(lambda genre: genre.serialize(), genres))    
+    all_genres = list(map(lambda genre: genre.serialize_dropdown(), genres))    
     return jsonify(all_genres),200
 
 #GENRE METHODS BY ID    

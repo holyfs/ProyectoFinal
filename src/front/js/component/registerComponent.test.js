@@ -16,8 +16,8 @@ export const SignUpTest = () => {
     const [age, setAge] = useState("");
     const [description, setDescription] = useState("");
     const [artist_name_or_band_name, setArtist_name_or_band_name] = useState("");
-    const [experience, setExperience] = useState(false);
-    const [band, setBand] = useState(false);
+    const [experience, setExperience] = useState("");
+    const [band, setBand] = useState("");
     const [avatar, setAvatar] = useState("");
     const navigate = useNavigate();
     async function signUp(event) {
@@ -38,26 +38,26 @@ export const SignUpTest = () => {
         newRequest.append("band", band)
         newRequest.append("file", avatar)
         newRequest.append("is_active", true)
-        const response = await fetch(process.env.BACKEND_URL + "/api/signup", {
+        const response = await fetch("https://3001-holyfs-proyectofinal-zmvgflr5rep.ws-eu54.gitpod.io" + "/api/signup", {
             method: "POST",
             headers: {
                 /*  "Content-Type": "multipart/form-data", */
                 "mode": 'no-cors'
             },
             body: newRequest
-/*                  ({
-                        name: name,
-                        last_name: lastName,
-                        email: email,
-                        password: password,
-                        age: age,
-                        description: description,
-                        artist_name_or_band_name: artist_name_or_band_name,
-                        experience: experience,
-                        band: band,
-                        avatar: avatar,
-                        is_active: true
-                    })  */
+            /*                  ({
+                                    name: name,
+                                    last_name: lastName,
+                                    email: email,
+                                    password: password,
+                                    age: age,
+                                    description: description,
+                                    artist_name_or_band_name: artist_name_or_band_name,
+                                    experience: experience,
+                                    band: band,
+                                    avatar: avatar,
+                                    is_active: true
+                                })  */
         });;
         request.send(formData);
         const responseJson = await response.json();
@@ -74,17 +74,17 @@ export const SignUpTest = () => {
         <div className="container">
             <h1>SIGN UP</h1>
             <form onSubmit={signUp}>
-        <div className="card card-container">
-        <center>
-          <img
-            src="https://st2.depositphotos.com/3854637/47799/v/600/depositphotos_477992494-stock-illustration-profile-of-a-young-woman.jpg"
-            alt="profile-img"
-            className="profile-img-card"
-            width="250"
-            height="250"
-          />
-        </center>
-        </div>
+                <div className="card card-container">
+                    <center>
+                        <img
+                            src="https://st2.depositphotos.com/3854637/47799/v/600/depositphotos_477992494-stock-illustration-profile-of-a-young-woman.jpg"
+                            alt="profile-img"
+                            className="profile-img-card"
+                            width="250"
+                            height="250"
+                        />
+                    </center>
+                </div>
                 <br></br>
                 <div className="form-group">
                     <label>
@@ -134,8 +134,8 @@ export const SignUpTest = () => {
                         ¿Eres una banda?
                         <input
                             type="checkbox"
-                            className="form-control"
-                        //onChange={event => setBand(event.target.value)}
+                            checked={false}
+                            onChange={event => setBand(event.target.value)}
                         />
                     </label>
                 </div>
@@ -145,8 +145,8 @@ export const SignUpTest = () => {
                         ¿Tienes Experiencia?
                         <input
                             type="checkbox"
-                            className="form-control"
-                        //onChange={event => setExperience(event.target.value)}
+                            checked
+                            onChange={event => setExperience(event.target.value)}
                         />
                     </label>
                 </div>

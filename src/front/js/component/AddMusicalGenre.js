@@ -2,16 +2,11 @@ import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
 
-const options = [
-  { label: "Grapes 🍇", value: "grapes" },
-  { label: "Mango 🥭", value: "mango" },
-  { label: "Strawberry 🍓", value: "strawberry"}
-];
 
 
-const Example = () => {
+const AddMusicalGenre = () => {
     const peticionGet=async()=>{
-        await axios.get("https://3001-holyfs-proyectofinal-reo9cfu8fdi.ws-eu54.gitpod.io/api/instruments")
+        await axios.get("https://3001-holyfs-proyectofinal-zmvgflr5rep.ws-eu54.gitpod.io/api/genre")
         .then(response=>{
           setInstruments(response.data);
           setTablaInstruments(response.data);
@@ -25,15 +20,9 @@ const Example = () => {
     useEffect(()=>{
         peticionGet();
         },[])
-/*         let instruns=instruments.map((instruments)=>(
-            <>{JSON.stringify(instruments.name)}
-                </> 
-                ))  */
 
   return (
     <div>
-      <h1>Select Fruits</h1>
-      <pre>{JSON.stringify(selected)}</pre>
       <MultiSelect
         options={instruments}                                   
         value={selected}
@@ -44,4 +33,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default AddMusicalGenre;

@@ -6,8 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from "../../styles/Card.module.css";
 import { Link } from "react-router-dom";
-import AddMusicalInstruments from "./AddMusicalInstruments.js";
-import Example from "./test.js";
+
 
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
@@ -15,7 +14,7 @@ function Search() {
   const [busqueda, setBusqueda]= useState("");
 
   const peticionGet=async()=>{
-    await axios.get("https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user")
+    await axios.get("https://3001-holyfs-proyectofinal-zmvgflr5rep.ws-eu54.gitpod.io/api/user")
     .then(response=>{
       setUsuarios(response.data);
       setTablaUsuarios(response.data);
@@ -57,8 +56,7 @@ function Search() {
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </div>
-        <div><Example /></div>
-        {/* <div>
+        <div>
           {usuarios.map((usuarios) => (
             <div
               key={usuarios.id}
@@ -91,7 +89,7 @@ function Search() {
               </div>
             </div>
           ))}
-        </div> */}
+        </div>
       </>
     );
     }
