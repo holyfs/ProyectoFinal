@@ -78,6 +78,11 @@ class Instruments_user(db.Model):
             "user": self.user.serialize(),
             "instrument":self.instrument.serialize(),
         }
+    def serialize_dropdown(self):
+        return {
+            "value": self.instrument.id,
+            "label": self.instrument.name
+        }
 class Generos_user(db.Model):
     __tablename__ = 'generos_user'
     id = db.Column(db.Integer, primary_key=True)
@@ -91,6 +96,11 @@ class Generos_user(db.Model):
         return {
             "user": self.user.serialize(),
             "genre":self.genre.serialize()
+        }
+    def serialize_dropdown(self):
+        return {
+            "value": self.genre.id,
+            "label": self.genre.name
         }
 class Images(db.Model):
     __tablename__ = 'images'

@@ -17,6 +17,8 @@ import axios from "axios";
 export const PersonalBio = () => {
     let navigate = useNavigate();
     const [usuarios, setUsuarios]= useState([]);
+    const [userGenre, setUserGenres]= useState([]);
+    const [userInstruments, setUserInstruments]= useState([]);
     const [experience, setExperience] = useState(false);
     const [band, setBand] = useState(false);
     const [name, setName] = useState("");
@@ -38,17 +40,21 @@ export const PersonalBio = () => {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + token
 			}
-		});
-		if (!response.ok) throw Error("There was a problem in the login request");
+		}).then(response=>{
+        if (!response.msg=="ok") throw Error("There was a problem in the login request");
        
-		const responseJson = await response.json();
-		setData(responseJson);
+		const responseJson = response.json();
+		setData(responseJson)
+    });
+		
 	};
 //Debemos averiguar como conseguir el Id del usuario al que tiene que entrar despues de hacer fetch a private
     const getUserDataById = async () => {
     await axios.get("https://3001-holyfs-proyectofinal-nmoo6rhjs9l.ws-eu54.gitpod.io/api/user/1")
     .then(response=>{
-    setUsuarios(response.data);
+    setUsuarios(response.data.user);
+    setUserGenres(response.data.genres);
+    setUserInstruments(response.data.instruments);
 //      setTablaUsuarios(response.data);
         console.log(response)
      /*  setAge(response.data.age);
@@ -187,8 +193,8 @@ export const PersonalBio = () => {
                     <div className="col-5">
                         <label ><strong>Descripción:</strong> </label>
                         <div className="mb-3" id="description">{usuarios.description}</div>
-                        <label className="mb-2" ><strong>Generos:</strong></label>
-                        <div><AddMusicalGenre /></div>
+                        <label className="mb-2" ><strong>Generos:</strong>{userGenre.map((genre) => genre.label)}</label>
+                        <div><AddMusicalGenre userGenre={userGenre}/></div>
                         <label className="mb-2" ><strong>Instrumentos:</strong> </label>
                         <div><AddMusicalInstruments /></div>
                         <div className="d-flex justify-content-center mt-3 mb-2" >

@@ -193,7 +193,15 @@ def get_user_by_id(id):
     user = User.query.get(id)
     if user is None:
         raise APIException("user not found", 404)
-    return jsonify(user.serialize()),200    
+    generos_user = Generos_user.query.filter_by(user_id=id).all()
+    print(generos_user)
+    instruments_user = Instruments_user.query.filter_by(user_id=id).all()
+    result = {"msg": "ok",
+    "user":user.serialize(),
+    "genres":list(map(lambda genre: genre.serialize_dropdown(), generos_user)),
+    "instruments":list(map(lambda instrument: instrument.serialize_dropdown(), instruments_user))  
+    }
+    return jsonify(result),200    
 
 @api.route('/user', methods=['PUT'])
 #@jwt_required()
@@ -276,11 +284,10 @@ def create_token():
 @jwt_required()
 def protected():
     print("ok")
-    return jsonify("ok")
     # Access the identity of the current user with get_jwt_identity
     current_user_id = get_jwt_identity()
     user = User.query.get(current_user_id)    
-    return jsonify({"id": user.id, "email": user.email }), 200
+    return jsonify({"id": user.id, "email": user.email , "msg": "ok"}), 200
 
 
 #MUSICAL_INSTRUMENTS METHODS

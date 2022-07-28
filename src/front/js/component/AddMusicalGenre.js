@@ -4,27 +4,35 @@ import axios from "axios";
 
 
 
-const AddMusicalGenre = () => {
+const AddMusicalGenre = (props) => {
+    const [selected, setSelected] = useState([]);
+    const [genres, setGenres]= useState([]);
+    const [tablaGenres, setTablaGenres]= useState([]);
+/*      if (props.userGenre.length > 0){
+      //setSelected(props.userGenre)
+      console.log(props.userGenre)
+    }  
+  const userAux=props.userGenre */
+
     const peticionGet=async()=>{
         await axios.get("https://3001-holyfs-proyectofinal-nmoo6rhjs9l.ws-eu54.gitpod.io/api/genre")
         .then(response=>{
-          setInstruments(response.data);
-          setTablaInstruments(response.data);
+          setGenres(response.data);
+          setTablaGenres(response.data);
         }).catch(error=>{
           console.log(error);
         })
       } 
-    const [selected, setSelected] = useState([]);
-    const [instruments, setInstruments]= useState([]);
-    const [tablaInstruments, setTablaInstruments]= useState([]);
+      
     useEffect(()=>{
         peticionGet();
         },[])
 
   return (
     <div>
-      <MultiSelect
-        options={instruments}                                   
+      <pre>{JSON.stringify(selected)}</pre>
+      <MultiSelect   
+        options={genres}                                   
         value={selected}
         onChange={setSelected}
         labelledBy="Select"
