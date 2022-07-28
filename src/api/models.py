@@ -8,7 +8,7 @@ class User(db.Model):
     password = db.Column(db.String(250), unique=False, nullable=False)
     name = db.Column(db.String(80), unique=False, nullable=False)
     last_name = db.Column(db.String(80), unique=False, nullable=False)
-    age = db.Column(db.Integer)
+    age = db.Column(db.Integer, nullable=False)
     band = db.Column(db.Boolean(), nullable=False)
     description = db.Column(db.String(10000), unique=False, nullable=False)
     avatar = db.Column(db.String(700), unique=True, nullable=False)

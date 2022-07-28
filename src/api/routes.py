@@ -195,31 +195,25 @@ def get_user_by_id(id):
         raise APIException("user not found", 404)
     return jsonify(user.serialize()),200    
 
-@api.route('/user/<int:id>', methods=['PUT'])
-@jwt_required()
-def update_user_by_id(id):
-    user = User.query.get(id)
-    image_to_load = request.files['file']
-    result = cloudinary.uploader.upload(image_to_load)
-    user.name = request.form["name"]
-    user.last_name = request.form["last_name"]
-    user.email = request.form["email"]
-    user.age = request.form["age"]
-    user.description = request.form["description"]
-    user.band=request.form["band"]
-    if request.form["band"] == 'True':
-        user.band = True
-    else:
-        user.band = False
-    user.experience=request.form["experience"]
-    if request.form["experience"] == 'True':
-        user.experience = True
-    else:
-        user.experience = False 
-    user.artist_name_or_band_name = request.form["artist_name_or_band_name"]
-    user.avatar=result["url"]
+@api.route('/user', methods=['PUT'])
+#@jwt_required()
+def update_user_by_id():
+    user = User.query.get(request.form["id"])
+    user.name = request.form["name"]if request.form["name"] != "" else user.name
+    user.last_name = request.form["last_name"]if request.form["last_name"] != "" else user.last_name
+    user.age = request.form["age"]if request.form["age"] != "" else user.age
+    user.description = request.form["description"]if request.form["description"] != "" else user.description
+    user.band =True if request.form["band"]  == "True" else False
+    user.experience =True if request.form["experience"]  == "True" else False
+    user.artist_name_or_band_name = request.form["artist_name_or_band_name"]if request.form["artist_name_or_band_name"] != "" else user.artist_name_or_band_name
+    try:
+        image_to_load = request.files['file']
+        result = cloudinary.uploader.upload(image_to_load)
+        user.avatar=result["url"]
+    except:
+        print("imagen no se actualizo")
     if not user:
-        return jsonify("user not found"), 404   
+        return jsonify("user not found"), 404     
     db.session.commit()        
     return jsonify(user.serialize()),200
 

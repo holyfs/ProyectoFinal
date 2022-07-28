@@ -6,7 +6,7 @@ import axios from "axios";
 
 const AddMusicalGenre = () => {
     const peticionGet=async()=>{
-        await axios.get("https://3001-holyfs-proyectofinal-zmvgflr5rep.ws-eu54.gitpod.io/api/genre")
+        await axios.get("https://3001-holyfs-proyectofinal-nmoo6rhjs9l.ws-eu54.gitpod.io/api/genre")
         .then(response=>{
           setInstruments(response.data);
           setTablaInstruments(response.data);

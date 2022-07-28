@@ -13,7 +13,7 @@ function Search() {
   const [busqueda, setBusqueda]= useState("");
 
   const peticionGet=async()=>{
-    await axios.get("https://3001-holyfs-proyectofinal-zmvgflr5rep.ws-eu54.gitpod.io/api/user")
+    await axios.get("https://3001-holyfs-proyectofinal-nmoo6rhjs9l.ws-eu54.gitpod.io/api/user")
     .then(response=>{
       setUsuarios(response.data);
       setTablaUsuarios(response.data);
