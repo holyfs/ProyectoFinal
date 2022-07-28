@@ -14,12 +14,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			user_token: null
+			user_token: null,
+			detalle: null
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
+			},
+			loadSomeData: async () => {
+				//Usuarios
+				try {
+					const res = await fetch(process.env.BACKEND_URL + "/api/user"); //acá hacemos el fetch, que seria la respuesta
+					const data = await res.json(); //la data es la respuesta que nos da el fetch convertido a json
+					console.log("Async:", data);
+					setStore({
+						users: data //data es la información que nos interesa de esa respuesta del fetch
+					});
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			getDetalleUser: async uid => {
+				try {
+					const id = parseInt(uid, 10) +1;
+					const res = await fetch(process.env.BACKEND_URL + "/api/user" + id);
+					const data = await res.json();
+					console.log("AsyncDetalles:", data.properties);
+					setStore({
+						detalle: data.properties
+					});
+				} catch {}
 			},
 
 			getMessage: () => {
@@ -29,6 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
+			
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
@@ -43,9 +69,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
+			
 			setUser_token: token => {
 				setStore({ user_token: token });
 			}
+			
 		}
 	};
 };

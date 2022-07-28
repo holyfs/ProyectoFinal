@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useState, Component } from "react";
+import { useNavigate } from 'react-router-dom';
 import '../../styles/App.css';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -9,6 +10,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../../../services/auth.service";
 class Login extends React.Component{
+  
   state={
     abierto: false,
   }
@@ -16,16 +18,20 @@ class Login extends React.Component{
   abrirModal=()=>{
     this.setState({abierto: !this.state.abierto});
   }
-
+  
   render(){
 
     const modalStyles={
       position: "absolute",
       top: '50%',
       left: '50%',
-      transform: 'translate(-50%, -50%)'
+      transform: 'translate(-50%, -50%)',
+      
     }
+      
+
     return(
+      
       <>
       <div className="principal">
         <div className="secundario">
@@ -34,13 +40,25 @@ class Login extends React.Component{
       </div></div>
 
       <Modal isOpen={this.state.abierto} style={modalStyles}>
-      <form class="seminor-login-form">
+      <form class="seminor-login-form"  >
               <div class="form-group">
-                <input type="email" class="form-control" required autocomplete="off" />
+            <input
+						type="email"
+						className="form-control"
+						placeholder="email"
+						onChange={event => setEmail(event.target.value)}
+						required
+					/>
                 <label class="form-control-placeholder" for="name">Email address</label>
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" required autocomplete="off" />
+              <input
+						type="password"
+						className="form-control"
+						placeholder="password"
+						onChange={event => setPassword(event.target.value)}
+						required
+					    />
                 <label class="form-control-placeholder" for="password">Password</label>
               </div>
               <div class="form-group">
@@ -62,7 +80,7 @@ class Login extends React.Component{
                                       </div>
 
                                       <ModalFooter>
-            <Button color="primary">Iniciar Sesión</Button>
+            <Button color="primary" type="submit">Iniciar Sesión</Button>
             <Button color="secondary" onClick={this.abrirModal}>Cerrar</Button>
         </ModalFooter>
         
@@ -73,6 +91,8 @@ class Login extends React.Component{
       </Modal>
       </>
     )
+      
+    
   }
 }
 

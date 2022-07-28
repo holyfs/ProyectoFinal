@@ -66,7 +66,7 @@ export const Navbar = () => {
 				<Link to="/mainindex">
 			<button className="btn btn-dark" type="button">Main Api</button>
 		  	</Link>
-				<form class="form-inline">
+				<form className="form-inline">
 		  	{tok==null?
 			<Link to="/login">
 			<button className="btn btn-dark" type="button">Login no modal</button>

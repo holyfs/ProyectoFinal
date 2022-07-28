@@ -7,9 +7,7 @@ import { MainIndex } from "./pages/mainIndex";
 import { Demo } from "./pages/demo";
 import App from "./pages/App";
 import {Login} from "./component/login.component"
-import Login2 from "./component/login"
-import LoginMensajes from "./component/login.mensajes"
-import RegisterMensajes from "./component/register.mensajes"
+import LoginMensajes from "./component/login.mensajes";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
@@ -41,9 +39,7 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<App />} path="/app" />
                         <Route element={<Login />} path="/login" />
-                        <Route element={<Login2 />} path="/login2" />
                         <Route element={<LoginMensajes />} path="/loginmensaje" />
-                        <Route element={<RegisterMensajes />} path="/registermensaje" />
                         <Route element={<Signup />} path="/signup" />
                         <Route element={<SignUpTest />} path="/signup2" />
                         <Route element={<Single />} path="/single/:theid" />
