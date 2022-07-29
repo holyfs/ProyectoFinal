@@ -19,7 +19,7 @@ export const MainIndex = () => {
     const { store, actions } = useContext(Context);
 
   return (
-
+  <>
     <div className="App">
       <h1 className="text-center mb-3">Músicos/Banda</h1>
 
@@ -28,17 +28,14 @@ export const MainIndex = () => {
           <div className="col">
             <h4>***Filter boceto***</h4>
           </div>
-
-
-          <div className="col-lg-8 col-12">
-            <div className="row">
-              <Search />
-            </div>
-          </div>
         </div>
       </div>
+      <div className="col-lg-8 col-12">
+        <Search />
+      </div>
 
-      <h4>***Footer Pagination***</h4>
+    
     </div>
+  </>
   );
 };

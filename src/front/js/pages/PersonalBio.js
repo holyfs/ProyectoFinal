@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import Contact from "../component/contact";
+import Contact from "../component/contact.nomodal";
 import '../../styles/bio.css';
 import { Context } from "../store/appContext";
 import ChangePassword from "../component/ChangePassword";
@@ -154,7 +154,7 @@ export const PersonalBio = () => {
                             <input className="col-8" id="age" onChange={event => setAge(event.target.value)} />
                         </div>
                         <div className="col-4" id="email" contentEditable="false"><strong>email:</strong> {usuarios.email}</div>
-                        <button>***changepassword component</button>
+                        <ChangePassword />
                         <div className="form-group">
                             <label>
                                 ¿Eres una banda?

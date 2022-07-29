@@ -55,7 +55,7 @@ function Search() {
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </div>
-        <div>
+        <div className="row">
           {usuarios.map((usuarios) => (
             <div
               key={usuarios.id}

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import Contact from "../component/contact";
 import '../../styles/bio.css';
+import { ContactNoModal } from "../component/contact.nomodal";
 
 import { Context } from "../store/appContext";
 
@@ -16,12 +17,18 @@ export const Bio = () => {
                 <div className="col-3">
                     <h1 className="bioperfil">Nombre de Banda</h1>
                 </div>
-                <div className="d-flex justify-content-end">
+                
                     
-              ***componente contact.js***
+                <div className="d-flex justify-content-end">
+                        <form>
+                            <a href="/contactNoModal">
+                                <input type="button" value="Contacto" />
+                            </a>
+                        </form>
+                </div>
               
 				
-                </div>
+                
             </div>
         </div>
         <div className="container-fluid">

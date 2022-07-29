@@ -450,6 +450,9 @@ def delete_user_instrument():
     res = {"msg":"music instrument deleted"}
     return jsonify(res),200
 
+
+#ENVIAR MAIL CON CAMBIO DE PASSWORD
+
 def reset_password():
     password_choice = ["A","B","C","D","E","F","G","H","J","Q","K","1","2","3","4","5","6","7","8","9","l","m","n","o","p","q","r","s","t","u",".","<","#","@","-","_","/","&","%","$"]
     password_list= random.sample(password_choice, k=8)
@@ -469,6 +472,12 @@ def reset_user_password():
     exist_user.password = hashed.decode(FORMAT_CODE)
     db.session.commit()        
     return jsonify(exist_user.serialize()),200
+
+#ENVIAR MENSAJE AL USUARIO
+
+@api.route('/sendMsg', methods=['PUT'])
+def send_Msg():
+    body=request.get_json()
 
 
 if __name__ == '__main__':
