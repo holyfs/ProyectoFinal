@@ -145,12 +145,12 @@ def add_user():
     description = request.form["description"]
     artist_name_or_band_name = request.form["artist_name_or_band_name"]    
     band=request.form["band"]
-    if band == 'True':
+    if band == 'true':
         band = True
     else:
         band = False
     experience=request.form["experience"]
-    if experience == 'True':
+    if experience == 'true':
         experience = True
     else:
         experience = False 
@@ -211,8 +211,8 @@ def update_user_by_id():
     user.last_name = request.form["last_name"]if request.form["last_name"] != "" else user.last_name
     user.age = request.form["age"]if request.form["age"] != "" else user.age
     user.description = request.form["description"]if request.form["description"] != "" else user.description
-    user.band =True if request.form["band"]  == "True" else False
-    user.experience =True if request.form["experience"]  == "True" else False
+    user.band =True if request.form["band"]  == "true" else False
+    user.experience =True if request.form["experience"]  == "true" else False
     user.artist_name_or_band_name = request.form["artist_name_or_band_name"]if request.form["artist_name_or_band_name"] != "" else user.artist_name_or_band_name
     try:
         image_to_load = request.files['file']

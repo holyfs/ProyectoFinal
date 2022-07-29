@@ -19,8 +19,8 @@ export const PersonalBio = () => {
     const [usuarios, setUsuarios]= useState([]);
     const [userGenre, setUserGenres]= useState([]);
     const [userInstruments, setUserInstruments]= useState([]);
-    const [experience, setExperience] = useState(false);
-    const [band, setBand] = useState(false);
+    const [experience, setExperience] = useState();
+    const [band, setBand] = useState();
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [age, setAge] = useState("");
@@ -50,7 +50,7 @@ export const PersonalBio = () => {
 	};
 //Debemos averiguar como conseguir el Id del usuario al que tiene que entrar despues de hacer fetch a private
     const getUserDataById = async () => {
-    await axios.get("https://3001-holyfs-proyectofinal-nmoo6rhjs9l.ws-eu54.gitpod.io/api/user/1")
+    await axios.get("https://3001-holyfs-proyectofinal-l3b0jsgpj2x.ws-eu54.gitpod.io/api/user/1")
     .then(response=>{
     setUsuarios(response.data.user);
     setUserGenres(response.data.genres);
@@ -79,7 +79,7 @@ export const PersonalBio = () => {
         newRequest.append("experience", experience)
         newRequest.append("band", band)
         newRequest.append("file", avatar)
-        const response = await fetch("https://3001-holyfs-proyectofinal-nmoo6rhjs9l.ws-eu54.gitpod.io" + "/api/user", {
+        const response = await fetch("https://3001-holyfs-proyectofinal-l3b0jsgpj2x.ws-eu54.gitpod.io" + "/api/user", {
             method: "PUT",
             headers: {
                 "mode": 'no-cors',
@@ -106,7 +106,13 @@ export const PersonalBio = () => {
         getUserDataById();
 	}, []);
 
-
+    const handleChange = (changeType) => {
+        if (changeType === "band"){
+            setBand(!band);
+        }else {
+            setExperience(!experience)
+        } 
+    }
     let guardar_cambios = () => {
         putUser()
     }
@@ -152,7 +158,8 @@ export const PersonalBio = () => {
                                 ¿Eres una banda?
                                 <input
                                     type="checkbox"
-                                    onChange={event => setBand(event.target.value)}
+                                    checked={usuarios.band}
+                                    onChange={()=>handleChange("band")}
                                 />
                             </label>
                         </div>
@@ -161,7 +168,8 @@ export const PersonalBio = () => {
                                 ¿Tienes Experiencia?
                                 <input
                                     type="checkbox"
-                                    onChange={event => setExperience(event.target.value)}
+                                    checked={usuarios.experience}
+                                    onChange={()=>handleChange("experience")}
                                 />
                             </label>
                         </div>

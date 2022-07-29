@@ -16,8 +16,8 @@ export const SignUpTest = () => {
     const [age, setAge] = useState("");
     const [description, setDescription] = useState("");
     const [artist_name_or_band_name, setArtist_name_or_band_name] = useState("");
-    const [experience, setExperience] = useState("");
-    const [band, setBand] = useState("");
+    const [experience, setExperience] = useState(false);
+    const [band, setBand] = useState(false);
     const [avatar, setAvatar] = useState("");
     const navigate = useNavigate();
     async function signUp(event) {
@@ -34,11 +34,11 @@ export const SignUpTest = () => {
         newRequest.append("age", age)
         newRequest.append("description", description)
         newRequest.append("artist_name_or_band_name", artist_name_or_band_name)
-        newRequest.append("experience", experience)
-        newRequest.append("band", band)
+        newRequest.append("experience", String(experience))
+        newRequest.append("band", String(band))
         newRequest.append("file", avatar)
         newRequest.append("is_active", true)
-        const response = await fetch("https://3001-holyfs-proyectofinal-nmoo6rhjs9l.ws-eu54.gitpod.io" + "/api/signup", {
+        const response = await fetch("https://3001-holyfs-proyectofinal-l3b0jsgpj2x.ws-eu54.gitpod.io" + "/api/signup", {
             method: "POST",
             headers: {
                 /*  "Content-Type": "multipart/form-data", */
@@ -59,17 +59,23 @@ export const SignUpTest = () => {
                                     is_active: true
                                 })  */
         });;
-        request.send(formData);
         const responseJson = await response.json();
         Swal.fire({
             icon: 'sucess',
             title: 'Registro Completo',
-            text: 'Something went wrong!',
+            text: 'Good!',
             footer: '<a href="/login">Quieres Iniciar sesión?</a>'
           })
-        return responseJson;
-       
+        return responseJson;       
     }
+    const handleChange = (changeType) => {
+        if (changeType === "band"){
+            setBand(!band);
+        }else {
+            setExperience(!experience)
+        } 
+        
+      };
     return (
         <div className="container">
             <h1>SIGN UP</h1>
@@ -134,8 +140,8 @@ export const SignUpTest = () => {
                         ¿Eres una banda?
                         <input
                             type="checkbox"
-                            checked={false}
-                            onChange={event => setBand(event.target.value)}
+                            checked={band}
+                            onChange={()=>handleChange("band")}
                         />
                     </label>
                 </div>
@@ -145,8 +151,8 @@ export const SignUpTest = () => {
                         ¿Tienes Experiencia?
                         <input
                             type="checkbox"
-                            checked
-                            onChange={event => setExperience(event.target.value)}
+                            checked={experience}
+                            onChange={()=>handleChange("experience")}
                         />
                     </label>
                 </div>
