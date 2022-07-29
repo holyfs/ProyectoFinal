@@ -84,6 +84,7 @@ export const PersonalBio = () => {
             method: "PUT",
             headers: {
                 "mode": 'no-cors',
+                "Authorization": "Bearer " + token
             },
             body: newRequest
 

@@ -204,7 +204,7 @@ def get_user_by_id(id):
     return jsonify(result),200    
 
 @api.route('/user', methods=['PUT'])
-#@jwt_required()
+@jwt_required()
 def update_user_by_id():
     user = User.query.get(request.form["id"])
     user.name = request.form["name"]if request.form["name"] != "" else user.name

@@ -46,34 +46,27 @@ export default class Login extends Component {
     this.form.validateAll();
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.username, this.state.password).then(
-        () => {
-          //this.props.history.push("/profile");
-          //window.location.reload();
+        (response) => {
           Swal.fire({
             icon: 'sucess',
+            confirmButtonColor: 'rgb(25, 169, 149)',
+            confirmButtonText:'Quieres ir a tu página personal?',
             title: 'Login Completo',
             text: 'Gracias por usar esta página web ',
-            footer: '<a href=/personalbio${user_id}`>Quieres ir a tu página personal?</a>'
+          }).then((result) => {
+            let user_id = localStorage.getItem("user_id")
+            if (result.value) {window.location.href = "/personalbio:"+ user_id
+            }
           })
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+        }). catch(error =>  {
+          console.log(error.response.data.message.toString())
+          const resMessage = error.response.data.message.toString();
           this.setState({
             loading: false,
             message: resMessage
           });
+        })
         }
-      );
-    } else {
-      this.setState({
-        loading: false
-      });
-    }
   }
   render() {
     return (

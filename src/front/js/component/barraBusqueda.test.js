@@ -77,7 +77,7 @@ function Search() {
                       {usuarios.artist_name_or_band_name}
                     </div>
                     <div>
-                      <Link to="/bio">
+                      <Link to={`/bio:${usuarios.id}`}>
                         <button type="button" className="btn btn-info">
                           Info
                         </button>
