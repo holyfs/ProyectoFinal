@@ -40,9 +40,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const id = parseInt(uid, 10) +1;
 					const res = await fetch(process.env.BACKEND_URL + "/api/user" + id);
 					const data = await res.json();
-					console.log("AsyncDetalles:", data.properties);
+					console.log("AsyncDetalles:", data.response);
 					setStore({
-						detalle: data.properties
+						detalle: data.response
 					});
 				} catch {}
 			},
