@@ -28,6 +28,11 @@ export const MainIndex = () => {
           <div className="col">
             <h4>***Filter boceto***</h4>
           </div>
+          <div className="col-lg-8 col-12">
+            <div className="row">
+              <Search />
+            </div>
+          </div>
         </div>
       </div>
       <div className="col-lg-8 col-12">

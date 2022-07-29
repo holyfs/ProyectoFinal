@@ -38,26 +38,13 @@ export const SignUpTest = () => {
         newRequest.append("band", String(band))
         newRequest.append("file", avatar)
         newRequest.append("is_active", true)
-        const response = await fetch("https://3001-holyfs-proyectofinal-5zwcb1ywnhe.ws-eu54.gitpod.io" + "/api/signup", {
+        const response = await fetch("https://3001-holyfs-proyectofinal-axxcr8ukdk4.ws-eu54.gitpod.io" + "/api/signup", {
             method: "POST",
             headers: {
                 /*  "Content-Type": "multipart/form-data", */
                 "mode": 'no-cors'
             },
             body: newRequest
-            /*                  ({
-                                    name: name,
-                                    last_name: lastName,
-                                    email: email,
-                                    password: password,
-                                    age: age,
-                                    description: description,
-                                    artist_name_or_band_name: artist_name_or_band_name,
-                                    experience: experience,
-                                    band: band,
-                                    avatar: avatar,
-                                    is_active: true
-                                })  */
         });;
         const responseJson = await response.json();
         Swal.fire({

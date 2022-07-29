@@ -16,9 +16,9 @@ import axios from "axios";
 
 export const PersonalBio = () => {
     let navigate = useNavigate();
-    const [usuarios, setUsuarios]= useState([]);
-    const [userGenre, setUserGenres]= useState([]);
-    const [userInstruments, setUserInstruments]= useState([]);
+    const [usuarios, setUsuarios] = useState([]);
+    const [userGenre, setUserGenres] = useState(null);
+    const [userInstruments, setUserInstruments] = useState([]);
     const [experience, setExperience] = useState();
     const [band, setBand] = useState();
     const [name, setName] = useState("");
@@ -28,48 +28,54 @@ export const PersonalBio = () => {
     const [artist_name_or_band_name, setArtist_name_or_band_name] = useState("");
     const [avatar, setAvatar] = useState("");
     const [id, setId] = useState("");
-	const { store, actions } = useContext(Context);
-	const [data, setData] = useState(" ");
+    const { store, actions } = useContext(Context);
+    const [data, setData] = useState(" ");
     const protectedData = async () => {
-		// retrieve token form localStorage
-        
-		const token = localStorage.getItem("jwt-token");
-		const response = await fetch("https://3001-holyfs-proyectofinal-5zwcb1ywnhe.ws-eu54.gitpod.io" + "/api/private", {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				"Authorization": token
-			}
-		}).then(response=>{
-        if (!response.msg=="ok") throw Error("There was a problem in the login request");
-       
-		const responseJson = response.json();
-		setData(responseJson)
-    });
-		
-	};
-    const user_id = localStorage.getItem("user_id")
-//Debemos averiguar como conseguir el Id del usuario al que tiene que entrar despues de hacer fetch a private
-    const getUserDataById = async () => {
-    await axios.get(`https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user/${user_id}`)
-    .then(response=>{
-    setUsuarios(response.data.user);
-    setUserGenres(response.data.genres);
-    setUserInstruments(response.data.instruments);
-//      setTablaUsuarios(response.data);
-        console.log(response)
-     /*  setAge(response.data.age);
-      setName(response.data.name);
-      setLastName(response.data.last_name);
-      setDescription(response.data.description);
-      setArtist_name_or_band_name(response.data.artist_name_or_band_name);
-      setAvatar(response.data.avatar);*/
-      setId(response.data.id) 
-    }).catch(error=>{
-      console.log(error);
-    })
+        // retrieve token form localStorage
+
+        const token = JSON.parse(localStorage.getItem("jwt-token"));
+        const response = await fetch("https://3001-holyfs-proyectofinal-axxcr8ukdk4.ws-eu54.gitpod.io" + "/api/private", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token.token
+            }
+        }).then(response => {
+            if (!response.msg == "ok") throw Error("There was a problem in the login request");
+
+            const responseJson = response.json();
+            setData(responseJson)
+        }).catch(error => {
+            localStorage.removeItem('jwt-token');
+            localStorage.removeItem('user_id');
+            window.location.href = '/loginmensaje';
+            console.log(error)
+
+        });
+
     };
-    const putUser = async() => {
+    const user_id = localStorage.getItem("user_id")
+    //Debemos averiguar como conseguir el Id del usuario al que tiene que entrar despues de hacer fetch a private
+    const getUserDataById = async () => {
+        await axios.get(`https://3001-holyfs-proyectofinal-axxcr8ukdk4.ws-eu54.gitpod.io/api/user/${user_id}`)
+            .then(response => {
+                setUsuarios(response.data.user);
+                setUserGenres(response.data.genres);
+                setUserInstruments(response.data.instruments);
+                //      setTablaUsuarios(response.data);
+                console.log(response)
+                /*  setAge(response.data.age);
+                 setName(response.data.name);
+                 setLastName(response.data.last_name);
+                 setDescription(response.data.description);
+                 setArtist_name_or_band_name(response.data.artist_name_or_band_name);
+                 setAvatar(response.data.avatar);*/
+                setId(response.data.user.id)
+            }).catch(error => {
+                console.log(error);
+            })
+    };
+    const putUser = async () => {
         let newRequest = new FormData();
         newRequest.append("id", id)
         newRequest.append("name", name)
@@ -80,40 +86,40 @@ export const PersonalBio = () => {
         newRequest.append("experience", experience)
         newRequest.append("band", band)
         newRequest.append("file", avatar)
-        const response = await fetch("https://3001-holyfs-proyectofinal-l3b0jsgpj2x.ws-eu54.gitpod.io" + "/api/user", {
+        const token = JSON.parse(localStorage.getItem("jwt-token"));
+        const response = await fetch("https://3001-holyfs-proyectofinal-axxcr8ukdk4.ws-eu54.gitpod.io" + "/api/user", {
             method: "PUT",
             headers: {
                 "mode": 'no-cors',
-                "Authorization": "Bearer " + token
+                "Authorization": "Bearer " + token.token
             },
             body: newRequest
 
         });;
-        request.send(formData);
         const responseJson = await response.json();
         Swal.fire({
             icon: 'sucess',
             title: 'Registro Completo',
             text: 'Everything went good!',
             footer: '<a href="/login">Quieres Iniciar sesión?</a>'
-          })
+        })
         return responseJson;
-       
+
     }
 
-	useEffect(() => {
+    useEffect(() => {
         let prueba = localStorage.getItem("jwt-token")
-		if (prueba === null) navigate("/rederictsignup");
-		else protectedData();
+        if (prueba === null) navigate("/rederictsignup");
+        else protectedData();
         getUserDataById();
-	}, []);
+    }, []);
 
     const handleChange = (changeType) => {
-        if (changeType === "band"){
+        if (changeType === "band") {
             setBand(!band);
-        }else {
+        } else {
             setExperience(!experience)
-        } 
+        }
     }
     let guardar_cambios = () => {
         putUser()
@@ -133,7 +139,7 @@ export const PersonalBio = () => {
                         </form>
                     </div>
                 </div>
-            
+
 
                 <div className="row">
                     <div className="col-3 d-flex justify-content-center" >
@@ -161,7 +167,7 @@ export const PersonalBio = () => {
                                 <input
                                     type="checkbox"
                                     checked={usuarios.band}
-                                    onChange={()=>handleChange("band")}
+                                    onChange={() => handleChange("band")}
                                 />
                             </label>
                         </div>
@@ -171,13 +177,13 @@ export const PersonalBio = () => {
                                 <input
                                     type="checkbox"
                                     checked={usuarios.experience}
-                                    onChange={()=>handleChange("experience")}
+                                    onChange={() => handleChange("experience")}
                                 />
                             </label>
                         </div>
                     </div>
                 </div>
-               {/*  <div className="row col-4 offset-3">Cambiar foto de perfil</div>
+                {/*  <div className="row col-4 offset-3">Cambiar foto de perfil</div>
                 <div className="row col-4 offset-3">
                     <input
                         type="file"
@@ -203,24 +209,24 @@ export const PersonalBio = () => {
                     <div className="col-5">
                         <label ><strong>Descripción:</strong> </label>
                         <div className="mb-3" id="description">{usuarios.description}</div>
-                        <label className="mb-2" ><strong>Generos:</strong>{userGenre.map((genre) => genre.label)}</label>
-                        <div><AddMusicalGenre userGenre={userGenre}/></div>
+                        <label className="mb-2" ><strong>Generos:</strong>{userGenre?.map((genre) => genre.label)}</label>
+                        <div>{(userGenre) ? <AddMusicalGenre userGenre={userGenre} /> : 'cargando...'}</div>
                         <label className="mb-2" ><strong>Instrumentos:</strong> </label>
                         <div><AddMusicalInstruments /></div>
                         <div className="d-flex justify-content-center mt-3 mb-2" >
-                        <button onClick={() => guardar_cambios()}>Guardar Cambios</button>
+                            <button onClick={() => guardar_cambios()}>Guardar Cambios</button>
                         </div>
-                        
+
                     </div>
                 </div>
-              {/*   <div className="row">
+                {/*   <div className="row">
                     <label className="col-6">
                         <div className="description" id="description">{usuarios.description}</div>
                     </label>
                 </div> */}
 
 
-            
+
             </div>
 
         </>
