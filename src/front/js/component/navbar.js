@@ -20,8 +20,13 @@ export const Navbar = () => {
         confirmButtonText: "Aceptar",
         cancelButtonText: "Cancelar",
     })
-    .then(resultado => {
-        if (resultado.value=== true) {
+    .then((resultado) => {
+		console.log(resultado)
+        if (resultado.value!='cancel') {
+			localStorage.removeItem('jwt-token');
+			localStorage.removeItem('user_id');
+			window.location.href='/loginmensaje';
+
             
         }else {
             // Dijeron que no
@@ -29,8 +34,7 @@ export const Navbar = () => {
         }
 		
     });
-	localStorage.removeItem('jwt-token');
-			window.location.reload();
+
 			
 	  };
 			

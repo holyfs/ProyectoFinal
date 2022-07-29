@@ -38,7 +38,7 @@ export const PersonalBio = () => {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + token
+				"Authorization": token
 			}
 		}).then(response=>{
         if (!response.msg=="ok") throw Error("There was a problem in the login request");
