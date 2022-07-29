@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
+import CardPrueba from "./pages/carPrueba";
+import {IndexPrueba} from "./pages/indexPrueba";
 
 import { Home } from "./pages/home";
 import { MainIndex } from "./pages/mainIndex";
@@ -35,6 +37,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<IndexPrueba />} path="/indexprueba" />
                         <Route element={<MainIndex />} path="/mainindex" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<App />} path="/app" />
@@ -44,7 +47,7 @@ const Layout = () => {
                         <Route element={<SignUpTest />} path="/signup2" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
-                        <Route element={<Bio />} path="/bio:id" />
+                        <Route element={<Bio />} path="/bio:uid" />
                         <Route element={<PersonalBio />} path="/PersonalBio:id" />
                         <Route element={<Redirect />} path="/rederictsignup" />
                         <Route element={<ForgetPassword/>} path="/forgetpassword" />

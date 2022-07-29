@@ -51,7 +51,7 @@ export const PersonalBio = () => {
     const user_id = localStorage.getItem("user_id")
 //Debemos averiguar como conseguir el Id del usuario al que tiene que entrar despues de hacer fetch a private
     const getUserDataById = async () => {
-    await axios.get(`https://3001-holyfs-proyectofinal-5zwcb1ywnhe.ws-eu54.gitpod.io/api/user/${user_id}`)
+    await axios.get(`https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user/${user_id}`)
     .then(response=>{
     setUsuarios(response.data.user);
     setUserGenres(response.data.genres);

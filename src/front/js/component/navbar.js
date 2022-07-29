@@ -22,7 +22,7 @@ export const Navbar = () => {
     })
     .then((resultado) => {
 		console.log(resultado)
-        if (resultado.value!='cancel') {
+        if (resultado.dismiss!='cancel') {
 			localStorage.removeItem('jwt-token');
 			localStorage.removeItem('user_id');
 			window.location.href='/loginmensaje';

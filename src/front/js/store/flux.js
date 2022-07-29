@@ -15,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			user_token: null,
+			users: [],
 			detalle: null
 		},
 		actions: {

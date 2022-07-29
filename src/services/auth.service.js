@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "https://3001-holyfs-proyectofinal-5zwcb1ywnhe.ws-eu54.gitpod.io/api";
+const API_URL = "https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api";
 class AuthService {
   login(email, password) {
     

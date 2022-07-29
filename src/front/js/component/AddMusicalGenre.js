@@ -15,7 +15,7 @@ const AddMusicalGenre = (props) => {
   const userAux=props.userGenre */
 
     const peticionGet=async()=>{
-        await axios.get("https://3001-holyfs-proyectofinal-nmoo6rhjs9l.ws-eu54.gitpod.io/api/genre")
+        await axios.get("https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/genre")
         .then(response=>{
           setGenres(response.data);
           setTablaGenres(response.data);

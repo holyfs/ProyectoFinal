@@ -17,16 +17,6 @@ export const MainIndex = () => {
     let [fetchedData, updateFetchedData] = useState([]);
     let { info, results } = fetchedData;
     const { store, actions } = useContext(Context);
-    let api = `https://3001-holyfs-proyectofinal-l3b0jsgpj2x.ws-eu54.gitpod.io/api/user`;
-
-
-  useEffect(() => {
-    (async function () {
-      let data = await fetch(api).then((res) => res.json());
-      console.log(data);
-      updateFetchedData(data);
-    })();
-  }, [api]);
 
   return (
 
