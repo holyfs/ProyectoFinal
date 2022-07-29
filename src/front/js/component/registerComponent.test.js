@@ -38,7 +38,7 @@ export const SignUpTest = () => {
         newRequest.append("band", String(band))
         newRequest.append("file", avatar)
         newRequest.append("is_active", true)
-        const response = await fetch("https://3001-holyfs-proyectofinal-l3b0jsgpj2x.ws-eu54.gitpod.io" + "/api/signup", {
+        const response = await fetch("https://3001-holyfs-proyectofinal-5zwcb1ywnhe.ws-eu54.gitpod.io" + "/api/signup", {
             method: "POST",
             headers: {
                 /*  "Content-Type": "multipart/form-data", */

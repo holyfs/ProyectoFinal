@@ -46,6 +46,7 @@ export const Login = () => {
 		// save your token in the localStorage
 		//also you should set your user into the store using the setStore function
 		localStorage.setItem("jwt-token", data.token);
+		localStorage.setItem("user_id", data.user_id);
 		actions.setUser_token(data.token);
 		Swal.fire({
             icon: 'sucess',
@@ -53,7 +54,6 @@ export const Login = () => {
             text: 'Gracias por usar esta página web ',
             footer: '<a href="/personalbio">Quieres ir a tu página personal?</a>'
           })
-    console.log(data)
 	}
 
 	return (

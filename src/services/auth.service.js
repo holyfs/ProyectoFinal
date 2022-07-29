@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api";
+const API_URL = "https://3001-holyfs-proyectofinal-5zwcb1ywnhe.ws-eu54.gitpod.io/api";
 class AuthService {
   login(email, password) {
     
@@ -11,6 +11,7 @@ class AuthService {
       .then(response => {
         if (response.data.token) {
           localStorage.setItem("jwt-token", JSON.stringify(response.data));
+          localStorage.setItem("user_id", JSON.stringify(response.data.user_id));
         }
         return response.data;
       });

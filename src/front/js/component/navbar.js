@@ -6,7 +6,6 @@ import App from "../pages/App"
 import Signup from "../component/signup"
 import "../../styles/navBar.css"
 import {Login} from "../component/login.component"
-import Login2 from "../component/login"
 import Swal from "sweetalert2"
 
 
@@ -36,7 +35,7 @@ export const Navbar = () => {
 	  };
 			
   
-
+	let user_id = localStorage.getItem("user_id")
 	let tok = localStorage.getItem("jwt-token")
 	let tokLogout = localStorage.getItem("jwt-token")
 	return (
@@ -71,7 +70,7 @@ export const Navbar = () => {
 			<Link to="/login">
 			<button className="btn btn-dark" type="button">Login no modal</button>
 		  	</Link>
-			:<Link to="/personalbio">
+			:<Link to={`/personalbio:${user_id}`}>
 			<button className="btn btn-dark" type="button">Mi zona</button>
 		  	</Link>}
 			{tokLogout==null?
