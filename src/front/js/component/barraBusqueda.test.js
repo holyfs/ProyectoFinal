@@ -11,6 +11,8 @@ import config from "../config";
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
   const [tablaUsuarios, setTablaUsuarios]= useState([]);
+  const [userInstruments, setUserInstruments] = useState(null);
+  const [userGenre, setUserGenres] = useState(null);
   const [busqueda, setBusqueda]= useState("");
 
   const peticionGet=async()=>{
@@ -18,6 +20,9 @@ function Search() {
     .then(response=>{
       setUsuarios(response.data);
       setTablaUsuarios(response.data);
+      setUserInstruments(response.data.instruments);
+      console.log(response.data);
+      setUserGenres(response.data.genres);
     }).catch(error=>{
       console.log(error);
     })
@@ -77,7 +82,16 @@ function Search() {
                     <div className="fs-5">
                       {usuarios.artist_name_or_band_name}
                     </div>
+                    <div className="fs-6 fw-bold">Genero Musical</div>
+                    <div className="fs-5">
+                    {userGenre?.map((genre) => genre.label + " ")}
+                    </div>
+                    <div className="fs-6 fw-bold">Instrumento</div>
+                    <div className="fs-5">
+                    {userInstruments?.map((instruments) => instruments.label + " ")}
+                    </div>
                     <div>
+                      
                       <Link to={`/bio:${usuarios.id}`}>
                         <button type="button" className="btn btn-info">
                           Info

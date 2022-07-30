@@ -38,12 +38,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getDetalleUser: async uid => {
 				try {
-					const id = parseInt(uid, 10) +1;
-					const res = await fetch(process.env.BACKEND_URL + "/api/user" + id);
+					const id = parseInt(uid);
+					const res = await fetch("https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user/" + id);
 					const data = await res.json();
-					console.log("AsyncDetalles:", data.response);
+					console.log(uid);
+					console.log("AsyncDetalles:", data.response.data.user);
 					setStore({
-						detalle: data.response
+						detalle: data.response.data.user
 					});
 				} catch {}
 			},

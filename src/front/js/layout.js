@@ -17,6 +17,7 @@ import { Navbar } from "./component/navbar";
 import Signup from "./component/signup";
 import { Footer } from "./component/footer";
 import { Bio } from "./pages/bio";
+import { BioFinal } from "./pages/bio.final";
 import { PersonalBio } from "./pages/PersonalBio";
 import {Redirect} from "./pages/redirectSignup"
 import ForgetPassword from "./component/ForgetPassword";
@@ -50,6 +51,7 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<Bio />} path="/bio:uid" />
+                        <Route element={<BioFinal />} path="/biofinal:uid" />
                         <Route element={<PersonalBio />} path="/PersonalBio:id" />
                         <Route element={<Redirect />} path="/rederictsignup" />
                         <Route element={<ForgetPassword/>} path="/forgetpassword" />

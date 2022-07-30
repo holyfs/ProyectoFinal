@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import styles from "../../styles/Card.module.css";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 const CardPrueba = props => {
 	const { store, actions } = useContext(Context);
@@ -30,7 +29,7 @@ const CardPrueba = props => {
                     {props.artist_name_or_band_name}
                   </div>
                   <div>
-                    <Link to={"/bio/" + props.index}>
+                    <Link to={"/biofinal/" + props.index}>
                       <button type="button" className="btn btn-info">
                         Info
                       </button>
