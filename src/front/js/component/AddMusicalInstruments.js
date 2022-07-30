@@ -4,8 +4,11 @@ import axios from "axios";
 import config from "../config";
 
 
+const AddMusicalInstruments = (props) => {
+  const [selected, setSelected] = useState([]);
+  const [instruments, setInstruments]= useState([]);
+  const [tablaInstruments, setTablaInstruments]= useState([]);
 
-const AddMusicalInstruments = () => {
     const peticionGet=async()=>{
         await axios.get(`${config.hostname}/api/instruments`)
         .then(response=>{
@@ -15,11 +18,10 @@ const AddMusicalInstruments = () => {
           console.log(error);
         })
       } 
-    const [selected, setSelected] = useState([]);
-    const [instruments, setInstruments]= useState([]);
-    const [tablaInstruments, setTablaInstruments]= useState([]);
+
     useEffect(()=>{
         peticionGet();
+        setSelected(props.userInstruments)
         },[])
 
   return (
