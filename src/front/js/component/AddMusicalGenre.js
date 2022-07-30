@@ -8,21 +8,12 @@ const AddMusicalGenre = (props) => {
   const [selected, setSelected] = useState([]);
   const [genres, setGenres] = useState([]);
   const [tablaGenres, setTablaGenres] = useState([]);
-  /*      if (props.userGenre.length > 0){
-        //setSelected(props.userGenre)
-        console.log(props.userGenre)
-      }  
-    const userAux=props.userGenre */
 
   const peticionGet = async () => {
     await axios.get(`${config.hostname}/api/genre`)
       .then(response => {
-        console.log({ response })
         setGenres(response.data);
         setTablaGenres(response.data);
-
-
-
       }).catch(error => {
         console.log(error);
       })
@@ -37,7 +28,7 @@ const AddMusicalGenre = (props) => {
 
   return (
     <div>
-      <pre>{JSON.stringify(selected)}</pre>
+{/*       <pre>{JSON.stringify(selected)}</pre> */}
       <MultiSelect
         options={genres}
         value={selected}
