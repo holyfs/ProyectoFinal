@@ -5,6 +5,7 @@ import Contact from "../component/contact.nomodal";
 import '../../styles/bio.css';
 import { Context } from "../store/appContext";
 import ChangePassword from "../component/ChangePassword";
+import { ChangePasswordNoModal } from "../component/ChangePassword.nomodal";
 import { Images } from "./galeriaImagenes";
 import { useNavigate } from 'react-router-dom';
 import AddMusicalGenre from "../component/AddMusicalGenre.js";
@@ -161,7 +162,13 @@ export const PersonalBio = () => {
                             <input className="col-8" id="age" onChange={event => setAge(event.target.value)} />
                         </div>
                         <div className="col-4" id="email" contentEditable="false"><strong>email:</strong> {usuarios.email}</div>
-{/*                         <ChangePassword /> */}
+                        <div className="d-flex justify-content-end">
+                        <form>
+                            <a href=`/ChangePasswordNoModal:{id}`>
+                                <input type="button" value="Cambiar Contraseña" />
+                            </a>
+                        </form>
+                </div>
                         <div className="form-group">
                             <label>
                                 ¿Eres una banda?

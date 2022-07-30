@@ -23,6 +23,7 @@ import ForgetPassword from "./component/ForgetPassword";
 import { Images } from "./pages/galeriaImagenes";
 import {SignUpTest} from "./component/registerComponent.test";
 import { ContactNoModal } from "./component/contact.nomodal";
+import { ChangePasswordNoModal } from "./component/ChangePassword.nomodal";
 
 //create your first component
 const Layout = () => {
@@ -54,6 +55,7 @@ const Layout = () => {
                         <Route element={<ForgetPassword/>} path="/forgetpassword" />
                         <Route element={<Images/>} path="/images" />
                         <Route element={<ContactNoModal/>} path="/ContactNoModal" />
+                        <Route element={<ChangePasswordNoModal/>} path="/ChangePasswordNoModal" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
