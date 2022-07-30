@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from "../../styles/Card.module.css";
 import { Link } from "react-router-dom";
+import config from "../config";
 
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
@@ -13,7 +14,7 @@ function Search() {
   const [busqueda, setBusqueda]= useState("");
 
   const peticionGet=async()=>{
-    await axios.get("https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user")
+    await axios.get(`${config.hostname}/api/user`)
     .then(response=>{
       setUsuarios(response.data);
       setTablaUsuarios(response.data);

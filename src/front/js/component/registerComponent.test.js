@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import UploadImage from "../component/uploadImage";
 import { resetWarningCache } from "prop-types";
 import { Link } from "react-router-dom";
+import config from "../config.js";
 import Swal from "sweetalert2"
 export const SignUpTest = () => {
     //const { store, actions } = useContext(Context);
@@ -38,7 +39,7 @@ export const SignUpTest = () => {
         newRequest.append("band", String(band))
         newRequest.append("file", avatar)
         newRequest.append("is_active", true)
-        const response = await fetch("https://3001-holyfs-proyectofinal-axxcr8ukdk4.ws-eu54.gitpod.io" + "/api/signup", {
+        const response = await fetch(config.hostname + "/api/signup", {
             method: "POST",
             headers: {
                 /*  "Content-Type": "multipart/form-data", */

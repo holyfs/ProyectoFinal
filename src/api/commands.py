@@ -104,7 +104,7 @@ def setup_commands(app):
             num_genre = random.randint(1,6)
             for y in range(1,num_genre):
                 user_generos = Generos_user()
-                random_genre= random.randint(1,16)
+                random_genre= random.randint(1,15)
                 random_user = x
                 user_generos.genre_id = random_genre
                 user_generos.user_id = random_user

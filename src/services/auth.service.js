@@ -1,5 +1,6 @@
 import axios from "axios";
-const API_URL = "https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api";
+import config from "../front/js/config.js";
+const API_URL =`${config.hostname}/api`;
 class AuthService {
   login(email, password) {
     

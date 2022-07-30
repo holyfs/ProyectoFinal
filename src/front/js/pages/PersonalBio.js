@@ -12,6 +12,7 @@ import AddMusicalInstruments from "../component/AddMusicalInstruments.js";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 import Swal from "sweetalert2"
 import axios from "axios";
+import config from "../config.js";
 
 
 export const PersonalBio = () => {
@@ -34,7 +35,7 @@ export const PersonalBio = () => {
         // retrieve token form localStorage
 
         const token = JSON.parse(localStorage.getItem("jwt-token"));
-        const response = await fetch("https://3001-holyfs-proyectofinal-axxcr8ukdk4.ws-eu54.gitpod.io" + "/api/private", {
+        const response = await fetch(config.hostname + "/api/private", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -57,7 +58,7 @@ export const PersonalBio = () => {
     const user_id = localStorage.getItem("user_id")
     //Debemos averiguar como conseguir el Id del usuario al que tiene que entrar despues de hacer fetch a private
     const getUserDataById = async () => {
-        await axios.get(`https://3001-holyfs-proyectofinal-axxcr8ukdk4.ws-eu54.gitpod.io/api/user/${user_id}`)
+        await axios.get(`${config.hostname}/api/user/${user_id}`)
             .then(response => {
                 setUsuarios(response.data.user);
                 setUserGenres(response.data.genres);
@@ -87,7 +88,7 @@ export const PersonalBio = () => {
         newRequest.append("band", band)
         newRequest.append("file", avatar)
         const token = JSON.parse(localStorage.getItem("jwt-token"));
-        const response = await fetch("https://3001-holyfs-proyectofinal-axxcr8ukdk4.ws-eu54.gitpod.io" + "/api/user", {
+        const response = await fetch(config.hostname + "/api/user", {
             method: "PUT",
             headers: {
                 "mode": 'no-cors',
@@ -160,7 +161,7 @@ export const PersonalBio = () => {
                             <input className="col-8" id="age" onChange={event => setAge(event.target.value)} />
                         </div>
                         <div className="col-4" id="email" contentEditable="false"><strong>email:</strong> {usuarios.email}</div>
-                        <ChangePassword />
+{/*                         <ChangePassword /> */}
                         <div className="form-group">
                             <label>
                                 ¿Eres una banda?
