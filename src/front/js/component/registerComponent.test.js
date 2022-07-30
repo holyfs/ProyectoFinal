@@ -44,7 +44,7 @@ export const SignUpTest = () => {
         newRequest.append("band", String(band))
         newRequest.append("file", avatar)
         newRequest.append("is_active", true)
-        fetch(config.hostname + "/api/signup", {
+        const response = await fetch(config.hostname + "/api/signup", {
             method: "POST",
             headers: {
                 /*  "Content-Type": "multipart/form-data", */
