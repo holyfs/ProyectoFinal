@@ -56,8 +56,8 @@ const Layout = () => {
                         <Route element={<Redirect />} path="/rederictsignup" />
                         <Route element={<ForgetPassword/>} path="/forgetpassword" />
                         <Route element={<Images/>} path="/images" />
-                        <Route element={<ContactNoModal/>} path="/ContactNoModal:id" />
-                        <Route element={<ChangePasswordNoModal/>} path="/ChangePasswordNoModal:id" />
+                        <Route element={<ContactNoModal/>} path="/ContactNoModal" />
+                        <Route element={<ChangePasswordNoModal/>} path="/ChangePasswordNoModal" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
