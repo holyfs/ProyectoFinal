@@ -14,21 +14,9 @@ export const Bio = () => {
     const [userGenre, setUserGenres] = useState(null);
     let id = window.location.href.split(":")[2]
 
-    const peticionGet=async()=>{
-        await axios.get(`https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user/${id}`)
-        .then(response=>{
-          setUsuarios((response.data.user));
-          console.log(response);
-          setUserInstruments(response.data.instruments);
-          setUserGenres(response.data.genres);
-          setTablaUsuarios(response.data);
-        }).catch(error=>{
-          console.log(error);
-        })
-      }
-      useEffect(()=>{
-        peticionGet();
-        },[])
+
+
+    
     return (
     <>
     <div>
