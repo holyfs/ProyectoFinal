@@ -58,7 +58,7 @@ export default class Login extends Component {
             if (result.value) {window.location.href = "/personalbio:"+ user_id
             }
           })
-        }). catch(error =>  {
+        }).catch(error =>  {
           console.log(error.response.data.message.toString())
           const resMessage = error.response.data.message.toString();
           this.setState({

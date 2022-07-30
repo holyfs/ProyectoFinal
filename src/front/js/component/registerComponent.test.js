@@ -51,8 +51,13 @@ export const SignUpTest = () => {
         Swal.fire({
             icon: 'sucess',
             title: 'Registro Completo',
-            text: 'Good!',
-            footer: '<a href="/login">Quieres Iniciar sesión?</a>'
+            confirmButtonText:'Quieres hacer login?',
+            confirmButtonColor: 'rgb(25, 169, 149)',
+          }).then((result) => {
+            if (result.value) {window.location.href = "/loginmensaje"
+            }else{window.location.href = "/mainindex"
+
+            }
           })
         return responseJson;       
     }
