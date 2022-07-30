@@ -50,39 +50,21 @@ export const SignUpTest = () => {
                 /*  "Content-Type": "multipart/form-data", */
                 "mode": 'no-cors'
             },
-            body: newRequest            
-        }).then((response)=>{
-            return response.json()
-        }).then((response)=>{
-            if (response.msg){
-                Swal.fire({
-                    icon: 'sucess',
-                    title: response.msg,
-                    confirmButtonText:'ok',
-                    confirmButtonColor: 'rgb(25, 169, 149)',
-                  })
-                return; 
-            }else{
-            Swal.fire({
-                icon: 'sucess',
-                title: 'Registro Completo',
-                confirmButtonText:'Quieres hacer login?',
-                confirmButtonColor: 'rgb(25, 169, 149)',
-              }).then((result) => {
-                if (result.value) {window.location.href = "/loginmensaje"
-                }else{window.location.href = "/mainindex"
-                }
-              })
+            body: newRequest
+        });;
+        const responseJson = await response.json();
+        Swal.fire({
+            icon: 'sucess',
+            title: 'Registro Completo',
+            confirmButtonText:'Quieres hacer login?',
+            confirmButtonColor: 'rgb(25, 169, 149)',
+          }).then((result) => {
+            if (result.value) {window.location.href = "/loginmensaje"
+            }else{window.location.href = "/mainindex"
+
             }
-        }).catch((error)=>{
-            Swal.fire({
-                icon: 'sucess',
-                title: 'Error al hacer registro',
-                confirmButtonText:'ok',
-                confirmButtonColor: 'rgb(25, 169, 149)',
-              })
-            console.log("error login")
-        })              
+          })
+        return responseJson;       
     }
     const handleChange = (changeType) => {
         if (changeType === "band"){
