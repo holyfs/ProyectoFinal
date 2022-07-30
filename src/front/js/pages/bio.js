@@ -14,9 +14,8 @@ export const Bio = () => {
     const [userGenre, setUserGenres] = useState(null);
     let id = window.location.href.split(":")[2]
 
-
-
     
+
     return (
     <>
     <div>
