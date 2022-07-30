@@ -38,7 +38,7 @@ export const PersonalBio = () => {
         // retrieve token form localStorage
 
         const token = JSON.parse(localStorage.getItem("jwt-token"));
-        const response = await fetch(config.hostname + "/api/private", {
+        const response = await fetch("https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io" + "/api/private", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export const PersonalBio = () => {
     };
     const user_id = localStorage.getItem("user_id")
     const getUserDataById = async () => {
-        await axios.get(`${config.hostname}/api/user/${user_id}`)
+        await axios.get(`https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user/${user_id}`)
             .then(response => {
                 setUsuarios(response.data.user);
                 console.log(response.data.user)
@@ -92,7 +92,7 @@ export const PersonalBio = () => {
         newRequest.append("instruments", "")
         newRequest.append("genres", "")
         const token = JSON.parse(localStorage.getItem("jwt-token"));
-        const response = await fetch(config.hostname + "/api/user", {
+        const response = await fetch("https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io" + "/api/user", {
             method: "PUT",
             headers: {
                 "mode": 'no-cors',
@@ -220,8 +220,8 @@ export const PersonalBio = () => {
                             <> {edit ? <input id="age" className="col-8" onChange={event => setAge(event.target.value)}/>: " "}
                             </>
                         </div>
-                        <div className="col-4" id="email"><strong>email:</strong> {usuarios.email}</div>
-{/*                         <ChangePassword /> */}
+                        <div className="col-4" id="email" contentEditable="false"><strong>email:</strong> {usuarios.email}</div>
+                        ***Change Password***
                         <div className="form-group">
                             <label>
                                 ¿Eres una banda?
