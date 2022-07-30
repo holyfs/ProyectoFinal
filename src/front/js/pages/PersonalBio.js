@@ -201,7 +201,7 @@ export const PersonalBio = () => {
                             <> {edit ? <input id="age" className="col-8" onChange={event => setAge(event.target.value)}/>: " "}
                             </>
                         </div>
-                        <div className="col-4" id="email"><strong>email:</strong> {usuarios.email}</div>
+                        <div className="col-4" id="email" contentEditable="false"><strong>email:</strong> {usuarios.email}</div>
 {/*                         <ChangePassword /> */}
                         <div className="form-group">
                             <label>
