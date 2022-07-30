@@ -202,7 +202,13 @@ export const PersonalBio = () => {
                             </>
                         </div>
                         <div className="col-4" id="email" contentEditable="false"><strong>email:</strong> {usuarios.email}</div>
-{/*                         <ChangePassword /> */}
+                        <div className="d-flex justify-content-end">
+                        <form>
+                            <a href=`/ChangePasswordNoModal:{id}`>
+                                <input type="button" value="Cambiar Contraseña" />
+                            </a>
+                        </form>
+                </div>
                         <div className="form-group">
                             <label>
                                 ¿Eres una banda?
