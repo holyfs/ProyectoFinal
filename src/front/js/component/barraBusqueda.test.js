@@ -86,6 +86,14 @@ function Search() {
                     <div className="fs-5">
                     {userInstruments?.map((instruments) => instruments.label + " ")}
                     </div>
+                    <div className="fs-6 fw-bold">Genero Musical</div>
+                    <div className="fs-5">
+                    {userGenre?.map((genre) => genre.label + " ")}
+                    </div>
+                    <div className="fs-6 fw-bold">Instrumento</div>
+                    <div className="fs-5">
+                    {userInstruments?.map((instruments) => instruments.label + " ")}
+                    </div>
                     <div>
                       
                       <Link to={`/bio:${usuarios.id}`}>
