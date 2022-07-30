@@ -401,6 +401,19 @@ def get_user_genre(user_id):
         raise APIException("not user or genres found", 404)
     all_genres = list(map(lambda genre: genre.serialize(), generos_user))
     return jsonify(all_genres),200
+@api.route('/user/filterby/genre', methods=['GET'])
+def get_filterby_genre():
+    generos_user = Generos_user.query.order_by(Generos_user.user_id).all()
+    if len(generos_user) <= 0:
+        raise APIException("not user or genres found", 404)
+    all_genres = list(map(lambda genre: genre.serialize(), generos_user))
+    mydic = {}
+    for element in all_genres:
+       mydic[element["user"]["id"]]=5
+       print(mydic)
+
+
+    return jsonify(all_genres),200
 #USER MUSICAL GENRE DELETE
 @api.route('/user/genre/delete', methods=['DELETE'])
 def delete_user_genre():
