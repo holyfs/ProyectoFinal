@@ -21,8 +21,8 @@ export const PersonalBio = () => {
     const [usuarios, setUsuarios] = useState([]);
     const [userGenre, setUserGenres] = useState(null);
     const [userInstruments, setUserInstruments] = useState(null);
-    const [experience, setExperience] = useState(false);
-    const [band, setBand] = useState(false);
+    const [experience, setExperience] = useState();
+    const [band, setBand] = useState();
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [age, setAge] = useState("");
@@ -85,11 +85,9 @@ export const PersonalBio = () => {
         newRequest.append("age", age)
         newRequest.append("description", description)
         newRequest.append("artist_name_or_band_name", artist_name_or_band_name)
-        newRequest.append("experience", "true" ? experience : "false")
-        newRequest.append("band", "true" ? band : "false")
-        newRequest.append("file", "avatar")
-        newRequest.append("instruments", "")
-        newRequest.append("genres", "")
+        newRequest.append("experience", String(experience))
+        newRequest.append("band", String(band))
+        newRequest.append("file", avatar)
         const token = JSON.parse(localStorage.getItem("jwt-token"));
         const response = await fetch(config.hostname + "/api/user", {
             method: "PUT",
@@ -121,12 +119,12 @@ export const PersonalBio = () => {
 
     const handleChange = (changeType) => {
         if (changeType === "band") {
-            setBand(!band);
+            setBand(band);
         }if (changeType === "edit"){
             setEdit(!edit)
         }
          else {
-            setExperience(!experience)
+            setExperience(experience)
         }
         
     }
@@ -148,36 +146,20 @@ export const PersonalBio = () => {
             }
           }).then((result)=>{
             console.log(result.value)
-            let newRequest = new FormData();
-            newRequest.append("id", id)
-            newRequest.append("name", "")
-            newRequest.append("last_name", "")
-            newRequest.append("age", "")
-            newRequest.append("description", "")
-            newRequest.append("artist_name_or_band_name", "")
-            newRequest.append("experience", String(experience))
-            newRequest.append("band", String(band))
-            newRequest.append("file", result.value)
-            newRequest.append("instruments", "")
-            newRequest.append("genres", "")
-            const token = JSON.parse(localStorage.getItem("jwt-token"));
-            const response = fetch(config.hostname + "/api/user", {
-                method: "PUT",
-                headers: {
-                    "mode": 'no-cors',
-                    "Authorization": "Bearer " + token.token
-                },
-                body: newRequest
-    
-            }).then((response)=>{
-/*                 window.location.href='/personalbio:'+ id */
-            }).then((response)=>{
-                console.log(response)
-            })
-            
           })      
-          } 
-      
+      /*     if (file) {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+              Swal.fire({
+                title: 'Your uploaded picture',
+                imageUrl: e.target.files[0],                
+                imageAlt: 'The uploaded picture'
+              })
+            }
+            
+            reader.readAsDataURL(file)
+          } */
+      }
     return (
         <>
             <div className="container-fluid">
@@ -219,7 +201,7 @@ export const PersonalBio = () => {
                             <> {edit ? <input id="age" className="col-8" onChange={event => setAge(event.target.value)}/>: " "}
                             </>
                         </div>
-                        <div className="col-4" id="email" contentEditable="false"><strong>email:</strong> {usuarios.email}</div>
+                        <div className="col-4" id="email"><strong>email:</strong> {usuarios.email}</div>
 {/*                         <ChangePassword /> */}
                         <div className="form-group">
                             <label>
@@ -252,8 +234,14 @@ export const PersonalBio = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-2 offset-1">
+                    <div className="col-3">
                         <button type="button" className="btn btn-info" onClick={changePic}>Cambiar foto de perfil</button>
+                        <div className="d-flex justify-content-center">
+                            <input
+                                type="file"
+                                className="form-control"
+                                onChange={event => setAvatar(event.target.files[0])}/>
+                        </div>
                     </div>
                     <div className="col-5">
                         <div className="row">
