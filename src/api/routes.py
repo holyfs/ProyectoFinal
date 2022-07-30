@@ -475,7 +475,7 @@ def reset_user_password():
     db.session.commit()        
     return jsonify(exist_user.serialize()),200
 
-#ENVIAR MENSAJE AL USUARIO
+#ENVIAR MENSAJE DE CONTACTO AL USUARIO
 
 @api.route('/sendMsg', methods=['PUT'])
 def send_Msg():

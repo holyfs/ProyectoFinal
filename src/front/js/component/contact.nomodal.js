@@ -5,11 +5,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 
 export const ContactNoModal = () => {
-  
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [msg, setMsg] = useState("");
+  let id = window.location.href.split(":")[2]
+
 
   const SendMsg = () => {
     fetch(process.env.BACKEND_URL + "/sendMsg", {
@@ -54,17 +56,17 @@ export const ContactNoModal = () => {
 
 
         <div className="d-flex justify-content-end">
-                        <form>
-                            <a href="/bio:id">
-                                <input type="button" value="Cerrar" />
-                            </a>
-                        </form>
-                </div>
+          <form>
+            <a href={"/bio:" + id}>
+              <input type="button" value="Cerrar" />
+            </a>
+          </form>
+        </div>
 
 
 
       </form>
 
-      </>
-    )
-  }
+    </>
+  )
+}

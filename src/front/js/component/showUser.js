@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "../../styles/Card.module.css";
+import config from "../config";
 
 
 const ShowUser = () => {
@@ -14,7 +15,7 @@ const ShowUser = () => {
     // });
 
     axios
-      .all([axios.get(`https://3001-holyfs-proyectofinal-5m505b4tkc5.ws-eu54.gitpod.io/api/user`)])
+      .all([axios.get(`${config.hostname}/api/user`)])
       .then(
         axios.spread((users) => {
           const user = users.data;
