@@ -195,7 +195,6 @@ def get_users():
         raise APIException("no user, please enter a valid user", 404)
     generos_user = Generos_user.query.all()
     all_genres=list(map(lambda genre: genre.serialize_search(), generos_user))
-    print(all_genres[0])
     instruments_user = Instruments_user.query.all()
     all_instruments=list(map(lambda instrument: instrument.serialize_search(), instruments_user))
     new_list=[]
@@ -219,7 +218,6 @@ def get_user_by_id(id):
     if user is None:
         raise APIException("user not found", 404)
     generos_user = Generos_user.query.filter_by(user_id=id).all()
-    print(generos_user)
     instruments_user = Instruments_user.query.filter_by(user_id=id).all()
     result = {"msg": "ok",
     "user":user.serialize(),
@@ -229,7 +227,7 @@ def get_user_by_id(id):
     return jsonify(result),200    
 
 @api.route('/user', methods=['PUT'])
-@jwt_required()
+#@jwt_required()
 def update_user_by_id():
     user = User.query.get(request.form["id"])
     user.name = request.form["name"]if request.form["name"] != "" else user.name
@@ -239,11 +237,16 @@ def update_user_by_id():
     user.band =True if request.form["band"]  == "true" else False
     user.experience =True if request.form["experience"]  == "true" else False
     user.artist_name_or_band_name = request.form["artist_name_or_band_name"]if request.form["artist_name_or_band_name"] != "" else user.artist_name_or_band_name
+    instrumentos=request.form["instruments"].split(",")
+    genres=request.form["genres"].split(",")
     try:
-        image_to_load = request.files['file']
-        result = cloudinary.uploader.upload(image_to_load)
-        user.avatar=result["url"]
+        add_genre_to_user(user.id, genres)
+        add_instrument_to_user(user.id, instrumentos)
+        # image_to_load = request.files['file']
+        # result = cloudinary.uploader.upload(image_to_load)
+        # user.avatar=result["url"]
     except:
+        return jsonify("no update"), 500
         print("imagen no se actualizo")
     if not user:
         return jsonify("user not found"), 404     
@@ -311,7 +314,6 @@ def protected():
     print("ok")
     # Access the identity of the current user with get_jwt_identity
     current_user_id = get_jwt_identity()
-    print(current_user_id)
     user = User.query.get(current_user_id)
   
     return jsonify({"id": user.id, "email": user.email , "msg": "ok"}), 200
@@ -402,19 +404,22 @@ def delete_genre_by_id(id):
 
 
 #USER MUSICAL GENRE POST
-@api.route('/user/genre', methods=['POST'])
-def add_genre_to_user():
-    body = request.get_json()
-    generos_user = Generos_user (
-        user_id=body["user_id"],
-        genre_id=body["genre_id"]
+def add_genre_to_user(user_id,list_of_genre):
+    for genre in list_of_genre:
+        exist_genre = Generos_user.query.filter((Generos_user.user_id==user_id) & (Generos_user.genre_id==genre)).all()
+        if  exist_genre :
+            print("el usuario ya tiene el genero asignado") 
+            continue
+        generos_user = Generos_user (
+            user_id=user_id,
+            genre_id=genre
         )
-    try:
-        db.session.add(generos_user)
-        db.session.commit()        
-    except IntegrityError:
-        db.session.rollback()
-        return jsonify("user or genre not found"),500
+        try:
+            db.session.add(generos_user)
+            db.session.commit()        
+        except IntegrityError:
+            db.session.rollback()
+            return jsonify("user or instrument not found"),500  
     res = {"msg":"musical genre added"}
     return jsonify(res),200
 
@@ -427,55 +432,54 @@ def get_user_genre(user_id):
     all_genres = list(map(lambda genre: genre.serialize(), generos_user))
     return jsonify(all_genres),200
 
-@api.route('/user/favorites', methods=['GET'])
-def get_user_instrument_genre():
-    # user_genre_instruments=RelacionUsuario(
+# @api.route('/user/favorites', methods=['GET'])
+# def get_user_instrument_genre():
+#     # user_genre_instruments=RelacionUsuario(
          
-    #      id=User.id,
-    #      name=User.name,
-    # )
-    #, Genre.name,Instruments.name
-    user_genre_instruments = db.session.query(User.id, User.name,User.artist_name_or_band_name, User.avatar, User.experience, User.band, Genre.name, Instruments.name).join(Generos_user, Generos_user.user_id == User.id).join(Instruments_user, Instruments_user.user_id == User.id).all()
-    #user_genre_instruments = db.session.query(User.id, User.name, User.artist_name_or_band_name, User.avatar, User.experience, User.band,db.func.group_concat(Genre.name),db.func.group_concat( Instruments.name) ).outerjoin(Generos_user, Generos_user.user_id == User.id).outerjoin(Instruments_user, Instruments_user.user_id == User.id).filter( Genre.name, Instruments.name).group_by(User.id).all()
-    # user_genre_instruments =db.session.query(
-    # User.id,
-    # User.name,
-    # db.func.count(Genre.name),
-    # db.func.count(Instruments.name)
-    # ).filter(User.id, Generos_user.user_id, Instruments_user.user_id).group_by(User.id).all()
-    print(user_genre_instruments)
-    if len(user_genre_instruments) <= 0:
-        raise APIException("not user or genres found", 404)
-    all_genres = list(map(lambda row: convertidObj(row), user_genre_instruments))
-    return jsonify(all_genres),200
+#     #      id=User.id,
+#     #      name=User.name,
+#     # )
+#     #, Genre.name,Instruments.name
+#     user_genre_instruments = db.session.query(User.id, User.name,User.artist_name_or_band_name, User.avatar, User.experience, User.band, Genre.name, Instruments.name).join(Generos_user, Generos_user.user_id == User.id).join(Instruments_user, Instruments_user.user_id == User.id).all()
+#     #user_genre_instruments = db.session.query(User.id, User.name, User.artist_name_or_band_name, User.avatar, User.experience, User.band,db.func.group_concat(Genre.name),db.func.group_concat( Instruments.name) ).outerjoin(Generos_user, Generos_user.user_id == User.id).outerjoin(Instruments_user, Instruments_user.user_id == User.id).filter( Genre.name, Instruments.name).group_by(User.id).all()
+#     # user_genre_instruments =db.session.query(
+#     # User.id,
+#     # User.name,
+#     # db.func.count(Genre.name),
+#     # db.func.count(Instruments.name)
+#     # ).filter(User.id, Generos_user.user_id, Instruments_user.user_id).group_by(User.id).all()
+#     if len(user_genre_instruments) <= 0:
+#         raise APIException("not user or genres found", 404)
+#     all_genres = list(map(lambda row: convertidObj(row), user_genre_instruments))
+#     return jsonify(all_genres),200
 
-def convertidObj(row):
-    print(row)
-    pepito=dict(
-        id=row.id,
-        name=row[1],
-        gnre=row[6],
-        intrument=row[7],
-        artist_name_or_band_name=row.artist_name_or_band_name, 
-        avatar=row.avatar,
-        experience=row.experience,
-        band =row.band,
+# def convertidObj(row):
+#     print(row)
+#     pepito=dict(
+#         id=row.id,
+#         name=row[1],
+#         gnre=row[6],
+#         intrument=row[7],
+#         artist_name_or_band_name=row.artist_name_or_band_name, 
+#         avatar=row.avatar,
+#         experience=row.experience,
+#         band =row.band,
 
-    )
-    print(pepito)
-    return pepito
-@api.route('/user/filterby/genre', methods=['GET'])
-def get_filterby_genre():
-    generos_user = Generos_user.query.order_by(Generos_user.user_id).all()
-    if len(generos_user) <= 0:
-        raise APIException("not user or genres found", 404)
-    all_genres = list(map(lambda genre: genre.serialize(), generos_user))
-    mydic = {}
-    for element in all_genres:
-       mydic[element["user"]["id"]]=5
-#       print(mydic)
+#     )
+#     print(pepito)
+#     return pepito
+# @api.route('/user/filterby/genre', methods=['GET'])
+# def get_filterby_genre():
+#     generos_user = Generos_user.query.order_by(Generos_user.user_id).all()
+#     if len(generos_user) <= 0:
+#         raise APIException("not user or genres found", 404)
+#     all_genres = list(map(lambda genre: genre.serialize(), generos_user))
+#     mydic = {}
+#     for element in all_genres:
+#        mydic[element["user"]["id"]]=5
+# #       print(mydic)
 
-    return jsonify(all_genres),200
+#     return jsonify(all_genres),200
 
 
 #USER MUSICAL GENRE DELETE
@@ -491,22 +495,29 @@ def delete_user_genre():
     return jsonify(res),200
 
 #USER MUSIC INSTRUMENT POST
-@api.route('/user/instrument', methods=['POST'])
-def add_instrument_to_user():
-    body = request.get_json()
-    user_id=body["user_id"]
-    instruments_user = Instruments_user (
-        user_id=body["user_id"],
-        instruments_id=body["instruments_id"]
+#@api.route('/user/instrument', methods=['POST'])
+def add_instrument_to_user(user_id,list_of_instruments):
+    # body = request.get_json()
+    # user_id=body["user_id"]
+    for instrument in list_of_instruments:
+        print(instrument)
+        exist_intrument = Instruments_user.query.filter((Instruments_user.user_id==user_id) & (Instruments_user.instruments_id==instrument)).all()
+        if  exist_intrument:
+            print("el usuario ya tiene el instrumento asignado")
+            continue
+        instruments_user = Instruments_user (
+        user_id=user_id,
+        instruments_id=instrument
         )
-    try:
-        db.session.add(instruments_user)
-        db.session.commit()        
-    except IntegrityError:
-        db.session.rollback()
-        return jsonify("user or instrument not found"),500
-    res = {"msg":"musical genre added"}
-    return jsonify(res),200
+        try:
+            db.session.add(instruments_user)
+            db.session.commit()        
+        except IntegrityError:
+            db.session.rollback()
+            return jsonify("user or instrument not found"),500   
+    
+    res = {"msg":"OK"}
+    return jsonify(res)
 
 #USER MUSIC INSTRUMENT GET
 @api.route('/user/<int:user_id>/instrument', methods=['GET'])
