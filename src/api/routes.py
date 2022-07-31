@@ -187,29 +187,91 @@ def add_user():
 #     all_users = list(map(lambda user: user.serialize(), users))    
 #     return jsonify(all_users),200
 
-@api.route('/user', methods=['GET'])
-def get_users():
+# @api.route('/user', methods=['GET'])
+# def get_users():
+
+#     users = User.query.all()
+#     all_users=list(map(lambda users: users.serialize(), users))
+#     if len(users) <= 0:
+#         raise APIException("no user, please enter a valid user", 404)
+#     generos_user = Generos_user.query.all()
+#     all_genres=list(map(lambda genre: genre.serialize_search(), generos_user))
+#     instruments_user = Instruments_user.query.all()
+#     all_instruments=list(map(lambda instrument: instrument.serialize_search(), instruments_user))
+#     new_list=[]
+#     for user in all_users:
+#         user_with_genre = list(filter(lambda ge: ge["user_id"] == user["id"], all_genres))
+#         user_with_instruments = list(filter(lambda ge: ge["user_id"] == user["id"], all_instruments))
+#         complete_user={
+#             "user":user,
+#             "genres":user_with_genre,
+#             "instruments":user_with_instruments
+#         }
+#         new_list.append(complete_user)
+#     result = {"msg": "ok",
+#     "response": new_list} 
+#     return jsonify(result),200
+
+
+
+
+@api.route('/user', methods=['POST'])
+def search_users_filtered():
+    body = request.get_json()
+    instruments=body["instruments"] 
+    genres =body["genres"]
     users = User.query.all()
-    all_users=list(map(lambda users: users.serialize(), users))
+    print(users)
     if len(users) <= 0:
-        raise APIException("no user, please enter a valid user", 404)
-    generos_user = Generos_user.query.all()
+        raise APIException("no users", 404)
+    
+    if str(instruments)!="":
+        instruments_user = Instruments_user.query.filter_by(instruments_id=instruments).all()    
+    elif instruments=="":
+        instruments_user = Instruments_user.query.all()
+    print(instruments_user)
+
+    if str(genres)!="":
+        generos_user = Generos_user.query.filter_by(genre_id=genres).all()
+    elif str(genres)=="":
+        generos_user = Generos_user.query.all()
+    print(generos_user)
+
+    all_users=list(map(lambda users: users.serialize(), users))
     all_genres=list(map(lambda genre: genre.serialize_search(), generos_user))
-    instruments_user = Instruments_user.query.all()
     all_instruments=list(map(lambda instrument: instrument.serialize_search(), instruments_user))
+
     new_list=[]
+    complete_user={}
     for user in all_users:
         user_with_genre = list(filter(lambda ge: ge["user_id"] == user["id"], all_genres))
         user_with_instruments = list(filter(lambda ge: ge["user_id"] == user["id"], all_instruments))
-        complete_user={
-            "user":user,
-            "genres":user_with_genre,
-            "instruments":user_with_instruments
-        }
+        if str(instruments)=="" and str(genres)=="":
+             complete_user={
+                "user":user,
+                "genres":user_with_genre,
+                "instruments":user_with_instruments
+            }
+        elif str(instruments)!="" and len(user_with_instruments) > 0: 
+            complete_user={
+                "user":user,
+                "genres":user_with_genre,
+                "instruments":user_with_instruments
+            }
+        elif str(genres)!="" and len(user_with_genre) > 0:
+            complete_user={
+                "user":user,
+                "genres":user_with_genre,
+                "instruments":user_with_instruments
+            }
+        else:
+            continue
         new_list.append(complete_user)
     result = {"msg": "ok",
     "response": new_list} 
     return jsonify(result),200
+
+
 
 #USER METHODS BY ID    
 @api.route('/user/<int:id>', methods=['GET'])
