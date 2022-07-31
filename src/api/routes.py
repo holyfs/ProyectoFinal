@@ -179,13 +179,38 @@ def add_user():
     #return jsonify(user.serialize()),201
 
 #GET ALL USERS - LIST
+# @api.route('/user', methods=['GET'])
+# def get_users():
+#     users = User.query.all()
+#     if len(users) <= 0:
+#         raise APIException("no user, please enter a valid user", 404)
+#     all_users = list(map(lambda user: user.serialize(), users))    
+#     return jsonify(all_users),200
+
 @api.route('/user', methods=['GET'])
 def get_users():
     users = User.query.all()
+    all_users=list(map(lambda users: users.serialize(), users))
     if len(users) <= 0:
         raise APIException("no user, please enter a valid user", 404)
-    all_users = list(map(lambda user: user.serialize(), users))    
-    return jsonify(all_users),200
+    generos_user = Generos_user.query.all()
+    all_genres=list(map(lambda genre: genre.serialize_search(), generos_user))
+    print(all_genres[0])
+    instruments_user = Instruments_user.query.all()
+    all_instruments=list(map(lambda instrument: instrument.serialize_search(), instruments_user))
+    new_list=[]
+    for user in all_users:
+        user_with_genre = list(filter(lambda ge: ge["user_id"] == user["id"], all_genres))
+        user_with_instruments = list(filter(lambda ge: ge["user_id"] == user["id"], all_instruments))
+        complete_user={
+            "user":user,
+            "genres":user_with_genre,
+            "instruments":user_with_instruments
+        }
+        new_list.append(complete_user)
+    result = {"msg": "ok",
+    "response": new_list} 
+    return jsonify(result),200
 
 #USER METHODS BY ID    
 @api.route('/user/<int:id>', methods=['GET'])
@@ -401,6 +426,44 @@ def get_user_genre(user_id):
         raise APIException("not user or genres found", 404)
     all_genres = list(map(lambda genre: genre.serialize(), generos_user))
     return jsonify(all_genres),200
+
+@api.route('/user/favorites', methods=['GET'])
+def get_user_instrument_genre():
+    # user_genre_instruments=RelacionUsuario(
+         
+    #      id=User.id,
+    #      name=User.name,
+    # )
+    #, Genre.name,Instruments.name
+    user_genre_instruments = db.session.query(User.id, User.name,User.artist_name_or_band_name, User.avatar, User.experience, User.band, Genre.name, Instruments.name).join(Generos_user, Generos_user.user_id == User.id).join(Instruments_user, Instruments_user.user_id == User.id).all()
+    #user_genre_instruments = db.session.query(User.id, User.name, User.artist_name_or_band_name, User.avatar, User.experience, User.band,db.func.group_concat(Genre.name),db.func.group_concat( Instruments.name) ).outerjoin(Generos_user, Generos_user.user_id == User.id).outerjoin(Instruments_user, Instruments_user.user_id == User.id).filter( Genre.name, Instruments.name).group_by(User.id).all()
+    # user_genre_instruments =db.session.query(
+    # User.id,
+    # User.name,
+    # db.func.count(Genre.name),
+    # db.func.count(Instruments.name)
+    # ).filter(User.id, Generos_user.user_id, Instruments_user.user_id).group_by(User.id).all()
+    print(user_genre_instruments)
+    if len(user_genre_instruments) <= 0:
+        raise APIException("not user or genres found", 404)
+    all_genres = list(map(lambda row: convertidObj(row), user_genre_instruments))
+    return jsonify(all_genres),200
+
+def convertidObj(row):
+    print(row)
+    pepito=dict(
+        id=row.id,
+        name=row[1],
+        gnre=row[6],
+        intrument=row[7],
+        artist_name_or_band_name=row.artist_name_or_band_name, 
+        avatar=row.avatar,
+        experience=row.experience,
+        band =row.band,
+
+    )
+    print(pepito)
+    return pepito
 @api.route('/user/filterby/genre', methods=['GET'])
 def get_filterby_genre():
     generos_user = Generos_user.query.order_by(Generos_user.user_id).all()
@@ -410,10 +473,11 @@ def get_filterby_genre():
     mydic = {}
     for element in all_genres:
        mydic[element["user"]["id"]]=5
-       print(mydic)
-
+#       print(mydic)
 
     return jsonify(all_genres),200
+
+
 #USER MUSICAL GENRE DELETE
 @api.route('/user/genre/delete', methods=['DELETE'])
 def delete_user_genre():

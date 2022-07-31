@@ -83,6 +83,11 @@ class Instruments_user(db.Model):
             "value": self.instrument.id,
             "label": self.instrument.name
         }
+    def serialize_search(self):
+        return {
+            "user_id":self.user_id,
+            "intrument": self.instrument.serialize()
+        }
 class Generos_user(db.Model):
     __tablename__ = 'generos_user'
     id = db.Column(db.Integer, primary_key=True)
@@ -101,6 +106,11 @@ class Generos_user(db.Model):
         return {
             "value": self.genre.id,
             "label": self.genre.name
+        }
+    def serialize_search(self):
+        return {
+            "user_id":self.user_id,
+            "genre": self.genre.serialize()
         }
 class Images(db.Model):
     __tablename__ = 'images'
