@@ -215,13 +215,17 @@ def add_user():
 
 
 
-@api.route('/user', methods=['POST'])
+@api.route('/user', methods=['GET','POST'])
 def search_users_filtered():
-    body = request.get_json()
-    instruments=body["instruments"] 
-    genres =body["genres"]
+    if request.method == 'GET':
+        instruments=""
+        genres =""
+    elif request.method == 'POST':    
+        body = request.get_json()
+        instruments=body["instruments"] 
+        genres =body["genres"]
+
     users = User.query.all()
-    print(users)
     if len(users) <= 0:
         raise APIException("no users", 404)
     
@@ -289,7 +293,7 @@ def get_user_by_id(id):
     return jsonify(result),200    
 
 @api.route('/user', methods=['PUT'])
-#@jwt_required()
+@jwt_required()
 def update_user_by_id():
     user = User.query.get(request.form["id"])
     user.name = request.form["name"]if request.form["name"] != "" else user.name
@@ -299,16 +303,15 @@ def update_user_by_id():
     user.band =True if request.form["band"]  == "true" else False
     user.experience =True if request.form["experience"]  == "true" else False
     user.artist_name_or_band_name = request.form["artist_name_or_band_name"]if request.form["artist_name_or_band_name"] != "" else user.artist_name_or_band_name
-    instrumentos=request.form["instruments"].split(",")
-    genres=request.form["genres"].split(",")
-    try:
+    instrumentos=request.form["instruments"].split(",") if request.form["instruments"]!="" else []
+    genres=request.form["genres"].split(",") if request.form["genres"]!="" else []
+    try: 
         add_genre_to_user(user.id, genres)
-        add_instrument_to_user(user.id, instrumentos)
-        # image_to_load = request.files['file']
-        # result = cloudinary.uploader.upload(image_to_load)
-        # user.avatar=result["url"]
+        add_instrument_to_user(user.id, instrumentos)  
+        image_to_load = request.files['file']
+        result = cloudinary.uploader.upload(image_to_load)
+        user.avatar=result["url"] 
     except:
-        return jsonify("no update"), 500
         print("imagen no se actualizo")
     if not user:
         return jsonify("user not found"), 404     

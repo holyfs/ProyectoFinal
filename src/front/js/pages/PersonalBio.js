@@ -14,6 +14,7 @@ import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 import Swal from "sweetalert2"
 import axios from "axios";
 import config from "../config.js";
+import { faWindowMinimize } from "@fortawesome/free-regular-svg-icons";
 
 
 export const PersonalBio = () => {
@@ -21,8 +22,8 @@ export const PersonalBio = () => {
     const [usuarios, setUsuarios] = useState([]);
     const [userGenre, setUserGenres] = useState(null);
     const [userInstruments, setUserInstruments] = useState(null);
-    const [experience, setExperience] = useState();
-    const [band, setBand] = useState();
+    const [experience, setExperience] = useState(false);
+    const [band, setBand] = useState(false);
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [age, setAge] = useState("");
@@ -85,9 +86,11 @@ export const PersonalBio = () => {
         newRequest.append("age", age)
         newRequest.append("description", description)
         newRequest.append("artist_name_or_band_name", artist_name_or_band_name)
-        newRequest.append("experience", String(experience))
-        newRequest.append("band", String(band))
-        newRequest.append("file", avatar)
+        newRequest.append("experience", "true" ? experience : "false")
+        newRequest.append("band", "true" ? band : "false")
+        newRequest.append("file", "avatar")
+        newRequest.append("instruments", "")
+        newRequest.append("genres", "")
         const token = JSON.parse(localStorage.getItem("jwt-token"));
         const response = await fetch(config.hostname + "/api/user", {
             method: "PUT",
@@ -101,9 +104,10 @@ export const PersonalBio = () => {
         const responseJson = await response.json();
         Swal.fire({
             icon: 'sucess',
-            title: 'Registro Completo',
-            text: 'Everything went good!',
-            footer: '<a href="/login">Quieres Iniciar sesión?</a>'
+            title: 'Actualizacion Completada',
+            
+        }).then((response)=>{
+            window.location.href='/personalbio:'+ id
         })
         return responseJson;
 
@@ -118,12 +122,12 @@ export const PersonalBio = () => {
 
     const handleChange = (changeType) => {
         if (changeType === "band") {
-            setBand(band);
+            setBand(!band);
         }if (changeType === "edit"){
             setEdit(!edit)
         }
          else {
-            setExperience(experience)
+            setExperience(!experience)
         }
         
     }
@@ -145,20 +149,34 @@ export const PersonalBio = () => {
             }
           }).then((result)=>{
             console.log(result.value)
-          })      
-      /*     if (file) {
-            const reader = new FileReader()
-            reader.onload = (e) => {
-              Swal.fire({
-                title: 'Your uploaded picture',
-                imageUrl: e.target.files[0],                
-                imageAlt: 'The uploaded picture'
-              })
-            }
+            let newRequest = new FormData();
+            newRequest.append("id", id)
+            newRequest.append("name", "")
+            newRequest.append("last_name", "")
+            newRequest.append("age", "")
+            newRequest.append("description", "")
+            newRequest.append("artist_name_or_band_name", "")
+            newRequest.append("experience", String(experience))
+            newRequest.append("band", String(band))
+            newRequest.append("file", result.value)
+            newRequest.append("instruments", "")
+            newRequest.append("genres", "")
+            const token = JSON.parse(localStorage.getItem("jwt-token"));
+            const response = fetch(config.hostname + "/api/user", {
+                method: "PUT",
+                headers: {
+                    "mode": 'no-cors',
+                    "Authorization": "Bearer " + token.token
+                },
+                body: newRequest
+    
+            }).then((response)=>{
+                window.location.href='/personalbio:'+ id
+            })
             
-            reader.readAsDataURL(file)
-          } */
-      }
+          })      
+          } 
+      
     return (
         <>
             <div className="container-fluid">
@@ -233,14 +251,8 @@ export const PersonalBio = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-3">
+                    <div className="col-2 offset-1">
                         <button type="button" className="btn btn-info" onClick={changePic}>Cambiar foto de perfil</button>
-                        <div className="d-flex justify-content-center">
-                            <input
-                                type="file"
-                                className="form-control"
-                                onChange={event => setAvatar(event.target.files[0])}/>
-                        </div>
                     </div>
                     <div className="col-5">
                         <label ><strong>Descripción:</strong> </label>
