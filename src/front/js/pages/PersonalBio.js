@@ -172,9 +172,10 @@ export const PersonalBio = () => {
     
             }).then((response)=>{
                 window.location.href='/personalbio:'+ id
+            }) }).then((response)=>{
+                console.log(response)
             })
-            
-          })      
+                
           } 
       
     return (
