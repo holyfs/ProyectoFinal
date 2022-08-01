@@ -49,8 +49,8 @@ export const ContactNoModal = () => {
           <label class="form-control-placeholder" for="nombre">Mensaje</label>
           <input type="mensaje" class="form-control" onChange={event => setMsg(event.target.value)} required />
         </div>
-        <div class="btn-check-log">
-          <button type="submit" className="btn btn-dark" onClick={SendMsg()}>Enviar</button>
+        <div className="d-flex justify-content-center mt-3 mb-2" >
+          <button onClick={() => SendMsg()}>Enviar</button>
         </div>
 
 
