@@ -3,6 +3,7 @@ import '../../styles/App.css';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
+import config from '../config';
 
 class ChangePassword extends React.Component{
   state={
@@ -24,7 +25,7 @@ class ChangePassword extends React.Component{
         alert("Las contraseñas no coinciden");
         return;
       }
-      fetch(process.env.BACKEND_URL + "/user/<int:id>/new-password", {
+      fetch(config.hostname + "/user/<int:id>/new-password", {
         method: "PUT",
         headers: {
           "Content-type": "multipart/form-data",

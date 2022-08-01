@@ -3,6 +3,9 @@ import '../../styles/App.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
+import config from '../config';
+import Swal from "sweetalert2";
+
 
 export const ContactNoModal = () => {
 
@@ -14,19 +17,31 @@ export const ContactNoModal = () => {
 
 
   const SendMsg = () => {
-    fetch(process.env.BACKEND_URL + "/sendMsg", {
+    /* fetch(config.hostname + "/sendMsg", {
       method: "PUT",
       headers: {
         "Content-type": "multipart/form-data",
       },
-      body: JSON.stringify({
+      body: ({
         email: email,
         name: name,
         phone: phone,
         msg: msg
       })
     });
-    // necesitaria un RETURN aquí para enviar a bio y enviar un alert con "mensaje enviado"
+    */
+    Swal.fire({
+      icon: 'sucess',
+      title: 'Mensaje Enviado',
+      confirmButtonText: 'Volver a pagina del artista',
+      confirmButtonColor: 'rgb(25, 169, 149)',
+    }).then((result) => {
+      if (result.value) {
+          window.location.href = "/bio:"+id
+      } else {
+          window.location.href = "/mainindex"
+      }
+    })
   }
 
 
