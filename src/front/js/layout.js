@@ -20,7 +20,7 @@ import { Bio } from "./pages/bio";
 import { BioFinal } from "./pages/bio.final";
 import { PersonalBio } from "./pages/PersonalBio";
 import {Redirect} from "./pages/redirectSignup"
-import ForgetPassword from "./component/ForgetPassword";
+import { ForgetPassword } from "./component/ForgetPassword";
 import { Images } from "./pages/galeriaImagenes";
 import {SignUpTest} from "./component/registerComponent.test";
 import { ContactNoModal } from "./component/contact.nomodal";

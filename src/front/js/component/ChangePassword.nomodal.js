@@ -15,20 +15,22 @@ export const ChangePasswordNoModal = () => {
   let id = window.location.href.split(":")[2]
 
   const ChangePassword = async () => {
+    let newRequest = new FormData();
+    newRequest.append("password", password);
+    newRequest.append("new_password",newpassword);
+    const token = JSON.parse(localStorage.getItem("jwt-token"));
     if (newpassword !== confirmPass) {
       alert("Las contraseñas no coinciden");
       return;
     }
     else {
-      const response = await fetch(config.hostname + `/user/${id}/new-password`, {
+      const response = await fetch(config.hostname + `api/user/${id}/new-password`, {
         method: "PUT",
         headers: {
-          "mode": 'no-cors'
+          "mode": 'no-cors',
+          "Authorization": "Bearer " + token
         },
-        body: ({
-          password: password,
-          new_password: newpassword
-        })
+        body: newRequest
       });
       const responseJson = await response.json();
       Swal.fire({
