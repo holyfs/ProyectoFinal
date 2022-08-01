@@ -76,27 +76,19 @@ function Search() {
                   alt=""
                 />
                 <div className={`${styles.content}`}>
-                  <div className="fs-4 fw-bold mb-4">{usuarios.artist_name_or_band_name}</div>
+{/*                 <div className="fs-4 fw-bold mb-4">{usuarios.user.name}</div> */}
+                  <div className="fs-4 fw-bold mb-4">{usuarios.user.artist_name_or_band_name}</div>
                   <div className="">
                     <div className="fs-6 fw-bold">Genero Musical</div>
                     <div className="fs-5">
-                    {userGenre?.map((genre) => genre.label + " ")}
+                    {usuarios.genres?.map((genre) => genre.genre.name + " ")}
                     </div>
                     <div className="fs-6 fw-bold">Instrumento</div>
                     <div className="fs-5">
-                    {userInstruments?.map((instruments) => instruments.label + " ")}
+                    {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}
                     </div>
-                    <div className="fs-6 fw-bold">Genero Musical</div>
-                    <div className="fs-5">
-                    {userGenre?.map((genre) => genre.label + " ")}
-                    </div>
-                    <div className="fs-6 fw-bold">Instrumento</div>
-                    <div className="fs-5">
-                    {userInstruments?.map((instruments) => instruments.label + " ")}
-                    </div>
-                    <div>
-                      
-                      <Link to={`/bio:${usuarios.id}`}>
+                    <div>                     
+                      <Link to={`/bio:${usuariosuser.id}`}>
                         <button type="button" className="button">
                           Info
                         </button>

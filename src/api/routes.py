@@ -173,9 +173,6 @@ def add_user():
     db.session.add(user)
     db.session.commit()   
     response=jsonify(user.serialize())
-    # response.headers.add("Access-Control-Allow-Origin", "*")
-    # response.status=201
-    # return response  
     return jsonify(user.serialize()),201
 
 #GET ALL USERS - LIST
@@ -562,8 +559,6 @@ def delete_user_genre():
 #USER MUSIC INSTRUMENT POST
 #@api.route('/user/instrument', methods=['POST'])
 def add_instrument_to_user(user_id,list_of_instruments):
-    # body = request.get_json()
-    # user_id=body["user_id"]
     for instrument in list_of_instruments:
         print(instrument)
         exist_instrument = Instruments_user.query.filter((Instruments_user.user_id==user_id) & (Instruments_user.instruments_id==instrument)).all()
