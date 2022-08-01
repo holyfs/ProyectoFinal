@@ -87,9 +87,9 @@ export const Bio = () => {
            
         </div>
             <div className="form-floating" style={{alignItems: "center"}}>
-                <textarea className="form-control" style={{ display: "flex", border: "3px solid black", height: "240px",
+                <div className="form-control" style={{ display: "flex", border: "3px solid black", height: "240px",
 		        padding: "10px", textAlign: "center", fontSize: 20, alignItems:"center", color: "white", background: "black",
-		        width: "290px" }} id="floatingTextarea2">{usuarios.description}</textarea>
+		        width: "290px" }} id="floatingTextarea2">{usuarios.description}</div>
             </div>
     </div>
            
