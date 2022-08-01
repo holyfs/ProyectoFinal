@@ -18,11 +18,9 @@ function Search() {
   const peticionGet=async()=>{
     await axios.get(`${config.hostname}/api/user`)
     .then(response=>{
-      console.log(response)
       setUsuarios(response.data.response);
       setTablaUsuarios(response.data);
       setUserInstruments(response.data.instruments);
-      console.log(response.data);
       setUserGenres(response.data.genres);
     }).catch(error=>{
       console.log(error);

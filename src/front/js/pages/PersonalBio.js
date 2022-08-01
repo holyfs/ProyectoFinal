@@ -257,10 +257,13 @@ export const PersonalBio = () => {
                         <button type="button" className="btn btn-info" onClick={changePic}>Cambiar foto de perfil</button>
                     </div>
                     <div className="col-5">
+                        <div className="row">
                         <label ><strong>Descripción:</strong> </label>
-                        <div className="mb-3" id="description">{usuarios.description}</div>
+                        <div className="mb-3" id="description">{usuarios.description} </div>
+                        <> {edit ? <textarea  maxLength="1500px" rows="5" id="description" className="mb-3" onChange={event => setDescription(event.target.value)}/>: " "}
+                        </>
+                        </div>                   
                         <label className="mb-2" ><strong>Generos:</strong> {userGenre?.map((genre) => genre.label + " ")}</label>
-{/*                         <div>{(userGenre) ? <AddMusicalGenre userGenre={userGenre} /> : 'cargando...'}</div> */}
                         <> {edit ? <AddMusicalGenre userGenre={userGenre} />: " "}
                             </>
                         <label className="mb-2" ><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>

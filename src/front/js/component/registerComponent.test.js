@@ -81,7 +81,7 @@ export const SignUpTest = () => {
                 confirmButtonText:'ok',
                 confirmButtonColor: 'rgb(25, 169, 149)',
               })
-            console.log(" error login")
+            console.log("error login")
         })              
     }
     const handleChange = (changeType) => {
