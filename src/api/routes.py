@@ -157,7 +157,7 @@ def add_user():
     hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
     exist_user = User.query.filter_by(email=email).first()
     if exist_user:
-        raise APIException("email already registered", 404)  
+        return jsonify({"msg":"Email already registered"}),500  
     user = User(
         name=name,
         last_name=last_name,
@@ -173,10 +173,10 @@ def add_user():
     db.session.add(user)
     db.session.commit()   
     response=jsonify(user.serialize())
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.status=201
-    return response  
-    #return jsonify(user.serialize()),201
+    # response.headers.add("Access-Control-Allow-Origin", "*")
+    # response.status=201
+    # return response  
+    return jsonify(user.serialize()),201
 
 #GET ALL USERS - LIST
 # @api.route('/user', methods=['GET'])

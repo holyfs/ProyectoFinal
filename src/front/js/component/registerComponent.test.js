@@ -21,10 +21,15 @@ export const SignUpTest = () => {
     const [band, setBand] = useState("");
     const [avatar, setAvatar] = useState("");
     const navigate = useNavigate();
-    async function signUp(event) {
+    function signUp(event) {
         event.preventDefault();
         if (password !== confirmPass) {
-            alert("Las contraseñas no coinciden");
+            Swal.fire({
+                icon: 'sucess',
+                title: "Las contraseñas no coinciden",
+                confirmButtonText:'ok',
+                confirmButtonColor: 'rgb(25, 169, 149)',
+              })
             return;
         }
         let newRequest = new FormData();
@@ -39,27 +44,45 @@ export const SignUpTest = () => {
         newRequest.append("band", String(band))
         newRequest.append("file", avatar)
         newRequest.append("is_active", true)
-        const response = await fetch(config.hostname + "/api/signup", {
+        fetch(config.hostname + "/api/signup", {
             method: "POST",
             headers: {
                 /*  "Content-Type": "multipart/form-data", */
                 "mode": 'no-cors'
             },
-            body: newRequest
-        });;
-        const responseJson = await response.json();
-        Swal.fire({
-            icon: 'sucess',
-            title: 'Registro Completo',
-            confirmButtonText:'Quieres hacer login?',
-            confirmButtonColor: 'rgb(25, 169, 149)',
-          }).then((result) => {
-            if (result.value) {window.location.href = "/loginmensaje"
-            }else{window.location.href = "/mainindex"
-
+            body: newRequest            
+        }).then((response)=>{
+            return response.json()
+        }).then((response)=>{
+            if (response.msg){
+                Swal.fire({
+                    icon: 'sucess',
+                    title: response.msg,
+                    confirmButtonText:'ok',
+                    confirmButtonColor: 'rgb(25, 169, 149)',
+                  })
+                return; 
+            }else{
+            Swal.fire({
+                icon: 'sucess',
+                title: 'Registro Completo',
+                confirmButtonText:'Quieres hacer login?',
+                confirmButtonColor: 'rgb(25, 169, 149)',
+              }).then((result) => {
+                if (result.value) {window.location.href = "/loginmensaje"
+                }else{window.location.href = "/mainindex"
+                }
+              })
             }
-          })
-        return responseJson;       
+        }).catch((error)=>{
+            Swal.fire({
+                icon: 'sucess',
+                title: 'Error al hacer registro',
+                confirmButtonText:'ok',
+                confirmButtonColor: 'rgb(25, 169, 149)',
+              })
+            console.log(" error login")
+        })              
     }
     const handleChange = (changeType) => {
         if (changeType === "band"){
