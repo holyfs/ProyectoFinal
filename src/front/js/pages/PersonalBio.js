@@ -183,8 +183,6 @@ export const PersonalBio = (props) => {
           } 
 
           const getSelectedGenres=(seleccionados, tipo)=>{
-
-            console.log(tipo)
             if (tipo=== "G"){
                 
                 setGenreSelected(seleccionados)

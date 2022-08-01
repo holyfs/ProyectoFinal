@@ -230,13 +230,11 @@ def search_users_filtered():
         instruments_user = Instruments_user.query.filter_by(instruments_id=instruments).all()    
     elif instruments=="":
         instruments_user = Instruments_user.query.all()
-    print(instruments_user)
 
     if str(genres)!="":
         generos_user = Generos_user.query.filter_by(genre_id=genres).all() 
     elif str(genres)=="":
         generos_user = Generos_user.query.all()
-    print(generos_user)
 
     all_users=list(map(lambda users: users.serialize(), users))
     all_genres=list(map(lambda genre: genre.serialize_search(), generos_user))
@@ -300,13 +298,11 @@ def update_user_by_id():
     user.band =True if request.form["band"]  == "true" else False
     user.experience =True if request.form["experience"]  == "true" else False
     user.artist_name_or_band_name = request.form["artist_name_or_band_name"]if request.form["artist_name_or_band_name"] != "" else user.artist_name_or_band_name
-    print(request.form["instruments"])
     instrumentos=request.form["instruments"].split(",") if request.form["instruments"]!="" else []
-    print(instrumentos)
     genres=request.form["genres"].split(",") if request.form["genres"]!="" else []
-    try: 
-        add_genre_to_user(user.id, genres)
-        add_instrument_to_user(user.id, instrumentos)  
+    add_genre_to_user(user.id, genres)
+    add_instrument_to_user(user.id, instrumentos) 
+    try:    
         image_to_load = request.files['file']
         result = cloudinary.uploader.upload(image_to_load)
         user.avatar=result["url"] 
@@ -375,7 +371,6 @@ def create_token():
 @api.route("/private", methods=["GET"])
 @jwt_required(optional=True)
 def protected():
-    print("ok")
     # Access the identity of the current user with get_jwt_identity
     current_user_id = get_jwt_identity()
     user = User.query.get(current_user_id)
@@ -469,10 +464,18 @@ def delete_genre_by_id(id):
 
 #USER MUSICAL GENRE POST
 def add_genre_to_user(user_id,list_of_genre):
+    exist_genre = Generos_user.query.filter((Generos_user.user_id==user_id)).first()
+    if exist_genre:
+        db.session.delete(exist_genre)
+        db.session.commit()
+    print(Generos_user.query.filter((Generos_user.user_id==user_id)).all())
     for genre in list_of_genre:
-        exist_genre = Generos_user.query.filter((Generos_user.user_id==user_id) & (Generos_user.genre_id==genre)).all()
-        if  exist_genre :
-            print("el usuario ya tiene el genero asignado") 
+        print(genre)
+        # exist_genre = Generos_user.query.filter((Generos_user.user_id==user_id) & (Generos_user.genre_id==genre)).all()
+        # if  exist_genre :
+        #     print("el usuario ya tiene el genero asignado")
+          
+        if genre == "":
             continue
         generos_user = Generos_user (
             user_id=user_id,
@@ -562,11 +565,16 @@ def delete_user_genre():
 #@api.route('/user/instrument', methods=['POST'])
 def add_instrument_to_user(user_id,list_of_instruments):
     print("hola")
+    exist_instrument = Instruments_user.query.filter((Instruments_user.user_id==user_id)).all()
+    if exist_instrument: 
+        db.session.delete(exist_instrument)
+        print("borrar")
     for instrument in list_of_instruments:
-        print(instrument)
-        exist_instrument = Instruments_user.query.filter((Instruments_user.user_id==user_id) & (Instruments_user.instruments_id==instrument)).all()
-        if  exist_instrument:
-            print("el usuario ya tiene el instrumento asignado")
+        # exist_instrument = Instruments_user.query.filter((Instruments_user.user_id==user_id) & (Instruments_user.instruments_id==instrument)).all()
+        # if  exist_instrument:
+        #     print("el usuario ya tiene el instrumento asignado")
+        #     continue
+        if instrument == "":
             continue
         instruments_user = Instruments_user (
         user_id=user_id,
