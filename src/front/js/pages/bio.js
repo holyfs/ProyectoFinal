@@ -4,6 +4,7 @@ import Contact from "../component/contact";
 import '../../styles/bio.css';
 import { ContactNoModal } from "../component/contact.nomodal";
 import axios from "axios";
+import config from "../config.js"
 
 import { Context } from "../store/appContext";
 
@@ -15,7 +16,7 @@ export const Bio = () => {
     let id = window.location.href.split(":")[2]
 
     const peticionGet=async()=>{
-        await axios.get(`https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user/${id}`)
+        await axios.get(`${config.hostname}/api/user/${id}`)
         .then(response=>{
           setUsuarios((response.data.user));
           setUserInstruments(response.data.instruments);
