@@ -22,11 +22,10 @@ function Search() {
       setUsuarios(response.data.response);
       setTablaUsuarios(response.data);
       setUserInstruments(response.data.instruments);
-      setUserGenres(response.data.genres);
+      setUserGenres(response.data.genres); 
     }).catch(error=>{
       console.log(error);
-    })
-  }
+  })}
 
   const handleChange=e=>{
     setBusqueda(e.target.value);
@@ -88,7 +87,7 @@ function Search() {
                     {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}
                     </div>
                     <div>                     
-                      <Link to={`/bio:${usuariosuser.id}`}>
+                      <Link to={`/bio:${usuarios.user.id}`}>
                         <button type="button" className="button">
                           Info
                         </button>
