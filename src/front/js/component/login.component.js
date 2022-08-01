@@ -2,7 +2,7 @@ import React, { useContext, useState, Component } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import { useAlert } from 'react-alert'
-import ForgetPass from "./ForgetPassword"
+import ForgetPassword from "./ForgetPassword"
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2"
 import Form from "react-validation/build/form";
@@ -10,7 +10,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
 import "../../styles/home.css";
-import ForgetPassword from "./ForgetPassword";
+
 export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState(null);
@@ -90,7 +90,7 @@ export const Login = () => {
 					/>
 				</div>
 				<p className="forgot-password text-right">
-                    Olvidé mi clave<i className="glyphicon glyphicon-cloud"> :( </i> <ForgetPass />
+                    Olvidé mi clave<i className="glyphicon glyphicon-cloud"> :( </i> <a href="/forgetpassword">¿Olvistaste tu contraseña?</a>
                 </p>
 				<button type="submit" className="btn btn-primary">
 					Login

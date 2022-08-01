@@ -5,6 +5,7 @@ import CheckButton from "react-validation/build/button";
 import AuthService from "../../../services/auth.service";
 import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2"
+import { ForgetPassword } from "./ForgetPassword";
 const required = value => {
   if (!value) {
     return (
@@ -118,6 +119,7 @@ export default class Login extends Component {
                 <span>Login</span>
               </button>
               <h4>No tienes cuenta?</h4><a href="/signup2">Registrate!</a>
+              <a href="/forgetpassword">¿Olvistaste tu contraseña?</a>
             </div>
             {this.state.message && (
               <div className="form-group">

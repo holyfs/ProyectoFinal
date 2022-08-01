@@ -9,6 +9,7 @@ import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
 import AddMusicalGenre from "./AddMusicalGenre.js";
+
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
   const [tablaUsuarios, setTablaUsuarios]= useState([]);

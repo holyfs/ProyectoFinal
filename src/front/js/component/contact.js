@@ -46,7 +46,7 @@ class Contact extends React.Component {
     }
 
     const SendMsg = () => {
-      fetch(process.env.BACKEND_URL + "/sendMsg", {
+      fetch(config.hostname + "/sendMsg", {
         method: "PUT",
         headers: {
           "Content-type": "multipart/form-data",

@@ -9,95 +9,100 @@ import config from "../config.js"
 import { Context } from "../store/appContext";
 
 export const Bio = () => {
-    const [usuarios, setUsuarios]= useState([]);
-    const [tablaUsuarios, setTablaUsuarios]= useState([]);
+    const [usuarios, setUsuarios] = useState([]);
+    const [tablaUsuarios, setTablaUsuarios] = useState([]);
     const [userInstruments, setUserInstruments] = useState(null);
     const [userGenre, setUserGenres] = useState(null);
     let id = window.location.href.split(":")[2]
 
-    const peticionGet=async()=>{
+    const peticionGet = async () => {
         await axios.get(`${config.hostname}/api/user/${id}`)
-        .then(response=>{
-          setUsuarios((response.data.user));
-          setUserInstruments(response.data.instruments);
-          setUserGenres(response.data.genres);
-          setTablaUsuarios(response.data);
-        }).catch(error=>{
-          console.log(error);
-        })
-      }
-      useEffect(()=>{
+            .then(response => {
+                setUsuarios((response.data.user));
+                setUserInstruments(response.data.instruments);
+                setUserGenres(response.data.genres);
+                setTablaUsuarios(response.data);
+            }).catch(error => {
+                console.log(error);
+            })
+    }
+    useEffect(() => {
         peticionGet();
-        },[])
+    }, [])
     return (
-    <>
-    <div>
-    <div
-    key={usuarios.id} 
-    className="container-fluid">
-       
-       
-            <div className="row">
-                <div className="col-3">
-                    <h1 className="bioperfil"> {usuarios.artist_name_or_band_name}</h1>
-                </div>
-                
-                    
-                <div className="d-flex justify-content-end">
-                        <form>
-                            <a href={"/contactNoModal:"+id}>
-                                <input type="button" className="btn btn-info" value="Contacto" />
-                            </a>
-                        </form>
-                </div>
-              
-				
-                
-            </div>
-           
-        
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-3">
-                    <img className="rounded-circle" width="350px" height="350px" src={usuarios.avatar}></img>
-                </div>
-                <div className="col-3">
-                <h1 className="PersonalDates">Datos Personales</h1>
-                    <ul className="list-group">
-                    <label><h3>Nombre</h3></label>
-                    <li class="list-group-item list-group-item-success">{usuarios.name}</li>
-                    <label><h3>Apellido</h3></label>
-                    <li class="list-group-item list-group-item-success">{usuarios.last_name}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <>
+            <div>
+                <div
+                    key={usuarios.id}
+                    className="container-fluid">
 
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-3">
-                <div className="row">
-                <label className="mb-2" ><strong>Generos:</strong> {userGenre?.map((genre) => genre.label + " ")}</label>
-                </div>
-                <div className="row">
-                <label className="mb-2" ><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
-                </div>
-                </div>
-            </div>
-           
-        </div>
-            <div className="form-floating" style={{alignItems: "center"}}>
-                <div className="form-control" style={{ display: "flex", border: "3px solid black", height: "240px",
-		        padding: "10px", textAlign: "center", fontSize: 20, alignItems:"center", color: "white", background: "black",
-		        width: "290px" }} id="floatingTextarea2">{usuarios.description}</div>
-            </div>
-    </div>
-           
-    </div>
-    </>
-        
-       
 
-    
-)
+                    <div className="row">
+                        <div className="col-3">
+                            <h1 className="bioperfil"> {usuarios.artist_name_or_band_name}</h1>
+                        </div>
+
+
+                        <div className="d-flex justify-content-end">
+                            <form>
+                                <a href={"/contactNoModal:" + id}>
+                                    <input type="button" className="btn btn-info" value="Contacto" />
+                                </a>
+                            </form>
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-3">
+                                <img className="rounded-circle" width="350px" height="350px" src={usuarios.avatar}></img>
+                                <div className="row">
+                            <div className="col-3">
+                                <div className="row">
+                                    <label className="mb-2" ><strong>Generos:</strong> {userGenre?.map((genre) => genre.label + " ")}</label>
+                                </div>
+                                <div className="row">
+                                    <label className="mb-2" ><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                            <div className="col-9">
+                                <h1 className="PersonalDates">Datos Personales</h1>
+                                <ul className="list-group">
+                                    <label><h3>Nombre</h3></label>
+                                    <li class="list-group-item col-4 list-group-item-success">{usuarios.name}</li>
+                                    <label><h3>Apellido</h3></label>
+                                    <li class="list-group-item col-4 list-group-item-success">{usuarios.last_name}</li>
+                                    <label><h3>Descripción</h3></label>
+                                        <div className="form-floating" style={{ alignItems: "center" }}>
+                                            <div className="form-control" style={{
+                                                display: "flex", border: "3px solid black", height: "100%",
+                                                padding: "10px", textAlign: "center", fontSize: 20, alignItems: "center", color: "white", background: "black",
+                                                width: "100%"
+                                            }} id="floatingTextarea2">{usuarios.description}</div>
+                                        </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="container-fluid">
+                        
+
+                    </div>
+
+                </div>
+
+            </div>
+        </>
+
+
+
+
+    )
 }
