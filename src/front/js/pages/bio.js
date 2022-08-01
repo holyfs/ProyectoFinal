@@ -41,18 +41,6 @@ export const Bio = () => {
                 <div className="col-3">
                     <h1 className="bioperfil"> {usuarios.artist_name_or_band_name}</h1>
                 </div>
-                
-                    
-                <div className="d-flex justify-content-end">
-                        <form>
-                            <a href={"/contactNoModal:"+id}>
-                                <input type="button" value="Contacto" />
-                            </a>
-                        </form>
-                </div>
-              
-				
-                
             </div>
            
         
@@ -69,6 +57,24 @@ export const Bio = () => {
                     <label><h3>Apellido</h3></label>
                     <li class="list-group-item list-group-item-success">{usuarios.last_name}</li>
                     </ul>
+                    <div className="col-3"> 
+                    <label><h3>Descripción</h3></label>
+                    <div className="form-floating" style={{alignItems: "center"}}>
+                        <textarea className="form-control" style={{ display: "flex", border: "3px solid black", height: "240px",
+		                    padding: "10px", textAlign: "center", fontSize: 20, alignItems:"center", color: "white", background: "black",
+		                    width: "290px" }} id="floatingTextarea2">{usuarios.description}</textarea>
+                    </div>
+                    </div>
+                    <div className="col-3">
+                    <label><h3>Contacta con: {usuarios.artist_name_or_band_name}</h3></label>
+                    <div className="d-flex justify-content-end">
+                        <form>
+                            <a href={"/contactNoModal:"+id}>
+                                <input type="button" className="btn btn-info" value="Contacto" />
+                            </a>
+                        </form>
+                </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,20 +83,16 @@ export const Bio = () => {
             <div className="row">
                 <div className="col-3">
                 <div className="row">
-                <label className="mb-2" ><strong>Generos:</strong> {userGenre?.map((genre) => genre.label + " ")}</label>
+                <label className="mb-2" ><h3>Generos:</h3> {userGenre?.map((genre) => genre.label + " ")}</label>
                 </div>
                 <div className="row">
-                <label className="mb-2" ><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
+                <label className="mb-2" ><h3>Instrumentos:</h3> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
                 </div>
                 </div>
             </div>
            
         </div>
-            <div className="form-floating" style={{alignItems: "center"}}>
-                <textarea className="form-control" style={{ display: "flex", border: "3px solid black", height: "240px",
-		        padding: "10px", textAlign: "center", fontSize: 20, alignItems:"center", color: "white", background: "black",
-		        width: "290px" }} id="floatingTextarea2">{usuarios.description}</textarea>
-            </div>
+           
     </div>
            
     </div>

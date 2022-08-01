@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from "../../styles/Card.module.css";
+import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
 
@@ -75,20 +76,8 @@ function Search() {
                   alt=""
                 />
                 <div className={`${styles.content}`}>
-                  <div className="fs-4 fw-bold mb-4">{usuarios.user.name}</div>
+                  <div className="fs-4 fw-bold mb-4">{usuarios.artist_name_or_band_name}</div>
                   <div className="">
-                    <div className="fs-6 fw-bold">Nombre Artístico</div>
-                    <div className="fs-5">
-                      {usuarios.user.artist_name_or_band_name}
-                    </div>
-                    <div className="fs-6 fw-bold">Genero Musical</div>
-                    <div className="fs-5">
-                    {usuarios.genres?.map((genre) => genre.genre.name + ", ")}
-                    </div>
-                    <div className="fs-6 fw-bold">Instrumento</div>
-                    <div className="fs-5">
-                    {usuarios.instruments?.map((instruments) => instruments.instrument.name + ", ")}
-                    </div>
                     <div className="fs-6 fw-bold">Genero Musical</div>
                     <div className="fs-5">
                     {userGenre?.map((genre) => genre.label + " ")}
@@ -100,7 +89,7 @@ function Search() {
                     <div>
                       
                       <Link to={`/bio:${usuarios.id}`}>
-                        <button type="button" className="btn btn-info">
+                        <button type="button" className="button">
                           Info
                         </button>
                       </Link>
