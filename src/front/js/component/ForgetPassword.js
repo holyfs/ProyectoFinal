@@ -4,21 +4,30 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, L
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import config from '../config';
+import Swal from "sweetalert2";
 
 export const ForgetPassword = () => {
 
   const [email, setEmail] = useState("");
 
   const SendPass = () => {
-    fetch(config.hostname + `api/user/reset-password`, {
+    fetch(config.hostname + `/api/user/reset-password`, {
       method: "PUT",
       headers: {
+        "mode": 'no-cors',
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
 				email: email
 			})
     });
+    Swal.fire({
+   
+      title: 'Enviada contraseña',
+
+    }).then(() => {
+      window.location.href = '/loginmensaje'
+    })
   }
 
 
