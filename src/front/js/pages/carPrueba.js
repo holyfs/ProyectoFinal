@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 import styles from "../../styles/Card.module.css";
 
 const CardPrueba = props => {
-	const { store, actions } = useContext(Context);
+	
 
     return (
         <div>

@@ -233,7 +233,7 @@ def search_users_filtered():
     print(instruments_user)
 
     if str(genres)!="":
-        generos_user = Generos_user.query.filter_by(genre_id=genres).all()
+        generos_user = Generos_user.query.filter_by(genre_id=genres).all() 
     elif str(genres)=="":
         generos_user = Generos_user.query.all()
     print(generos_user)
@@ -300,7 +300,9 @@ def update_user_by_id():
     user.band =True if request.form["band"]  == "true" else False
     user.experience =True if request.form["experience"]  == "true" else False
     user.artist_name_or_band_name = request.form["artist_name_or_band_name"]if request.form["artist_name_or_band_name"] != "" else user.artist_name_or_band_name
+    print(request.form["instruments"])
     instrumentos=request.form["instruments"].split(",") if request.form["instruments"]!="" else []
+    print(instrumentos)
     genres=request.form["genres"].split(",") if request.form["genres"]!="" else []
     try: 
         add_genre_to_user(user.id, genres)
@@ -559,6 +561,7 @@ def delete_user_genre():
 #USER MUSIC INSTRUMENT POST
 #@api.route('/user/instrument', methods=['POST'])
 def add_instrument_to_user(user_id,list_of_instruments):
+    print("hola")
     for instrument in list_of_instruments:
         print(instrument)
         exist_instrument = Instruments_user.query.filter((Instruments_user.user_id==user_id) & (Instruments_user.instruments_id==instrument)).all()

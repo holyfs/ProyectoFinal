@@ -5,9 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from "../../styles/Card.module.css";
-import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
+import "../../styles/botones.css";
 
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
@@ -88,7 +88,7 @@ function Search() {
                     </div>
                     <div>                     
                       <Link to={`/bio:${usuarios.user.id}`}>
-                        <button type="button" className="button">
+                        <button type="button" className="botonAnillos">
                           Info
                         </button>
                       </Link>

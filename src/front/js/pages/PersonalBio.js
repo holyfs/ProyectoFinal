@@ -17,7 +17,7 @@ import config from "../config.js";
 import { faWindowMinimize } from "@fortawesome/free-regular-svg-icons";
 
 
-export const PersonalBio = () => {
+export const PersonalBio = (props) => {
     let navigate = useNavigate();
     const [usuarios, setUsuarios] = useState([]);
     const [userGenre, setUserGenres] = useState(null);
@@ -32,6 +32,8 @@ export const PersonalBio = () => {
     const [avatar, setAvatar] = useState("");
     const [id, setId] = useState("");
     const [edit, setEdit] = useState(false);
+    const [genreSelected, setGenreSelected] = useState("");
+    const [instrumentSelected, setInstrumentSelected] = useState("");
     const { store, actions } = useContext(Context);
     const [data, setData] = useState(" ");
     const protectedData = async () => {
@@ -63,7 +65,6 @@ export const PersonalBio = () => {
         await axios.get(`${config.hostname}/api/user/${user_id}`)
             .then(response => {
                 setUsuarios(response.data.user);
-                console.log(response.data.user)
                 setUserGenres(response.data.genres);
                 setUserInstruments(response.data.instruments);
                 //      setTablaUsuarios(response.data);
@@ -79,6 +80,9 @@ export const PersonalBio = () => {
             })
     };
     const putUser = async () => {
+        const selectedGenres = formatGenresToCallApi(genreSelected)
+        const selectedInstruments = formatGenresToCallApi(instrumentSelected)
+
         let newRequest = new FormData();
         newRequest.append("id", id)
         newRequest.append("name", name)
@@ -89,8 +93,8 @@ export const PersonalBio = () => {
         newRequest.append("experience", "true" ? experience : "false")
         newRequest.append("band", "true" ? band : "false")
         newRequest.append("file", "avatar")
-        newRequest.append("instruments", "")
-        newRequest.append("genres", "")
+        newRequest.append("instruments", selectedInstruments)
+        newRequest.append("genres", selectedGenres)
         const token = JSON.parse(localStorage.getItem("jwt-token"));
         const response = await fetch(config.hostname + "/api/user", {
             method: "PUT",
@@ -177,6 +181,26 @@ export const PersonalBio = () => {
             })
                 
           } 
+
+          const getSelectedGenres=(seleccionados, tipo)=>{
+
+            console.log(tipo)
+            if (tipo=== "G"){
+                
+                setGenreSelected(seleccionados)
+            }else if(tipo ==="I"){
+                setInstrumentSelected(seleccionados)
+            }
+          }
+          const formatGenresToCallApi=(genres)=>{            
+            let aux = ""
+            genres.forEach((genre)=>{
+                console.log(genre.value)
+                aux = aux + String(genre.value)+","               
+            })
+            
+            return aux
+          }
       
     return (
         <>
@@ -269,10 +293,10 @@ export const PersonalBio = () => {
                         </>
                         </div>                   
                         <label className="mb-2" ><strong>Generos:</strong> {userGenre?.map((genre) => genre.label + " ")}</label>
-                        <> {edit ? <AddMusicalGenre userGenre={userGenre} />: " "}
+                        <> {edit ? <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={userGenre} />: " "}
                             </>
                         <label className="mb-2" ><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
-                        <> {edit ? <AddMusicalInstruments userInstruments={userInstruments} />: " "}
+                        <> {edit ? <AddMusicalInstruments selectionEvent={getSelectedGenres} userInstruments={userInstruments} />: " "}
                             </>
                         <div className="d-flex justify-content-center mt-3 mb-2" >
                             <button onClick={() => guardar_cambios()}>Guardar Cambios</button>

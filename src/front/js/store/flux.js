@@ -26,11 +26,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loadSomeData: async () => {
 				//Usuarios
 				try {
-					const res = await fetch(process.env.BACKEND_URL + "/api/user"); //acá hacemos el fetch, que seria la respuesta
+					const res = await fetch("https://3001-holyfs-proyectofinal-ab6okwzyw8d.ws-eu54.gitpod.io" + "/api/user"); //acá hacemos el fetch, que seria la respuesta
 					const data = await res.json(); //la data es la respuesta que nos da el fetch convertido a json
-					console.log("Async:", data);
+/*  					console.log("Async:", data.response);  */
 					setStore({
-						users: data //data es la información que nos interesa de esa respuesta del fetch
+						users: data.response //data es la información que nos interesa de esa respuesta del fetch
 					});
 				} catch (error) {
 					console.log(error);
@@ -39,10 +39,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getDetalleUser: async uid => {
 				try {
 					const id = parseInt(uid);
-					const res = await fetch("https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user/" + id);
+					const res = await fetch("https://3001-holyfs-proyectofinal-ab6okwzyw8d.ws-eu54.gitpod.io/api/user/" + uid);
 					const data = await res.json();
-					console.log(uid);
-					console.log("AsyncDetalles:", data.response.data.user);
+/* 					console.log(data); */
+					/* console.log("AsyncDetalles:", data.response.data.user); */
 					setStore({
 						detalle: data.response.data.user
 					});
