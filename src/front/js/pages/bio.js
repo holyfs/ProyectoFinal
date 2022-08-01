@@ -18,7 +18,6 @@ export const Bio = () => {
         await axios.get(`https://3001-holyfs-proyectofinal-q4aicqzoqf2.ws-eu54.gitpod.io/api/user/${id}`)
         .then(response=>{
           setUsuarios((response.data.user));
-          console.log(response);
           setUserInstruments(response.data.instruments);
           setUserGenres(response.data.genres);
           setTablaUsuarios(response.data);
