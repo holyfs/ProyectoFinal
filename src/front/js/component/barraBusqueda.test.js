@@ -18,7 +18,8 @@ function Search() {
   const peticionGet=async()=>{
     await axios.get(`${config.hostname}/api/user`)
     .then(response=>{
-      setUsuarios(response.data);
+      console.log(response)
+      setUsuarios(response.data.response);
       setTablaUsuarios(response.data);
       setUserInstruments(response.data.instruments);
       console.log(response.data);
@@ -64,7 +65,7 @@ function Search() {
         <div className="row">
           {usuarios.map((usuarios) => (
             <div
-              key={usuarios.id}
+              key={usuarios.user.id}
               className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark"
             >
               <div
@@ -72,27 +73,27 @@ function Search() {
               >
                 <img
                   className={`${styles.img} img-fluid`}
-                  src={usuarios.avatar}
+                  src={usuarios.user.avatar}
                   alt=""
                 />
                 <div className={`${styles.content}`}>
-                  <div className="fs-4 fw-bold mb-4">{usuarios.name}</div>
+                  <div className="fs-4 fw-bold mb-4">{usuarios.user.name}</div>
                   <div className="">
                     <div className="fs-6 fw-bold">Nombre Artístico</div>
                     <div className="fs-5">
-                      {usuarios.artist_name_or_band_name}
+                      {usuarios.user.artist_name_or_band_name}
                     </div>
                     <div className="fs-6 fw-bold">Genero Musical</div>
                     <div className="fs-5">
-                    {userGenre?.map((genre) => genre.label + " ")}
+                    {usuarios.genres?.map((genre) => genre.genre.name + ", ")}
                     </div>
                     <div className="fs-6 fw-bold">Instrumento</div>
                     <div className="fs-5">
-                    {userInstruments?.map((instruments) => instruments.label + " ")}
+                    {usuarios.instruments?.map((instruments) => instruments.instrument.name + ", ")}
                     </div>
                     <div>
                       
-                      <Link to={`/bio:${usuarios.id}`}>
+                      <Link to={`/bio:${usuarios.user.id}`}>
                         <button type="button" className="btn btn-info">
                           Info
                         </button>

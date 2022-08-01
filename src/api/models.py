@@ -86,7 +86,7 @@ class Instruments_user(db.Model):
     def serialize_search(self):
         return {
             "user_id":self.user_id,
-            "intrument": self.instrument.serialize()
+            "instrument": self.instrument.serialize()
         }
 class Generos_user(db.Model):
     __tablename__ = 'generos_user'

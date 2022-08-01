@@ -566,8 +566,8 @@ def add_instrument_to_user(user_id,list_of_instruments):
     # user_id=body["user_id"]
     for instrument in list_of_instruments:
         print(instrument)
-        exist_intrument = Instruments_user.query.filter((Instruments_user.user_id==user_id) & (Instruments_user.instruments_id==instrument)).all()
-        if  exist_intrument:
+        exist_instrument = Instruments_user.query.filter((Instruments_user.user_id==user_id) & (Instruments_user.instruments_id==instrument)).all()
+        if  exist_instrument:
             print("el usuario ya tiene el instrumento asignado")
             continue
         instruments_user = Instruments_user (

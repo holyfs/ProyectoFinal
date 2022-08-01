@@ -171,7 +171,9 @@ export const PersonalBio = () => {
                 body: newRequest
     
             }).then((response)=>{
-                window.location.href='/personalbio:'+ id
+/*                 window.location.href='/personalbio:'+ id */
+            }).then((response)=>{
+                console.log(response)
             })
             
           })      
