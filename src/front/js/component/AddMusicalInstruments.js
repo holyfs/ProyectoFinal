@@ -22,14 +22,21 @@ const AddMusicalInstruments = (props) => {
     useEffect(()=>{
         peticionGet();
         setSelected(props.userInstruments)
+        props.selectionEvent(props.userInstruments, "I")
         },[])
+
+        const handleEvent= (event)=>{
+    
+          setSelected(event)
+          props.selectionEvent(event, "I")
+        }
 
   return (
     <div>
       <MultiSelect
         options={instruments}                                   
         value={selected}
-        onChange={setSelected}
+        onChange={(e)=>handleEvent(e)}
         labelledBy="Select"
       />
     </div>

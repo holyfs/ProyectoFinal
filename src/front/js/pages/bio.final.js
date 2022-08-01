@@ -5,9 +5,10 @@ import { Context } from "../store/appContext";
 
 export const BioFinal = props => {
 	const { store, actions } = useContext(Context);
+	console.log(store)
 	const params = useParams();
     useEffect(() => {
-		actions.getDetalleUser(params.uid);
+		actions.getDetalleUser(uid);
 	}, []);
 
     return (

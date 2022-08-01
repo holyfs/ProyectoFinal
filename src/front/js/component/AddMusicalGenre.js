@@ -22,17 +22,27 @@ const AddMusicalGenre = (props) => {
 
   useEffect(() => {
     peticionGet();
+    if (props.userGenre.length > 0){
     setSelected(props.userGenre)
+    props.selectionEvent(props.userGenre, "G")
+  }else{
+    setSelected([])
+    props.selectionEvent([], "G")
+  }
+
   }, [])
+  const handleEvent= (event)=>{    
+    setSelected(event)
+    props.selectionEvent(event, "G")
+  }
 
 
   return (
     <div>
-{/*       <pre>{JSON.stringify(selected)}</pre> */}
       <MultiSelect
         options={genres}
         value={selected}
-        onChange={setSelected}
+        onChange={(e)=>handleEvent(e)}
         labelledBy="Select"
       />
     </div>
