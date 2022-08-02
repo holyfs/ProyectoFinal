@@ -20,14 +20,33 @@ export const ForgetPassword = () => {
 			body: JSON.stringify({
 				email: email
 			})
-    });
-    Swal.fire({
-   
-      title: 'Enviada contraseña',
-
-    }).then(() => {
-      window.location.href = '/loginmensaje'
-    })
+    }).then((response) => {
+      return response.json()
+    }).then((response)=>{
+      if (response.msg) {
+        Swal.fire({
+            title: response.msg,
+            confirmButtonText: 'ok',
+            confirmButtonColor: 'rgb(25, 179, 149)',
+           
+        }).then((result)=>{
+          if(result){
+            window.location.href = "/mainindex"}
+          else{
+            window.location.href = "/forgetpassword"
+          }
+          })
+        
+        return;
+    }    
+    }).catch((error) => {
+      Swal.fire({
+          title: 'Error al hacer registro',
+          confirmButtonText: 'ok',
+          confirmButtonColor: 'rgb(25, 169, 149)',
+      })
+        console.log("error")
+  }) 
   }
 
 

@@ -25,7 +25,6 @@ export const SignUpTest = () => {
         event.preventDefault();
         if (password !== confirmPass) {
             Swal.fire({
-                icon: 'sucess',
                 title: "Las contraseñas no coinciden",
                 confirmButtonText:'ok',
                 confirmButtonColor: 'rgb(25, 169, 149)',
@@ -56,7 +55,6 @@ export const SignUpTest = () => {
         }).then((response) => {
             if (response.msg) {
                 Swal.fire({
-                    icon: 'sucess',
                     title: response.msg,
                     confirmButtonText: 'ok',
                     confirmButtonColor: 'rgb(25, 169, 149)',
@@ -64,7 +62,6 @@ export const SignUpTest = () => {
                 return;
             } else {
                 Swal.fire({
-                    icon: 'sucess',
                     title: 'Registro Completo',
                     confirmButtonText: 'Quieres hacer login?',
                     confirmButtonColor: 'rgb(25, 169, 149)',
@@ -78,7 +75,6 @@ export const SignUpTest = () => {
             }        
         }).catch((error) => {
                     Swal.fire({
-                        icon: 'sucess',
                         title: 'Error al hacer registro',
                         confirmButtonText: 'ok',
                         confirmButtonColor: 'rgb(25, 169, 149)',

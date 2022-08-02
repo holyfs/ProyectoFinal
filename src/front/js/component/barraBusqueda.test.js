@@ -15,7 +15,7 @@ function Search() {
   const [tablaUsuarios, setTablaUsuarios]= useState([]);
   const [userInstruments, setUserInstruments] = useState([]);
   const [searchUserGenre, setSearchUserGenre] = useState([]);
-  const [busqueda, setBusqueda]= useState("");
+/*   const [busqueda, setBusqueda]= useState(""); */
   const peticionGet=async()=>{
     await axios.get(`${config.hostname}/api/user`)
     .then(response=>{
@@ -25,8 +25,8 @@ function Search() {
       console.log(error);
   })}
   const handleChange=e=>{
-    setBusqueda(e.target.value);
-    filtrar(e.target.value);
+/*     setBusqueda(e.target.value); */
+    filtrar(e.target.value); 
   }
   const filtrar=(terminoBusqueda)=>{
     var resultadosBusqueda=tablaUsuarios.filter((elemento)=>{
@@ -36,7 +36,7 @@ function Search() {
       //|| elemento.user.instruments.instrument.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
       ){
         return elemento;
-      }    
+      }   
     });
     setUsuarios(resultadosBusqueda);
     //setUserInstruments(resultadosBusqueda);
@@ -47,11 +47,18 @@ function Search() {
       setSearchUserGenre(selection)
     }
   }
-  const filtroGenre=(genero)=>{
-    if (tablaUsuarios.filter((genero))){
-    }else{
-      console.log("no pasa nada")
-    }
+  const filtroGenre=()=>{
+    let filtroPorGenero = []
+    tablaUsuarios.forEach((elemento)=>{
+    elemento.genres.forEach((genres)=>{
+    searchUserGenre.forEach((value)=>{
+      if(genres.genre.id===value.value)
+      {
+        filtroPorGenero.push(elemento) }
+    }) 
+   })
+    })
+    setUsuarios(filtroPorGenero)
   }
   useEffect(()=>{
     peticionGet();
@@ -61,7 +68,7 @@ function Search() {
         <div className="containerInput">
           <input
             className="form-control inputBuscar"
-            value={busqueda}
+/*             value={busqueda} */
             placeholder="Búsqueda por Nombre"
             onChange={handleChange}
           />
@@ -70,7 +77,7 @@ function Search() {
           </button>
         </div>
         <div> <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]}/></div>
-        <button className="btn btn-success" id="buton_busqueda_genre" onClick={()=>filtroGenre(searchUserGenre)}>
+        <button className="btn btn-success" id="buton_busqueda_genre" onClick={filtroGenre}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
         <div className="row">
