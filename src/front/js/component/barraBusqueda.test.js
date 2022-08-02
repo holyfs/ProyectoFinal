@@ -52,39 +52,6 @@ function Search() {
     //setUserInstruments(resultadosBusqueda);
     //setUserGenres(resultadosBusqueda);
   }
-  const getSelectedGenres=(selection, tipo)=>{
-    if (tipo === "G"){
-      setSearchUserGenre(selection)
-    }else if (tipo === "I"){
-      setSearchUserInstruments(selection)
-    }
-  }
-  const filtroGenre=()=>{
-    let filtroPorGenero = []
-    tablaUsuarios.forEach((elemento)=>{
-    elemento.genres.forEach((genres)=>{
-    searchUserGenre.forEach((value)=>{
-      if(genres.genre.id===value.value && !filtroPorGenero.find((elemento)=>elemento.user.id ===genres.user_id)){
-        filtroPorGenero.push(elemento) }
-    }) 
-   })
-    })
-    setUsuarios(filtroPorGenero)
-  }
-
-  const filtroInstruments=()=>{
-    let filtroPorInstrumento = []
-    tablaUsuarios.forEach((elemento)=>{
-    elemento.instruments.forEach((instruments)=>{
-    searchUserIntruments.forEach((value)=>{
-      if(instruments.instrument.id===value.value && !filtroPorInstrumento.find((elemento)=>elemento.user.id ===instruments.user_id)){
-        filtroPorInstrumento.push(elemento) }
-    }) 
-   })
-    })
-    setUsuarios(filtroPorInstrumento)
-  }
-
   useEffect(()=>{
     peticionGet();
     },[])
@@ -95,9 +62,9 @@ function Search() {
         <div className="d-flex justify-content-start">
           <div style={{ width: '100%' }}>
           <input
-            className="form-control"
+            className="form-control inputBuscar"
 /*             value={busqueda} */
-            placeholder="Búsqueda por Nombre de Artista o Banda"
+            placeholder="Búsqueda por Nombre"
             onChange={handleChange}
           />
           </div>
