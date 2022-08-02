@@ -10,17 +10,24 @@ import { Link } from "react-router-dom";
 import config from "../config";
 import AddMusicalGenre from "./AddMusicalGenre.js";
 
+
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
   const [tablaUsuarios, setTablaUsuarios]= useState([]);
   const [userInstruments, setUserInstruments] = useState([]);
-  const [searchUserGenre, setSearchUserGenre] = useState([]);
+  const [userGenre, setUserGenres] = useState([]);
   const [busqueda, setBusqueda]= useState("");
+
+ 
+
   const peticionGet=async()=>{
     await axios.get(`${config.hostname}/api/user`)
     .then(response=>{
       setUsuarios(response.data.response);
       setTablaUsuarios(response.data.response);
+      setUserInstruments(response.data.response.instruments);
+      //setUserGenres(response.data.genres); 
+      //console.log(response.data.respone.instruments);
     }).catch(error=>{
       console.log(error);
   })}
@@ -34,6 +41,7 @@ function Search() {
       || elemento.user.artist_name_or_band_name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
       //|| elemento.user.genres.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
       //|| elemento.user.instruments.instrument.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+    
       ){
         return elemento;
       }    
@@ -41,17 +49,6 @@ function Search() {
     setUsuarios(resultadosBusqueda);
     //setUserInstruments(resultadosBusqueda);
     //setUserGenres(resultadosBusqueda);
-  }
-  const getSelectedGenres=(selection, tipo)=>{
-    if (tipo === "G"){
-      setSearchUserGenre(selection)
-    }
-  }
-  const filtroGenre=(genero)=>{
-    if (tablaUsuarios.filter((genero))){
-    }else{
-      console.log("no pasa nada")
-    }
   }
   useEffect(()=>{
     peticionGet();
@@ -88,7 +85,7 @@ function Search() {
                   alt=""
                 />
                 <div className={`${styles.content}`}>
-{/*                 <div className="fs-4 fw-bold mb-4">{usuarios.user.name}</div> */}
+                {/*<div className="fs-4 fw-bold mb-4">{usuarios.user.name}</div> */}
                   <div className="fs-4 fw-bold mb-4">{usuarios.user.artist_name_or_band_name}</div>
                   <div className="">
                     <div className="fs-6 fw-bold">Genero Musical</div>

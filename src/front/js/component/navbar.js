@@ -25,7 +25,7 @@ export const Navbar = () => {
         if (resultado.dismiss!='cancel') {
 			localStorage.removeItem('jwt-token');
 			localStorage.removeItem('user_id');
-			window.location.href='/loginmensaje';
+			window.location.href='/';
 
             
         }else {
@@ -64,16 +64,14 @@ export const Navbar = () => {
             display: none;
           }
         `}</style>
+		
+         
+		
 			
 				</Link>
-				<Link to="/mainindex">
-			<button className="btn btn-dark" type="button">Main Api</button>
-		  	</Link>
 				<form className="form-inline">
 		  	{tok==null?
-			<Link to="/login">
-			<button className="btn btn-dark" type="button">Login no modal</button>
-		  	</Link>
+			<button className="btn btn-dark" type="button"><App /></button>
 			:<Link to={`/personalbio:${user_id}`}>
 			<button className="btn btn-dark" type="button">Mi zona</button>
 		  	</Link>}
@@ -84,18 +82,6 @@ export const Navbar = () => {
 			:
 			<button className="btn btn-dark" type="button" onClick={logout}>Log Out</button>
 			}
-			
-				
-			
-        
-			<Link to="/loginmensaje">
-			<button className="btn btn-dark" type="button">LoginMensajes</button>
-		  	</Link>
-        
-      		
-			<button className="btn btn-dark" type="button"><App /></button>
-					
-				
 					
           	<button className="btn btn-dark" type="button"><Signup /></button>
     			</form>

@@ -2,7 +2,26 @@
 
     /* other stuff we already covered */
   
-    height: 400px;
+
     max-height: 100%;
+    width: 300px;
+    background: #4FD1C5;
+    border-radius: 20%;
     
   }
+
+  .btncerrar{
+    width: 100%;
+    padding: 15px;
+    border-radius: 2px;
+    border: none;
+    margin: 20px 0;
+    font-size: 20px;
+    background: #225677;
+    color: white;
+    cursor: pointer;
+    transition: all .5s ease;
+  }
+  .btncerrar:hover{
+    background: red;
+}
