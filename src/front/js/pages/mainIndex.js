@@ -70,8 +70,8 @@ jQuery(document).ready(function($){
 
     <div className="App">
       <h1 className="text-center mb-3 titulos bubbles">Músicos/Banda</h1>
-      <div className="col-lg-8 col-12">
-        <div className="row">
+      <div className="row d-flex justify-content-center">
+        <div className="col-8">
           <Search />
         </div>
       </div>

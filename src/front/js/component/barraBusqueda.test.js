@@ -9,7 +9,7 @@ import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
 import AddMusicalGenre from "../component/AddMusicalGenre.js"
-/* import AddMusicalInstruments from "../component/AddMusicalInstruments.js" */
+import AddMusicalInstruments from "../component/AddMusicalInstruments.js"
 
 
 function Search() {
@@ -91,26 +91,49 @@ function Search() {
 
     return (
       <>
-        <div className="containerInput">
+        <div className="row mb-3">
+        <div className="d-flex justify-content-start">
+          <div style={{ width: '100%' }}>
           <input
-            className="form-control inputBuscar"
+            className="form-control"
 /*             value={busqueda} */
-            placeholder="Búsqueda por Nombre"
+            placeholder="Búsqueda por Nombre de Artista o Banda"
             onChange={handleChange}
           />
-          <button className="btn btn-success">
+          </div>
+          <div>
+          <button className="btn btn-info">
             <FontAwesomeIcon icon={faSearch} />
           </button>
+          </div>
         </div>
-
-        <div> <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]}/></div>
-        <button className="btn btn-success" id="buton_busqueda_genre" onClick={filtroGenre}>
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-{/*           <div> <AddMusicalInstruments selectionEvent={getSelectedGenres} userGenre={[]}/></div>
-        <button className="btn btn-success" id="buton_busqueda_genre" onClick={filtroInstruments}>
-            <FontAwesomeIcon icon={faSearch} />
-          </button> */}
+        </div>
+        <div className="row">
+          <div className="col">
+            <div className="d-flex justify-content-start">
+              <div style={{ width: '90%' }} >
+                <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]} />
+              </div>
+              <div >
+                <button className="btn btn-info" id="buton_busqueda_genre" onClick={filtroGenre}>
+                  <FontAwesomeIcon icon={faSearch} />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="d-flex justify-content-end">
+              <div style={{ width: '90%' }}>
+                <AddMusicalInstruments selectionEvent={getSelectedGenres} userInstruments={[]} />
+              </div>
+              <div>
+                <button className="btn btn-info" id="buton_busqueda_intrum" onClick={filtroInstruments}>  {/* style={{ height: '10%' }} */}
+                  <FontAwesomeIcon icon={faSearch} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="row">
           {usuarios.map((usuarios) => (
             <div
