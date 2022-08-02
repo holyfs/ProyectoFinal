@@ -129,8 +129,7 @@ export const PersonalBio = (props) => {
             setBand(!band);
         }if (changeType === "edit"){
             setEdit(!edit)
-        }
-         else {
+        }else if (changeType === "experience"){
             setExperience(!experience)
         }
         
@@ -183,7 +182,7 @@ export const PersonalBio = (props) => {
           } 
 
           const getSelectedGenres=(seleccionados, tipo)=>{
-            if (tipo=== "G"){
+            if (tipo === "G"){
                 
                 setGenreSelected(seleccionados)
             }else if(tipo ==="I"){
@@ -193,7 +192,6 @@ export const PersonalBio = (props) => {
           const formatGenresToCallApi=(genres)=>{            
             let aux = ""
             genres.forEach((genre)=>{
-                console.log(genre.value)
                 aux = aux + String(genre.value)+","               
             })
             
@@ -297,7 +295,9 @@ export const PersonalBio = (props) => {
                         <> {edit ? <AddMusicalInstruments selectionEvent={getSelectedGenres} userInstruments={userInstruments} />: " "}
                             </>
                         <div className="d-flex justify-content-center mt-3 mb-2" >
-                            <button onClick={() => guardar_cambios()}>Guardar Cambios</button>
+                        <> {edit ? <button onClick={() => guardar_cambios()}>Guardar Cambios</button> : " "}
+                            </>
+                            
                         </div>
                     </div>
                 </div>
