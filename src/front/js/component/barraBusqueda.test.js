@@ -84,7 +84,7 @@ function Search() {
                   alt=""
                 />
                 <div className={`${styles.content}`}>
-                {/*<div className="fs-4 fw-bold mb-4">{usuarios.user.name}</div> */}
+                <div className="fs-4  mb-4">{usuarios.user.name}</div>
                   <div className="fs-4 fw-bold mb-4">{usuarios.user.artist_name_or_band_name}</div>
                   <div className="">
                     <div className="fs-6 fw-bold">Genero Musical</div>

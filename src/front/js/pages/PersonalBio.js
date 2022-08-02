@@ -204,7 +204,7 @@ export const PersonalBio = (props) => {
                 <div className="row mt-2">
                     <div className="col-6 offset-3">
                         <h1 className="bioperfil" onChange={event => setArtist_name_or_band_name(event.target.value)}>{usuarios.artist_name_or_band_name}</h1>
-                        <div> {edit ? <input onChange={event => setArtist_name_or_band_name(event.target.value)}/>: <div></div>}
+                        <div> {edit ? <input placeholder={usuarios.artist_name_or_band_name} onChange={event => setArtist_name_or_band_name(event.target.value)}/>: <div></div>}
                         </div>
                     </div>
                     {/* <div className="d-flex justify-content-end">
@@ -226,17 +226,17 @@ export const PersonalBio = (props) => {
                         <button type="button" className="btn btn-info" onClick={()=>handleChange("edit")}>edit</button>
                         <div className="row">
                             <span className="col-4"><strong>Nombre:</strong> {usuarios.name}</span>
-                            <> {edit ? <input id="userName" className="col-8" onChange={event => setName(event.target.value)}/>: " "}
+                            <> {edit ? <input placeholder={usuarios.name} id="userName" className="col-8" onChange={event => setName(event.target.value)}/>: " "}
                             </>
                         </div>
                         <div className="row">
                             <span className="col-4"><strong>Apellido:</strong> {usuarios.last_name}</span>
-                            <> {edit ? <input id="LastName" className="col-8" onChange={event => setLastName(event.target.value)}/>: " "}
+                            <> {edit ? <input placeholder={usuarios.last_name} id="LastName" className="col-8" onChange={event => setLastName(event.target.value)}/>: " "}
                             </>
                         </div>
                         <div className="row">
                             <span className="col-4"><strong>Edad:</strong> {usuarios.age}</span>
-                            <> {edit ? <input id="age" className="col-8" onChange={event => setAge(event.target.value)}/>: " "}
+                            <> {edit ? <input placeholder={usuarios.age} id="age" className="col-8" onChange={event => setAge(event.target.value)}/>: " "}
                             </>
                         </div>
                         <div className="col-4" id="email"><strong>email:</strong> {usuarios.email}</div>
@@ -285,7 +285,7 @@ export const PersonalBio = (props) => {
                         <div className="row">
                         <label ><strong>Descripción:</strong> </label>
                         <div className="mb-3" id="description">{usuarios.description} </div>
-                        <> {edit ? <textarea  maxLength="1500px" rows="5" id="description" className="mb-3" onChange={event => setDescription(event.target.value)}/>: " "}
+                        <> {edit ? <textarea placeholder={usuarios.description} maxLength="1500px" rows="5" id="description" className="mb-3" onChange={event => setDescription(event.target.value)}/>: " "}
                         </>
                         </div>                   
                         <label className="mb-2" ><strong>Generos:</strong> {userGenre?.map((genre) => genre.label + " ")}</label>
