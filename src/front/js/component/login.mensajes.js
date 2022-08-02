@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -6,6 +8,8 @@ import AuthService from "../../../services/auth.service";
 import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2"
 import { ForgetPassword } from "./ForgetPassword";
+import "../../styles/signup.css";
+import '../../styles/App.css';
 const required = value => {
   if (!value) {
     return (
@@ -72,37 +76,41 @@ export default class Login extends Component {
   render() {
     return (
       <div className="col-md-12">
-        <div className="card card-container">
+        <center>
           <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+            src="https://pbs.twimg.com/profile_images/897355385/cabeza-avatar.gif"
             alt="profile-img"
             className="profile-img-card"
             width="250"
 			      height="250"
           />
+        </center>
           <Form
+            className="form"
             onSubmit={this.handleLogin}
             ref={c => {
               this.form = c;
             }}
           >
             <div className="form-group">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username"> <FontAwesomeIcon icon={faEnvelope} /><strong>Email</strong></label>
               <Input
                 type="text"
-                className="form-control"
+                className="cajas"
                 name="username"
+                placeholder="Introduce tu Email"
                 value={this.state.username}
                 onChange={this.onChangeUsername}
                 validations={[required]}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password"><FontAwesomeIcon icon={faLock} /><strong>Password</strong></label>
               <Input
                 type="password"
-                className="form-control"
+                className="cajas"
                 name="password"
+                placeholder="Introduce tu contraseña"
                 value={this.state.password}
                 onChange={this.onChangePassword}
                 validations={[required]}
@@ -110,7 +118,7 @@ export default class Login extends Component {
             </div>
             <div className="form-group">
               <button
-                className="btn btn-primary btn-block"
+                className="btnregistro"
                 disabled={this.state.loading}
               >
                 {this.state.loading && (
@@ -119,7 +127,7 @@ export default class Login extends Component {
                 <span>Login</span>
               </button>
               <h4>No tienes cuenta?</h4><a href="/signup2">Registrate!</a>
-              <a href="/forgetpassword">¿Olvistaste tu contraseña?</a>
+              <h4><a href="/forgetpassword">¿Olvistaste tu contraseña?</a></h4>
             </div>
             {this.state.message && (
               <div className="form-group">
@@ -135,7 +143,7 @@ export default class Login extends Component {
               }}
             />
           </Form>
-        </div>
+        
       </div>
     );
   }

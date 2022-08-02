@@ -1,4 +1,6 @@
 import React, { useContext, useState, Component } from "react";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from 'react-router-dom';
 import '../../styles/App.css';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label} from 'reactstrap';
@@ -120,22 +122,24 @@ class Login extends React.Component{
           </center>
           
              
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username"> <FontAwesomeIcon icon={faEnvelope} /><strong>Email</strong></label>
               <Input
                 type="text"
                 className="cajas"
                 name="username"
+                placeholder="Introduce tu Email"
                 value={this.state.username}
                 onChange={this.onChangeUsername}
                 validations={[required]}
               />
       
             
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password"><FontAwesomeIcon icon={faLock} /><strong>Password</strong></label>
               <Input
                 type="password"
                 className="cajas"
                 name="password"
+                placeholder="Introduce tu contraseña"
                 value={this.state.password}
                 onChange={this.onChangePassword}
                 validations={[required]}

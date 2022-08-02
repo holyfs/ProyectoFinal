@@ -69,9 +69,9 @@ jQuery(document).ready(function($){
   return (
 
     <div className="App">
-      <h1 className="text-center mb-3 titulos bubbles">Músicos/Banda</h1>
-      <div className="row d-flex justify-content-center">
-        <div className="col-8">
+      <a href="" className="bubbles"><img src="https://fontmeme.com/permalink/220802/0d19c228db18ba0ac2250e51dd95f26d.png" alt="fuente-de-shang-chi" border="0" /></a><a href="" className="bubbles"></a>
+      <div className="col-lg-8 col-12">
+        <div className="row">
           <Search />
         </div>
       </div>

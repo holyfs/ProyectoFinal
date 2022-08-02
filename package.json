@@ -95,6 +95,7 @@
 		"react-bootstrap": "^2.4.0",
 		"react-dom": "^16.8.4",
 		"react-hook-form": "^7.33.1",
+		"react-icons": "^4.4.0",
 		"react-jquery-plugin": "^1.1.7",
 		"react-multi-select-component": "^4.3.0",
 		"react-paginate": "^8.1.3",

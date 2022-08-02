@@ -65,7 +65,7 @@ export const ForgetPassword = () => {
       </div>
 
       <form>
-        <a href={"/mainindex"}>
+        <a href={"/loginmensaje"}>
           <input type="button" value="Cerrar" />
         </a>
       </form>
