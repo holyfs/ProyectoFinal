@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
 //import { Context } from "../store/appContext";
 import "../../styles/home.css";
+import "../../styles/signup.css";
 import { useNavigate } from "react-router-dom";
 import UploadImage from "../component/uploadImage";
 import { resetWarningCache } from "prop-types";
 import { Link } from "react-router-dom";
 import config from "../config.js";
 import Swal from "sweetalert2"
+import App from "../pages/App"
 export const SignUpTest = () => {
     //const { store, actions } = useContext(Context);
     const [name, setName] = useState("");
@@ -96,17 +98,17 @@ export const SignUpTest = () => {
         
       };
     return (
-        <div className="container">
-            <h1>SIGN UP</h1>
+        <div className="form">
+            <h1 className="titulo">SIGN UP</h1>
             <form onSubmit={signUp}>
-                <div className="card card-container">
+                <div className="boxCard">
                     <center>
                         <img
                             src="https://st2.depositphotos.com/3854637/47799/v/600/depositphotos_477992494-stock-illustration-profile-of-a-young-woman.jpg"
                             alt="profile-img"
                             className="profile-img-card"
-                            width="250"
-                            height="250"
+                            width="395"
+                            height="258"
                         />
                     </center>
                 </div>
@@ -116,7 +118,7 @@ export const SignUpTest = () => {
                         Name:
                         <input
                             type="text"
-                            className="form-control"
+                            className="cajas"
                             placeholder="Name"
                             onChange={event => setName(event.target.value)}
                             required
@@ -127,7 +129,7 @@ export const SignUpTest = () => {
                 <div className="form-group">
                     <input
                         type="text"
-                        className="form-control"
+                        className="cajas"
                         placeholder="Last Name"
                         onChange={event => setLastName(event.target.value)}
                         required
@@ -137,7 +139,7 @@ export const SignUpTest = () => {
                 <div className="form-group">
                     <input
                         type="number"
-                        className="form-control"
+                        className="cajas"
                         placeholder="Age"
                         onChange={event => setAge(event.target.value)}
                         required
@@ -147,7 +149,7 @@ export const SignUpTest = () => {
                 <div className="form-group">
                     <input
                         type="text"
-                        className="form-control"
+                        className="cajas"
                         placeholder="Name of Band/Artist"
                         onChange={event => setArtist_name_or_band_name(event.target.value)}
                         required
@@ -192,7 +194,7 @@ export const SignUpTest = () => {
                 <div className="form-group">
                     <input
                         type="textarea"
-                        className="form-control"
+                        className="cajas"
                         placeholder="Your Description"
                         onChange={event => setDescription(event.target.value)}
                         required
@@ -202,7 +204,7 @@ export const SignUpTest = () => {
                 <div className="form-group">
                     <input
                         type="email"
-                        className="form-control"
+                        className="cajas"
                         placeholder="email"
                         onChange={event => setEmail(event.target.value)}
                         required
@@ -212,7 +214,7 @@ export const SignUpTest = () => {
                 <div className="form-group">
                     <input
                         type="password"
-                        className="form-control"
+                        className="cajas"
                         placeholder="password"
                         onChange={event => setPassword(event.target.value)}
                         required
@@ -222,15 +224,18 @@ export const SignUpTest = () => {
                 <div className="form-group">
                     <input
                         type="password"
-                        className="form-control"
+                        className="cajas"
                         placeholder="password confirmation"
                         onChange={event => setConfirmPass(event.target.value)}
                     />
                 </div>
                 <br></br>
-                <button type="submit" className="btn btn-primary">
+                <p className="termino1"><input type="checkbox" required/>&nbsp; Estoy de acuerdo con <a className="termino2" href="">Terminos y Condiciones</a></p>
+                <button type="submit" className="btnregistro">
                     Register!
                 </button>
+                <p className="tengo-cuenta"><a className="tengo-cuenta">Ya tengo cuenta <button className="btn btn-dark" type="button"><App /></button></a></p>
+
             </form>
         </div>
     );

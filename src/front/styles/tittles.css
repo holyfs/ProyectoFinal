@@ -1,0 +1,29 @@
+.titulos{
+    text-align: left; 
+    font-family: Comic Sans MS; 
+    font-weight:bold; 
+    font-size: 80px; 
+    color: #EBD758; 
+    text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68
+    }
+
+    .bubbles {
+        display: inline-block;
+        position: relative;
+        }
+        
+        .bubbles h1 {
+        position: relative;
+        margin: 1em 0 0;
+        font-family: 'Luckiest Guy', cursive;
+        color: #fff;
+        z-index: 2;
+        }
+        
+        .individual-bubble {
+        position: absolute;
+        border-radius: 100%;
+        bottom: 10px;
+        background-color: #fff;
+        z-index: 1;
+        }

@@ -8,32 +8,41 @@ import styles from "../../styles/Card.module.css";
 import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
-import AddMusicalGenre from "./AddMusicalGenre.js";
+
 
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
   const [tablaUsuarios, setTablaUsuarios]= useState([]);
   const [userInstruments, setUserInstruments] = useState([]);
-  const [searchUserGenre, setSearchUserGenre] = useState([]);
+  const [userGenre, setUserGenres] = useState([]);
   const [busqueda, setBusqueda]= useState("");
+
+ 
+
   const peticionGet=async()=>{
     await axios.get(`${config.hostname}/api/user`)
     .then(response=>{
       setUsuarios(response.data.response);
       setTablaUsuarios(response.data.response);
+      setUserInstruments(response.data.response.instruments);
+      //setUserGenres(response.data.genres); 
+      //console.log(response.data.respone.instruments);
     }).catch(error=>{
       console.log(error);
   })}
+
   const handleChange=e=>{
     setBusqueda(e.target.value);
     filtrar(e.target.value);
   }
+
   const filtrar=(terminoBusqueda)=>{
     var resultadosBusqueda=tablaUsuarios.filter((elemento)=>{
       if(elemento.user.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
       || elemento.user.artist_name_or_band_name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
       //|| elemento.user.genres.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
       //|| elemento.user.instruments.instrument.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+    
       ){
         return elemento;
       }    
@@ -42,20 +51,11 @@ function Search() {
     //setUserInstruments(resultadosBusqueda);
     //setUserGenres(resultadosBusqueda);
   }
-  const getSelectedGenres=(selection, tipo)=>{
-    if (tipo === "G"){
-      setSearchUserGenre(selection)
-    }
-  }
-  const filtroGenre=(genero)=>{
-    if (tablaUsuarios.filter((genero))){
-    }else{
-      console.log("no pasa nada")
-    }
-  }
+
   useEffect(()=>{
     peticionGet();
     },[])
+
     return (
       <>
         <div className="containerInput">
@@ -69,10 +69,6 @@ function Search() {
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </div>
-        <div> <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]}/></div>
-        <button className="btn btn-success" id="buton_busqueda_genre" onClick={()=>filtroGenre(searchUserGenre)}>
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
         <div className="row">
           {usuarios.map((usuarios) => (
             <div
@@ -99,7 +95,7 @@ function Search() {
                     <div className="fs-5">
                     {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}
                     </div>
-                    <div>                    
+                    <div>                     
                       <Link to={`/bio:${usuarios.user.id}`}>
                         <button type="button" className="botonAnillos">
                           Info
@@ -111,8 +107,9 @@ function Search() {
               </div>
             </div>
           ))}
-        </div>
+        </div> 
       </>
     );
     }
+    
     export default Search;
