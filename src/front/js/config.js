@@ -1,3 +1,3 @@
 export default {
-    hostname: 'https://3001-holyfs-proyectofinal-ab6okwzyw8d.ws-eu54.gitpod.io',
+    hostname: 'https://3001-holyfs-proyectofinal-2kgx72w3vde.ws-eu54.gitpod.io',
 }
