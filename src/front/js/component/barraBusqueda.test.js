@@ -111,7 +111,7 @@ function Search() {
         <div className="row">
           <div className="col">
             <div className="d-flex justify-content-start">
-              <div style={{ width: '90%' }} >
+              <div style={{ width: '95%' }} >
                 <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]} />
               </div>
               <div >
@@ -123,7 +123,7 @@ function Search() {
           </div>
           <div className="col">
             <div className="d-flex justify-content-end">
-              <div style={{ width: '90%' }}>
+              <div style={{ width: '95%' }}>
                 <AddMusicalInstruments selectionEvent={getSelectedGenres} userInstruments={[]} />
               </div>
               <div>
@@ -134,7 +134,7 @@ function Search() {
             </div>
           </div>
         </div>
-        <div className="row">
+        <div className="row" >
           {usuarios.map((usuarios) => (
             <div
               key={usuarios.user.id}
@@ -147,20 +147,21 @@ function Search() {
                   className={`${styles.img} img-fluid`}
                   src={usuarios.user.avatar}
                   alt=""
+                  style={{ height: '280px',  width: '330px'}}
                 />
                 <div className={`${styles.content}`}>
-                <div className="fs-4  mb-4">{usuarios.user.name}</div>
+                  <div className="fs-4  mb-4">{usuarios.user.name}</div>
                   <div className="fs-4 fw-bold mb-4">{usuarios.user.artist_name_or_band_name}</div>
                   <div className="">
                     <div className="fs-6 fw-bold">Genero Musical</div>
                     <div className="fs-5">
-                    {usuarios.genres?.map((genre) => genre.genre.name + " ")}
+                      {usuarios.genres?.map((genre) => genre.genre.name + " ")}
                     </div>
                     <div className="fs-6 fw-bold">Instrumento</div>
                     <div className="fs-5">
-                    {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}
+                      {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}
                     </div>
-                    <div>                     
+                    <div>
                       <Link to={`/bio:${usuarios.user.id}`}>
                         <button type="button" className="botonAnillos">
                           Info
