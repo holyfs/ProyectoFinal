@@ -25,7 +25,7 @@ export const Navbar = () => {
         if (resultado.dismiss!='cancel') {
 			localStorage.removeItem('jwt-token');
 			localStorage.removeItem('user_id');
-			window.location.href='/loginmensaje';
+			window.location.href='/';
 
             
         }else {
@@ -45,35 +45,29 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-light Nav">
 		<div className="container">
+			<div className="row">
+				<div  className="col">
 				<Link to="/">
-				<span className="navbar-brand mb-0 h1">
+				<span className="navbar-brand mb-0 h1 contenedor imagen">
 					<img
 						src="https://cdn.icon-icons.com/icons2/1052/PNG/256/256_folder_music_icon-icons.com_76633.png"
 						width="90"
 						height="60"
+						align="left"
 					/>
+					<a href=""><img src="https://fontmeme.com/permalink/220802/7b8c462e600cd808c123f8ab40fd0ec4.png" alt="efecto-sombra" border="0" className="image10 image3"/></a>
 				</span>
-				<Link to="/" className="navbar-brand fs-3 ubuntu">
-				<span className="text-primary">Music</span>On Demand
-        </Link>
-        <style jsx>{`
-          button[aria-expanded="false"] > .close {
-            display: none;
-          }
-          button[aria-expanded="true"] > .open {
-            display: none;
-          }
-        `}</style>
-			
 				</Link>
-				<Link to="/mainindex">
-			<button className="btn btn-dark" type="button">Main Api</button>
-		  	</Link>
+				
+				</div>
+				
+				
+				
+			</div>
+	
 				<form className="form-inline">
 		  	{tok==null?
-			<Link to="/login">
-			<button className="btn btn-dark" type="button">Login no modal</button>
-		  	</Link>
+			<button className="btn btn-dark" type="button"><App /></button>
 			:<Link to={`/personalbio:${user_id}`}>
 			<button className="btn btn-dark" type="button">Mi zona</button>
 		  	</Link>}
@@ -84,18 +78,6 @@ export const Navbar = () => {
 			:
 			<button className="btn btn-dark" type="button" onClick={logout}>Log Out</button>
 			}
-			
-				
-			
-        
-			<Link to="/loginmensaje">
-			<button className="btn btn-dark" type="button">LoginMensajes</button>
-		  	</Link>
-        
-      		
-			<button className="btn btn-dark" type="button"><App /></button>
-					
-				
 					
           	<button className="btn btn-dark" type="button"><Signup /></button>
     			</form>

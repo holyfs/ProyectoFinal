@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open sans';
+}
+
+.form{
+    width: 450px;
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    background: rgba(15, 50, 72, 0.3);
+    border-radius: 15px;
+}
+
+.titulo{
+    color: yellow;
+    margin-bottom: 20px;
+}
+.cajas{
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    border: none;
+    border-left: 10px solid #d9e4ea;
+    transition: all .5s ease;
+}
+img {
+    border-radius: 15px;
+}
+
+.cajas:hover, .cajas:focus{
+    border-left: 10px solid #1a4c7e;
+}
+
+.termino1{
+    text-align: center;
+    color: #3b3b3b;
+}
+
+.termino2{
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.termino2:hover{
+    color: #dbdbdb;
+}
+
+.btnregistro{
+    width: 100%;
+    padding: 15px;
+    border-radius: 2px;
+    border: none;
+    margin: 20px 0;
+    font-size: 20px;
+    background: #225677;
+    color: white;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.btnregistro:hover{
+    background: lightgreen;
+}
+
+.tengo-cuenta{
+    text-align: center;
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.tengo-cuenta:hover{
+    color: #dbdbdb;
+}
+
+.btncerrar{
+    width: 100%;
+    padding: 15px;
+    border-radius: 2px;
+    border: none;
+    margin: 20px 0;
+    font-size: 20px;
+    background: #225677;
+    color: white;
+    cursor: pointer;
+    transition: all .5s ease;
+  }
+  .btncerrar:hover{
+    background: red;
+}

@@ -6,12 +6,13 @@
   grid-template-areas: "image" "text" "stats";
 
   border-radius: 18px;
-  background: lightseagreen;
+  background: lightgray;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
   font-family: roboto;
   text-align: center;
   border-left: 1px solid rgb(172, 26, 87);
   border-right: 1px solid rgb(172, 26, 87);
+  text-shadow: 0px 0px 9px #508AD3;
   
 
   transition: 0.5s ease;
@@ -25,8 +26,8 @@
 .content {
   grid-area: text;
   margin: 25px;
-  color: black;
-  font-size:50px;
+  COLOR: #1278BF;
+  font-size:80px;
   font-weight: 300;
 }
 .img {

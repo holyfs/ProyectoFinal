@@ -5,6 +5,7 @@ import '../../styles/bio.css';
 import { ContactNoModal } from "../component/contact.nomodal";
 import axios from "axios";
 import config from "../config.js"
+import "../../styles/tittles.css";
 
 import { Context } from "../store/appContext";
 
@@ -39,7 +40,7 @@ export const Bio = () => {
 
                     <div className="row">
                         <div className="col-3">
-                            <h1 className="bioperfil"> {usuarios.artist_name_or_band_name}</h1>
+                            <h1 className="titulos"> {usuarios.artist_name_or_band_name}</h1>
                         </div>
 
 

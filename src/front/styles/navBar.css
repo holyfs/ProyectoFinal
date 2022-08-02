@@ -4,3 +4,25 @@
 .Foot{
     background-color: aquamarine;
 }
+
+
+.photo:hover img{
+    box-shadow: 1px 1px 10px 0 rgba(0,0,0,.1);
+  }
+  
+  .image10 {
+    -webkit-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+    } 
+    .image10:hover {
+    -webkit-filter: invert(100%);
+    }
+
+    .image3 {
+        -webkit-transition: all 0.7s ease;
+        transition: all 0.7s ease;
+       } 
+       .image3:hover {
+       -webkit-transform:scale(1.3);
+       transform:scale(1.3);
+       }
