@@ -59,10 +59,10 @@ class Login extends React.Component{
         (response) => {
           Swal.fire({
             icon: 'sucess',
-            confirmButtonColor: 'rgb(25, 169, 149)',
-            confirmButtonText:'Quieres ir a tu página personal?',
             title: 'Login Completo',
             text: 'Gracias por usar esta página web ',
+            confirmButtonColor: 'rgb(25, 169, 149)',
+            confirmButtonText:'Quieres ir a tu página personal?'
           }).then((result) => {
             let user_id = localStorage.getItem("user_id")
             if (result.value) {window.location.href = "/personalbio:"+ user_id
