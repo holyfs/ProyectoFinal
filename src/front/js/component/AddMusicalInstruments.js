@@ -21,8 +21,13 @@ const AddMusicalInstruments = (props) => {
 
     useEffect(()=>{
         peticionGet();
+        if (props.userInstruments.length > 0){
         setSelected(props.userInstruments)
         props.selectionEvent(props.userInstruments, "I")
+      }else{
+        setSelected([])
+        props.selectionEvent([], "I")
+      }
         },[])
 
         const handleEvent= (event)=>{

@@ -8,13 +8,15 @@ import styles from "../../styles/Card.module.css";
 import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
+import AddMusicalGenre from "../component/AddMusicalGenre.js"
+import AddMusicalInstruments from "../component/AddMusicalInstruments.js"
 
 
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
   const [tablaUsuarios, setTablaUsuarios]= useState([]);
   const [userInstruments, setUserInstruments] = useState([]);
-
+  const [searchUserIntruments, setSearchUserInstruments] = useState([]);
   const [searchUserGenre, setSearchUserGenre] = useState([]);
 /*   const [busqueda, setBusqueda]= useState(""); */
 
@@ -53,6 +55,8 @@ function Search() {
   const getSelectedGenres=(selection, tipo)=>{
     if (tipo === "G"){
       setSearchUserGenre(selection)
+    }else if (tipo === "I"){
+      setSearchUserInstruments(selection)
     }
   }
   const filtroGenre=()=>{
@@ -60,13 +64,25 @@ function Search() {
     tablaUsuarios.forEach((elemento)=>{
     elemento.genres.forEach((genres)=>{
     searchUserGenre.forEach((value)=>{
-      if(genres.genre.id===value.value)
-      {
+      if(genres.genre.id===value.value && !filtroPorGenero.find((elemento)=>elemento.user.id ===genres.user_id)){
         filtroPorGenero.push(elemento) }
     }) 
    })
     })
     setUsuarios(filtroPorGenero)
+  }
+
+  const filtroInstruments=()=>{
+    let filtroPorInstrumento = []
+    tablaUsuarios.forEach((elemento)=>{
+    elemento.instruments.forEach((instruments)=>{
+    searchUserIntruments.forEach((value)=>{
+      if(instruments.instrument.id===value.value && !filtroPorInstrumento.find((elemento)=>elemento.user.id ===instruments.user_id)){
+        filtroPorInstrumento.push(elemento) }
+    }) 
+   })
+    })
+    setUsuarios(filtroPorInstrumento)
   }
 
   useEffect(()=>{
@@ -75,23 +91,50 @@ function Search() {
 
     return (
       <>
-        <div className="containerInput">
+        <div className="row mb-3">
+        <div className="d-flex justify-content-start">
+          <div style={{ width: '100%' }}>
           <input
-            className="form-control inputBuscar"
+            className="form-control"
 /*             value={busqueda} */
-            placeholder="Búsqueda por Nombre"
+            placeholder="Búsqueda por Nombre de Artista o Banda"
             onChange={handleChange}
           />
-          <button className="btn btn-success">
+          </div>
+          <div>
+          <button className="btn btn-info">
             <FontAwesomeIcon icon={faSearch} />
           </button>
+          </div>
         </div>
-
-        <div> <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]}/></div>
-        <button className="btn btn-success" id="buton_busqueda_genre" onClick={filtroGenre}>
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
+        </div>
         <div className="row">
+          <div className="col">
+            <div className="d-flex justify-content-start">
+              <div style={{ width: '95%' }} >
+                <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]} />
+              </div>
+              <div >
+                <button className="btn btn-info" id="buton_busqueda_genre" onClick={filtroGenre}>
+                  <FontAwesomeIcon icon={faSearch} />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="d-flex justify-content-end">
+              <div style={{ width: '95%' }}>
+                <AddMusicalInstruments selectionEvent={getSelectedGenres} userInstruments={[]} />
+              </div>
+              <div>
+                <button className="btn btn-info" id="buton_busqueda_intrum" onClick={filtroInstruments}>  {/* style={{ height: '10%' }} */}
+                  <FontAwesomeIcon icon={faSearch} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row" >
           {usuarios.map((usuarios) => (
             <div
               key={usuarios.user.id}
@@ -104,20 +147,21 @@ function Search() {
                   className={`${styles.img} img-fluid`}
                   src={usuarios.user.avatar}
                   alt=""
+                  style={{ height: '280px',  width: '330px'}}
                 />
                 <div className={`${styles.content}`}>
-                <div className="fs-4  mb-4">{usuarios.user.name}</div>
+                  <div className="fs-4  mb-4">{usuarios.user.name}</div>
                   <div className="fs-4 fw-bold mb-4">{usuarios.user.artist_name_or_band_name}</div>
                   <div className="">
                     <div className="fs-6 fw-bold">Genero Musical</div>
                     <div className="fs-5">
-                    {usuarios.genres?.map((genre) => genre.genre.name + " ")}
+                      {usuarios.genres?.map((genre) => genre.genre.name + " ")}
                     </div>
                     <div className="fs-6 fw-bold">Instrumento</div>
                     <div className="fs-5">
-                    {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}
+                      {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}
                     </div>
-                    <div>                     
+                    <div>
                       <Link to={`/bio:${usuarios.user.id}`}>
                         <button type="button" className="botonAnillos">
                           Info
