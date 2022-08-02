@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, current_app
 from api.models import db, User, Instruments, Genre, Generos_user, Instruments_user, Images, Images_user
 from api.utils import generate_sitemap, APIException
 import bcrypt
@@ -14,6 +14,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import random
+from flask_mail import Mail, Message
 
 from datetime import timedelta
 delta = timedelta(
@@ -608,18 +609,25 @@ def reset_password():
     print(new_password)
     return new_password
 
+
 @api.route('/user/reset-password', methods=['PUT'])
 def reset_user_password():
+    mail = Mail(current_app)
     body=request.get_json()
     email = body["email"]
     exist_user = User.query.filter_by(email=email).first()
     if not exist_user:
-        return jsonify("email is not registered"), 404
+        return jsonify({"msg":"email is not registered"}), 404
     else:
-        hashed = bcrypt.hashpw(reset_password().encode(FORMAT_CODE), bcrypt.gensalt())
+        password = reset_password()
+        hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
     exist_user.password = hashed.decode(FORMAT_CODE)
-    db.session.commit()        
-    return jsonify(exist_user.serialize()),200
+    db.session.commit()
+    msg = Message('Hello', sender='facemusicapp@gmail.com', recipients = [email])
+    msg.body = 'This is your new password: ' + password
+    mail.send(msg)
+    return jsonify({"msg":"Password enviado"})
+
 
 #ENVIAR MENSAJE DE CONTACTO AL USUARIO
 

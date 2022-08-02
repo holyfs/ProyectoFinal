@@ -14,10 +14,9 @@ function Search() {
   const [usuarios, setUsuarios]= useState([]);
   const [tablaUsuarios, setTablaUsuarios]= useState([]);
   const [userInstruments, setUserInstruments] = useState([]);
-  const [userGenre, setUserGenres] = useState([]);
-  const [busqueda, setBusqueda]= useState("");
 
- 
+  const [searchUserGenre, setSearchUserGenre] = useState([]);
+/*   const [busqueda, setBusqueda]= useState(""); */
 
   const peticionGet=async()=>{
     await axios.get(`${config.hostname}/api/user`)
@@ -32,8 +31,8 @@ function Search() {
   })}
 
   const handleChange=e=>{
-    setBusqueda(e.target.value);
-    filtrar(e.target.value);
+/*     setBusqueda(e.target.value); */
+    filtrar(e.target.value); 
   }
 
   const filtrar=(terminoBusqueda)=>{
@@ -45,11 +44,29 @@ function Search() {
     
       ){
         return elemento;
-      }    
+      }   
     });
     setUsuarios(resultadosBusqueda);
     //setUserInstruments(resultadosBusqueda);
     //setUserGenres(resultadosBusqueda);
+  }
+  const getSelectedGenres=(selection, tipo)=>{
+    if (tipo === "G"){
+      setSearchUserGenre(selection)
+    }
+  }
+  const filtroGenre=()=>{
+    let filtroPorGenero = []
+    tablaUsuarios.forEach((elemento)=>{
+    elemento.genres.forEach((genres)=>{
+    searchUserGenre.forEach((value)=>{
+      if(genres.genre.id===value.value)
+      {
+        filtroPorGenero.push(elemento) }
+    }) 
+   })
+    })
+    setUsuarios(filtroPorGenero)
   }
 
   useEffect(()=>{
@@ -61,7 +78,7 @@ function Search() {
         <div className="containerInput">
           <input
             className="form-control inputBuscar"
-            value={busqueda}
+/*             value={busqueda} */
             placeholder="Búsqueda por Nombre"
             onChange={handleChange}
           />
@@ -69,6 +86,11 @@ function Search() {
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </div>
+
+        <div> <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]}/></div>
+        <button className="btn btn-success" id="buton_busqueda_genre" onClick={filtroGenre}>
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
         <div className="row">
           {usuarios.map((usuarios) => (
             <div

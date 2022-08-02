@@ -1,3 +1,4 @@
+import config from "../config.js";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -26,7 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loadSomeData: async () => {
 				//Usuarios
 				try {
-					const res = await fetch("https://3001-holyfs-proyectofinal-ab6okwzyw8d.ws-eu54.gitpod.io" + "/api/user"); //acá hacemos el fetch, que seria la respuesta
+					const res = await fetch(`${config.hostname}/api/user`); //acá hacemos el fetch, que seria la respuesta
 					const data = await res.json(); //la data es la respuesta que nos da el fetch convertido a json
 /*  					console.log("Async:", data.response);  */
 					setStore({
@@ -39,7 +40,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getDetalleUser: async uid => {
 				try {
 					const id = parseInt(uid);
-					const res = await fetch("https://3001-holyfs-proyectofinal-ab6okwzyw8d.ws-eu54.gitpod.io/api/user/" + uid);
+					const res = await fetch(`${config.hostname}/api/user:${uid}`);
 					const data = await res.json();
 /* 					console.log(data); */
 					/* console.log("AsyncDetalles:", data.response.data.user); */
@@ -51,7 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getMessage: () => {
 				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
+				fetch(`${config.hostname}/api/hello`)
 					.then(resp => resp.json())
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
