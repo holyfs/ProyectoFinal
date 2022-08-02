@@ -9,7 +9,7 @@ import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
 import AddMusicalGenre from "../component/AddMusicalGenre.js"
-import AddMusicalInstruments from "../component/AddMusicalInstruments.js"
+/* import AddMusicalInstruments from "../component/AddMusicalInstruments.js" */
 
 
 function Search() {
@@ -107,10 +107,10 @@ function Search() {
         <button className="btn btn-success" id="buton_busqueda_genre" onClick={filtroGenre}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
-          <div> <AddMusicalInstruments selectionEvent={getSelectedGenres} userGenre={[]}/></div>
+{/*           <div> <AddMusicalInstruments selectionEvent={getSelectedGenres} userGenre={[]}/></div>
         <button className="btn btn-success" id="buton_busqueda_genre" onClick={filtroInstruments}>
             <FontAwesomeIcon icon={faSearch} />
-          </button>
+          </button> */}
         <div className="row">
           {usuarios.map((usuarios) => (
             <div
