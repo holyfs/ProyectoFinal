@@ -464,17 +464,10 @@ def delete_genre_by_id(id):
 
 #USER MUSICAL GENRE POST
 def add_genre_to_user(user_id,list_of_genre):
-    exist_genre = Generos_user.query.filter((Generos_user.user_id==user_id)).first()
-    if exist_genre:
-        db.session.delete(exist_genre)
-        db.session.commit()
-    print(Generos_user.query.filter((Generos_user.user_id==user_id)).all())
+    exist_genre = Generos_user.query.filter((Generos_user.user_id==user_id)).delete()
+    db.session.commit()
+
     for genre in list_of_genre:
-        print(genre)
-        # exist_genre = Generos_user.query.filter((Generos_user.user_id==user_id) & (Generos_user.genre_id==genre)).all()
-        # if  exist_genre :
-        #     print("el usuario ya tiene el genero asignado")
-          
         if genre == "":
             continue
         generos_user = Generos_user (
@@ -564,16 +557,10 @@ def delete_user_genre():
 #USER MUSIC INSTRUMENT POST
 #@api.route('/user/instrument', methods=['POST'])
 def add_instrument_to_user(user_id,list_of_instruments):
-    print("hola")
-    exist_instrument = Instruments_user.query.filter((Instruments_user.user_id==user_id)).all()
-    if exist_instrument: 
-        db.session.delete(exist_instrument)
-        print("borrar")
+
+    exist_instrument = Instruments_user.query.filter((Instruments_user.user_id==user_id)).delete()
+    db.session.commit()
     for instrument in list_of_instruments:
-        # exist_instrument = Instruments_user.query.filter((Instruments_user.user_id==user_id) & (Instruments_user.instruments_id==instrument)).all()
-        # if  exist_instrument:
-        #     print("el usuario ya tiene el instrumento asignado")
-        #     continue
         if instrument == "":
             continue
         instruments_user = Instruments_user (
