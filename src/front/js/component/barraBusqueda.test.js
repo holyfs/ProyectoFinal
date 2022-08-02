@@ -8,13 +8,15 @@ import styles from "../../styles/Card.module.css";
 import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
+import AddMusicalGenre from "../component/AddMusicalGenre.js"
+import AddMusicalInstruments from "../component/AddMusicalInstruments.js"
 
 
 function Search() {
   const [usuarios, setUsuarios]= useState([]);
   const [tablaUsuarios, setTablaUsuarios]= useState([]);
   const [userInstruments, setUserInstruments] = useState([]);
-
+  const [searchUserIntruments, setSearchUserInstruments] = useState([]);
   const [searchUserGenre, setSearchUserGenre] = useState([]);
 /*   const [busqueda, setBusqueda]= useState(""); */
 
@@ -53,6 +55,8 @@ function Search() {
   const getSelectedGenres=(selection, tipo)=>{
     if (tipo === "G"){
       setSearchUserGenre(selection)
+    }else if (tipo === "I"){
+      setSearchUserInstruments(selection)
     }
   }
   const filtroGenre=()=>{
@@ -60,13 +64,25 @@ function Search() {
     tablaUsuarios.forEach((elemento)=>{
     elemento.genres.forEach((genres)=>{
     searchUserGenre.forEach((value)=>{
-      if(genres.genre.id===value.value)
-      {
+      if(genres.genre.id===value.value && !filtroPorGenero.find((elemento)=>elemento.user.id ===genres.user_id)){
         filtroPorGenero.push(elemento) }
     }) 
    })
     })
     setUsuarios(filtroPorGenero)
+  }
+
+  const filtroInstruments=()=>{
+    let filtroPorInstrumento = []
+    tablaUsuarios.forEach((elemento)=>{
+    elemento.instruments.forEach((instruments)=>{
+    searchUserIntruments.forEach((value)=>{
+      if(instruments.instrument.id===value.value && !filtroPorInstrumento.find((elemento)=>elemento.user.id ===instruments.user_id)){
+        filtroPorInstrumento.push(elemento) }
+    }) 
+   })
+    })
+    setUsuarios(filtroPorInstrumento)
   }
 
   useEffect(()=>{
@@ -89,6 +105,10 @@ function Search() {
 
         <div> <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]}/></div>
         <button className="btn btn-success" id="buton_busqueda_genre" onClick={filtroGenre}>
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
+          <div> <AddMusicalInstruments selectionEvent={getSelectedGenres} userGenre={[]}/></div>
+        <button className="btn btn-success" id="buton_busqueda_genre" onClick={filtroInstruments}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
         <div className="row">
