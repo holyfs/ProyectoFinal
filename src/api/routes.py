@@ -314,9 +314,9 @@ def update_user_by_id():
     db.session.commit()        
     return jsonify(user.serialize()),200
 
-@api.route('/user/<int:id>/new-password', methods=['PUT'])
+@api.route('/user/new-password', methods=['PUT'])
 @jwt_required()
-def user_new_password(id):
+def user_new_password():
     user = User.query.get(id)
     password=request.form["password"]
     if not bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)):
@@ -633,7 +633,16 @@ def reset_user_password():
 
 @api.route('/sendMsg', methods=['PUT'])
 def send_Msg():
+    mail = Mail(current_app)
     body=request.get_json()
+    msg = Message('Hello', sender='facemusicapp@gmail.com', recipients = 'facemusicapp@gmail.com')
+    msg.body = {'nombre de contacto:' # usuario.name 
+    'mail:' #usuario.email 
+    'Telefono:' #usuario.phone 
+    'Mensaje:' #usuario.mensaje
+    }
+    mail.send(msg)
+    return jsonify({"msg":"Mensaje enviado"})
 
 
 if __name__ == '__main__':
