@@ -55,7 +55,7 @@ export default class Login extends Component {
           Swal.fire({
             icon: 'sucess',
             confirmButtonColor: 'rgb(25, 169, 149)',
-            confirmButtonText:'Quieres ir a tu página personal?',
+            confirmButtonText:'Vamos a tu pagina personal!',
             title: 'Login Completo',
             text: 'Gracias por usar esta página web ',
           }).then((result) => {

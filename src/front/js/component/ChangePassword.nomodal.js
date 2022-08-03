@@ -21,6 +21,7 @@ export const ChangePasswordNoModal = () => {
     let newRequest = new FormData();
     newRequest.append("password", password);
     newRequest.append("new_password",newpassword);
+    newRequest.append("id", id)
     const token = JSON.parse(localStorage.getItem("jwt-token"));
 
     if (newpassword !== confirmPass) {
@@ -28,7 +29,7 @@ export const ChangePasswordNoModal = () => {
       return;
     }
     else {
-      const response = await fetch(config.hostname + `/api/user/${id}/new-password`, {
+      const response = await fetch(config.hostname + `/api/user/new-password`, {
         method: "PUT",
         headers: {
           "mode": 'no-cors',
