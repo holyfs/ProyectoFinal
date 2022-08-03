@@ -1,3 +1,3 @@
 export default {
-    hostname: process.env.BACKEND_URL,
+    hostname: 'https://3001-holyfs-proyectofinal-f7gdb11yhhb.ws-eu54.gitpod.io',
 }
