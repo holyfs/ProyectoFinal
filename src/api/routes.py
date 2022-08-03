@@ -314,10 +314,14 @@ def update_user_by_id():
     db.session.commit()        
     return jsonify(user.serialize()),200
 
-@api.route('/user/<int:id>/new-password', methods=['PUT'])
+@api.route('/user/new-password', methods=['PUT'])
 @jwt_required()
-def user_new_password(id):
-    user = User.query.get(id)
+def user_new_password():
+    user = User.query.get(request.form["id"])
+    print(user)
+    exist_user = User.query.filter(User.id==user.id).first()
+    if not exist_user:
+        return jsonify({"msg":"user not found"}), 404
     password=request.form["password"]
     if not bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)):
         return jsonify("bad password, try again"),404
@@ -328,8 +332,7 @@ def user_new_password(id):
         return jsonify("user not found"),404
     db.session.commit()
     response_body = {
-        "msg" : "password changed",
-        "user": user.serialize()
+        "msg" : "password changed"
     } 
     return jsonify(response_body),200   
  

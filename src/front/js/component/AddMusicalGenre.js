@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MultiSelect, Dropdown } from "react-multi-select-component";
+import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
 import config from "../config";
 
@@ -44,7 +44,6 @@ const AddMusicalGenre = (props) => {
         options={genres}
         value={selected}
         onChange={(e)=>handleEvent(e)}
-        labelledBy="Select"
       />
     </div>
   );

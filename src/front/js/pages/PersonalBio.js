@@ -202,9 +202,65 @@ export const PersonalBio = (props) => {
         <>
             <div className="container-fluid">
                 <div className="row mt-2">
-                    <div className="col-6 offset-3">
+                    <div className="col-9 offset-3">
                         <h1 className="bioperfil" onChange={event => setArtist_name_or_band_name(event.target.value)}>{usuarios.artist_name_or_band_name}</h1>
-                        <div> {edit ? <input placeholder={usuarios.artist_name_or_band_name} onChange={event => setArtist_name_or_band_name(event.target.value)}/>: <div></div>}
+                        <div className="col-6"> {edit ? <input placeholder={usuarios.artist_name_or_band_name} onChange={event => setArtist_name_or_band_name(event.target.value)} /> : <div></div>}
+                            <div className="row">
+                                <span className="PersonalDates col-10">Datos Personales</span>
+                                <button type="button" className="btn btn-info col-2" onClick={() => handleChange("edit")}>edit</button>
+                            </div>
+                            <div className="row">
+                                <span className="col"><strong>Nombre:</strong> {usuarios.name}</span>
+                                <> {edit ? <input placeholder={usuarios.name} id="userName" className="col" onChange={event => setName(event.target.value)} /> : " "}
+                                </>
+                            </div>
+                            <div className="row">
+                                <span className="col"><strong>Apellido:</strong> {usuarios.last_name}</span>
+                                <> {edit ? <input placeholder={usuarios.last_name} id="LastName" className="col" onChange={event => setLastName(event.target.value)} /> : " "}
+                                </>
+                            </div>
+                            <div className="row">
+                                <span className="col"><strong>Edad:</strong> {usuarios.age}</span>
+                                <> {edit ? <input placeholder={usuarios.age} id="age" className="col" onChange={event => setAge(event.target.value)} /> : " "}
+                                </>
+                            </div>
+                            <div className="col" id="email"><strong>email:</strong> {usuarios.email}</div>
+                            <div className="form-group">
+                                <label>
+                                    ¿Eres una banda?
+                                    <> {edit ? <input
+                                        type="checkbox"
+                                        checked={band}
+                                        onChange={() => handleChange("band")}
+                                    /> : <input
+                                        type="checkbox"
+                                        checked={usuarios.band}
+                                        onChange={() => handleChange("band")} />}</>
+                                </label>
+                            </div>
+                            <div className="form-group">
+                                <label>
+                                    ¿Tienes Experiencia?
+                                    <>{edit ? <input
+                                        type="checkbox"
+                                        checked={experience}
+                                        onChange={() => handleChange("experience")}
+                                    />
+                                        : <input
+                                            type="checkbox"
+                                            checked={usuarios.experience}
+                                            onChange={() => handleChange("experience")}
+                                        />}</>
+                                </label>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <label ><strong>Descripción:</strong> </label>
+                                    <div className="mb-3" id="description">{usuarios.description} </div>
+                                    <> {edit ? <textarea placeholder={usuarios.description} maxLength="1500px" rows="5" id="description" className="mb-3 col" onChange={event => setDescription(event.target.value)} /> : " "}
+                                    </>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     {/* <div className="d-flex justify-content-end">
@@ -214,32 +270,23 @@ export const PersonalBio = (props) => {
                             </a>
                         </form>
                     </div> */}
+
                 </div>
 
-
-                <div className="row">
-                    <div className="col-3 d-flex justify-content-center" >
-                        <img className="rounded-circle" width="350px" height="350px" src={usuarios.avatar}></img>
+                <div className="col-3">
+                    <div className="" >
+                        <img className="rounded-circle" width="250px" height="250px" src={usuarios.avatar}></img>
+                        <div className="">
+                        <button type="button" className="btn btn-info" onClick={changePic}>Cambiar foto de perfil</button>
                     </div>
-                    <div className="col-5">
-                        <h3 className="PersonalDates">Datos Personales</h3>
-                        <button type="button" className="btn btn-info" onClick={()=>handleChange("edit")}>edit</button>
-                        <div className="row">
-                            <span className="col-4"><strong>Nombre:</strong> {usuarios.name}</span>
-                            <> {edit ? <input placeholder={usuarios.name} id="userName" className="col-8" onChange={event => setName(event.target.value)}/>: " "}
-                            </>
-                        </div>
-                        <div className="row">
-                            <span className="col-4"><strong>Apellido:</strong> {usuarios.last_name}</span>
-                            <> {edit ? <input placeholder={usuarios.last_name} id="LastName" className="col-8" onChange={event => setLastName(event.target.value)}/>: " "}
-                            </>
-                        </div>
-                        <div className="row">
-                            <span className="col-4"><strong>Edad:</strong> {usuarios.age}</span>
-                            <> {edit ? <input placeholder={usuarios.age} id="age" className="col-8" onChange={event => setAge(event.target.value)}/>: " "}
-                            </>
-                        </div>
-                        <div className="col-4" id="email"><strong>email:</strong> {usuarios.email}</div>
+            
+                  </div>
+                    </div>
+                   
+                        
+                      
+                       
+                        
                         <div className="d-flex justify-content-end">
                         <form>
                             <a href={"/ChangePasswordNoModal:"+user_id}>
@@ -247,60 +294,31 @@ export const PersonalBio = (props) => {
                             </a>
                         </form>
                         </div>
-                        <div className="form-group">
-                            <label>
-                                ¿Eres una banda?
-                                <> {edit ?<input
-                                    type="checkbox"
-                                    checked={band}
-                                    onChange={() => handleChange("band")}
-                                />:<input
-                                type="checkbox"
-                                checked={usuarios.band}
-                                onChange={() => handleChange("band")}/>}</>
-                            </label>
-                        </div>
-                        <div className="form-group">
-                            <label>
-                                ¿Tienes Experiencia?
-                                <>{edit ? <input
-                                    type="checkbox"
-                                    checked={experience}
-                                    onChange={() => handleChange("experience")}
-                                />
-                                :<input
-                                type="checkbox"
-                                checked={usuarios.experience}
-                                onChange={() => handleChange("experience")}
-                            />}</>
-                            </label>
-                        </div>
-                    </div>
+                        
+                        
+                    
+                   
                 </div>
                 <div className="row">
-                    <div className="col-2 offset-1">
-                        <button type="button" className="btn btn-info" onClick={changePic}>Cambiar foto de perfil</button>
-                    </div>
-                    <div className="col-5">
-                        <div className="row">
-                        <label ><strong>Descripción:</strong> </label>
-                        <div className="mb-3" id="description">{usuarios.description} </div>
-                        <> {edit ? <textarea placeholder={usuarios.description} maxLength="1500px" rows="5" id="description" className="mb-3" onChange={event => setDescription(event.target.value)}/>: " "}
-                        </>
-                        </div>                   
-                        <label className="mb-2" ><strong>Generos:</strong> {userGenre?.map((genre) => genre.label + " ")}</label>
-                        <> {edit ? <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={userGenre} />: " "}
+
+                    <div className="row">
+                        
+                        <div className="col">
+                            <label className="mb-2" ><strong>Generos:</strong> {userGenre?.map((genre) => genre.label + " ")}</label>
+                            <> {edit ? <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={userGenre} /> : " "}
                             </>
-                        <label className="mb-2" ><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
-                        <> {edit ? <AddMusicalInstruments selectionEvent={getSelectedGenres} userInstruments={userInstruments} />: " "}
+                        </div>
+                        <div className="col">
+                            <label className="mb-2 " ><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
+                            <> {edit ? <AddMusicalInstruments selectionEvent={getSelectedGenres} userInstruments={userInstruments} /> : " "}
                             </>
+                        </div>
                         <div className="d-flex justify-content-center mt-3 mb-2" >
-                        <> {edit ? <button onClick={() => guardar_cambios()}>Guardar Cambios</button> : " "}
+                            <> {edit ? <button onClick={() => guardar_cambios()}>Guardar Cambios</button> : " "}
                             </>
-                            
                         </div>
                     </div>
-                </div>
+                
             </div>
         </>
     )

@@ -42,7 +42,6 @@ const AddMusicalInstruments = (props) => {
         options={instruments}                                   
         value={selected}
         onChange={(e)=>handleEvent(e)}
-        labelledBy="Select"
       />
     </div>
   );
