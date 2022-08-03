@@ -26,17 +26,21 @@ function Search() {
         setUsuarios(response.data.response);
         setTablaUsuarios(response.data.response);
         setUserInstruments(response.data.response.instruments);
+
         //setUserGenres(response.data.genres); 
+
         //console.log(response.data.respone.instruments);
       }).catch(error => {
         console.log(error);
       })
+
   }
 
   const handleChange = e => {
     /*     setBusqueda(e.target.value); */
     filtrar(e.target.value);
   }
+
 
   const filtrar = (terminoBusqueda) => {
     var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
@@ -61,6 +65,7 @@ function Search() {
     }
   }
   const filtroGenre = () => {
+
     if (searchUserGenre.length === 0) {
       setUsuarios(tablaUsuarios)
       return;
@@ -78,6 +83,7 @@ function Search() {
     })
     setUsuarios(filtroPorGenero)
   }
+
 
   const filtroInstruments = () => {
     if (searchUserIntruments.length === 0) {
@@ -184,11 +190,15 @@ function Search() {
                 </div>
               </div>
             </div>
+
           </div>
+
         ))}
       </div>
     </>
   );
 }
 
+
 export default Search;
+

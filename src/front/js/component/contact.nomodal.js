@@ -17,19 +17,20 @@ export const ContactNoModal = () => {
 
 
   const SendMsg = () => {
-    /* fetch(config.hostname + "/sendMsg", {
+    fetch(config.hostname + "/api/sendMsg/", {
       method: "PUT",
       headers: {
-        "Content-type": "multipart/form-data",
+        "Content-Type": "application/json"
       },
-      body: ({
-        email: email,
+      body: JSON.stringify({
         name: name,
+				email: email,
         phone: phone,
-        msg: msg
-      })
+        msg: msg,
+        id_user: id
+			})
     });
-    */
+    
     Swal.fire({
       icon: 'sucess',
       title: 'Mensaje Enviado',
