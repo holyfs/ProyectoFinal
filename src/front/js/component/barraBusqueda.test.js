@@ -1,5 +1,5 @@
 import "../../styles/barraBusqueda.test.css";
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,81 +13,78 @@ import AddMusicalInstruments from "../component/AddMusicalInstruments.js"
 
 
 function Search() {
-  const [usuarios, setUsuarios]= useState([]);
-  const [tablaUsuarios, setTablaUsuarios]= useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+  const [tablaUsuarios, setTablaUsuarios] = useState([]);
   const [userInstruments, setUserInstruments] = useState([]);
   const [searchUserIntruments, setSearchUserInstruments] = useState([]);
   const [searchUserGenre, setSearchUserGenre] = useState([]);
-/*   const [busqueda, setBusqueda]= useState(""); */
-
-  const peticionGet=async()=>{
+  /*   const [busqueda, setBusqueda]= useState(""); */
+  const peticionGet = async () => {
     await axios.get(`${config.hostname}/api/user`)
-    .then(response=>{
-      setUsuarios(response.data.response);
-      setTablaUsuarios(response.data.response);
-      setUserInstruments(response.data.response.instruments);
-      //setUserGenres(response.data.genres); 
-      //console.log(response.data.respone.instruments);
-    }).catch(error=>{
-      console.log(error);
-  })}
-
-  const handleChange=e=>{
-/*     setBusqueda(e.target.value); */
-    filtrar(e.target.value); 
+      .then(response => {
+        setUsuarios(response.data.response);
+        setTablaUsuarios(response.data.response);
+        setUserInstruments(response.data.response.instruments);
+        //setUserGenres(response.data.genres);
+        //console.log(response.data.respone.instruments);
+      }).catch(error => {
+        console.log(error);
+      })
   }
-
-  const filtrar=(terminoBusqueda)=>{
-    var resultadosBusqueda=tablaUsuarios.filter((elemento)=>{
-      if(elemento.user.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
-      || elemento.user.artist_name_or_band_name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
-      //|| elemento.user.genres.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
-      //|| elemento.user.instruments.instrument.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
-    
-      ){
+  const handleChange = e => {
+    /*     setBusqueda(e.target.value); */
+    filtrar(e.target.value);
+  }
+  const filtrar = (terminoBusqueda) => {
+    var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+      if (elemento.user.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+        || elemento.user.artist_name_or_band_name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+        //|| elemento.user.genres.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+        //|| elemento.user.instruments.instrument.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+      ) {
         return elemento;
-      }   
+      }
     });
     setUsuarios(resultadosBusqueda);
     //setUserInstruments(resultadosBusqueda);
     //setUserGenres(resultadosBusqueda);
   }
-  const getSelectedGenres=(selection, tipo)=>{
-    if (tipo === "G"){
+  const getSelectedGenres = (selection, tipo) => {
+    if (tipo === "G") {
       setSearchUserGenre(selection)
-    }else if (tipo === "I"){
+    } else if (tipo === "I") {
       setSearchUserInstruments(selection)
     }
   }
-  const filtroGenre=()=>{
+  const filtroGenre = () => {
     let filtroPorGenero = []
-    tablaUsuarios.forEach((elemento)=>{
-    elemento.genres.forEach((genres)=>{
-    searchUserGenre.forEach((value)=>{
-      if(genres.genre.id===value.value && !filtroPorGenero.find((elemento)=>elemento.user.id ===genres.user_id)){
-        filtroPorGenero.push(elemento) }
-    }) 
-   })
+    tablaUsuarios.forEach((elemento) => {
+      elemento.genres.forEach((genres) => {
+        searchUserGenre.forEach((value) => {
+          if (genres.genre.id === value.value && !filtroPorGenero.find((elemento) => elemento.user.id === genres.user_id)) {
+            filtroPorGenero.push(elemento)
+          }
+        })
+      })
     })
     setUsuarios(filtroPorGenero)
   }
-
-  const filtroInstruments=()=>{
+  const filtroInstruments = () => {
     let filtroPorInstrumento = []
-    tablaUsuarios.forEach((elemento)=>{
-    elemento.instruments.forEach((instruments)=>{
-    searchUserIntruments.forEach((value)=>{
-      if(instruments.instrument.id===value.value && !filtroPorInstrumento.find((elemento)=>elemento.user.id ===instruments.user_id)){
-        filtroPorInstrumento.push(elemento) }
-    }) 
-   })
+    tablaUsuarios.forEach((elemento) => {
+      elemento.instruments.forEach((instruments) => {
+        searchUserIntruments.forEach((value) => {
+          if (instruments.instrument.id === value.value && !filtroPorInstrumento.find((elemento) => elemento.user.id === instruments.user_id)) {
+            filtroPorInstrumento.push(elemento)
+          }
+        })
+      })
     })
     setUsuarios(filtroPorInstrumento)
   }
-
-  useEffect(()=>{
+  useEffect(() => {
     peticionGet();
-    },[])
+  }, [])
 
     return (
       <>
@@ -137,8 +134,7 @@ function Search() {
         <div className="row" >
           {usuarios.map((usuarios) => (
             <div
-              key={usuarios.user.id}
-              className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark"
+              className={`${styles.card} d-flex flex-column justify-content-center`}
             >
               <div
                 className={`${styles.card} d-flex flex-column justify-content-center`}
@@ -172,10 +168,10 @@ function Search() {
                 </div>
               </div>
             </div>
-          ))}
-        </div> 
-      </>
-    );
-    }
-    
-    export default Search;
+          
+        ))}
+      </div>
+    </>
+  );
+}
+export default Search;

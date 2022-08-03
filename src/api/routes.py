@@ -636,7 +636,16 @@ def reset_user_password():
 
 @api.route('/sendMsg', methods=['PUT'])
 def send_Msg():
+    mail = Mail(current_app)
     body=request.get_json()
+    msg = Message('Hello', sender='facemusicapp@gmail.com', recipients = 'facemusicapp@gmail.com')
+    msg.body = {'nombre de contacto:' # usuario.name 
+    'mail:' #usuario.email 
+    'Telefono:' #usuario.phone 
+    'Mensaje:' #usuario.mensaje
+    }
+    mail.send(msg)
+    return jsonify({"msg":"Mensaje enviado"})
 
 
 if __name__ == '__main__':
