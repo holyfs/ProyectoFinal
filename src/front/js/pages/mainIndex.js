@@ -69,7 +69,7 @@ jQuery(document).ready(function($){
 return (
 
     <div className="App">
-      <a href="" className="bubbles"><img src="https://fontmeme.com/permalink/220802/0d19c228db18ba0ac2250e51dd95f26d.png" alt="fuente-de-shang-chi" border="0" /></a><a href="" className="bubbles"></a>
+      <a href="" className="bubbles mb-2"><img src="https://fontmeme.com/permalink/220802/0d19c228db18ba0ac2250e51dd95f26d.png" alt="fuente-de-shang-chi" border="0" /></a><a href="" className="bubbles"></a>
       <div className="row d-flex justify-content-center">
         <div className="col-8">
           <Search />
