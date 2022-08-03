@@ -18,32 +18,36 @@ const AddMusicalGenre = (props) => {
         console.log(error);
       })
   }
+/* let placeholder= select.querySelector(".gray")="Generos" */
+/* let select = document.getElementsByClassName("rnsc")[0]
+select.children[0].children[0].children[0].children[0].innerHTML = "y ahora?" */
 
 
   useEffect(() => {
     peticionGet();
-    if (props.userGenre.length > 0){
-    setSelected(props.userGenre)
-    props.selectionEvent(props.userGenre, "G")
-  }else{
-    setSelected([])
-    props.selectionEvent([], "G")
-  }
+    if (props.userGenre.length > 0) {
+      setSelected(props.userGenre)
+      props.selectionEvent(props.userGenre, "G")
+    } else {
+      setSelected([])
+      props.selectionEvent([], "G")
+    }
 
   }, [])
-  const handleEvent= (event)=>{    
-    setSelected(event)
-    props.selectionEvent(event, "G")
+  const handleEvent = (array) => {
+    setSelected(array)
+    props.selectionEvent(array, "G")
   }
 
 
   return (
     <div>
-      
+
       <MultiSelect
         options={genres}
         value={selected}
-        onChange={(e)=>handleEvent(e)}
+        onChange={(array) => handleEvent(array)}
+                
       />
     </div>
   );

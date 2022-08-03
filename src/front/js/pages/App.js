@@ -62,7 +62,7 @@ class Login extends React.Component{
             title: 'Login Completo',
             text: 'Gracias por usar esta página web ',
             confirmButtonColor: 'rgb(25, 169, 149)',
-            confirmButtonText:'Quieres ir a tu página personal?'
+            confirmButtonText:'Vamos a tu pagina personal'
           }).then((result) => {
             let user_id = localStorage.getItem("user_id")
             if (result.value) {window.location.href = "/personalbio:"+ user_id
