@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import config from '../config';
 import Swal from "sweetalert2";
+import "../../styles/signup.css";
+import '../../styles/App.css';
 
 
 export const ChangePasswordNoModal = () => {
@@ -48,28 +50,41 @@ export const ChangePasswordNoModal = () => {
 
     return (
       <>
-        <div class="form-group">
-          <input type="password" class="form-control" onChange={event => setPassword(event.target.value)} required />
-          <label class="form-control-placeholder" for="password">Antigua Password</label>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" onChange={event => setNewPassword(event.target.value)} required />
-          <label class="form-control-placeholder" for="password">Nueva Password</label>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" onChange={event => setConfirmPass(event.target.value)} required />
-          <label class="form-control-placeholder" for="password">Nueva Password</label>
-        </div>
-
-        <div className="d-flex justify-content-center mt-3 mb-2" >
-          <button onClick={() => ChangePassword()}>Cambiar contraseña</button>
-        </div>
-        <div className="d-flex justify-content-end">
-          <form>
+       <div className="form">
+      
+        <center>
+          <img
+            src="https://www.muycomputer.com/wp-content/uploads/2018/06/WiFi-password.jpg"
+            alt="profile-img"
+            className="profile-img-card"
+            width="250"
+			      height="250"
+          />
+        </center>
+        
+        <label><strong>Antigua Contraseña:</strong></label>
+        <input type="password" className="form-control cajas" onChange={event => setPassword(event.target.value)} required />
+        
+      
+        
+        <label><strong>Nueva Contraseña:</strong>  </label>
+  
+        <input type="password" className="form-control cajas" onChange={event => setNewPassword(event.target.value)} required />
+        
+        <label><strong>Confimre Contraseña:</strong>  </label>
+      
+        <input type="password" className="form-control cajas" onChange={event => setConfirmPass(event.target.value)} required />
+      
+      
+        
+          <button className="btnregistro" onClick={() => ChangePassword()}>Cambiar contraseña</button>
+        
+      
+        
             <a href={"/personalbio:" + id}>
-              <input type="button" value="Cerrar" />
+              <input type="button" className="btn btn-danger" value="Cerrar" />
             </a>
-          </form>
+        
         </div>
       </>
     )

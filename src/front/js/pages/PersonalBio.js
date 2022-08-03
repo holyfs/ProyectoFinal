@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import Contact from "../component/contact.nomodal";
 import '../../styles/bio.css';
+import '../../styles/tittles.css';
 import { Context } from "../store/appContext";
 import ChangePassword from "../component/ChangePassword";
 import { ChangePasswordNoModal } from "../component/ChangePassword.nomodal";
@@ -218,6 +219,7 @@ export const PersonalBio = (props) => {
 
 
                 <div className="row">
+                <h1 className="titulos">Avatar</h1>
                     <div className="col-3 d-flex justify-content-center" >
                         <img className="rounded-circle" width="350px" height="350px" src={usuarios.avatar}></img>
                     </div>
@@ -226,7 +228,7 @@ export const PersonalBio = (props) => {
                         <button type="button" className="btn btn-info" onClick={()=>handleChange("edit")}>edit</button>
                         <div className="row">
                             <span className="col-4"><strong>Nombre:</strong> {usuarios.name}</span>
-                            <> {edit ? <input placeholder={usuarios.name} id="userName" className="col-8" onChange={event => setName(event.target.value)}/>: " "}
+                            <> {edit ? <input  placeholder={usuarios.name} id="userName" className="col-8" onChange={event => setName(event.target.value)}/>: " "}
                             </>
                         </div>
                         <div className="row">
@@ -243,7 +245,7 @@ export const PersonalBio = (props) => {
                         <div className="d-flex justify-content-end">
                         <form>
                             <a href={"/ChangePasswordNoModal:"+user_id}>
-                                <input type="button" value="Cambiar Contraseña" />
+                                <input type="button" className="btn btn-info" value="Cambiar Contraseña" />
                             </a>
                         </form>
                         </div>

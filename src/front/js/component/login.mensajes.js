@@ -75,7 +75,15 @@ export default class Login extends Component {
   }
   render() {
     return (
-      <div className="col-md-12">
+      <Form
+            className="form"
+            onSubmit={this.handleLogin}
+            ref={c => {
+              this.form = c;
+            }}
+          >
+      
+      
         <center>
           <img
             src="https://pbs.twimg.com/profile_images/897355385/cabeza-avatar.gif"
@@ -85,13 +93,7 @@ export default class Login extends Component {
 			      height="250"
           />
         </center>
-          <Form
-            className="form"
-            onSubmit={this.handleLogin}
-            ref={c => {
-              this.form = c;
-            }}
-          >
+          
             <div className="form-group">
               <label htmlFor="username"> <FontAwesomeIcon icon={faEnvelope} /><strong>Email</strong></label>
               <Input
@@ -144,7 +146,7 @@ export default class Login extends Component {
             />
           </Form>
         
-      </div>
+      
     );
   }
 }

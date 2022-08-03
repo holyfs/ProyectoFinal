@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import config from '../config';
 import Swal from "sweetalert2";
+import "../../styles/signup.css";
+import '../../styles/App.css';
 
 
 export const ContactNoModal = () => {
@@ -47,36 +49,45 @@ export const ContactNoModal = () => {
 
   return (
     <>
-      <form class="seminor-login-form">
-        <div class="form-group">
-          <label class="form-control-placeholder" for="name">Email address</label>
-          <input type="email" class="form-control" onChange={event => setEmail(event.target.value)} required />
+      <form className="form">
+      <center>
+          <img
+            src="https://us.123rf.com/450wm/8vfanrf/8vfanrf1602/8vfanrf160200067/53778178-contacto-iconos-de-correo-electr%C3%B3nico-concepto-bolet%C3%ADn-tel%C3%A9fono-.jpg?ver=6"
+            alt="profile-img"
+            className="profile-img-card"
+            width="250"
+			      height="250"
+          />
+        </center>
+        <div className="form-group">
+          <label className="form-control-placeholder" for="name"><strong>Email address:</strong></label>
+          <input type="email" className="form-control cajas" onChange={event => setEmail(event.target.value)} required />
         </div>
-        <div class="form-group">
-          <label class="form-control-placeholder" for="nombre">Nombre</label>
-          <input type="nombre" class="form-control" onChange={event => setName(event.target.value)} required />
+        <div className="form-group">
+          <label className="form-control-placeholder" for="nombre"><strong>Nombre:</strong></label>
+          <input type="nombre" className="form-control cajas" onChange={event => setName(event.target.value)} required />
         </div>
-        <div class="form-group">
-          <label class="form-control-placeholder" for="Teléfono">Telefono</label>
-          <input type="mensaje" class="form-control" onChange={event => setPhone(event.target.value)} required />
+        <div className="form-group">
+          <label className="form-control-placeholder" for="Teléfono"><strong>Telefono:</strong></label>
+          <input type="mensaje" className="form-control cajas" onChange={event => setPhone(event.target.value)} required />
         </div>
-        <div class="form-group">
-          <label class="form-control-placeholder" for="nombre">Mensaje</label>
-          <input type="mensaje" class="form-control" onChange={event => setMsg(event.target.value)} required />
+        <div className="form-group">
+          <label className="form-control-placeholder" for="nombre"><strong>Mensaje:</strong></label>
+          <textarea type="mensaje" className="form-control cajas" onChange={event => setMsg(event.target.value)} required />
         </div>
         <div className="d-flex justify-content-center mt-3 mb-2" >
-          <button onClick={() => SendMsg()}>Enviar</button>
+          <button className="btnregistro" onClick={() => SendMsg()}>Enviar</button>
         </div>
 
 
 
-        <div className="d-flex justify-content-end">
-          <form>
+        
+          
             <a href={"/bio:" + id}>
-              <input type="button" value="Cerrar" />
+              <input type="button" className="btn btn-danger" value="Cerrar" />
             </a>
-          </form>
-        </div>
+        
+      
 
 
 

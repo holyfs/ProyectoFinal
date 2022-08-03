@@ -14,6 +14,7 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
+import { Navbar2 } from "./component/navbar2";
 import Signup from "./component/signup";
 import { Footer } from "./component/footer";
 import { Bio } from "./pages/bio";
@@ -38,6 +39,7 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
+                    <Navbar2 />
                     <Routes>
                         <Route element={<MainIndex />} path="/" />
                         <Route element={<IndexPrueba />} path="/indexprueba" />

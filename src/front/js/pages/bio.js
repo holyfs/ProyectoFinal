@@ -80,12 +80,9 @@ export const Bio = () => {
                                     <label><h3>Apellido</h3></label>
                                     <li class="list-group-item col-4 list-group-item-success">{usuarios.last_name}</li>
                                     <label><h3>Descripción</h3></label>
-                                        <div className="form-floating" style={{ alignItems: "center" }}>
-                                            <div className="form-control" style={{
-                                                display: "flex", border: "3px solid black", height: "100%",
-                                                padding: "10px", textAlign: "center", fontSize: 20, alignItems: "center", color: "white", background: "black",
-                                                width: "100%"
-                                            }} id="floatingTextarea2">{usuarios.description}</div>
+                                        <div className="form-floating cajadescri" style={{ alignItems: "center" }}>
+                                            
+                                            <h3>{usuarios.description}</h3>
                                         </div>
                                 </ul>
                             </div>
