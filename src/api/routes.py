@@ -634,16 +634,24 @@ def reset_user_password():
 
 #ENVIAR MENSAJE DE CONTACTO AL USUARIO
 
-@api.route('/sendMsg', methods=['PUT'])
+@api.route('/sendmsg', methods=['POST'])
 def send_Msg():
     mail = Mail(current_app)
-    body=request.get_json()
-    msg = Message('Hello', sender='facemusicapp@gmail.com', recipients = 'facemusicapp@gmail.com')
-    msg.body = {'nombre de contacto:' # usuario.name 
-    'mail:' #usuario.email 
-    'Telefono:' #usuario.phone 
-    'Mensaje:' #usuario.mensaje
-    }
+    body= request.get_json()
+    id = body["id_user"]
+    user = User.query.filter_by(id=id).first()
+    email = user.email
+    #name=body["name"]
+    #print(name)
+    # contact_email=body["contact_email"] 
+    # telefono=body["phone"]
+    # mensaje=body["mensaje"]
+    msg = Message('Alguien se quiere poner en contacto contigo', sender='facemusicapp@gmail.com', recipients = [email])
+    #msg.body = {name
+    # contact_email,
+    # telefono, 
+    #mensaje
+    #}
     mail.send(msg)
     return jsonify({"msg":"Mensaje enviado"})
 
