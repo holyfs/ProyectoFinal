@@ -19,16 +19,16 @@ export const ContactNoModal = () => {
 
 
   const SendMsg = () => {
-    fetch(config.hostname + "/api/sendMsg/", {
-      method: "PUT",
+    fetch(config.hostname + "/api/sendmsg/", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        name: name,
-				email: email,
+/*         name: name,
+				contact_email: email,
         phone: phone,
-        msg: msg,
+        msg: msg, */
         id_user: id
 			})
     });
