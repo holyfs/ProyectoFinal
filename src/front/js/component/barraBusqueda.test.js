@@ -68,7 +68,10 @@ function Search() {
     }
   }
   const NoEncontroNada=()=>{
-     return <h3>No se encontraron incidencias, vuelve a intentarlo</h3>
+    let mensaje =<div className="alert alert-danger mt-3" role="alert">
+    No hay resultados para tu búsqueda!
+  </div>
+     return mensaje
   }
 
   const filtroGenre = () => {
@@ -161,7 +164,7 @@ function Search() {
         </div>
       </div>
       <div className="row" >
-        {usuarios?.map((usuarios) => (
+        {usuarios.length>0?usuarios.map((usuarios) => (
           <div
             key={usuarios.user.id}
             className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark"
@@ -197,10 +200,9 @@ function Search() {
                 </div>
               </div>
             </div>
-
           </div>
-
-        ))}: {NoEncontroNada()}
+          )):<div>{NoEncontroNada()}</div>
+        }
       </div>
     </>
   );
