@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import config from '../config';
 import Swal from "sweetalert2";
+import "../../styles/signup.css";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const ForgetPassword = () => {
 
@@ -66,21 +69,33 @@ export const ForgetPassword = () => {
     <>
 
 
-      <form className="seminor-login-form">
+      <form className="form">
+      <center>
+          <img
+            src="https://www.shareicon.net/download/2016/05/29/772533_locked_512x512.png"
+            alt="profile-img"
+            className="profile-img-card"
+            width="250"
+			      height="250"
+          />
+          </center>
         <div className="form-group">
-          <input type="email" className="form-control" required autocomplete="off" onChange={event => setEmail(event.target.value)} />
-          <label className="form-control-placeholder" for="name">Email address</label>
+          <label className="form-control-placeholder" for="name"><FontAwesomeIcon icon={faEnvelope} /><strong>Email address:</strong></label>
+          <input type="email" placeholder='Introduce tu email de usuario' className="form-control" required autocomplete="off" onChange={event => setEmail(event.target.value)}/>
+          
         </div>
-      </form>
-      <div className="d-flex justify-content-center mt-3 mb-2" >
-        <button onClick={() => SendPass()}>Enviar Contraseña</button>
+        <div className="d-flex justify-content-center mt-3 mb-2" >
+          <button className="btnregistro" onClick={() => SendPass()}>Enviar Contraseña</button>
       </div>
-
       <form>
-        <a href={"/mainindex"}>
-          <input type="button" value="Cerrar" />
+        <a href={"/loginmensaje"}>
+          <input type="button" className="btncerrar" value="Cerrar" />
         </a>
       </form>
+      </form>
+      
+
+      
 
 
     </>

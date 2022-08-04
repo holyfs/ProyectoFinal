@@ -1,3 +1,11 @@
 .contactar {
     border: 0;
 }
+
+.cajadescri{
+    box-sizing: content-box;
+width: 50%;
+border: solid gainsboro 5px;
+padding: 5px;
+background-color: whitesmoke;
+}
