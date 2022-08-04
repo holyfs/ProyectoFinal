@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import { faUser, faEnvelope, faCheck, faLock, faCalendar, faGuitar, faCamera, faComment} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import "../../styles/signup.css";
@@ -108,10 +110,11 @@ export const SignUpTest = () => {
                         />
                     </center>
                 </div>
-                <br></br>
-                <div className="form-group">
+            <br></br>
+            
                     <label>
-                        Name:
+                    <FontAwesomeIcon icon={faUser} />
+                       <strong> Nombre:</strong>
                         <input
                             type="text"
                             className="cajas"
@@ -120,9 +123,11 @@ export const SignUpTest = () => {
                             required
                         />
                     </label>
-                </div>
-                <br></br>
-                <div className="form-group">
+            
+                
+                    <label>
+                    <FontAwesomeIcon icon={faUser} /><strong>Apellido:</strong>
+                    
                     <input
                         type="text"
                         className="cajas"
@@ -130,9 +135,11 @@ export const SignUpTest = () => {
                         onChange={event => setLastName(event.target.value)}
                         required
                     />
-                </div>
-                <br></br>
-                <div className="form-group">
+                    </label>
+                <label>
+                    <FontAwesomeIcon icon={faCalendar} />
+                    <strong>Edad:</strong>
+               
                     <input
                         type="number"
                         className="cajas"
@@ -140,9 +147,11 @@ export const SignUpTest = () => {
                         onChange={event => setAge(event.target.value)}
                         required
                     />
-                </div>
-                <br></br>
-                <div className="form-group">
+            
+                </label>
+                <label>
+                <FontAwesomeIcon icon={faGuitar} />
+                <strong>Nombre de artista/Banda:</strong>
                     <input
                         type="text"
                         className="cajas"
@@ -150,33 +159,33 @@ export const SignUpTest = () => {
                         onChange={event => setArtist_name_or_band_name(event.target.value)}
                         required
                     />
-                </div>
-                <br></br>
-                <div className="form-group">
+                </label>
                     <label>
-                        ¿Eres una banda?
+                        <strong>¿Eres una banda?</strong>
                         <input
                             type="checkbox"
                             checked={band}
                             onChange={()=>handleChange("band")}
                         />
                     </label>
-                </div>
-                <br></br>
-                <div className="form-group">
+            
+            <br></br>
+        
                     <label>
-                        ¿Tienes Experiencia?
+                        <strong>¿Tienes Experiencia?</strong>
                         <input
                             type="checkbox"
                             checked={experience}
                             onChange={()=>handleChange("experience")}
                         />
                     </label>
-                </div>
+    
                 <br></br>
-                <div className="form-group">
+                <br></br>
+                
                     <label>
-                        <h4>Elige tu foto de perfil</h4>
+                    
+                        <h4><FontAwesomeIcon icon={faCamera} />Elige tu foto de perfil</h4>
                         <input
                             type="file"
                             className="form-control"
@@ -184,10 +193,9 @@ export const SignUpTest = () => {
                             required
                         />
                     </label>
-                    <br></br>
-                </div>
-                <br></br>
-                <div className="form-group">
+                    <label>
+                    <FontAwesomeIcon icon={faComment} />
+                    <strong>Escribe sobre ti:</strong>
                     <input
                         type="textarea"
                         className="cajas"
@@ -195,9 +203,10 @@ export const SignUpTest = () => {
                         onChange={event => setDescription(event.target.value)}
                         required
                     />
-                </div>
-                <br></br>
-                <div className="form-group">
+                    </label>
+                    <label>
+                    <FontAwesomeIcon icon={faEnvelope} />
+                    <strong>Email:</strong>
                     <input
                         type="email"
                         className="cajas"
@@ -205,9 +214,10 @@ export const SignUpTest = () => {
                         onChange={event => setEmail(event.target.value)}
                         required
                     />
-                </div>
-                <br></br>
-                <div className="form-group">
+                    </label>
+                    <label
+                    ><FontAwesomeIcon icon={faLock} />
+                    <strong>Contraseña:</strong>
                     <input
                         type="password"
                         className="cajas"
@@ -215,18 +225,19 @@ export const SignUpTest = () => {
                         onChange={event => setPassword(event.target.value)}
                         required
                     />
-                </div>
-                <br></br>
-                <div className="form-group">
+                    </label>
+                    <label
+                    ><FontAwesomeIcon icon={faLock} />
+                    <strong>Confirma Contraseña:</strong>
                     <input
                         type="password"
                         className="cajas"
                         placeholder="password confirmation"
                         onChange={event => setConfirmPass(event.target.value)}
                     />
-                </div>
-                <br></br>
-                <p className="termino1"><input type="checkbox" required/>&nbsp; Estoy de acuerdo con <a className="termino2" href="">Terminos y Condiciones</a></p>
+                    </label>
+                
+                <p className="termino1"><input type="checkbox" required/>&nbsp; <FontAwesomeIcon icon={faCheck} />Estoy de acuerdo con <a className="termino2" href="">Terminos y Condiciones</a></p>
                 <button type="submit" className="btnregistro">
                     Register!
                 </button>

@@ -10,8 +10,6 @@ import { Link } from "react-router-dom";
 import config from "../config";
 import AddMusicalGenre from "../component/AddMusicalGenre.js"
 import AddMusicalInstruments from "../component/AddMusicalInstruments.js"
-
-
 function Search() {
   const [usuarios, setUsuarios] = useState([]);
   const [tablaUsuarios, setTablaUsuarios] = useState([]);
