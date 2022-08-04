@@ -55,6 +55,9 @@ function Search() {
     //setUserInstruments(resultadosBusqueda);
     //setUserGenres(resultadosBusqueda);
   }
+
+
+
   const getSelectedGenres = (selection, tipo) => {
     if (tipo === "G") {
       setSearchUserGenre(selection)
@@ -62,11 +65,18 @@ function Search() {
       setSearchUserInstruments(selection)
     }
   }
+  const NoEncontroNada=()=>{
+    let mensaje =<div className="alert alert-danger mt-3" role="alert">
+    No hay resultados para tu búsqueda!
+  </div>
+     return mensaje
+  }
+
   const filtroGenre = () => {
 
-    if (searchUserGenre.length === 0) {
+    if (searchUserGenre.length === 0){
       setUsuarios(tablaUsuarios)
-      return;
+      return
     }
 
     let filtroPorGenero = []
@@ -152,7 +162,7 @@ function Search() {
         </div>
       </div>
       <div className="row" >
-        {usuarios.map((usuarios) => (
+        {usuarios.length>0?usuarios.map((usuarios) => (
           <div
             key={usuarios.user.id}
             className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark"
@@ -188,10 +198,9 @@ function Search() {
                 </div>
               </div>
             </div>
-
           </div>
-
-        ))}
+          )):<div>{NoEncontroNada()}</div>
+        }
       </div>
     </>
   );

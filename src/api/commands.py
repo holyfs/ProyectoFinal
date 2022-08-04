@@ -168,7 +168,7 @@ def setup_commands(app):
         user.description = "Soy Nuevo en esto​"
         user.experience = False
         user.age = 35
-        user.avatar = "hol"
+        user.avatar = "https://garajedelrock.com/wp-content/uploads/2022/06/serj-tankian-de-system-of-a-down-lanza-su-nueva-cancion-amber.jpg"
         user.artist_name_or_band_name = "Angel Fernandez"
         db.session.add(user)
         db.session.commit()
@@ -182,7 +182,7 @@ def setup_commands(app):
         user.description = "Soy un genio a la guitarra"
         user.experience = True
         user.age = 35
-        user.avatar = "hhollssdfl"
+        user.avatar = "https://estacionk2.com/wp-content/uploads/2021/03/David-Gilmour-Hero-Credit-Jorgen-Angel-Redferns@2560x1707.jpg"
         user.artist_name_or_band_name = "Ely Cruz"
         db.session.add(user)
         db.session.commit()
@@ -196,7 +196,7 @@ def setup_commands(app):
         user.description = "Jairo empezó su carrera como músico de calle, por lugares tan distintos como Lloret de Mar, Barcelona o París. Más tarde formó el grupo Trimelón de Naranjus, con varios amigos, y grabó dos discos en los años 1997 y 2000. Tras la disolución del grupo, ha hecho espectáculos por los bares mezclando su música, monólogos y boxeo en un pequeño cabaré que ha paseado el Rumboxing (rumba, swing y combate cuerpo a cuerpo) por ciudades como Madrid, Burgos o Palma de Mallorca."
         user.experience = True
         user.age = 35
-        user.avatar = "holassss"
+        user.avatar = "https://images.thebrag.com/td/uploads/2020/08/Danny-Carey-Tool-Drumming-Performance-600x340.jpg"
         user.artist_name_or_band_name = "Muchachito Bombo Infierno"
         db.session.add(user)
         db.session.commit()
