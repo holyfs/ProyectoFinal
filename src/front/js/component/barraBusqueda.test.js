@@ -57,6 +57,9 @@ function Search() {
     //setUserInstruments(resultadosBusqueda);
     //setUserGenres(resultadosBusqueda);
   }
+
+
+
   const getSelectedGenres = (selection, tipo) => {
     if (tipo === "G") {
       setSearchUserGenre(selection)
@@ -64,11 +67,15 @@ function Search() {
       setSearchUserInstruments(selection)
     }
   }
+  const NoEncontroNada=()=>{
+     return <h3>No se encontraron incidencias, vuelve a intentarlo</h3>
+  }
+
   const filtroGenre = () => {
 
-    if (searchUserGenre.length === 0) {
+    if (searchUserGenre.length === 0){
       setUsuarios(tablaUsuarios)
-      return;
+      return
     }
 
     let filtroPorGenero = []
@@ -154,7 +161,7 @@ function Search() {
         </div>
       </div>
       <div className="row" >
-        {usuarios.map((usuarios) => (
+        {usuarios?.map((usuarios) => (
           <div
             key={usuarios.user.id}
             className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark"
@@ -193,7 +200,7 @@ function Search() {
 
           </div>
 
-        ))}
+        ))}: {NoEncontroNada()}
       </div>
     </>
   );
