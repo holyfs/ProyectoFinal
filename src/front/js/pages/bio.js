@@ -32,75 +32,73 @@ export const Bio = () => {
     }, [])
     return (
         <>
-            <div>
-                <div
-                    key={usuarios.id}
-                    className="container-fluid">
-
-
-                    <div className="row">
-                        <div className="col-3">
-                            <h1 className="titulos"> {usuarios.artist_name_or_band_name}</h1>
-                        </div>
-
-
-                        <div className="d-flex justify-content-end">
-                            <form>
-                                <a href={"/contactNoModal:" + id}>
-                                    <input type="button" className="btn btn-info" value="Contacto" />
-                                </a>
-                            </form>
-                        </div>
-
-
-
+            <div className="container-fluid">
+                <div className="row mt-2 d-flex justify-content-center">
+                    <div className="col-3 d-flex align-items-center flex-column">
+                        <img className="rounded-circle mt-5 mb-2" width="300px" height="300px" src={usuarios.avatar}></img>
                     </div>
-
-
-                    <div className="container-fluid">
+                    <div className="col-7">
                         <div className="row">
-                            <div className="col-3">
-                                <img className="rounded-circle" width="350px" height="350px" src={usuarios.avatar}></img>
-                                <div className="row">
-                            <div className="col-3">
-                                <div className="row">
+                            <div className="row mb-2">
+                                <h1 className="bioperfil col" onChange={event => setArtist_name_or_band_name(event.target.value)}><strong style={{ textTransform: 'uppercase' }}>{usuarios.artist_name_or_band_name}</strong></h1>
+                            </div>
+                            <div className="row mb-2 ">
+                                <span className="PersonalDates col-10 pt-2"><h3><strong>Datos Personales</strong></h3></span>
+                                <button type="button" className="btn btn-info col-2" onClick={() => { window.location.href = "/contactNoModal:" + id }}><strong>Contacto</strong></button>
+                            </div>
+                            <div className="row mb-1">
+                                <span className="col"><strong>Nombre:</strong> {usuarios.name}</span>
+                            </div>
+                            <div className="row mb-1">
+                                <span className="col"><strong>Apellido:</strong> {usuarios.last_name}</span>
+                            </div>
+                            <div className="row mb-1">
+                                <span className="col"><strong>Edad:</strong> {usuarios.age}</span>
+                            </div>
+                            <div className="row mb-1">
+                                <div className="form-group">
+                                    <label>
+                                        banda:
+                                        <input
+                                            type="checkbox"
+                                            checked={usuarios.band}/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="row mb-1">
+                                <div className="form-group">
+                                    <label>
+                                        Experiencia:
+                                        <input
+                                            type="checkbox"
+                                            checked={usuarios.experience}/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="row mb-1">
+                                <div className="col">
+                                    <label><strong>Descripción</strong> </label>
+                                    <div>{usuarios.description} </div>
+                                </div>
+
+                            </div>
+                            <div className="row">
+                                <div className="col">
                                     <label className="mb-2" ><strong>Generos:</strong> {userGenre?.map((genre) => genre.label + " ")}</label>
                                 </div>
-                                <div className="row">
-                                    <label className="mb-2" ><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <label className="mb-2 "><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
                                 </div>
                             </div>
                         </div>
-                            </div>
-                            <div className="col-9">
-                                <h1 className="PersonalDates">Datos Personales</h1>
-                                <ul className="list-group">
-                                    <label><h3>Nombre</h3></label>
-                                    <li class="list-group-item col-4 list-group-item-success">{usuarios.name}</li>
-                                    <label><h3>Apellido</h3></label>
-                                    <li class="list-group-item col-4 list-group-item-success">{usuarios.last_name}</li>
-                                    <label><h3>Descripción</h3></label>
-                                        <div className="form-floating cajadescri" style={{ alignItems: "center" }}>
-                                            
-                                            <h3>{usuarios.description}</h3>
-                                        </div>
-                                </ul>
-                            </div>
+                        <div className="d-flex justify-content-center mt-3 mb-2" >
+
                         </div>
                     </div>
-
-                    <div className="container-fluid">
-                        
-
-                    </div>
-
                 </div>
-
             </div>
         </>
-
-
-
-
     )
 }
