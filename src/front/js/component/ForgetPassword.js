@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../../styles/App.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -18,38 +18,50 @@ export const ForgetPassword = () => {
       method: "PUT",
       headers: {
         "mode": 'no-cors',
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({
-				email: email
-			})
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email
+      })
     }).then((response) => {
       return response.json()
-    }).then((response)=>{
-      if (response.msg) {
+    }).then((response) => {
+      if (response.msg = "Password enviado") {
         Swal.fire({
-            title: response.msg,
-            confirmButtonText: 'ok',
-            confirmButtonColor: 'rgb(25, 179, 149)',
-           
-        }).then((result)=>{
-          if(result){
-            window.location.href = "/mainindex"}
-          else{
+          title: response.msg,
+          confirmButtonText: 'ok',
+          confirmButtonColor: 'rgb(25, 179, 149)',
+
+        }).then((result) => {
+          if (result) {
+            window.location.href = "/"
+          }
+        })
+      }
+      if (response.msg = "Email is not registered") {
+        Swal.fire({
+          title: response.msg,
+          confirmButtonText: 'ok',
+          confirmButtonColor: 'rgb(25, 179, 149)',
+
+        }).then((result) => {
+          if (result) {
             window.location.href = "/forgetpassword"
           }
-          })
-        
-        return;
-    }    
+        })
+      }
+
+
+      return;
+
     }).catch((error) => {
       Swal.fire({
-          title: 'Error al hacer registro',
-          confirmButtonText: 'ok',
-          confirmButtonColor: 'rgb(25, 169, 149)',
+        title: 'Error al hacer registro',
+        confirmButtonText: 'ok',
+        confirmButtonColor: 'rgb(25, 169, 149)',
       })
-        console.log("error")
-  }) 
+      console.log(error)
+    })
   }
 
 

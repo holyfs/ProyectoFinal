@@ -52,7 +52,7 @@ export const Login = () => {
             icon: 'sucess',
             title: 'Login Completo',
             text: 'Gracias por usar esta página web ',
-            footer: '<a href="/personalbio">Quieres ir a tu página personal?</a>'
+            footer: '<a href="/personalbio">Vamos a tu pagina personal</a>'
           })
 	}
 
