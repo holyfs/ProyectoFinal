@@ -22,34 +22,25 @@ export const ContactNoModal = () => {
   let id = window.location.href.split(":")[2]
 
 
-  const SendMsg = () => {
-    fetch(config.hostname + "/api/sendMsg/", {
-      method: "PUT",
+  const SendMsg = async() => {
+   const response = await fetch(config.hostname + "/api/sendmsg", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
         name: name,
-				email: email,
+        contact_email: email,
         phone: phone,
-        msg: msg,
+        mensaje: msg,
         id_user: id
-			})
-    });
-    
-    Swal.fire({
-      icon: 'sucess',
-      title: 'Mensaje Enviado',
-      confirmButtonText: 'Volver a pagina del artista',
-      confirmButtonColor: 'rgb(25, 169, 149)',
-    }).then((result) => {
-      if (result.value) {
-          window.location.href = "/bio:"+id
-      } else {
-          window.location.href = "/mainindex"
-      }
+      })
     })
-  }
+   alert("mensaje y listo")
+   window.location.href = '/bio:' + id
+    }  
+    
+
 
 
   return (
