@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom'
 import '../../styles/App.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,15 +15,17 @@ export const ChangePasswordNoModal = () => {
   const [password, setPassword] = useState("");
   const [newpassword, setNewPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
-  let id = window.location.href.split(":")[2]
-
+  const params = useParams();
+  let id = params['id'];
+  const navigate = useNavigate();
   const ChangePassword = async () => {
 
     let newRequest = new FormData();
     newRequest.append("password", password);
-    newRequest.append("new_password",newpassword);
+    newRequest.append("new_password", newpassword);
     newRequest.append("id", id)
     const token = JSON.parse(localStorage.getItem("jwt-token"));
+
 
     if (newpassword !== confirmPass) {
       alert("Las contraseñas no coinciden");
@@ -43,52 +46,52 @@ export const ChangePasswordNoModal = () => {
         title: 'Contraseña guardada',
 
       }).then(() => {
-        window.location.href = '/personalbio:' + id
+        navigate(`/personalbio/${id}`);
       })
       return responseJson;
     }
   }
 
-    return (
-      <>
-       <div className="form">
-      
+  return (
+    <>
+      <div className="form">
+
         <center>
           <img
             src="https://www.muycomputer.com/wp-content/uploads/2018/06/WiFi-password.jpg"
             alt="profile-img"
             className="profile-img-card"
             width="250"
-			      height="250"
+            height="250"
           />
         </center>
-        
+
         <label><strong>Antigua Contraseña:</strong></label>
         <input type="password" className="form-control cajas" onChange={event => setPassword(event.target.value)} required />
-        
-      
-        
-        <label><strong>Nueva Contraseña:</strong>  </label>
-  
-        <input type="password" className="form-control cajas" onChange={event => setNewPassword(event.target.value)} required />
-        
-        <label><strong>Confimre Contraseña:</strong>  </label>
-      
-        <input type="password" className="form-control cajas" onChange={event => setConfirmPass(event.target.value)} required />
-      
-      
-        
-          <button className="btnregistro" onClick={() => ChangePassword()}>Cambiar contraseña</button>
-        
-      
-        
-            <a href={"/personalbio:" + id}>
-              <input type="button" className="btn btn-danger" value="Cerrar" />
-            </a>
-        
-        </div>
-      </>
-    )
 
-  }
+
+
+        <label><strong>Nueva Contraseña:</strong>  </label>
+
+        <input type="password" className="form-control cajas" onChange={event => setNewPassword(event.target.value)} required />
+
+        <label><strong>Confimre Contraseña:</strong>  </label>
+
+        <input type="password" className="form-control cajas" onChange={event => setConfirmPass(event.target.value)} required />
+
+
+
+        <button className="btnregistro" onClick={() => ChangePassword()}>Cambiar contraseña</button>
+
+
+
+        <a href={"/personalbio:" + id}>
+          <input type="button" className="btn btn-danger" value="Cerrar" />
+        </a>
+
+      </div>
+    </>
+  )
+
+}
 

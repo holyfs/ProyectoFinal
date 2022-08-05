@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useParams } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import Contact from "../component/contact";
 import '../../styles/bio.css';
@@ -14,7 +15,9 @@ export const Bio = () => {
     const [tablaUsuarios, setTablaUsuarios] = useState([]);
     const [userInstruments, setUserInstruments] = useState(null);
     const [userGenre, setUserGenres] = useState(null);
-    let id = window.location.href.split(":")[2]
+    const params = useParams();
+    let id = params['uid'];
+
 
     const peticionGet = async () => {
         await axios.get(`${config.hostname}/api/user/${id}`)
@@ -61,7 +64,7 @@ export const Bio = () => {
                                         banda:
                                         <input
                                             type="checkbox"
-                                            checked={usuarios.band}/>
+                                            checked={usuarios.band} />
                                     </label>
                                 </div>
                             </div>
@@ -71,7 +74,7 @@ export const Bio = () => {
                                         Experiencia:
                                         <input
                                             type="checkbox"
-                                            checked={usuarios.experience}/>
+                                            checked={usuarios.experience} />
                                     </label>
                                 </div>
                             </div>

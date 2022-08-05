@@ -23,45 +23,26 @@ export const ForgetPassword = () => {
       body: JSON.stringify({
         email: email
       })
-    }).then((response) => {
-      return response.json()
-    }).then((response) => {
-      if (response.msg = "Password enviado") {
-        Swal.fire({
-          title: response.msg,
-          confirmButtonText: 'ok',
-          confirmButtonColor: 'rgb(25, 179, 149)',
+    });
+    alert("Contraseña Enviada")
+    window.location.href = config.hostname + "/login.mensajes"
 
-        }).then((result) => {
-          if (result) {
-            window.location.href = "/"
-          }
-        })
+    Swal.fire({
+      title: gsgafsgdf,
+      confirmButtonText: 'ok',
+      confirmButtonColor: 'rgb(25, 179, 149)',
+
+    }).then((result) => {
+      if (result) {
+        window.location.href = "/"
       }
-      if (response.msg = "Email is not registered") {
-        Swal.fire({
-          title: response.msg,
-          confirmButtonText: 'ok',
-          confirmButtonColor: 'rgb(25, 179, 149)',
-
-        }).then((result) => {
-          if (result) {
-            window.location.href = "/forgetpassword"
-          }
-        })
-      }
-
-
-      return;
-
-    }).catch((error) => {
-      Swal.fire({
-        title: 'Error al hacer registro',
-        confirmButtonText: 'ok',
-        confirmButtonColor: 'rgb(25, 169, 149)',
-      })
-      console.log(error)
     })
+
+
+
+
+    return;
+
   }
 
 
@@ -70,32 +51,32 @@ export const ForgetPassword = () => {
 
 
       <form className="form">
-      <center>
+        <center>
           <img
             src="https://www.shareicon.net/download/2016/05/29/772533_locked_512x512.png"
             alt="profile-img"
             className="profile-img-card"
             width="250"
-			      height="250"
+            height="250"
           />
-          </center>
+        </center>
         <div className="form-group">
           <label className="form-control-placeholder" for="name"><FontAwesomeIcon icon={faEnvelope} /><strong>Email address:</strong></label>
-          <input type="email" placeholder='Introduce tu email de usuario' className="form-control" required autocomplete="off" onChange={event => setEmail(event.target.value)}/>
-          
+          <input type="email" placeholder='Introduce tu email de usuario' className="form-control" required autocomplete="off" onChange={event => setEmail(event.target.value)} />
+
         </div>
         <div className="d-flex justify-content-center mt-3 mb-2" >
           <button className="btnregistro" onClick={() => SendPass()}>Enviar Contraseña</button>
-      </div>
-      <form>
-        <a href={"/loginmensaje"}>
-          <input type="button" className="btncerrar" value="Cerrar" />
-        </a>
+        </div>
+        <form>
+          <a href={"/loginmensaje"}>
+            <input type="button" className="btncerrar" value="Cerrar" />
+          </a>
+        </form>
       </form>
-      </form>
-      
 
-      
+
+
 
 
     </>

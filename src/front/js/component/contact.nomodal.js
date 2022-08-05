@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../../styles/App.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -15,11 +16,13 @@ export const ContactNoModal = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [msg, setMsg] = useState("");
-  let id = window.location.href.split(":")[2]
+  const params = useParams();
+  let id = params['id'];
+  const navigate = useNavigate();
 
 
-  const SendMsg = async() => {
-   const response = await fetch(config.hostname + "/api/sendmsg", {
+  const SendMsg = async () => {
+    fetch(config.hostname + "/api/sendmsg", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -32,23 +35,33 @@ export const ContactNoModal = () => {
         id_user: id
       })
     })
-   alert("mensaje y listo")
-   window.location.href = '/bio:' + id
-    }  
-    
+    alert("Mensaje Enviado")
+    window.location.href = config.hostname + "/bio:" + id
+    Swal.fire({
+
+      title: 'Mensaje Enviado',
+      text: 'Gracias por usar esta página web ',
+      confirmButtonText: 'Vamos a la pagina del artista',
+
+    }).then((result) => {
+
+      if (result.value) { navigate(`/bio/${id}`) }
+
+    })
 
 
+  }
 
   return (
     <>
       <form className="form">
-      <center>
+        <center>
           <img
             src="https://us.123rf.com/450wm/8vfanrf/8vfanrf1602/8vfanrf160200067/53778178-contacto-iconos-de-correo-electr%C3%B3nico-concepto-bolet%C3%ADn-tel%C3%A9fono-.jpg?ver=6"
             alt="profile-img"
             className="profile-img-card"
             width="250"
-			      height="250"
+            height="250"
           />
         </center>
         <div className="form-group">
@@ -73,13 +86,13 @@ export const ContactNoModal = () => {
 
 
 
-        
-          
-            {/* <a href={"/bio:" + id}>
-              <input type="button" className="btn btn-danger" value="Cerrar" />
-            </a> */}
-        
-      
+
+
+        <a href={"/bio:" + id}>
+          <input type="button" className="btn btn-danger" value="Cerrar" />
+        </a>
+
+
 
 
 

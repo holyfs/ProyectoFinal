@@ -65,16 +65,16 @@ function Search() {
       setSearchUserInstruments(selection)
     }
   }
-  const NoEncontroNada=()=>{
-    let mensaje =<div className="alert alert-danger mt-3" role="alert">
-    No hay resultados para tu búsqueda!
-  </div>
-     return mensaje
+  const NoEncontroNada = () => {
+    let mensaje = <div className="alert alert-danger mt-3" role="alert">
+      No hay resultados para tu búsqueda!
+    </div>
+    return mensaje
   }
 
   const filtroGenre = () => {
 
-    if (searchUserGenre.length === 0){
+    if (searchUserGenre.length === 0) {
       setUsuarios(tablaUsuarios)
       return
     }
@@ -162,7 +162,7 @@ function Search() {
         </div>
       </div>
       <div className="row" >
-        {usuarios.length>0?usuarios.map((usuarios) => (
+        {usuarios.length > 0 ? usuarios.map((usuarios) => (
           <div
             key={usuarios.user.id}
             className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark"
@@ -189,7 +189,7 @@ function Search() {
                     {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}
                   </div>
                   <div>
-                    <Link to={`/bio:${usuarios.user.id}`}>
+                    <Link to={`/bio/${usuarios.user.id}`}>
                       <button type="button" className="botonAnillos">
                         Info
                       </button>
@@ -199,7 +199,7 @@ function Search() {
               </div>
             </div>
           </div>
-          )):<div>{NoEncontroNada()}</div>
+        )) : <div>{NoEncontroNada()}</div>
         }
       </div>
     </>
