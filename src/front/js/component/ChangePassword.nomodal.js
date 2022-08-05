@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import '../../styles/App.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import config from '../config';
 import Swal from "sweetalert2";
 import "../../styles/signup.css";
 import '../../styles/App.css';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 
 export const ChangePasswordNoModal = () => {
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [password, setPassword] = useState("");
   const [newpassword, setNewPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
@@ -41,6 +45,7 @@ export const ChangePasswordNoModal = () => {
       Swal.fire({
         icon: 'sucess',
         title: 'Contraseña guardada',
+        timer: 5500
 
       }).then(() => {
         window.location.href = '/personalbio:' + id
@@ -51,6 +56,14 @@ export const ChangePasswordNoModal = () => {
 
     return (
       <>
+      <a onClick={handleShow}>
+      <button className="btn btn-secondary">Cambiar Contraseña</button>
+      </a>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>FaceMusicApp</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
        <div className="form">
       
         <center>
@@ -82,11 +95,16 @@ export const ChangePasswordNoModal = () => {
         
       
         
-            <a href={"/personalbio:" + id}>
-              <input type="button" className="btn btn-danger" value="Cerrar" />
-            </a>
+            
         
         </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className="btn btn-danger" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       </>
     )
 

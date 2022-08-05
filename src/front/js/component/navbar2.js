@@ -7,7 +7,8 @@ import Signup from "../component/signup"
 import "../../styles/navBar2.css"
 import {Login} from "../component/login.component"
 import Swal from "sweetalert2"
-import face from "../../img/home.png";
+import Logo from "../../img/logo.png";
+
 
 export const Navbar2 = () => {
     const logout = () => {
@@ -42,16 +43,36 @@ export const Navbar2 = () => {
 	let tokLogout = localStorage.getItem("jwt-token")
 
     return (
-
-        <nav>
-        <ul className="fancyNav">
-            <li id="home"><a href="#home"><img src={face} /></a></li>
-            <li id="news"><a href="#news">News</a></li>
-            <li id="about"><a href="#about">About us</a></li>
-            <li id="services"><a href="#services">Services</a></li>
-            <li id="contact"><a href="#contact">Contact us</a></li>
+        <form className="form-inline">
+    
+        <nav className="">
+        <ul className="fancyNav image3">
+            <Link to ="/">
+            <li id="about" type="button"><a>🅸🅽🅸🅲🅸🅾<b>🎧</b></a></li>
+            </Link>
+            
+            <li id="about" type="button"><a>
+            {tok==null?
+			<App />
+			:<Link to={`/personalbio:${user_id}`}>
+			🅼🅸 🆉🅾🅽🅰🎤
+		  	</Link>}</a></li>
+            
+            <li id="about"><a type="button">
+            {tokLogout==null?
+			<Link to="/signup2">
+			🆂🅸🅶🅽🆄🅿🔔
+			</Link>
+			:
+			<a type="button" onClick={logout}>🅻🅾🅶🅾🆄🆃🔇</a>
+			}</a></li>
         </ul>
         </nav>
+        <center>
+        <a href="/"><img className="image3" src={Logo} width="250"
+                            height="250"/></a>
+        </center>
+        </form>
     );
 
 };

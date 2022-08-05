@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../../styles/App.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import config from '../config';
@@ -10,7 +11,10 @@ import '../../styles/App.css';
 
 
 export const ContactNoModal = () => {
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -41,6 +45,14 @@ export const ContactNoModal = () => {
 
   return (
     <>
+    <a onClick={handleShow}>
+    <button type="button" className="btn btn-info">Contactar</button>
+    </a>
+    <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>FaceMusicApp</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
       <form className="form">
       <center>
           <img
@@ -71,20 +83,14 @@ export const ContactNoModal = () => {
           <button className="btnregistro" onClick={() => SendMsg()}>Enviar</button>
         </div>
 
-
-
-        
-          
-            {/* <a href={"/bio:" + id}>
-              <input type="button" className="btn btn-danger" value="Cerrar" />
-            </a> */}
-        
-      
-
-
-
       </form>
-
+      </Modal.Body>
+      <Modal.Footer>
+          <Button className="btn btn-danger" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   )
 }
