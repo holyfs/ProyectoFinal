@@ -169,6 +169,7 @@ function Search() {
           >
             <div
               className={`${styles.card} d-flex flex-column justify-content-center`}
+              style={{ width: '330px' }}
             >
               <img
                 className={`${styles.img} img-fluid`}

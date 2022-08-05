@@ -212,7 +212,7 @@ export const PersonalBio = (props) => {
                             <button type="button" className="btn btn-info mb-2"  onClick={changePic}>Cambiar foto de perfil</button>
                         </div>
                         <div className="">
-                            <button className="btn btn-secondary" onClick={redirect} >Cambiar Contraseña</button>
+                        <ChangePasswordNoModal />
                         </div>
                     </div>
                     <div className="col-7">

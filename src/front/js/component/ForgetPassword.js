@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../../styles/App.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import config from '../config';
@@ -10,7 +11,10 @@ import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const ForgetPassword = () => {
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [email, setEmail] = useState("");
 
   const SendPass = () => {
@@ -67,7 +71,15 @@ export const ForgetPassword = () => {
 
   return (
     <>
+     <a onClick={handleShow}>
+        <strong>¡Recuperar!</strong>
+      </a>
 
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>FaceMusicApp</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
 
       <form className="form">
       <center>
@@ -87,12 +99,16 @@ export const ForgetPassword = () => {
         <div className="d-flex justify-content-center mt-3 mb-2" >
           <button className="btnregistro" onClick={() => SendPass()}>Enviar Contraseña</button>
       </div>
-      <form>
-        <a href={"/loginmensaje"}>
-          <input type="button" className="btncerrar" value="Cerrar" />
-        </a>
+      
       </form>
-      </form>
+      </Modal.Body>
+
+      <Modal.Footer>
+          <Button className="btncerrar" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       
 
       

@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import config from "../config.js";
 import Swal from "sweetalert2"
 import App from "../pages/App"
+import Terms from "../pages/termsCondition"
 export const SignUpTest = () => {
     //const { store, actions } = useContext(Context);
     const [name, setName] = useState("");
@@ -237,11 +238,11 @@ export const SignUpTest = () => {
                     />
                     </label>
                 
-                <p className="termino1"><input type="checkbox" required/>&nbsp; <FontAwesomeIcon icon={faCheck} />Estoy de acuerdo con <a className="termino2" href="">Terminos y Condiciones</a></p>
+                <p className="termino1"><input type="checkbox" required/>&nbsp; <FontAwesomeIcon icon={faCheck} />Estoy de acuerdo con <a href="#"><Terms /></a></p>
                 <button type="submit" className="btnregistro">
                     Register!
                 </button>
-                <p className="tengo-cuenta"><a className="tengo-cuenta">Ya tengo cuenta <button className="btn btn-dark" type="button"><App /></button></a></p>
+                <p className="tengo-cuenta pb-5"><a className="tengo-cuenta">Ya tengo cuenta <button className="btn btn-dark" type="button"><App /></button></a></p>
 
             </form>
         </div>

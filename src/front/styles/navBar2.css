@@ -10,6 +10,7 @@ nav{
     /* Affects the UL element */
     overflow: hidden;
     display: inline-block;
+    margin-top: 7px;
 
     border-radius: 4px;
     -moz-border-radius: 4px;
@@ -131,11 +132,11 @@ nav{
 
 /* Styling the anchor elements */
 
+
 .fancyNav li a{
     color: #5d5d5d;
     display: inline-block;
     font: 20px/1 Lobster,Arial,sans-serif;
-    padding: 12px 35px 14px;
     position: relative;
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
     z-index:2;
@@ -143,13 +144,4 @@ nav{
     white-space:nowrap;
 }
 
-.fancyNav a.homeIcon{
-    background:url('../img/home.png') no-repeat center center;
-    display: block;
-    overflow: hidden;
-    padding-left: 12px;
-    padding-right: 12px;
-    text-indent: -9999px;
-    width: 16px;
-}
 

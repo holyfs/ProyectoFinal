@@ -44,13 +44,7 @@ export const Bio = () => {
                         </div>
 
 
-                        <div className="d-flex justify-content-end">
-                            <form>
-                                <a href={"/contactNoModal:" + id}>
-                                    <input type="button" className="btn btn-info" value="Contacto" />
-                                </a>
-                            </form>
-                        </div>
+                       
 
 
 
@@ -69,6 +63,11 @@ export const Bio = () => {
                                 <div className="row">
                                     <label className="mb-2" ><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
                                 </div>
+                                <div className="row">
+                                <ContactNoModal />
+                                </div>
+                                    
+                            
                             </div>
                         </div>
                             </div>
@@ -85,6 +84,7 @@ export const Bio = () => {
                                             <h3>{usuarios.description}</h3>
                                         </div>
                                 </ul>
+                                
                             </div>
                         </div>
                     </div>

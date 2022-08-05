@@ -13,6 +13,7 @@ import CheckButton from "react-validation/build/button";
 import AuthService from "../../../services/auth.service";
 import "../../styles/signup.css";
 import Swal from "sweetalert2"
+import {ForgetPassword} from "../component/ForgetPassword"
 
 const required = value => {
   if (!value) {
@@ -99,7 +100,7 @@ class Login extends React.Component{
       
       <>
       
-      <div color="blue" onClick={this.abrirModal}>Login</div>
+      <div color="blue" onClick={this.abrirModal}>🅻🅾🅶🅸🅽🎙</div>
 
       
       
@@ -156,7 +157,7 @@ class Login extends React.Component{
                 <span>Login</span>
               </button>
               <h4>¿No tienes cuenta?</h4><a href="/signup2">¡Registrate!</a>
-              <h4>¿Olvidaste Tu Contraseña?</h4><a href="/forgetpassword">¡Recuperar!</a>
+              <h4>¿Olvidaste Tu Contraseña?</h4><a href="#"><ForgetPassword /></a>
             
             {this.state.message && (
               <div className="form-group">
