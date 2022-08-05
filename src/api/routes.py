@@ -641,17 +641,12 @@ def send_Msg():
     id = body["id_user"]
     user = User.query.filter_by(id=id).first()
     email = user.email
-    #name=body["name"]
-    #print(name)
-    # contact_email=body["contact_email"] 
-    # telefono=body["phone"]
-    # mensaje=body["mensaje"]
-    msg = Message('Alguien se quiere poner en contacto contigo', sender='facemusicapp@gmail.com', recipients = [email])
-    #msg.body = {name
-    # contact_email,
-    # telefono, 
-    #mensaje
-    #}
+    name=body["name"]
+    contact_email=body["contact_email"] 
+    telefono=body["phone"]
+    mensaje=body["mensaje"]
+    body="Hola " + user.name + "\n" + "Tienes un posible nuevo cliente llamado: "+name+ "\n"+"Correo: "+contact_email+ "\n"+"Número de telefono: "+telefono+"\n"+"y te manda a decir: "+mensaje
+    msg = Message('Alguien se quiere poner en contacto contigo', sender='facemusicapp@gmail.com', recipients = [email], body =body)
     mail.send(msg)
     return jsonify({"msg":"Mensaje enviado"})
 
