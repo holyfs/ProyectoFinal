@@ -65,16 +65,16 @@ function Search() {
       setSearchUserInstruments(selection)
     }
   }
-  const NoEncontroNada=()=>{
-    let mensaje =<div className="alert alert-danger mt-3" role="alert">
-    No hay resultados para tu búsqueda!
-  </div>
-     return mensaje
+  const NoEncontroNada = () => {
+    let mensaje = <div className="alert alert-danger mt-3" role="alert">
+      No hay resultados para tu búsqueda!
+    </div>
+    return mensaje
   }
 
   const filtroGenre = () => {
 
-    if (searchUserGenre.length === 0){
+    if (searchUserGenre.length === 0) {
       setUsuarios(tablaUsuarios)
       return
     }
@@ -118,7 +118,7 @@ function Search() {
 
   return (
     <>
-      <div className="row mb-3">
+      <div className="row" >
         <div className="d-flex justify-content-start">Nombre de artista o banda:
           <div style={{ width: '100%' }}>
             <input
@@ -161,46 +161,27 @@ function Search() {
           </div>
         </div>
       </div>
-      <div className="row" >
-        {usuarios.length>0?usuarios.map((usuarios) => (
+      <div className="row d-flex justify-content-around mt-3" >
+        {usuarios.length > 0 ? usuarios.map((usuarios) => (
           <div
             key={usuarios.user.id}
-            className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark"
+            className="col-lg-4 col-md-6 mb-4"
           >
-            <div
-              className={`${styles.card} d-flex flex-column justify-content-center`}
-              style={{ width: '330px' }}
-            >
-              <img
-                className={`${styles.img} img-fluid`}
-                src={usuarios.user.avatar}
-                alt=""
-                style={{ height: '280px', width: '330px' }}
-              />
-              <div className={`${styles.content}`}>
-                <div className="fs-4  mb-4">{usuarios.user.name}</div>
-                <div className="fs-4 fw-bold mb-4">{usuarios.user.artist_name_or_band_name}</div>
-                <div className="">
-                  <div className="fs-6 fw-bold">Genero Musical</div>
-                  <div className="fs-5">
-                    {usuarios.genres?.map((genre) => genre.genre.name + " ")}
-                  </div>
-                  <div className="fs-6 fw-bold">Instrumento</div>
-                  <div className="fs-5">
-                    {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}
-                  </div>
-                  <div>
-                    <Link to={`/bio:${usuarios.user.id}`}>
-                      <button type="button" className="botonAnillos">
-                        Info
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+            <div className="card" style={{ "width": 18 + "rem", "height": 30 + "rem" , "background": "rgba(0, 185, 182, 0.3)", "borderRadius": 10 + "px" }}>
+              <img src={usuarios.user.avatar} className="card-img-top" alt="imagen de la banda" style={{ height: 15 + "rem", width: 18 + "rem", "borderRadius": 10 + "px " +10 + "px " + 0 + "px " + 0 + "px " }} />
+              <div className="card-body">
+                <h5 className="card-title">{usuarios.user.artist_name_or_band_name}</h5>
+                <p className="card-text"><strong>Género Musical: </strong>
+                  {usuarios.genres?.map((genre) => genre.genre.name + " ")}</p>
+                <p className="card-text"><strong>Instrumento: </strong>
+                  {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}</p>
+              </div>
+              <div className="card-body">
+                <a href={`/bio:${usuarios.user.id}`} className="btn btn-info">BIO</a>
               </div>
             </div>
           </div>
-          )):<div>{NoEncontroNada()}</div>
+        )) : <div>{NoEncontroNada()}</div>
         }
       </div>
     </>
