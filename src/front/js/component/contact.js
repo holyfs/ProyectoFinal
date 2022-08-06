@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../styles/App.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -45,51 +44,39 @@ export const Contact = () => {
 
   return (
     <>
-    <a onClick={handleShow}>
-    <button type="button" className="btn btn-info">Contactar</button>
-    </a>
-    <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>FaceMusicApp</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-      <form className="form">
-      <center>
-          <img
-            src="https://us.123rf.com/450wm/8vfanrf/8vfanrf1602/8vfanrf160200067/53778178-contacto-iconos-de-correo-electr%C3%B3nico-concepto-bolet%C3%ADn-tel%C3%A9fono-.jpg?ver=6"
-            alt="profile-img"
-            className="profile-img-card"
-            width="250"
-			      height="250"
-          />
-        </center>
-        <div className="form-group">
-          <label className="form-control-placeholder" for="name"><strong>Email address:</strong></label>
-          <input type="email" className="form-control cajas" onChange={event => setEmail(event.target.value)} required />
-        </div>
-        <div className="form-group">
-          <label className="form-control-placeholder" for="nombre"><strong>Nombre:</strong></label>
-          <input type="nombre" className="form-control cajas" onChange={event => setName(event.target.value)} required />
-        </div>
-        <div className="form-group">
-          <label className="form-control-placeholder" for="Teléfono"><strong>Telefono:</strong></label>
-          <input type="mensaje" className="form-control cajas" onChange={event => setPhone(event.target.value)} required />
-        </div>
-        <div className="form-group">
-          <label className="form-control-placeholder" for="nombre"><strong>Mensaje:</strong></label>
-          <textarea type="mensaje" className="form-control cajas" onChange={event => setMsg(event.target.value)} required />
-        </div>
-        <div className="d-flex justify-content-center mt-3 mb-2" >
-          <button className="btnregistro" onClick={() => SendMsg()}>Enviar</button>
-        </div>
-
-      </form>
-      </Modal.Body>
-      <Modal.Footer>
-          <Button className="btn btn-danger" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
+      <a onClick={handleShow}>
+        <button type="button" className="btn btn-info">Contactar</button>
+      </a>
+      <Modal show={show} onHide={handleClose}>
+        <form className="contactForm" >
+          <center>
+            <img
+              src="https://alarmtech.com.do/wp-content/uploads/2019/05/contact-us-1024x350.jpg"
+              alt="profile-img"
+              className="profile-img-card"
+              width="300"
+              height="150"
+            />
+          </center>
+          <div className="form-group mt-4">
+            <input type="text" placeholder='Nombre' className="form-control cajas" onChange={event => setName(event.target.value)} required />
+          </div>
+          <div className="form-group">
+            <input type="email" placeholder='Email' className="form-control cajas" onChange={event => setEmail(event.target.value)} required />
+          </div>
+          <div className="form-group">
+            <input type="text" placeholder='Teléfono' className="form-control cajas" onChange={event => setPhone(event.target.value)} required />
+          </div>
+          <div className="form-group">
+            <textarea type="text" placeholder='Escribe tu mensaje aquí...' className="form-control cajas" onChange={event => setMsg(event.target.value)} required />
+          </div>
+          <div className="d-flex justify-content-center mt-3 mb-2" >
+            <button className="btnregistro" onClick={() => SendMsg()}>Enviar</button>
+          </div>
+          <div className="d-flex justify-content-end"><Button className="btn btn-danger d-flex justify-content-end" onClick={handleClose}>
+            Cerrar
+          </Button></div>
+        </form>
       </Modal>
     </>
   )
