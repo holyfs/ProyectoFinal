@@ -10,7 +10,7 @@ export const Footer = () => {
     <div>
     
         <nav>
-        <ul className="fancyNav image3">
+        <ul className="fancyNav image3 sticky-bottom">
 		<li>🅼🅰🅳🅴 🆆🅸🆃🅷 <i className="fa fa-heart text-danger" /> 🅱🆈 🅰🆈🅾🆉🅴, 🅴🅻🆈 🆈 🅰🅽🅶🅴🅻</li>
         </ul>
         </nav>

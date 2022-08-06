@@ -6,13 +6,13 @@
   grid-template-areas: "image" "text" "stats";
 
   border-radius: 18px;
-  background: lightgray;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+  background: rgba(0, 185, 182, 0.3);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
   font-family: roboto;
   text-align: center;
-  border-left: 1px solid rgb(172, 26, 87);
-  border-right: 1px solid rgb(172, 26, 87);
-  text-shadow: 0px 0px 9px #508AD3;
+  border: 2px solid rgba(0, 185, 182, 0.5);;
+
+  /* text-shadow: 0px 0px 9px #508AD3; */
   
 
   transition: 0.5s ease;
@@ -21,19 +21,19 @@
 }
 .card:hover {
   transform: scale(1.15);
-  box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
 }
-.content {
+/* .content {
   grid-area: text;
   margin: 25px;
-  COLOR: #1278BF;
-  font-size:80px;
-  font-weight: 300;
+  COLOR: #1278BF; 
+   font-size:80px;
+  font-weight: 300; 
 }
 .img {
   grid-area: image;
   border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-right-radius: 15px; 
   background-size: cover;
   align-self: center;
-}
+} */

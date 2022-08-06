@@ -31,7 +31,7 @@ export const Bio = () => {
     }, [])
     return (
         <>
-            <div className="container-fluid">
+            <div className="container-fluid" style={{"minHeight":90+"vh"}}>
                 <div className="row mt-2 d-flex justify-content-center">
                     <div className="col-3 d-flex align-items-center flex-column">
                         <img className="rounded-circle mt-5 mb-2" width="300px" height="300px" src={usuarios.avatar}></img>
@@ -43,7 +43,8 @@ export const Bio = () => {
                             </div>
                             <div className="row mb-2 ">
                                 <span className="PersonalDates col-10 pt-2"><h3><strong>Datos Personales</strong></h3></span>
-                                <Contact />
+                                <div className="col-2"><Contact /></div>
+                                
                             </div>
                             <div className="row mb-1">
                                 <span className="col"><strong>Nombre:</strong> {usuarios.name}</span>

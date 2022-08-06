@@ -86,7 +86,7 @@ export default class Login extends Component {
       
         <center>
           <img
-            src="https://pbs.twimg.com/profile_images/897355385/cabeza-avatar.gif"
+            src="./logo.png"
             alt="profile-img"
             className="profile-img-card"
             width="250"
@@ -95,7 +95,6 @@ export default class Login extends Component {
         </center>
           
             <div className="form-group">
-              <label htmlFor="username"> <FontAwesomeIcon icon={faEnvelope} /><strong>Email</strong></label>
               <Input
                 type="text"
                 className="cajas"
@@ -107,7 +106,6 @@ export default class Login extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password"><FontAwesomeIcon icon={faLock} /><strong>Password</strong></label>
               <Input
                 type="password"
                 className="cajas"
