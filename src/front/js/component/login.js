@@ -95,7 +95,6 @@ export default class Login extends Component {
         </center>
           
             <div className="form-group">
-              <label htmlFor="username"> <FontAwesomeIcon icon={faEnvelope} /><strong>Email</strong></label>
               <Input
                 type="text"
                 className="cajas"
@@ -107,7 +106,6 @@ export default class Login extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password"><FontAwesomeIcon icon={faLock} /><strong>Password</strong></label>
               <Input
                 type="password"
                 className="cajas"

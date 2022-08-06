@@ -119,7 +119,6 @@ class Login extends React.Component {
                 height="250"
               />
             </center>
-            <label htmlFor="username"> <FontAwesomeIcon icon={faEnvelope} /><strong>Email</strong></label>
             <Input
               type="text"
               className="cajas"
@@ -129,9 +128,6 @@ class Login extends React.Component {
               onChange={this.onChangeUsername}
               validations={[required]}
             />
-
-
-            <label htmlFor="password"><FontAwesomeIcon icon={faLock} /><strong>Password</strong></label>
             <Input
               type="password"
               className="cajas"
@@ -152,7 +148,7 @@ class Login extends React.Component {
               )}
               <span>Login</span>
             </button>
-            <h4>¿No tienes cuenta?</h4><a href="/signup">¡Registrate!</a>
+            <h4>¿No tienes cuenta?</h4><a href="/signup"><strong>¡Registrate!</strong></a>
             <h4>¿Olvidaste Tu Contraseña?</h4><a href="#"><ForgetPassword /></a>
 
             {this.state.message && (
@@ -170,7 +166,7 @@ class Login extends React.Component {
             />
 
             <ModalFooter>
-              <Button className="btncerrar" onClick={this.abrirModal}>Cerrar</Button>
+              <Button className="btn btn-danger" onClick={this.abrirModal}>Cerrar</Button>
             </ModalFooter>
           </Form>
         </Modal>
