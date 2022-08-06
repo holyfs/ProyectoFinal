@@ -8,6 +8,8 @@ import "../../styles/signup.css";
 import '../../styles/App.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 
 export const ChangePassword = () => {
@@ -19,6 +21,10 @@ export const ChangePassword = () => {
   const [newpassword, setNewPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   let id = window.location.href.split(":")[2]
+  // const params = useParams();
+  // let id = params['id'];
+  const navigate = useNavigate();
+
 
   const ChangePassword = async () => {
 
@@ -48,7 +54,7 @@ export const ChangePassword = () => {
         timer: 5500
 
       }).then(() => {
-        window.location.href = '/personalbio:' + id
+        navigate(`/personalbio:${id}`)
       })
       return responseJson;
     }

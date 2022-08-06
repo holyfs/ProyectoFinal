@@ -15,6 +15,8 @@ import config from "../config.js";
 import { faWindowMinimize } from "@fortawesome/free-regular-svg-icons";
 import { faPencil, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useParams } from 'react-router-dom';
+
 
 
 export const PersonalBio = (props) => {

@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import "../../styles/signup.css";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from 'react-router-dom';
 
 export const ForgetPassword = () => {
   const [show, setShow] = useState(false);
@@ -16,6 +17,8 @@ export const ForgetPassword = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+
 
   const SendPass = () => {
     fetch(config.hostname + `/api/user/reset-password`, {
@@ -30,27 +33,27 @@ export const ForgetPassword = () => {
     }).then((response) => {
       return response.json()
     }).then((response) => {
-      if (response.msg = "Password enviado") {
+      if (response.msg === 'Password enviado') {
         Swal.fire({
-          title: response.msg,
+          title: 'Password enviado',
           confirmButtonText: 'ok',
           confirmButtonColor: 'rgb(25, 179, 149)',
 
         }).then((result) => {
           if (result) {
-            window.location.href = "/"
+            navigate(`/`)
           }
         })
       }
-      if (response.msg = "Email is not registered") {
+      else if (response.msg === 'Email is not registered') {
         Swal.fire({
-          title: response.msg,
+          title: 'Email no registrado',
           confirmButtonText: 'ok',
           confirmButtonColor: 'rgb(25, 179, 149)',
 
         }).then((result) => {
           if (result) {
-            window.location.href = "/"
+            navigate(`/`)
           }
         })
       }
