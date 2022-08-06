@@ -70,7 +70,7 @@ export const SignUp = () => {
                     confirmButtonColor: 'rgb(25, 169, 149)',
                 }).then((result) => {
                     if (result.value) {
-                        window.location.href = "/loginmensaje"
+                        window.location.href = "/login"
                     } else {
                         window.location.href = "/mainindex"
                     }
@@ -78,7 +78,7 @@ export const SignUp = () => {
             }        
         }).catch((error) => {
                     Swal.fire({
-                        title: 'Error al hacer registro',
+                        title: error.msg,
                         confirmButtonText: 'ok',
                         confirmButtonColor: 'rgb(25, 169, 149)',
                     })
@@ -101,11 +101,11 @@ export const SignUp = () => {
                 <div className="boxCard">
                     <center>
                         <img
-                            src="https://st2.depositphotos.com/3854637/47799/v/600/depositphotos_477992494-stock-illustration-profile-of-a-young-woman.jpg"
+                            src="./logo.png"
                             alt="profile-img"
                             className="profile-img-card"
-                            width="395"
-                            height="258"
+                            width="350"
+                            height="350"
                         />
                     </center>
                 </div>
@@ -238,7 +238,7 @@ export const SignUp = () => {
                 
                 <p className="termino1"><input type="checkbox" required/>&nbsp; <FontAwesomeIcon icon={faCheck} />Estoy de acuerdo con <a href="#"><Terms /></a></p>
                 <button type="submit" className="btnregistro">
-                    Register!
+                    Registrar!
                 </button>
                 <p className="tengo-cuenta pb-5"><a className="tengo-cuenta">Ya tengo cuenta <button className="btn btn-dark" type="button"><App /></button></a></p>
 

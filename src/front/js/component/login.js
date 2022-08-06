@@ -86,7 +86,7 @@ export default class Login extends Component {
       
         <center>
           <img
-            src="https://pbs.twimg.com/profile_images/897355385/cabeza-avatar.gif"
+            src="./logo.png"
             alt="profile-img"
             className="profile-img-card"
             width="250"

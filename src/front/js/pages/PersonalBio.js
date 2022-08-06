@@ -202,7 +202,7 @@ export const PersonalBio = (props) => {
         }
     return (
         <>
-            <div className="container-fluid">
+            <div className="container-fluid" style={{"minHeight":90+"vh"}}>
                 <div className="row mt-2 d-flex justify-content-center">
                     <div className="col-3 d-flex align-items-center flex-column">
                         <img className="rounded-circle mt-5 mb-2" width="300px" height="300px" src={usuarios.avatar}></img>

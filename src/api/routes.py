@@ -158,7 +158,7 @@ def add_user():
     hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
     exist_user = User.query.filter_by(email=email).first()
     if exist_user:
-        return jsonify({"msg":"Email already registered"}),500  
+        return jsonify({"msg":"Email ya esta registrado"}),500  
     user = User(
         name=name,
         last_name=last_name,

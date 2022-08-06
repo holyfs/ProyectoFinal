@@ -66,10 +66,10 @@ export const Navbar = () => {
 			}</a></li>
         </ul>
         </nav>
-        <center>
+{/*         <center>
         <a href="/"><img className="image3" src={Logo} width="250"
                             height="250"/></a>
-        </center>
+        </center> */}
         </form>
     );
 
