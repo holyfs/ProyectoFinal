@@ -620,7 +620,7 @@ def reset_user_password():
     email = body["email"]
     exist_user = User.query.filter_by(email=email).first()
     if not exist_user:
-        return jsonify({"msg":"email is not registered"}), 404
+        return jsonify({"msg":"Email is not registered"}), 404
     else:
         password = reset_password()
         hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
