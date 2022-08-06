@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import Contact from "../component/contact";
+import {Contact} from "../component/contact";
 import '../../styles/bio.css';
-import { ContactNoModal } from "../component/contact.nomodal";
 import axios from "axios";
 import config from "../config.js"
 import "../../styles/tittles.css";
@@ -44,7 +43,7 @@ export const Bio = () => {
                             </div>
                             <div className="row mb-2 ">
                                 <span className="PersonalDates col-10 pt-2"><h3><strong>Datos Personales</strong></h3></span>
-                                <ContactNoModal />
+                                <Contact />
                             </div>
                             <div className="row mb-1">
                                 <span className="col"><strong>Nombre:</strong> {usuarios.name}</span>

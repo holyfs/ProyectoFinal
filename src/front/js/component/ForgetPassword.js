@@ -50,7 +50,7 @@ export const ForgetPassword = () => {
 
         }).then((result) => {
           if (result) {
-            window.location.href = "/forgetpassword"
+            window.location.href = "/"
           }
         })
       }

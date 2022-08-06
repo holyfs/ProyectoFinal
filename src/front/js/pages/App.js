@@ -156,7 +156,7 @@ class Login extends React.Component{
                 )}
                 <span>Login</span>
               </button>
-              <h4>¿No tienes cuenta?</h4><a href="/signup2">¡Registrate!</a>
+              <h4>¿No tienes cuenta?</h4><a href="/signup">¡Registrate!</a>
               <h4>¿Olvidaste Tu Contraseña?</h4><a href="#"><ForgetPassword /></a>
             
             {this.state.message && (

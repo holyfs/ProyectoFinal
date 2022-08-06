@@ -1,4 +1,4 @@
-import "../../styles/barraBusqueda.test.css";
+import "../../styles/SearchCardResults.css";
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,8 +8,8 @@ import styles from "../../styles/Card.module.css";
 import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
-import AddMusicalGenre from "../component/AddMusicalGenre.js"
-import AddMusicalInstruments from "../component/AddMusicalInstruments.js"
+import AddMusicalGenre from "./AddMusicalGenre.js"
+import AddMusicalInstruments from "./AddMusicalInstruments.js"
 function Search() {
   const [usuarios, setUsuarios] = useState([]);
   const [tablaUsuarios, setTablaUsuarios] = useState([]);

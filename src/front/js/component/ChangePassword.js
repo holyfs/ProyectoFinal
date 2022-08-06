@@ -1,81 +1,112 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../../styles/App.css';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import config from '../config';
+import Swal from "sweetalert2";
+import "../../styles/signup.css";
+import '../../styles/App.css';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-class ChangePassword extends React.Component{
-  state={
-    abierto: false,
-  }
 
-  abrirModal=()=>{
-    this.setState({abierto: !this.state.abierto});
-  }
-	
-  render(){
+export const ChangePassword = () => {
+  const [show, setShow] = useState(false);
 
-    const [password, setPassword] = useState("");
-    const [newpassword, setNewPassword] = useState("");
-	  const [confirmPass, setConfirmPass] = useState("");
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [password, setPassword] = useState("");
+  const [newpassword, setNewPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  let id = window.location.href.split(":")[2]
 
-    const ChangePassword = async() => {
-      if (newpassword !== confirmPass) {
-        alert("Las contraseñas no coinciden");
-        return;
-      }
-      fetch(config.hostname + "/user/<int:id>/new-password", {
+  const ChangePassword = async () => {
+
+    let newRequest = new FormData();
+    newRequest.append("password", password);
+    newRequest.append("new_password",newpassword);
+    newRequest.append("id", id)
+    const token = JSON.parse(localStorage.getItem("jwt-token"));
+
+    if (newpassword !== confirmPass) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+    else {
+      const response = await fetch(config.hostname + `/api/user/new-password`, {
         method: "PUT",
         headers: {
-          "Content-type": "multipart/form-data",
+          "mode": 'no-cors',
+          "Authorization": "Bearer " + token.token
         },
-        body: JSON.stringify({
-          password: password,
-          new_password: newpassword
-        })
+        body: newRequest
       });
-    // necesitaria un RETURN aquí para cerrar modal y enviar un alert con "cambio de contraseña"
-    }
+      const responseJson = await response.json();
+      Swal.fire({
+        icon: 'sucess',
+        title: 'Contraseña guardada',
+        timer: 5500
 
-    const modalStyles={
-      position: "absolute",
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)'
+      }).then(() => {
+        window.location.href = '/personalbio:' + id
+      })
+      return responseJson;
     }
-    return(
+  }
+
+    return (
       <>
-      <div className="principal">
-        <div className="secundario">
-      <Button color="danger" onClick={this.abrirModal}>Cambiar contraseña</Button>
-
-      </div></div>
-
-      <Modal isOpen={this.state.abierto} style={modalStyles}>
-      <div class="form-group">
-                <input type="password" class="form-control" onChange={event => setPassword(event.target.value)} required/>
-                <label class="form-control-placeholder" for="password">Antigua Password</label>
-       </div>
-       <div class="form-group">
-                <input type="password" class="form-control" onChange={event => setNewPassword(event.target.value)} required/>
-                <label class="form-control-placeholder" for="password">Nueva Password</label>
-       </div>
-       <div class="form-group">
-                <input type="password" class="form-control" onChange={event => setConfirmPass(event.target.value)} required/>
-                <label class="form-control-placeholder" for="password">Nueva Password</label>
-       </div>
-
-      <div class="btn-check-log">
-        <button type="submit" class="btn-check-login" onClick={ChangePassword()}>Cambiar Contraseña</button>
-      </div>
-        <ModalFooter>
-            <Button color="secondary" onClick={this.abrirModal}>Cerrar</Button>
-        </ModalFooter>
+      <a onClick={handleShow}>
+      <button className="btn btn-secondary">Cambiar Contraseña</button>
+      </a>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>FaceMusicApp</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+       <div className="form">
+      
+        <center>
+          <img
+            src="https://www.muycomputer.com/wp-content/uploads/2018/06/WiFi-password.jpg"
+            alt="profile-img"
+            className="profile-img-card"
+            width="250"
+			      height="250"
+          />
+        </center>
+        
+        <label><strong>Antigua Contraseña:</strong></label>
+        <input type="password" className="form-control cajas" onChange={event => setPassword(event.target.value)} required />
+        
+      
+        
+        <label><strong>Nueva Contraseña:</strong>  </label>
+  
+        <input type="password" className="form-control cajas" onChange={event => setNewPassword(event.target.value)} required />
+        
+        <label><strong>Confimre Contraseña:</strong>  </label>
+      
+        <input type="password" className="form-control cajas" onChange={event => setConfirmPass(event.target.value)} required />
+      
+      
+        
+          <button className="btnregistro" onClick={() => ChangePassword()}>Cambiar contraseña</button>
+        
+      
+        
+            
+        
+        </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className="btn btn-danger" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
       </Modal>
       </>
     )
-  }
-}
 
-export default ChangePassword;
+  }
+

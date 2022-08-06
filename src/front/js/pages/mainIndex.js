@@ -3,13 +3,10 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import "../../styles/index.css";
 import "../../styles/tittles.css";
-import Search from "../component/barraBusqueda.test"
+import Search from "../component/SearchCardResults"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
-import ShowUser from "../component/showUser";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Pagination from "../component/Pagination";
-import Filter from "../component/Filter/filter";
 import { $ }  from 'react-jquery-plugin'
 
 

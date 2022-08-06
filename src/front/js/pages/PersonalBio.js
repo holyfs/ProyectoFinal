@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import Contact from "../component/contact.nomodal";
+import Contact from "../component/contact";
 import '../../styles/bio.css';
 import { Context } from "../store/appContext";
-import ChangePassword from "../component/ChangePassword";
-import { ChangePasswordNoModal } from "../component/ChangePassword.nomodal";
-import { Images } from "./galeriaImagenes";
+import {ChangePassword} from "../component/ChangePassword";
 import { useNavigate } from 'react-router-dom';
 import AddMusicalGenre from "../component/AddMusicalGenre.js";
 import AddMusicalInstruments from "../component/AddMusicalInstruments.js";
@@ -212,7 +210,7 @@ export const PersonalBio = (props) => {
                             <button type="button" className="btn btn-info mb-2"  onClick={changePic}>Cambiar foto de perfil</button>
                         </div>
                         <div className="">
-                        <ChangePasswordNoModal />
+                        <ChangePassword />
                         </div>
                     </div>
                     <div className="col-7">
