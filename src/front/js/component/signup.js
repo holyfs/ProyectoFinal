@@ -96,7 +96,6 @@ export const SignUp = () => {
       };
     return (
         <div className="form">
-            <h1 className="titulo">SIGN UP</h1>
             <form onSubmit={signUp}>
                 <div className="boxCard">
                     <center>
@@ -109,138 +108,103 @@ export const SignUp = () => {
                         />
                     </center>
                 </div>
-            <br></br>
-            
-                    <label>
-                    <FontAwesomeIcon icon={faUser} />
-                       <strong> Nombre:</strong>
+                       <h1 className="">Registro:</h1>
                         <input
                             type="text"
                             className="cajas"
-                            placeholder="Name"
+                            placeholder="Nombre"
                             onChange={event => setName(event.target.value)}
                             required
                         />
-                    </label>
-            
-                
-                    <label>
-                    <FontAwesomeIcon icon={faUser} /><strong>Apellido:</strong>
                     
                     <input
                         type="text"
                         className="cajas"
-                        placeholder="Last Name"
+                        placeholder="Apellido"
                         onChange={event => setLastName(event.target.value)}
                         required
                     />
-                    </label>
-                <label>
-                    <FontAwesomeIcon icon={faCalendar} />
-                    <strong>Edad:</strong>
+
                
                     <input
                         type="number"
                         className="cajas"
-                        placeholder="Age"
+                        placeholder="Edad"
                         onChange={event => setAge(event.target.value)}
                         required
                     />
-            
-                </label>
-                <label>
-                <FontAwesomeIcon icon={faGuitar} />
-                <strong>Nombre de artista/Banda:</strong>
                     <input
                         type="text"
                         className="cajas"
-                        placeholder="Name of Band/Artist"
+                        placeholder="Nombre Artístico / Banda"
                         onChange={event => setArtist_name_or_band_name(event.target.value)}
                         required
                     />
-                </label>
-                    <label>
+                    <div>
+                    <label className="me-1">
                         <strong>¿Eres una banda?</strong>
+                    </label>
                         <input
                             type="checkbox"
                             checked={band}
                             onChange={()=>handleChange("band")}
                         />
-                    </label>
-            
-            <br></br>
-        
-                    <label>
+                        </div>
+                        <div>       
+                    <label className="me-1">
                         <strong>¿Tienes Experiencia?</strong>
+                    </label>
                         <input
                             type="checkbox"
                             checked={experience}
                             onChange={()=>handleChange("experience")}
                         />
-                    </label>
-    
-                <br></br>
-                <br></br>
-                
+                    </div>
+                    <div className="mt-2">
                     <label>
-                    
-                        <h4><FontAwesomeIcon icon={faCamera} />Elige tu foto de perfil</h4>
+                    <h6>  <FontAwesomeIcon icon={faCamera} /> Elige tu foto de perfil</h6> </label>
                         <input
                             type="file"
                             className="form-control"
                             onChange={event => setAvatar(event.target.files[0])}
                             required
-                        />
-                    </label>
-                    <label>
-                    <FontAwesomeIcon icon={faComment} />
-                    <strong>Escribe sobre ti:</strong>
+                        />                  
+                    </div>
+                    <div className="mt-3">
                     <input
                         type="textarea"
                         className="cajas"
-                        placeholder="Your Description"
+                        placeholder="Escribe sobre ti..."
                         onChange={event => setDescription(event.target.value)}
                         required
                     />
-                    </label>
-                    <label>
-                    <FontAwesomeIcon icon={faEnvelope} />
-                    <strong>Email:</strong>
+                    </div>
                     <input
                         type="email"
                         className="cajas"
-                        placeholder="email"
+                        placeholder="Email"
                         onChange={event => setEmail(event.target.value)}
                         required
                     />
-                    </label>
-                    <label
-                    ><FontAwesomeIcon icon={faLock} />
-                    <strong>Contraseña:</strong>
+
                     <input
                         type="password"
                         className="cajas"
-                        placeholder="password"
+                        placeholder="Contraseña"
                         onChange={event => setPassword(event.target.value)}
                         required
                     />
-                    </label>
-                    <label
-                    ><FontAwesomeIcon icon={faLock} />
-                    <strong>Confirma Contraseña:</strong>
                     <input
                         type="password"
                         className="cajas"
-                        placeholder="password confirmation"
+                        placeholder="Confirma Contraseña"
                         onChange={event => setConfirmPass(event.target.value)}
-                    />
-                    </label>
-                
-                <p className="termino1"><input type="checkbox" required/>&nbsp; <FontAwesomeIcon icon={faCheck} />Estoy de acuerdo con <a href="#"><Terms /></a></p>
+                    />               
+                <p className="termino1"><input type="checkbox" required/> Estoy de acuerdo con <a href="#" ><Terms /></a></p>
                 <button type="submit" className="btnregistro">
                     Registrar!
                 </button>
-                <p className="tengo-cuenta pb-5"><a className="tengo-cuenta">Ya tengo cuenta <button className="btn btn-dark" type="button"><App /></button></a></p>
+                <p className="tengo-cuenta pb-5"><a className="tengo-cuenta">Ya tengo cuenta  <button className="btn btn-dark" type="button"><App /></button></a></p>
 
             </form>
         </div>
