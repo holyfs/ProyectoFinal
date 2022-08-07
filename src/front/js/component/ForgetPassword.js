@@ -20,7 +20,8 @@ export const ForgetPassword = () => {
   const navigate = useNavigate();
 
 
-  const SendPass = () => {
+  const SendPass = (e) => {
+    e.preventDefault();
     fetch(config.hostname + `/api/user/reset-password`, {
       method: "PUT",
       headers: {
@@ -33,16 +34,14 @@ export const ForgetPassword = () => {
     }).then((response) => {
       return response.json()
     }).then((response) => {
-      if (response.msg === 'Password enviado') {
+      if (response.msg === 'Contraseña enviada') {
         Swal.fire({
-          title: 'Password enviado',
+          title: 'Contraseña enviada',
           confirmButtonText: 'ok',
           confirmButtonColor: 'rgb(25, 179, 149)',
 
         }).then((result) => {
-          if (result) {
-            navigate(`/`)
-          }
+            setShow(false)
         })
       }
       else if (response.msg === 'Email is not registered') {
@@ -52,9 +51,7 @@ export const ForgetPassword = () => {
           confirmButtonColor: 'rgb(25, 179, 149)',
 
         }).then((result) => {
-          if (result) {
-            navigate(`/`)
-          }
+          setShow(false)
         })
       }
 
@@ -98,7 +95,7 @@ export const ForgetPassword = () => {
           <input type="email" placeholder='Introduce tu email de usuario' className="form-control" required autocomplete="off" onChange={event => setEmail(event.target.value)}/>
         </div>
         <div className="d-flex justify-content-center mt-3 mb-2" >
-          <button className="btnregistro" onClick={() => SendPass()}>Enviar contraseña</button>
+          <button className="btnregistro" onClick={(e) => SendPass(e)}>Enviar contraseña</button>
       </div>
       
   {/*     </Modal.Body> */}
