@@ -628,7 +628,7 @@ def reset_user_password():
     msg = Message('Hello', sender='facemusicapp@gmail.com', recipients = [email])
     msg.body = 'This is your new password: ' + password
     mail.send(msg)
-    return jsonify({"msg":"Password enviado"})
+    return jsonify({"msg":"Contraseña enviada"})
 
 
 #ENVIAR MENSAJE DE CONTACTO AL USUARIO

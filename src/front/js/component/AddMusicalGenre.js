@@ -14,6 +14,8 @@ const AddMusicalGenre = (props) => {
       .then(response => {
         setGenres(response.data);
         setTablaGenres(response.data);
+        let selectorPlaceHolder= document.getElementsByClassName("rmsc")[0]
+        selectorPlaceHolder.querySelector(".gray").innerHTML="Géneros musicales"
       }).catch(error => {
         console.log(error);
       })

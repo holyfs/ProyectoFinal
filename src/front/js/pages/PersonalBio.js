@@ -56,7 +56,7 @@ export const PersonalBio = (props) => {
         }).catch(error => {
             localStorage.removeItem('jwt-token');
             localStorage.removeItem('user_id');
-            window.location.href = '/loginmensaje';
+            window.location.href = '/login';
             console.log(error)
 
         });
@@ -245,34 +245,29 @@ export const PersonalBio = (props) => {
                             <div className="row mb-1">
                                 <div className="col" id="email"><strong>email:</strong> {usuarios.email}</div>
                                 <div className="form-group">
-                                    <label>
-                                        ¿Eres una banda?
+                                    <label className="me-1">
+                                    <strong>¿Eres una banda?:  </strong>
+                                          
+                                        </label>
                                         <> {edit ? <input
                                             type="checkbox"
                                             checked={band}
                                             onChange={() => handleChange("band")}
-                                        /> : <input
-                                            type="checkbox"
-                                            checked={usuarios.band}
-                                            onChange={() => handleChange("band")} />}</>
-                                    </label>
+                                        /> :<span>{(usuarios.band) ? "Si" :"No"}</span>}</>   
                                 </div>
                             </div>
                             <div className="row mb-1">
                                 <div className="form-group">
-                                    <label>
-                                        ¿Tienes Experiencia?
+                                    <label className="me-1">
+                                    <strong>¿Tienes Experiencia?:</strong>
+                                         
+                                        </label >
                                         <>{edit ? <input
                                             type="checkbox"
                                             checked={experience}
                                             onChange={() => handleChange("experience")}
                                         />
-                                            : <input
-                                                type="checkbox"
-                                                checked={usuarios.experience}
-                                                onChange={() => handleChange("experience")}
-                                            />}</>
-                                    </label>
+                                            :<span>{(usuarios.experience) ? "Si" :"No"}</span>}</>
                                 </div>
                             </div>
                             <div className="row mb-1">
