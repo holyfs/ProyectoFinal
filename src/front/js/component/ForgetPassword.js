@@ -78,13 +78,13 @@ export const ForgetPassword = () => {
         <strong>¡Recuperar!</strong>
       </a>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+      <Modal show={show} onHide={handleClose} className="d-flex justify-content-center" >
+        {/* <Modal.Header closeButton>
           <Modal.Title>FaceMusicApp</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+        </Modal.Header> */}
+       {/*  <Modal.Body> */}
 
-      <form className="form2">
+      <form className="form2 m-0">
       <center>
           <img
             src="https://www.shareicon.net/download/2016/05/29/772533_locked_512x512.png"
@@ -94,23 +94,22 @@ export const ForgetPassword = () => {
 			      height="250"
           />
           </center>
-        <div className="form-group">
-          <label className="form-control-placeholder" for="name"><FontAwesomeIcon icon={faEnvelope} /><strong>Email address:</strong></label>
+        <div className="form-group mt-3">
           <input type="email" placeholder='Introduce tu email de usuario' className="form-control" required autocomplete="off" onChange={event => setEmail(event.target.value)}/>
-          
         </div>
         <div className="d-flex justify-content-center mt-3 mb-2" >
-          <button className="btnregistro" onClick={() => SendPass()}>Enviar Contraseña</button>
+          <button className="btnregistro" onClick={() => SendPass()}>Enviar contraseña</button>
       </div>
       
-      </form>
-      </Modal.Body>
+  {/*     </Modal.Body> */}
 
       <Modal.Footer>
-          <Button className="btncerrar" onClick={handleClose}>
+      <Button className="btn btn-danger" onClick={handleClose}>Cerrar</Button>
+         {/*  <Button className="btncerrar" onClick={handleClose}>
             Close
-          </Button>
+          </Button> */}
         </Modal.Footer>
+          </form>
       </Modal>
       
 

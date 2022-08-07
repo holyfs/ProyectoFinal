@@ -72,54 +72,34 @@ export const ChangePassword = () => {
     return (
       <>
       <a onClick={handleShow}>
-      <button className="btn btn-secondary">Cambiar Contraseña</button>
+      <button className="btn btn-secondary">Cambiar contraseña</button>
       </a>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>FaceMusicApp</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-       <div className="form2">
-      
-        <center>
-          <img
-            src="https://www.muycomputer.com/wp-content/uploads/2018/06/WiFi-password.jpg"
-            alt="profile-img"
-            className="profile-img-card"
-            width="250"
-			      height="250"
-          />
-        </center>
-        
-        <label><strong>Antigua Contraseña:</strong></label>
-        <input type="password" className="form-control cajas" onChange={event => setPassword(event.target.value)} required />
-        
-      
-        
-        <label><strong>Nueva Contraseña:</strong>  </label>
+        <Modal show={show} onHide={handleClose}>
   
-        <input type="password" className="form-control cajas" onChange={event => setNewPassword(event.target.value)} required />
-        
-        <label><strong>Confimre Contraseña:</strong>  </label>
-      
-        <input type="password" className="form-control cajas" onChange={event => setConfirmPass(event.target.value)} required />
-      
-      
-        
-          <button className="btnregistro" onClick={() => ChangePassword()}>Cambiar contraseña</button>
-        
-      
-        
+          <form className="form m-0">
+
+            <center>
+              <img
+                src="https://www.shareicon.net/download/2016/05/29/772533_locked_512x512.png"
+                alt="profile-img"
+                className="profile-img-card mb-3"
+                width="250"
+                height="250"
+              />
+            </center>
+            <input type="password" placeholder='Antigua contraseña' className="form-control cajas" onChange={event => setPassword(event.target.value)} required />
+
+            <input type="password" placeholder='Nueva contraseña' className="form-control cajas" onChange={event => setNewPassword(event.target.value)} required />
+
+            <input type="password" placeholder='Confirma nueva contraseña' className="form-control cajas" onChange={event => setConfirmPass(event.target.value)} required />
+
+            <button className="btnregistro" onClick={() => ChangePassword()}>Cambiar contraseña</button>
+            <Modal.Footer>
+              <Button className="btn btn-danger" onClick={handleClose}>Cerrar</Button>
+              </Modal.Footer>
+          </form>
             
-        
-        </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button className="btn btn-danger" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        </Modal>
       </>
     )
 
