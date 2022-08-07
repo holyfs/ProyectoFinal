@@ -126,8 +126,8 @@ export default class Login extends Component {
                 )}
                 <span>Login</span>
               </button>
-              <h4>No tienes cuenta?</h4><a href="/signup2">Registrate!</a>
-              <h4><a href="/forgetpassword">¿Olvistaste tu contraseña?</a></h4>
+              <h4>¿No tienes cuenta?</h4><a href="/signup"><strong>¡Registrate!</strong></a>
+              <h4>¿Olvistaste tu contraseña?</h4><a href="#"><ForgetPassword /></a>
             </div>
             {this.state.message && (
               <div className="form-group">
