@@ -56,7 +56,7 @@ export const PersonalBio = (props) => {
         }).catch(error => {
             localStorage.removeItem('jwt-token');
             localStorage.removeItem('user_id');
-            window.location.href = '/loginmensaje';
+            window.location.href = '/login';
             console.log(error)
 
         });
