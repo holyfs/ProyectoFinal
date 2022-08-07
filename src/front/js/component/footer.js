@@ -1,10 +1,20 @@
-import React, { Component } from "react";
 
-export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center Foot">
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			Ayoze, Ely y Ángel
-		</p>
-	</footer>
-);
+import React, { useState, Component  } from "react";
+import 'bootstrap/dist/css/bootstrap.css';
+import "../../styles/navBar2.css"
+import "../../styles/navBar.css"
+
+export const Footer = () => {
+   
+    return (
+    <div>
+    
+        <nav>
+        <ul className="fancyNav image3 sticky-bottom">
+		<li>🅼🅰🅳🅴 🆆🅸🆃🅷 <i className="fa fa-heart text-danger" /> 🅱🆈 🅰🆈🅾🆉🅴, 🅴🅻🆈 🆈 🅰🅽🅶🅴🅻</li>
+        </ul>
+        </nav>
+    </div>
+    );
+
+};

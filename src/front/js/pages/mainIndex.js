@@ -3,13 +3,10 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import "../../styles/index.css";
 import "../../styles/tittles.css";
-import Search from "../component/barraBusqueda.test"
+import Search from "../component/SearchCardResults"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
-import ShowUser from "../component/showUser";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Pagination from "../component/Pagination";
-import Filter from "../component/Filter/filter";
 import { $ }  from 'react-jquery-plugin'
 
 
@@ -68,13 +65,14 @@ jQuery(document).ready(function($){
 
 return (
 
-  <div className="App">
-    <a href="" className="bubbles"><img src="https://fontmeme.com/permalink/220802/0d19c228db18ba0ac2250e51dd95f26d.png" alt="fuente-de-shang-chi" border="0" /></a><a href="" className="bubbles"></a>
-    <div className="row d-flex justify-content-center">
-      <div className="col-8">
-        <Search />
+    <div className="App">
+      <a href="" className="bubbles mb-4"><img src="https://fontmeme.com/permalink/220802/0d19c228db18ba0ac2250e51dd95f26d.png" alt="fuente-de-shang-chi" border="0" /></a><a href="" className="bubbles"></a>
+      <div className="row d-flex justify-content-center">
+        <div className="col-8">
+          <Search />
+        </div>
       </div>
     </div>
-</div>
+
 );
 };

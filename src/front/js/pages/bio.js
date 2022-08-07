@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import Contact from "../component/contact";
+import {Contact} from "../component/contact";
 import '../../styles/bio.css';
-import { ContactNoModal } from "../component/contact.nomodal";
 import axios from "axios";
 import config from "../config.js"
 import "../../styles/tittles.css";
@@ -32,78 +31,74 @@ export const Bio = () => {
     }, [])
     return (
         <>
-            <div>
-                <div
-                    key={usuarios.id}
-                    className="container-fluid">
-
-
-                    <div className="row">
-                        <div className="col-3">
-                            <h1 className="titulos"> {usuarios.artist_name_or_band_name}</h1>
-                        </div>
-
-
-                        <div className="d-flex justify-content-end">
-                            <form>
-                                <a href={"/contactNoModal:" + id}>
-                                    <input type="button" className="btn btn-info" value="Contacto" />
-                                </a>
-                            </form>
-                        </div>
-
-
-
+            <div className="container-fluid" style={{"minHeight":90+"vh"}}>
+                <div className="row mt-2 d-flex justify-content-center">
+                    <div className="col-3 d-flex align-items-center flex-column">
+                        <img className="rounded-circle mt-5 mb-2" width="300px" height="300px" src={usuarios.avatar}></img>
                     </div>
-
-
-                    <div className="container-fluid">
+                    <div className="col-7">
                         <div className="row">
-                            <div className="col-3">
-                                <img className="rounded-circle" width="350px" height="350px" src={usuarios.avatar}></img>
-                                <div className="row">
-                            <div className="col-3">
-                                <div className="row">
+                            <div className="row mb-2">
+                                <h1 className="bioperfil col" onChange={event => setArtist_name_or_band_name(event.target.value)}><strong style={{ textTransform: 'uppercase' }}>{usuarios.artist_name_or_band_name}</strong></h1>
+                            </div>
+                            <div className="row mb-2 ">
+                                <span className="PersonalDates col-10 pt-2"><h3><strong>Datos Personales</strong></h3></span>
+                                <div className="col-2"><Contact /></div>
+                                
+                            </div>
+                            <div className="row mb-1">
+                                <span className="col"><strong>Nombre:</strong> {usuarios.name}</span>
+                            </div>
+                            <div className="row mb-1">
+                                <span className="col"><strong>Apellido:</strong> {usuarios.last_name}</span>
+                            </div>
+                            <div className="row mb-1">
+                                <span className="col"><strong>Edad:</strong> {usuarios.age}</span>
+                            </div>
+                            <div className="row mb-1">
+                                <div className="form-group">
+                                    <label>
+                                        banda:
+                                        <input
+                                            type="checkbox"
+                                            checked={usuarios.band}/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="row mb-1">
+                                <div className="form-group">
+                                    <label>
+                                        Experiencia:
+                                        <input
+                                            type="checkbox"
+                                            checked={usuarios.experience}/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="row mb-1">
+                                <div className="col">
+                                    <label><strong>Descripción</strong> </label>
+                                    <div>{usuarios.description} </div>
+                                </div>
+
+                            </div>
+                            <div className="row">
+                                <div className="col">
                                     <label className="mb-2" ><strong>Generos:</strong> {userGenre?.map((genre) => genre.label + " ")}</label>
                                 </div>
-                                <div className="row">
-                                    <label className="mb-2" ><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <label className="mb-2 "><strong>Instrumentos:</strong> {userInstruments?.map((instruments) => instruments.label + " ")} </label>
                                 </div>
                             </div>
                         </div>
-                            </div>
-                            <div className="col-9">
-                                <h1 className="PersonalDates">Datos Personales</h1>
-                                <ul className="list-group">
-                                    <label><h3>Nombre</h3></label>
-                                    <li class="list-group-item col-4 list-group-item-success">{usuarios.name}</li>
-                                    <label><h3>Apellido</h3></label>
-                                    <li class="list-group-item col-4 list-group-item-success">{usuarios.last_name}</li>
-                                    <label><h3>Descripción</h3></label>
-                                        <div className="form-floating" style={{ alignItems: "center" }}>
-                                            <div className="form-control" style={{
-                                                display: "flex", border: "3px solid black", height: "100%",
-                                                padding: "10px", textAlign: "center", fontSize: 20, alignItems: "center", color: "white", background: "black",
-                                                width: "100%"
-                                            }} id="floatingTextarea2">{usuarios.description}</div>
-                                        </div>
-                                </ul>
-                            </div>
+                        <div className="d-flex justify-content-center mt-3 mb-2" >
+
                         </div>
                     </div>
-
-                    <div className="container-fluid">
-                        
-
-                    </div>
-
                 </div>
-
             </div>
         </>
-
-
-
-
     )
 }

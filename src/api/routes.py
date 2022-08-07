@@ -158,7 +158,7 @@ def add_user():
     hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
     exist_user = User.query.filter_by(email=email).first()
     if exist_user:
-        return jsonify({"msg":"Email already registered"}),500  
+        return jsonify({"msg":"Email ya esta registrado"}),500  
     user = User(
         name=name,
         last_name=last_name,
@@ -317,7 +317,10 @@ def update_user_by_id():
 @api.route('/user/new-password', methods=['PUT'])
 @jwt_required()
 def user_new_password():
-    user = User.query.get(id)
+    user = User.query.get(request.form["id"])
+    exist_user = User.query.filter(User.id==user.id).first()
+    if not exist_user:
+        return jsonify({"msg":"user not found"}), 404
     password=request.form["password"]
     if not bcrypt.checkpw(password.encode(FORMAT_CODE), user.password.encode(FORMAT_CODE)):
         return jsonify("bad password, try again"),404
@@ -328,8 +331,7 @@ def user_new_password():
         return jsonify("user not found"),404
     db.session.commit()
     response_body = {
-        "msg" : "password changed",
-        "user": user.serialize()
+        "msg" : "password changed"
     } 
     return jsonify(response_body),200   
  
@@ -617,7 +619,7 @@ def reset_user_password():
     email = body["email"]
     exist_user = User.query.filter_by(email=email).first()
     if not exist_user:
-        return jsonify({"msg":"email is not registered"}), 404
+        return jsonify({"msg":"Email is not registered"}), 404
     else:
         password = reset_password()
         hashed = bcrypt.hashpw(password.encode(FORMAT_CODE), bcrypt.gensalt())
@@ -626,21 +628,24 @@ def reset_user_password():
     msg = Message('Hello', sender='facemusicapp@gmail.com', recipients = [email])
     msg.body = 'This is your new password: ' + password
     mail.send(msg)
-    return jsonify({"msg":"Password enviado"})
+    return jsonify({"msg":"Contraseña enviada"})
 
 
 #ENVIAR MENSAJE DE CONTACTO AL USUARIO
 
-@api.route('/sendMsg', methods=['PUT'])
+@api.route('/sendmsg', methods=['POST'])
 def send_Msg():
     mail = Mail(current_app)
-    body=request.get_json()
-    msg = Message('Hello', sender='facemusicapp@gmail.com', recipients = 'facemusicapp@gmail.com')
-    msg.body = {'nombre de contacto:' # usuario.name 
-    'mail:' #usuario.email 
-    'Telefono:' #usuario.phone 
-    'Mensaje:' #usuario.mensaje
-    }
+    body= request.get_json()
+    id = body["id_user"]
+    user = User.query.filter_by(id=id).first()
+    email = user.email
+    name=body["name"]
+    contact_email=body["contact_email"] 
+    telefono=body["phone"]
+    mensaje=body["mensaje"]
+    body="Hola " + user.name + "\n" + "Tienes un posible nuevo cliente llamado: "+name+ "\n"+"Correo: "+contact_email+ "\n"+"Número de telefono: "+telefono+"\n"+"y te manda a decir: "+mensaje
+    msg = Message('Alguien se quiere poner en contacto contigo', sender='facemusicapp@gmail.com', recipients = [email], body =body)
     mail.send(msg)
     return jsonify({"msg":"Mensaje enviado"})
 

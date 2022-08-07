@@ -1,81 +1,107 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../../styles/App.css';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from "react-router-dom";
 import config from '../config';
+import Swal from "sweetalert2";
+import "../../styles/signup.css";
+import '../../styles/App.css';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { useParams, useNavigate } from 'react-router-dom';
 
-class ChangePassword extends React.Component{
-  state={
-    abierto: false,
-  }
 
-  abrirModal=()=>{
-    this.setState({abierto: !this.state.abierto});
-  }
-	
-  render(){
 
-    const [password, setPassword] = useState("");
-    const [newpassword, setNewPassword] = useState("");
-	  const [confirmPass, setConfirmPass] = useState("");
+export const ChangePassword = () => {
+  const [show, setShow] = useState(false);
 
-    const ChangePassword = async() => {
-      if (newpassword !== confirmPass) {
-        alert("Las contraseñas no coinciden");
-        return;
-      }
-      fetch(config.hostname + "/user/<int:id>/new-password", {
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [password, setPassword] = useState("");
+  const [newpassword, setNewPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  let id_1 = window.location.href.split(":")[2]
+  let id = id_1.split("?")[0]
+  // const params = useParams();
+  // let id = params['id'];
+  const navigate = useNavigate();
+
+
+  const ChangePassword = async () => {
+
+    let newRequest = new FormData();
+    newRequest.append("password", password);
+    newRequest.append("new_password",newpassword);
+    newRequest.append("id", id)
+    const token = JSON.parse(localStorage.getItem("jwt-token"));
+
+    if (newpassword !== confirmPass) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+    else {
+      const response = await fetch(config.hostname + `/api/user/new-password`, {
         method: "PUT",
         headers: {
-          "Content-type": "multipart/form-data",
+          "mode": 'no-cors',
+          "Authorization": "Bearer " + token.token
         },
-        body: JSON.stringify({
-          password: password,
-          new_password: newpassword
+        body: newRequest
+      }).then((response) => {
+        return response.json()
+      }).then((response) => {
+          Swal.fire({
+            title: 'Password Cambiado',
+            confirmButtonText: 'ok',
+            confirmButtonColor: 'rgb(25, 179, 149)',
+  
+          }).then((result) => {
+            if (result) {
+              window.location.href = "/PersonalBio:" + id
+            }
+          })
         })
-      });
-    // necesitaria un RETURN aquí para cerrar modal y enviar un alert con "cambio de contraseña"
+      
+     
+      // window.location.href = config.hostname + "/PersonalBio:" + id
+      
+      return ;
     }
+  }
 
-    const modalStyles={
-      position: "absolute",
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)'
-    }
-    return(
+    return (
       <>
-      <div className="principal">
-        <div className="secundario">
-      <Button color="danger" onClick={this.abrirModal}>Cambiar contraseña</Button>
+      <a onClick={handleShow}>
+      <button className="btn btn-secondary">Cambiar contraseña</button>
+      </a>
+        <Modal show={show} onHide={handleClose}>
+  
+          <form className="form m-0">
 
-      </div></div>
+            <center>
+              <img
+                src="https://www.shareicon.net/download/2016/05/29/772533_locked_512x512.png"
+                alt="profile-img"
+                className="profile-img-card mb-3"
+                width="250"
+                height="250"
+              />
+            </center>
+            <input type="password" placeholder='Antigua contraseña' className="form-control cajas" onChange={event => setPassword(event.target.value)} required />
 
-      <Modal isOpen={this.state.abierto} style={modalStyles}>
-      <div class="form-group">
-                <input type="password" class="form-control" onChange={event => setPassword(event.target.value)} required/>
-                <label class="form-control-placeholder" for="password">Antigua Password</label>
-       </div>
-       <div class="form-group">
-                <input type="password" class="form-control" onChange={event => setNewPassword(event.target.value)} required/>
-                <label class="form-control-placeholder" for="password">Nueva Password</label>
-       </div>
-       <div class="form-group">
-                <input type="password" class="form-control" onChange={event => setConfirmPass(event.target.value)} required/>
-                <label class="form-control-placeholder" for="password">Nueva Password</label>
-       </div>
+            <input type="password" placeholder='Nueva contraseña' className="form-control cajas" onChange={event => setNewPassword(event.target.value)} required />
 
-      <div class="btn-check-log">
-        <button type="submit" class="btn-check-login" onClick={ChangePassword()}>Cambiar Contraseña</button>
-      </div>
-        <ModalFooter>
-            <Button color="secondary" onClick={this.abrirModal}>Cerrar</Button>
-        </ModalFooter>
-      </Modal>
+            <input type="password" placeholder='Confirma nueva contraseña' className="form-control cajas" onChange={event => setConfirmPass(event.target.value)} required />
+
+            <button className="btnregistro" onClick={() => ChangePassword()}>Cambiar contraseña</button>
+            <Modal.Footer>
+              <Button className="btn btn-danger" onClick={handleClose}>Cerrar</Button>
+              </Modal.Footer>
+          </form>
+            
+        </Modal>
       </>
     )
-  }
-}
 
-export default ChangePassword;
+  }
+

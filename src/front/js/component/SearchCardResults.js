@@ -1,15 +1,15 @@
-import "../../styles/barraBusqueda.test.css";
+import "../../styles/SearchCardResults.css";
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import styles from "../../styles/Card.module.css";
+import "../../styles/Card.module.css";
 import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
-import AddMusicalGenre from "../component/AddMusicalGenre.js"
-import AddMusicalInstruments from "../component/AddMusicalInstruments.js"
+import AddMusicalGenre from "./AddMusicalGenre.js"
+import AddMusicalInstruments from "./AddMusicalInstruments.js"
 function Search() {
   const [usuarios, setUsuarios] = useState([]);
   const [tablaUsuarios, setTablaUsuarios] = useState([]);
@@ -17,28 +17,36 @@ function Search() {
   const [searchUserIntruments, setSearchUserInstruments] = useState([]);
   const [searchUserGenre, setSearchUserGenre] = useState([]);
   /*   const [busqueda, setBusqueda]= useState(""); */
+
   const peticionGet = async () => {
     await axios.get(`${config.hostname}/api/user`)
       .then(response => {
         setUsuarios(response.data.response);
         setTablaUsuarios(response.data.response);
         setUserInstruments(response.data.response.instruments);
-        //setUserGenres(response.data.genres);
+
+        //setUserGenres(response.data.genres); 
+
         //console.log(response.data.respone.instruments);
       }).catch(error => {
         console.log(error);
       })
+
   }
+
   const handleChange = e => {
     /*     setBusqueda(e.target.value); */
     filtrar(e.target.value);
   }
+
+
   const filtrar = (terminoBusqueda) => {
     var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
       if (elemento.user.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
         || elemento.user.artist_name_or_band_name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
         //|| elemento.user.genres.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
         //|| elemento.user.instruments.instrument.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+
       ) {
         return elemento;
       }
@@ -47,6 +55,9 @@ function Search() {
     //setUserInstruments(resultadosBusqueda);
     //setUserGenres(resultadosBusqueda);
   }
+
+
+
   const getSelectedGenres = (selection, tipo) => {
     if (tipo === "G") {
       setSearchUserGenre(selection)
@@ -54,7 +65,20 @@ function Search() {
       setSearchUserInstruments(selection)
     }
   }
+  const NoEncontroNada = () => {
+    let mensaje = <div className="alert alert-danger mt-3" role="alert">
+      No hay resultados para tu búsqueda!
+    </div>
+    return mensaje
+  }
+
   const filtroGenre = () => {
+
+    if (searchUserGenre.length === 0) {
+      setUsuarios(tablaUsuarios)
+      return
+    }
+
     let filtroPorGenero = []
     tablaUsuarios.forEach((elemento) => {
       elemento.genres.forEach((genres) => {
@@ -67,7 +91,14 @@ function Search() {
     })
     setUsuarios(filtroPorGenero)
   }
+
+
   const filtroInstruments = () => {
+    if (searchUserIntruments.length === 0) {
+      setUsuarios(tablaUsuarios)
+      return;
+    }
+
     let filtroPorInstrumento = []
     tablaUsuarios.forEach((elemento) => {
       elemento.instruments.forEach((instruments) => {
@@ -80,19 +111,20 @@ function Search() {
     })
     setUsuarios(filtroPorInstrumento)
   }
+
   useEffect(() => {
     peticionGet();
   }, [])
 
   return (
     <>
-      <div className="row mb-3">
-        <div className="d-flex justify-content-start">Nombre de artista o banda:
+      <div className="row mb-2" >
+        <div className="d-flex justify-content-start ">
           <div style={{ width: '100%' }}>
             <input
-              className="form-control"
+              className="form-control busquedaplaceholder"
               /*             value={busqueda} */
-              /*             placeholder="Búsqueda por Nombre de Artista o Banda" */
+                  placeholder="Artista o banda"
               onChange={handleChange}
             />
           </div>
@@ -105,7 +137,7 @@ function Search() {
       </div>
       <div className="row">
         <div className="col">
-          <div className="d-flex justify-content-start">Generos musicales:
+          <div className="d-flex justify-content-start">
             <div style={{ width: '95%' }} >
               <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]} />
             </div>
@@ -117,7 +149,7 @@ function Search() {
           </div>
         </div>
         <div className="col">
-          <div className="d-flex justify-content-end">Instrumentos musicales:
+          <div className="d-flex justify-content-end">
             <div style={{ width: '95%' }}>
               <AddMusicalInstruments selectionEvent={getSelectedGenres} userInstruments={[]} />
             </div>
@@ -129,47 +161,33 @@ function Search() {
           </div>
         </div>
       </div>
-      <div className="row" >
-        {usuarios.map((usuarios) => (
+      <div className="row d-flex justify-content-around mt-3" >
+        {usuarios.length > 0 ? usuarios.map((usuarios) => (
           <div
             key={usuarios.user.id}
-            className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark"
+            className="col-lg-4 col-md-6 mb-4"
           >
-            <div
-              className={`${styles.card} d-flex flex-column justify-content-center`}
-            >
-              <img
-                className={`${styles.img} img-fluid`}
-                src={usuarios.user.avatar}
-                alt=""
-                style={{ height: '280px', width: '330px' }}
-              />
-              <div className={`${styles.content}`}>
-                <div className="fs-4  mb-4">{usuarios.user.name}</div>
-                <div className="fs-4 fw-bold mb-4">{usuarios.user.artist_name_or_band_name}</div>
-                <div className="">
-                  <div className="fs-6 fw-bold">Genero Musical</div>
-                  <div className="fs-5">
-                    {usuarios.genres?.map((genre) => genre.genre.name + " ")}
-                  </div>
-                  <div className="fs-6 fw-bold">Instrumento</div>
-                  <div className="fs-5">
-                    {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}
-                  </div>
-                  <div>
-                    <Link to={`/bio:${usuarios.user.id}`}>
-                      <button type="button" className="botonAnillos">
-                        Info
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+            <div className="card image6" style={{ "width": 18 + "rem", "height": 30 + "rem" , "background": "rgba(0, 185, 182, 0.3)", "borderRadius": 10 + "px" }}>
+              <img src={usuarios.user.avatar} className="card-img-top " alt="imagen de la banda" style={{ height: 15 + "rem", width: 18 + "rem", "borderRadius": 10 + "px " +10 + "px " + 0 + "px " + 0 + "px " }} />
+              <div className="card-body">
+                <h5 className="card-title">{usuarios.user.artist_name_or_band_name}</h5>
+                <p className="card-text"><strong>Género Musical: </strong>
+                  {usuarios.genres?.map((genre) => genre.genre.name + " ")}</p>
+                <p className="card-text"><strong>Instrumento: </strong>
+                  {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}</p>
+              </div>
+              <div className="card-body">
+                <a href={`/bio:${usuarios.user.id}`} className="btn btn-info image3">BIO</a>
               </div>
             </div>
           </div>
-        ))}
+        )) : <div>{NoEncontroNada()}</div>
+        }
       </div>
     </>
   );
 }
+
+
 export default Search;
+
