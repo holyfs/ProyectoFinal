@@ -118,13 +118,13 @@ function Search() {
 
   return (
     <>
-      <div className="row" >
-        <div className="d-flex justify-content-start">Nombre de artista o banda:
+      <div className="row mb-2" >
+        <div className="d-flex justify-content-start ">
           <div style={{ width: '100%' }}>
             <input
-              className="form-control"
+              className="form-control busquedaplaceholder"
               /*             value={busqueda} */
-              /*             placeholder="Búsqueda por Nombre de Artista o Banda" */
+                  placeholder="Artista o banda"
               onChange={handleChange}
             />
           </div>
@@ -137,7 +137,7 @@ function Search() {
       </div>
       <div className="row">
         <div className="col">
-          <div className="d-flex justify-content-start">Generos musicales:
+          <div className="d-flex justify-content-start">
             <div style={{ width: '95%' }} >
               <AddMusicalGenre selectionEvent={getSelectedGenres} userGenre={[]} />
             </div>
@@ -149,7 +149,7 @@ function Search() {
           </div>
         </div>
         <div className="col">
-          <div className="d-flex justify-content-end">Instrumentos musicales:
+          <div className="d-flex justify-content-end">
             <div style={{ width: '95%' }}>
               <AddMusicalInstruments selectionEvent={getSelectedGenres} userInstruments={[]} />
             </div>

@@ -56,3 +56,8 @@ button:hover::after, button:focus::after {
     opacity: 0;
   }
 } */
+.busquedaplaceholder::placeholder{
+  color: #aaa !important;
+  text-align: center;
+
+}

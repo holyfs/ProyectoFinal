@@ -14,6 +14,8 @@ const AddMusicalInstruments = (props) => {
         .then(response=>{
           setInstruments(response.data);
           setTablaInstruments(response.data);
+          let selectorPlaceHolder= document.getElementsByClassName("rmsc")[1]
+          selectorPlaceHolder.querySelector(".gray").innerHTML="Instrumentos musicales"
         }).catch(error=>{
           console.log(error);
         })
