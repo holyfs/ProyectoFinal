@@ -37,3 +37,11 @@
   background-size: cover;
   align-self: center;
 } */
+
+.image6 {
+  -webkit-transition: all 0.7s ease;
+  transition: all 0.7s ease;
+  } 
+  .image6:hover {
+  -webkit-filter: grayscale(100%);
+  }

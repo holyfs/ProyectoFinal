@@ -84,7 +84,7 @@ export const ForgetPassword = () => {
         </Modal.Header>
         <Modal.Body>
 
-      <form className="form">
+      <form className="form2">
       <center>
           <img
             src="https://www.shareicon.net/download/2016/05/29/772533_locked_512x512.png"

@@ -4,7 +4,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import styles from "../../styles/Card.module.css";
+import "../../styles/Card.module.css";
 import "../../styles/botones.css";
 import { Link } from "react-router-dom";
 import config from "../config";
@@ -167,8 +167,8 @@ function Search() {
             key={usuarios.user.id}
             className="col-lg-4 col-md-6 mb-4"
           >
-            <div className="card" style={{ "width": 18 + "rem", "height": 30 + "rem" , "background": "rgba(0, 185, 182, 0.3)", "borderRadius": 10 + "px" }}>
-              <img src={usuarios.user.avatar} className="card-img-top" alt="imagen de la banda" style={{ height: 15 + "rem", width: 18 + "rem", "borderRadius": 10 + "px " +10 + "px " + 0 + "px " + 0 + "px " }} />
+            <div className="card image6" style={{ "width": 18 + "rem", "height": 30 + "rem" , "background": "rgba(0, 185, 182, 0.3)", "borderRadius": 10 + "px" }}>
+              <img src={usuarios.user.avatar} className="card-img-top " alt="imagen de la banda" style={{ height: 15 + "rem", width: 18 + "rem", "borderRadius": 10 + "px " +10 + "px " + 0 + "px " + 0 + "px " }} />
               <div className="card-body">
                 <h5 className="card-title">{usuarios.user.artist_name_or_band_name}</h5>
                 <p className="card-text"><strong>Género Musical: </strong>
@@ -177,7 +177,7 @@ function Search() {
                   {usuarios.instruments?.map((instruments) => instruments.instrument.name + " ")}</p>
               </div>
               <div className="card-body">
-                <a href={`/bio:${usuarios.user.id}`} className="btn btn-info">BIO</a>
+                <a href={`/bio:${usuarios.user.id}`} className="btn btn-info image3">BIO</a>
               </div>
             </div>
           </div>

@@ -79,7 +79,7 @@ export const ChangePassword = () => {
           <Modal.Title>FaceMusicApp</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-       <div className="form">
+       <div className="form2">
       
         <center>
           <img
