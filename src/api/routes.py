@@ -318,7 +318,6 @@ def update_user_by_id():
 @jwt_required()
 def user_new_password():
     user = User.query.get(request.form["id"])
-    print(user)
     exist_user = User.query.filter(User.id==user.id).first()
     if not exist_user:
         return jsonify({"msg":"user not found"}), 404

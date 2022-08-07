@@ -20,7 +20,8 @@ export const ChangePassword = () => {
   const [password, setPassword] = useState("");
   const [newpassword, setNewPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
-  let id = window.location.href.split(":")[2]
+  let id_1 = window.location.href.split(":")[2]
+  let id = id_1.split("?")[0]
   // const params = useParams();
   // let id = params['id'];
   const navigate = useNavigate();
@@ -46,17 +47,25 @@ export const ChangePassword = () => {
           "Authorization": "Bearer " + token.token
         },
         body: newRequest
-      });
-      const responseJson = await response.json();
-      Swal.fire({
-        icon: 'sucess',
-        title: 'Contraseña guardada',
-        timer: 5500
-
-      }).then(() => {
-        navigate(`/personalbio:${id}`)
-      })
-      return responseJson;
+      }).then((response) => {
+        return response.json()
+      }).then((response) => {
+          Swal.fire({
+            title: 'Password Cambiado',
+            confirmButtonText: 'ok',
+            confirmButtonColor: 'rgb(25, 179, 149)',
+  
+          }).then((result) => {
+            if (result) {
+              window.location.href = "/PersonalBio:" + id
+            }
+          })
+        })
+      
+     
+      // window.location.href = config.hostname + "/PersonalBio:" + id
+      
+      return ;
     }
   }
 

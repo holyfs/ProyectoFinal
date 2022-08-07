@@ -7,6 +7,7 @@ import config from '../config';
 import Swal from "sweetalert2";
 import "../../styles/signup.css";
 import '../../styles/App.css';
+import { useNavigate } from 'react-router-dom';
 
 
 export const Contact = () => {
@@ -18,13 +19,16 @@ export const Contact = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [msg, setMsg] = useState("");
-  let id = window.location.href.split(":")[2]
+  let id_1 = window.location.href.split(":")[2]
+  let id = id_1.split("?")[0]
+  const navigate = useNavigate();
 
 
-  const SendMsg = async() => {
-   const response = await fetch(config.hostname + "/api/sendmsg", {
+  const SendMsg = () => {
+   fetch(config.hostname + "/api/sendmsg", {
       method: "POST",
       headers: {
+        "mode": 'no-cors',
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -34,10 +38,30 @@ export const Contact = () => {
         mensaje: msg,
         id_user: id
       })
-    })
-   alert("mensaje y listo")
-   window.location.href = '/bio:' + id
-    }  
+   }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      if (response.msg === "Mensaje enviado"){
+        Swal.fire({
+          title: 'Mensaje Enviado',
+          confirmButtonText: 'ok',
+          confirmButtonColor: 'rgb(25, 179, 149)',
+
+        }).then((result) => {
+          if (result) {
+            navigate(`/bio:${id}`)
+          }}
+        )}
+      })
+    
+   
+    // window.location.href = config.hostname + "/PersonalBio:" + id
+    
+    return;
+    
+    
+   
+  }
     
 
 
