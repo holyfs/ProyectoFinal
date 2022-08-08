@@ -59,9 +59,7 @@ export const Bio = () => {
                                 <div className="form-group">
                                     <label>
                                         banda:
-                                        <input
-                                            type="checkbox"
-                                            checked={usuarios.band}/>
+                                        <span className="ms-1">{(usuarios.band) ? "Si" :"No"}</span>
                                     </label>
                                 </div>
                             </div>
@@ -69,9 +67,7 @@ export const Bio = () => {
                                 <div className="form-group">
                                     <label>
                                         Experiencia:
-                                        <input
-                                            type="checkbox"
-                                            checked={usuarios.experience}/>
+                                        <span className="ms-1">{(usuarios.experience) ? "Si" :"No"}</span>
                                     </label>
                                 </div>
                             </div>
